@@ -3,16 +3,16 @@
 
 ! 감자깡팀 프로젝트
 
-☆☆ 작업 시작 전 무조건 받을 파일 존재하는지 내려받기 먼저!!!!!!!!!
--> 프로젝트 우측 버튼 -> team -> synchroniaze workspace -> incoming mode
--> 프로젝트 명이 뜰 경우 받을 파일이 있다는 의미
--> 파일 있을 경우 내려받고 작업 시작
-☆☆ 그 다음 작업 완료 후 본인 파일 올리기!!!!!!!
--> 프로젝트 우측 버튼 -> team -> synchroniaze workspace -> outgoing mode
--> 작업 후 파일 올리기
-git staging 에서 파일 추가 시 모든 파일 추가 금지!!!!!
-(pom.properties 특히 주의!!!!!!!!)
-자기가 손 본 파일만 추가하고 message 필수입력 후 commit & push
+* ☆☆ 작업 시작 전 무조건 받을 파일 존재하는지 내려받기 먼저!!!!!!!!!
+* -> 프로젝트 우측 버튼 -> team -> synchroniaze workspace -> incoming mode
+* -> 프로젝트 명이 뜰 경우 받을 파일이 있다는 의미
+* -> 파일 있을 경우 내려받고 작업 시작
+* ☆☆ 그 다음 작업 완료 후 본인 파일 올리기!!!!!!!
+* -> 프로젝트 우측 버튼 -> team -> synchroniaze workspace -> outgoing mode
+* -> 작업 후 파일 올리기
+* git staging 에서 파일 추가 시 모든 파일 추가 금지!!!!!
+* (pom.properties 특히 주의!!!!!!!!)
+* 자기가 손 본 파일만 추가하고 message 필수입력 후 commit & push
 
 * 본인이름 + 커밋 시 날짜(+시간) + 업데이트한 데이터에 대한 간략한 설명 으로 해주세요
 ex) 211018 검색 기능 추가, 211018 ver2 검색 기능 추추가
