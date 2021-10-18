@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- 사이드 메뉴가 있는 기본 template -->
+	<definition name="baseLayout" template="/WEB-INF/views/template/base_template.jsp">
+		<put-attribute name="title" value="POTATO_LIBRARY"/>
+		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/template/side.jsp"/>
+		<put-attribute name="body" value=""/>
+	</definition>
+	
+	<!--사이드 메뉴가 없는 메뉴 클릭 시 template -->
+	<definition name="noSideLayout" template="/WEB-INF/views/template/no_side_template.jsp">
+		<put-attribute name="title" value="POTATO_LIBRARY"/>
+		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
+		<put-attribute name="body" value=""/>
+	</definition>
+	
+	
+	<!-- 각 메뉴 클릭 시 내용 페이지 변경 -->
+	
+	<definition name="*/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
+	<definition name="noside/*/*" extends="noSideLayout">
+		<put-attribute name="body" value="/WEB-INF/views/noside/{1}/{2}.jsp"/>
+	</definition>
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
