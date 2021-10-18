@@ -10,7 +10,9 @@
 ☆☆ 그 다음 작업 완료 후 본인 파일 올리기!!!!!!!
 -> 프로젝트 우측 버튼 -> team -> synchroniaze workspace -> outgoing mode
 -> 작업 후 파일 올리기
-
+git staging 에서 파일 추가 시 모든 파일 추가 금지!!!!!
+(pom.properties 특히 주의!!!!!!!!)
+자기가 손 본 파일만 추가하고 message 필수입력 후 commit & push
 
 * 커밋 시 날짜 + 업데이트한 데이터에 대한 간략한 설명으로 해주세요
 ex) 211018 검색 기능 추가, 211018 ver2 검색 기능 추추가
