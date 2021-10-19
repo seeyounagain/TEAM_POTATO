@@ -13,11 +13,11 @@ public class ServiceServiceImpl implements ServiceService {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	//시트 리스트
 	@Override
 	public List<ReadingSeatVO> selectReadingSeat() {
-		
-		return sqlSession.selectList("serviceMapper.selectListReadingSeat");
+		return sqlSession.selectList("serviceMapper.selectReadingSeat");
 	}
 	
 	

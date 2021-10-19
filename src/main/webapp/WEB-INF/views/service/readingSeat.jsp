@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,18 +37,27 @@ background-color: white;
 <div class="container">
 	
 <div class="row position-relative map justify-content-center">
-	<div class="col-12">
-  <div class="position-absolute top-0 start-0">SEAT</div>
-  <div class="position-absolute top-25 start-50 translate-middle-x"><span class="seat">SEAT</span></div>
-  <div class="position-absolute top-25 end-0"><span class="seat">SEAT</span></div>
-  <div class="position-absolute top-50 start-0 translate-middle-y"><span class="seat">SEAT</span></div>
-  <div class="position-absolute top-50 start-50 translate-middle"><span class="seat">SEAT</span></div>
-  <div class="position-absolute top-50 end-0 translate-middle-y"><span class="seat">SEAT</span></div>
-  <div class="position-absolute bottom-0 start-0"><span class="seat">SEAT</span></div>
-  <div class="position-absolute bottom-0 start-50 translate-middle-x"><span class="seat">SEAT</span></div>
-  <div class="position-absolute bottom-0 end-0"><span class="seat">SEAT</span></div>
-	</div>
+<c:choose>
+<c:when test="${not empty seatList }">
+<c:forEach items="seatList" var="seat" varStatus="status">
+		<div class="col-1 seat ${seat.seatCode }">열람- ${status.index }</div>
+</c:forEach>
+</c:when>
+<c:otherwise>
+dd
+</c:otherwise>
+</c:choose>
+	
+
+
+</div>	
+	
+	
+	
 </div>
+
+
+
 	
 	<div class="col-8">
 	<table class="table">
@@ -60,14 +70,7 @@ background-color: white;
     </tr>
   </thead>
   <tbody>
-			<tr class="text-center">
-				<th class="align-middle" scope="row">${board.boardNum }</th>		
-				<td class="text-center align-middle">${board.title}</td>
-				<td class="text-center align-middle">${board.writer}</td>
-				<td class="text-center align-middle">${board.createDate}
-			</td>
-
-
+  
   </tbody>
 </table>
 </div>
@@ -75,7 +78,6 @@ background-color: white;
 	
 	
 	
-	
-</div>	
+
 </body>
 </html>

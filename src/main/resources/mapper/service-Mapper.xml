@@ -10,14 +10,18 @@
 			<result column="SEAT_IN_DATE" 		property="seatInDate"	/>
 			<result column="SEAT_OUT_DATE" 		property="seatOutDate"	/>
 			</resultMap>
+			
 			<resultMap type="com.potato.project.service.vo.ReadingSeatVO" id="seat">
-			<id 	column="SEAT_CODE" 			property="recordCode"	/>
+			<id 	column="SEAT_CODE" 			property="seatCode"		/>
 			<result column="SEAT_STATUS" 		property="seatStatus" 	/>
 			<result column="ID" 				property="id" 			/>
 			</resultMap>
-
-			 
-
+			<select id="selectReadingSeat" resultMap="seat">
+			SELECT SEAT_CODE
+					,SEAT_STATUS
+					,ID
+					FROM READING_SEAT
+			</select>
 </mapper>
 
 
