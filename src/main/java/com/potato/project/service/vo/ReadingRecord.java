@@ -1,8 +1,8 @@
-package com.potato.project.common.vo;
+package com.potato.project.service.vo;
 
 public class ReadingRecord {
 	
-	
+	// 천화 
 		private String recordCode	;						 //  RECORD_CODE
 		private String seatCode		;						 //  SEAT_CODE
 		private String id			;						 //  ID

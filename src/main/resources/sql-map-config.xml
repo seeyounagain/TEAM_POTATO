@@ -9,6 +9,7 @@
 
 	<mappers>
 		<mapper resource="/mapper/sample-Mapper.xml"/>
+		<mapper resource="/mapper/service-Mapper.xml"/>  <!-- // 천화  -->
 	</mappers>
 </configuration>
 
