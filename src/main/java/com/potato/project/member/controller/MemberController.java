@@ -1,4 +1,4 @@
-package com.potato.project.user.controller;
+package com.potato.project.member.controller;
 
 import javax.annotation.Resource;
 
@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.potato.project.user.service.UserService;
+import com.potato.project.member.service.MemberService;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class MemberController {
 	@Resource(name = "userService")
-	private UserService userSerivce;
+	private MemberService userSerivce;
 	
 	@GetMapping("/test")
 	public String test() {

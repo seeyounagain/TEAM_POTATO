@@ -59,74 +59,26 @@
 <!-- 메뉴 -->
 <div class="row mb-2 menu2">
 	<div class="col-12 text-center mb-3">
-		<img class="logo" width="200px" src="/resources/img/logo5.png" onclick="location.href='/content/test'">
+		<img class="logo" width="200px" src="/resources/img/logo5.png" onclick="location.href='/common/main'">
 	</div>
 	<div class="col-12 pb-2">
 		<ul class="nav justify-content-center">
 			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">자료검색</a>
+				<img class="line" src="/resources/img/top_line.jpg">
+			</li>
+		<c:forEach var="menu" items="${menuList }">
+			<li class="nav-item">
+				<a class="dropdown-toggle title" href="/??/${menu.menuUri }" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
+				<c:forEach var="sideMenu" items="${menu.sideMenuList }">
+					<li><a class="dropdown-item" href="/??/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">${sideMenu.sideMenuName }</a></li>
+				</c:forEach>
 				</ul>
 			</li>
 			<li class="nav-item">
 				<img class="line" src="/resources/img/top_line.jpg">
 			</li>
-			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">서비스</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
-				</ul>
-			</li>
-			<li class="nav-item">
-				<img class="line" src="/resources/img/top_line.jpg">
-			</li>
-			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">도서관정보</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
-				</ul>
-			</li>
-			<li class="nav-item">
-				<img class="line" src="/resources/img/top_line.jpg">
-			</li>
-			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">참여마당</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
-				</ul>
-			</li>
-			<li class="nav-item">
-				<img class="line" src="/resources/img/top_line.jpg">
-			</li>
-			<!-- 이용자 / 관리자에 따라 표출할 메뉴 -->
-			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">나의도서관</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/user/test">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
-				</ul>
-			</li>
-			<li class="nav-item">
-				<img class="line" src="/resources/img/top_line.jpg">
-			</li>
-			<li class="nav-item">
-				<a class="dropdown-toggle title" href="/admin/test" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">도서관관리</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/admin/test">하위메뉴1</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴2</a></li>
-					<li><a class="dropdown-item" href="#">하위메뉴3</a></li>
-				</ul>
-			</li>
+		</c:forEach>
 		</ul>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-package com.potato.project.common.vo;
+package com.potato.project.member.vo;
 
 public class MemberVO {
 	

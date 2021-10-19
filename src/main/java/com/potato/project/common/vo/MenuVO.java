@@ -1,5 +1,7 @@
 package com.potato.project.common.vo;
 
+import java.util.List;
+
 public class MenuVO {
 	
 	// 메뉴 테이블 MENU
@@ -8,6 +10,8 @@ public class MenuVO {
 	private String menuName	;	  // MENU_NAME -- 메뉴명
 	private String menuUri	;	  // MENU_URI  -- 메뉴 경로
 	private int    menuAuto	;	  // MENU_AUTO -- 메뉴번호 (권한) 0 공통, 1 이용자, 2 관리자
+	
+	private List<SideMenuVO> sideMenuList	;
 	
 	public String getMenuCode() {
 		return menuCode;
@@ -32,6 +36,13 @@ public class MenuVO {
 	}
 	public void setMenuAuto(int menuAuto) {
 		this.menuAuto = menuAuto;
+	}
+	
+	public List<SideMenuVO> getSideMenuList() {
+		return sideMenuList;
+	}
+	public void setSideMenuList(List<SideMenuVO> sideMenuList) {
+		this.sideMenuList = sideMenuList;
 	}
 	
 	
