@@ -10,6 +10,7 @@
 	<mappers>
 		<mapper resource="/mapper/sample-Mapper.xml"/>
 		<mapper resource="/mapper/service-Mapper.xml"/>  <!-- // 천화  -->
+		<mapper resource="/mapper/common-Mapper.xml"/>  <!-- // 시윤  -->
 	</mappers>
 </configuration>
 
