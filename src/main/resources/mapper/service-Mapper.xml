@@ -15,6 +15,7 @@
 			<result column="SEAT_STATUS" 		property="seatStatus" 	/>
 			<result column="ID" 				property="id" 			/>
 			</resultMap>
+
 			 
 
 </mapper>
