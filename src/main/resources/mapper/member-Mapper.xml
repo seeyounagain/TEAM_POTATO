@@ -26,7 +26,7 @@
 			<if test="gender != null and !gender.equals('')">
 			, GENDER
 			</if>
-			<if test="gender != null and !gender.equals('')">
+			<if test="favorite != null and !favorite.equals('')">
 			, FAVORITE
 			</if>
 		) VALUES (
@@ -38,7 +38,7 @@
 			<if test="gender != null and !gender.equals('')">
 			, #{gender}
 			</if>
-			<if test="gender != null and !gender.equals('')">
+			<if test="favorite != null and !favorite.equals('')">
 			, #{favorite}
 			</if>
 		)

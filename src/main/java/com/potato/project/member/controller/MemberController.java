@@ -3,24 +3,29 @@ package com.potato.project.member.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.potato.project.common.service.CommonService;
 import com.potato.project.member.service.MemberService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/member")
 public class MemberController {
-	@Resource(name = "userService")
-	private MemberService userSerivce;
 	
-	@GetMapping("/test")
-	public String test() {
-		return  "user/test";
-	}
+	@Resource(name = "memberService")
+	private MemberService memberSerivce;
 	
-	@GetMapping("/userJoinForm")
-	public String userJoinForm() {
-		return  "noside/user/user_join_form";
+	@Resource(name = "commonService")
+	private CommonService commonService;
+	
+	@GetMapping("/memberJoinForm")
+	public String memberJoinForm(Model model) {
+		
+		model.addAttribute("menuList",commonService.selectMenuList());
+		
+		return "noside/member/member_join_form";
+		
 	}
 }

@@ -44,7 +44,7 @@
 		<!-- 비로그인시 -->
 			<ul class="nav justify-content-end">
 			<li class="nav-item">
-				<a class="title" aria-current="page" href="/user/userJoinForm">회원가입</a>
+				<a class="title" aria-current="page" href="/member/memberJoinForm" >회원가입</a>
 			</li>
 			<li class="nav-item">
 				<img class="line" src="/resources/img/top_line.jpg">
@@ -68,10 +68,10 @@
 			</li>
 		<c:forEach var="menu" items="${menuList }">
 			<li class="nav-item">
-				<a class="dropdown-toggle title" href="/??/${menu.menuUri }" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
+				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
 				<ul class="dropdown-menu">
 				<c:forEach var="sideMenu" items="${menu.sideMenuList }">
-					<li><a class="dropdown-item" href="/??/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">${sideMenu.sideMenuName }</a></li>
+					<li><a class="dropdown-item" href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">${sideMenu.sideMenuName }</a></li>
 				</c:forEach>
 				</ul>
 			</li>
