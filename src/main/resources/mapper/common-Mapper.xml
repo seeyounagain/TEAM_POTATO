@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<mapper namespace="commonMapper">
+	
+	<!-- resultmap 작성 -->
+	<resultMap type="com.potato.project.common.vo.MenuVO" id="menu">
+		<id column="MENU_CODE" 				property="menuCode"/>
+		<result column="MENU_NAME" 			property="menuName"/>
+		<result column="MENU_URI" 			property="menuUri"/>
+		<result column="MENU_AUTO" 			property="menuAuto"/>
+		<collection property="sideMenuList" resultMap="sideMenu"/>
+	</resultMap>
+	
+	<resultMap type="com.potato.project.common.vo.SideMenuVO" id="sideMenu">
+		<id column="SIDE_MENU_CODE" 		property="sideMenuCode"/>
+		<result column="SIDE_MENU_NAME" 	property="sideMenuName"/>
+		<result column="SIDE_MENU_URI" 		property="sideMenuUri"/>
+		<result column="MENU_CODE" 			property="menuCode"/>
+	</resultMap>
+
+	<!-- 메뉴 & 사이드 목록 조회  -->
+	<select id="selectMenuList" resultMap="menu">
+		SELECT
+		     M.MENU_CODE
+		    , MENU_NAME
+		    , MENU_URI
+		    , MENU_AUTO
+		    , SIDE_MENU_CODE
+		    , SIDE_MENU_NAME
+		    , SIDE_MENU_URI
+		FROM MENU M , SIDE_MENU S
+		WHERE M.MENU_CODE = S.MENU_CODE
+		AND MENU_AUTO = 0
+		<if test="isAdmin != null and !isAdmin.equals('')">
+		UNION ALL
+		SELECT
+		     M.MENU_CODE
+		    , MENU_NAME
+		    , MENU_URI
+		    , MENU_AUTO
+		    , SIDE_MENU_CODE
+		    , SIDE_MENU_NAME
+		    , SIDE_MENU_URI
+		FROM MENU M , SIDE_MENU S
+		WHERE M.MENU_CODE = S.MENU_CODE
+		AND MENU_AUTO = DECODE(#{isAdmin}, 'Y', 2, 1)
+		</if>
+		ORDER BY M.MENU_CODE
+	</select>
+	
+	<!-- 사이드 메뉴 목록 조회 -->
+	<select id="selectSideMenuList" resultMap="sideMenu">
+		SELECT
+			SIDE_MENU_CODE
+			, SIDE_MENU_NAME
+			, SIDE_MENU_URI
+			, MENU_CODE
+		FROM SIDE_MENU
+		WHERE MENU_CODE = #{menuCode}
+		ORDER BY SIDE_MENU_CODE
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
