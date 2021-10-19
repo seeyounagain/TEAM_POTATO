@@ -3,10 +3,21 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="serviceMapper">
 
+			<resultMap type="com.potato.project.service.vo.ReadingRecordVO" id="record">
+			<id 	column="RECORD_CODE" 		property="recordCode"	/>
+			<result column="SEAT_CODE" 			property="seatCode" 	/>
+			<result column="ID" 				property="id" 			/>
+			<result column="SEAT_IN_DATE" 		property="seatInDate"	/>
+			<result column="SEAT_OUT_DATE" 		property="seatOutDate"	/>
+			</resultMap>
+			<resultMap type="com.potato.project.service.vo.ReadingSeatVO" id="seat">
+			<id 	column="SEAT_CODE" 			property="recordCode"	/>
+			<result column="SEAT_STATUS" 		property="seatStatus" 	/>
+			<result column="ID" 				property="id" 			/>
+			</resultMap>
+			 
+
 </mapper>
-
-
-
 
 
 
