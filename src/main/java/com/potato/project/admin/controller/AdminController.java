@@ -9,13 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.potato.project.admin.service.AdminService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/libManage")
 public class AdminController {
+	
 	@Resource(name = "adminService")
 	private AdminService adminSerivce;
 	
-	@GetMapping("/test")
-	public String test() {
-		return  "admin/test";
+	@GetMapping("/bookManage")
+	public String bookManage() {
+		
+		return  "admin/bookManage";
+		
+	}
+	
+	@GetMapping("/memberManage")
+	public String memberManage() {
+		
+		return  "admin/memberManage";
+		
 	}
 }

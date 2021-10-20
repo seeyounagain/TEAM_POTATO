@@ -14,6 +14,9 @@ public class MemberVO {
 	private String gender 	;		//  GENDER      -- 성별
 	private String favorite ;		//  FAVORITE    -- 관심카테고리
 	
+	private String[] tells;
+	private String[] addrs;
+	
 	public String getId() {
 		return id;
 	}
@@ -68,6 +71,20 @@ public class MemberVO {
 	public void setFavorite(String favorite) {
 		this.favorite = favorite;
 	}
-	                                        
+	
+	public String[] getTells() {
+		return tells;
+	}	
+	public void setTells(String[] tells) {
+		String tell = tells[0] + "-" + tells[1] + "-" + tells[2];
+		setTell(tell);
+	}
+	public String[] getAddrs() {
+		return addrs;
+	}
+	public void setAddrs(String[] addrs) {
+		String addr = addrs[0] + " " + addrs[1] + " " + addrs[2];
+		setAddr(addr);
+	}
 	
 }

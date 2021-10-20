@@ -16,6 +16,7 @@
 		<result column="FAVORITE" 		property="favorite"/>
 	</resultMap>
 	
+	<!-- 회원등록 -->
 	<insert id="insertMember">
 		INSERT INTO MEMBER (
 			ID
@@ -26,7 +27,7 @@
 			<if test="gender != null and !gender.equals('')">
 			, GENDER
 			</if>
-			<if test="gender != null and !gender.equals('')">
+			<if test="favorite != null and !favorite.equals('')">
 			, FAVORITE
 			</if>
 		) VALUES (
@@ -38,11 +39,29 @@
 			<if test="gender != null and !gender.equals('')">
 			, #{gender}
 			</if>
-			<if test="gender != null and !gender.equals('')">
+			<if test="favorite != null and !favorite.equals('')">
 			, #{favorite}
 			</if>
 		)
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="selectMember" resultMap="member">
+		SELECT
+    		ID
+    		, NAME
+    		, IS_ADMIN
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND PW = #{pw}
+	</select>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="selectMemberId" resultType="String">
+		SELECT ID
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
 	
 </mapper>
 

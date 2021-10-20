@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=22"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=1"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -30,29 +30,35 @@
 <div class="row mt-3 mb-1 menu1" style="font-size: 16px;">
 		<div class="col">
 		<!-- 로그인시 -->
-<!-- 			<ul class="nav justify-content-end">
-			<li class="nav-item">
-				<a class="nav-link" aria-current="page" href="#">환영합니다, <span style="text-decoration: underline 1px black;">이용자</span>님 :)</a>
-			</li>
-			<li class="nav-item">
-				<img class="line" src="/resources/img/top_line.jpg">
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" aria-current="page" href="#">로그아웃</a>
-			</li>
-			</ul> -->
+		<c:choose>
+			<c:when test="${not empty sessionScope.loginInfo }">
+	 			<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a class="title" aria-current="page" href="/myPage/myInfo">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+				</li>
+				<li class="nav-item">
+					<img class="line" src="/resources/img/top_line.jpg">
+				</li>
+				<li class="nav-item">
+					<a class="title" aria-current="page" onclick="logout();">로그아웃</a>
+				</li>
+				</ul>
+			</c:when>
+			<c:otherwise>
 		<!-- 비로그인시 -->
 			<ul class="nav justify-content-end">
 			<li class="nav-item">
-				<a class="title" aria-current="page" href="/user/userJoinForm">회원가입</a>
+				<a class="title" aria-current="page" href="/member/memberJoinInfo" >회원가입</a>
 			</li>
 			<li class="nav-item">
 				<img class="line" src="/resources/img/top_line.jpg">
 			</li>
 			<li class="nav-item">
-				<a class="title" aria-current="page" href="#">로그인</a>
+				<a class="title" aria-current="page" href="/member/memberLoginForm">로그인</a>
 			</li>
 			</ul>
+			</c:otherwise>
+		</c:choose>
 		</div>
 </div>
 
@@ -66,26 +72,20 @@
 			<li class="nav-item">
 				<img class="line" src="/resources/img/top_line.jpg">
 			</li>
-				<c:forEach var="menu" items="${menuList }">
-					<li class="nav-item">
-						<a class="dropdown-toggle title" id="dropdownMenuButton" data-bs-toggle="dropdown"aria-expanded="false">
-							${menu.menuName}
-						</a>
-						<ul class="dropdown-menu">
-							<c:forEach var="sideMenu" items="${menu.sideMenuList }">
-								<li>
-									<a class="dropdown-item"href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">
-										${sideMenu.sideMenuName }
-									</a>
-								</li>
-							</c:forEach>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<img class="line"src="/resources/img/top_line.jpg">
-					</li>
+		<c:forEach var="menu" items="${menuList }">
+			<li class="nav-item">
+				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
+				<ul class="dropdown-menu">
+				<c:forEach var="sideMenu" items="${menu.sideMenuList }">
+					<li><a class="dropdown-item" href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">${sideMenu.sideMenuName }</a></li>
 				</c:forEach>
-			</ul>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<img class="line" src="/resources/img/top_line.jpg">
+			</li>
+		</c:forEach>
+		</ul>
 	</div>
 </div>
 

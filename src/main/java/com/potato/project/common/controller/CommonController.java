@@ -1,6 +1,7 @@
 package com.potato.project.common.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,9 @@ public class CommonController {
 	private CommonService commonService;
 	
 	@GetMapping("/main")
-	public String test(Model model) {
+	public String test(Model model, HttpSession session) {
+		
+		//MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
 		model.addAttribute("menuList",commonService.selectMenuList());
 		
