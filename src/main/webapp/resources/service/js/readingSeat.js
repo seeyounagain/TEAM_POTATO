@@ -18,7 +18,7 @@ $(document).ready(function(){
 			      success: function(result) {
 			      	//ajax 실행 성공 시 실행되는 구간
 			      	$('#minimin').empty();
-		var str = '';
+   var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                      '    ;
    str+='	<div class="col-6 text-center mt-5 mb-5">                                       '    ;
    str+='	좌석상태변경 mini                                                                    '    ;
@@ -42,7 +42,7 @@ $(document).ready(function(){
    str+='</table>                                                                            '    ;
    str+='	</div>                                                                          '    ;
    str+='</div>                                                                         		'    ;
-	   $('#minimin').append(str);
+   $('#minimin').append(str);
 	   
 			      },
 			      error: function(){
