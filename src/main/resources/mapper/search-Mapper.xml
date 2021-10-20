@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 모든 SQL문을 mapper태그 안에 작성 -->
+<mapper namespace="searchMapper">
+	
+	<!-- resultmap 작성 -->
+	<resultMap type="com.potato.project.common.vo.BookVO" id="book">
+		<id column="BOOK_CODE" 			property="bookCode"/>
+		<result column="ISBN" 			property="isbn"/>
+		<result column="KDC" 			property="kdc"/>
+		<result column="KDC_NAME" 		property="kdcName"/>
+		<result column="KDC_NUM" 		property="kdcNum"/>
+		<result column="WRITER" 		property="writer"/>
+		<result column="TITLE" 			property="title"/>
+		<result column="PAGE" 			property="page"/>
+		<result column="BOOK_SIZE" 		property="bookSize"/>
+		<result column="KEYWORD" 		property="keyword"/>
+		<result column="PUBLISHER" 		property="publisher"/>
+		<result column="PUB_DATE" 		property="pubDate"/>
+		<result column="SUMMARY" 		property="summary"/>
+		<result column="INTRO" 			property="intro"/>
+		<result column="INPUT_DATE" 	property="inputDate"/>
+		<result column="AREA" 			property="area"/>
+		<result column="STATUS" 		property="status"/>
+	</resultMap>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
