@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
+<style type="text/css">
+.keyword {
+	width: 10%;
+}
+</style>
 </head>
 <body>
 
@@ -23,47 +28,34 @@
 			<div class="col-2 d-grid checkId" style="padding-left: 3px;">
 				<button type="button" class="btn btn-primary">상세검색</button>
 			</div>
+			<div class="input-group mt-5 mb-3">
+			  <select name="KDC_NAME" class="form-select" id="inputGroupSelect02">
+			    <option selected>분류</option>
+			    <option value="1">One</option>
+			    <option value="2">Two</option>
+			    <option value="3">Three</option>
+			  </select>
+			</div>
 			<div class="input-group mb-3">
-			  <select class="form-select" id="inputGroupSelect02">
-			    <option selected>Choose...</option>
-			    <option value="1">One</option>
-			    <option value="2">Two</option>
-			    <option value="3">Three</option>
-			  </select>
-			  <label class="input-group-text" for="inputGroupSelect02">Options</label>
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">제목</span>
+			  <input type="text" name="TITLE" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>
-		
 			<div class="input-group mb-3">
-			  <button class="btn btn-outline-secondary" type="button">Button</button>
-			  <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-			    <option selected>Choose...</option>
-			    <option value="1">One</option>
-			    <option value="2">Two</option>
-			    <option value="3">Three</option>
-			  </select>
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
+			  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>
-		
-			<div class="input-group">
-			  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-			    <option selected>Choose...</option>
-			    <option value="1">One</option>
-			    <option value="2">Two</option>
-			    <option value="3">Three</option>
-			  </select>
-			  <button class="btn btn-outline-secondary" type="button">Button</button>
+			<div class="input-group mb-3">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
+			  <input type="text" name="PUBLISHER" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>
-		
-			<div class="accordion accordion-flush" id="accordionFlushExample">
-			  <div class="accordion-item">
-			    <h2 class="accordion-header" id="flush-headingOne">
-			      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-			        상세검색
-			      </button>
-			    </h2>
-			    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-			      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-			    </div>
-			  </div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
+			  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
+			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>
 		</div>
 	</div>

@@ -23,7 +23,7 @@
 	<!-- 메뉴 & 사이드 목록 조회  -->
 	<select id="selectMenuList" resultMap="menu">
 		SELECT
-		     M.MENU_CODE
+		     M.MENU_CODE AS MENU_CODE
 		    , MENU_NAME
 		    , MENU_URI
 		    , MENU_AUTO
@@ -36,7 +36,7 @@
 		<if test="isAdmin != null and !isAdmin.equals('')">
 		UNION ALL
 		SELECT
-		     M.MENU_CODE
+		     M.MENU_CODE AS MENU_CODE
 		    , MENU_NAME
 		    , MENU_URI
 		    , MENU_AUTO
@@ -47,7 +47,7 @@
 		WHERE M.MENU_CODE = S.MENU_CODE
 		AND MENU_AUTO = DECODE(#{isAdmin}, 'Y', 2, 1)
 		</if>
-		ORDER BY M.MENU_CODE
+		ORDER BY MENU_CODE
 	</select>
 	
 	<!-- 사이드 메뉴 목록 조회 -->

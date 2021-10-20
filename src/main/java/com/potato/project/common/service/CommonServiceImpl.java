@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.common.vo.SideMenuVO;
+import com.potato.project.member.vo.MemberVO;
 
 @Service("commonService")
 public class CommonServiceImpl implements CommonService {
@@ -17,9 +18,9 @@ public class CommonServiceImpl implements CommonService {
 	
 	// 메뉴 목록 조회
 	@Override
-	public List<MenuVO> selectMenuList() {
+	public List<MenuVO> selectMenuList(MemberVO memberVO) {
 		
-		return sqlSession.selectList("commonMapper.selectMenuList");
+		return sqlSession.selectList("commonMapper.selectMenuList",memberVO);
 		
 	}
 	
