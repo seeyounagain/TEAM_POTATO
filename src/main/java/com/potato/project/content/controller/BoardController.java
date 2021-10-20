@@ -59,6 +59,8 @@ public class BoardController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
 		
 		model.addAttribute("qnaList", boardService.selectQnaList());
+		
+		
 		return  "board/qna_list";
 	}
 	
@@ -76,6 +78,8 @@ public class BoardController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
+		
+		
 		
 		return "board/qna_form";
 	}

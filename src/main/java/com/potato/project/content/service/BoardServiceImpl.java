@@ -27,6 +27,11 @@ public class BoardServiceImpl  implements BoardService{
 		
 		 return  sqlSession.selectList("boardMapper.selectQnaList");
 	}
+
+	@Override
+	public void insertQna(QnaVO qnaVO) {
+		
+	}
 	 
 
 	

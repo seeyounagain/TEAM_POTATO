@@ -14,6 +14,6 @@ public interface BoardService {
 	List<QnaVO> selectQnaList();
 	
 	//상담문의 입력
-	
+	void insertQna(QnaVO qnaVO);
 	
 }

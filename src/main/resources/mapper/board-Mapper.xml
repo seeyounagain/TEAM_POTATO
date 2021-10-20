@@ -61,6 +61,7 @@
 	          , CREATE_DATE
 	          , QNA_PW
 	)VALUES(
+				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 6, 3))), 0) + 1, 3, '0') FROM ITEM_CATEGORY)
 	
 	)
 	</insert>
