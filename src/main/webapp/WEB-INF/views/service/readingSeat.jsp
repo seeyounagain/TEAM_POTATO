@@ -45,10 +45,13 @@ background-color: white;
 
 <c:when test="${not empty seatList }">
 <c:forEach items="${seatList }" var="seat" varStatus="status">
-		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } 
+		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } seatForm 
 		<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
 		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if>
 		">
+		<input type="hidden" value="${seat.seatCode }">
+		
+		
 		<span class="align-middle" id="seatForm">열람- ${status.index +1 }
 		<c:choose>
 		<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
@@ -75,35 +78,9 @@ background-color: white;
 	<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
 	
 	
-	<span id="minimin" style="display: none">
-	<div class="col-12 container mb-5" >
-		<div class="row justify-content-center mt-5 align-middle">
-		<div class="col-6 text-center mt-5 mb-5">
-		좌석상태변경 mini
-<table class="table">
-  <thead>
-    <tr class="text-center mt-5">
-      <th scope="col">좌석번호</th>
-      <th scope="col">이용자</th>
-      <th scope="col">상태</th>
-      <th scope="col">상태변경</th>
-    </tr>
-  </thead>
-  <tbody>
-			<tr class="text-center">
-				<th class="align-middle" scope="row">${chooseSeat.seatCode }</th>		
-				<td class="text-center align-middle">${chooseSeat.seatCode }</td>
-				<td class="text-center align-middle">${chooseSeat.seatCode }</td>
-				<td class="text-center align-middle">${chooseSeat.seatCode }</td>
-			</tr>
-  </tbody>
-</table>
-		
-		
-		</div>
-		</div>
+	<div class="col-12 container mb-5" id="minimin">
+
 	</div>
-	</span>
 	
 	
 	

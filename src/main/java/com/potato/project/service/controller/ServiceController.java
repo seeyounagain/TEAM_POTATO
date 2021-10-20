@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +14,8 @@ import com.potato.project.common.service.CommonService;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.service.ServiceService;
+import com.potato.project.service.vo.ReadingSeatVO;
+
 // 천화 
 @Controller
 @RequestMapping("/service")
@@ -27,7 +30,7 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
-	@GetMapping("/libManage")
+	@RequestMapping("/libManage")
 	public String goReadingSeat(Model model, String menuCode,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -45,6 +48,11 @@ public class ServiceController {
 		return  "service/readingSeat";
 	}
 	
+	@ResponseBody
+	@PostMapping("/chooseSeat")
+	public ReadingSeatVO chooseSeat(Model model, String seatCode) {
+	return serviceService.chooseSeat(seatCode);
 	
+	}
 
 }

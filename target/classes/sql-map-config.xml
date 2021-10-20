@@ -12,7 +12,7 @@
 		<mapper resource="/mapper/service-Mapper.xml"/>  <!-- // 천화  -->
 		<mapper resource="/mapper/common-Mapper.xml"/>  <!-- // 시윤  -->
 		<mapper resource="/mapper/member-Mapper.xml"/>  <!-- // 시윤  -->
-		<mapper resource="/mapper/board-Mapper.xml"/>  <!-- // 민휘  -->
+		<mapper resource="/mapper/board-Mapper.xml"/>  <!-- // 민휘  --> 
 		<mapper resource="/mapper/libInfo-Mapper.xml"/>  <!-- // 상봉  -->
 	</mappers>
 </configuration>

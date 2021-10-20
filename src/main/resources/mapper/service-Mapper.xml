@@ -22,6 +22,13 @@
 					,ID
 					FROM READING_SEAT
 			</select>
+			<select id="chooseSeat" resultMap="seat">
+			SELECT SEAT_CODE
+					,SEAT_STATUS
+					,ID
+					FROM READING_SEAT
+					WHERE SEAT_CODE = #{seatCode }
+			</select>
 </mapper>
 
 
