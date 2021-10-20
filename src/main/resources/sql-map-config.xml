@@ -14,6 +14,7 @@
 		<mapper resource="/mapper/member-Mapper.xml"/>  <!-- // 시윤  -->
 		<mapper resource="/mapper/board-Mapper.xml"/>  <!-- // 민휘  --> 
 		<mapper resource="/mapper/libInfo-Mapper.xml"/>  <!-- // 상봉  -->
+		<mapper resource="/mapper/search-Mapper.xml"/>  <!-- // 시윤  -->
 	</mappers>
 </configuration>
 

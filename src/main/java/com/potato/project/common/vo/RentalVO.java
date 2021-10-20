@@ -4,12 +4,12 @@ public class RentalVO {
 	
 	// 대여 정보 테이블 RENTAL
 		
-	private String  rentalCode   ;    // RENTAL_CODE  -- 대여 코드 (기본키 RENTAL_0001)
-	private String  id        	 ;    // ID           -- 대출자 (외래키)
-	private String  bookCode     ;    // BOOK_CODE    -- 대출한책 코드 (외래키)
-	private String  rentalDate   ;    // RENTAL_DATE  -- 대출일
-	private String  returnDate   ;    // RETURN_DATE  -- 반납일 (대출일 + 7일)
-	
+	private String  rentalCode	;	// RENTAL_CODE  -- 대여 코드 (기본키 RENTAL_0001)
+	private String  id			;	// ID           -- 대출자 (외래키)
+	private String  bookCode	;	// BOOK_CODE    -- 대출한책 코드 (외래키)
+	private String  rentalDate	;	// RENTAL_DATE  -- 대출일
+	private String  returnDate	;	// RETURN_DATE  -- 실제 반납일
+	private String  limitDate	;	// LIMIT_DATE	-- 반납 마감일 (대출일 + 7일)
 	
 	public String getRentalCode() {
 		return rentalCode;
@@ -40,6 +40,12 @@ public class RentalVO {
 	}
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
+	}
+	public String getLimitDate() {
+		return limitDate;
+	}
+	public void setLimitDate(String limitDate) {
+		this.limitDate = limitDate;
 	}
 	 
 
