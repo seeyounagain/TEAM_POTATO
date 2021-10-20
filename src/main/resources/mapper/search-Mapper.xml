@@ -4,11 +4,16 @@
 <mapper namespace="searchMapper">
 	
 	<!-- resultmap 작성 -->
+	<resultMap type="com.potato.project.common.vo.BookCateVO" id="cate">
+		<id column="KDC_NUM" 			property="kdcNum"/>
+		<result column="KDC_NAME" 		property="kdcName"/>
+		<collection property="bookList" resultMap="book"/>
+	</resultMap>
+		
 	<resultMap type="com.potato.project.common.vo.BookVO" id="book">
 		<id column="BOOK_CODE" 			property="bookCode"/>
 		<result column="ISBN" 			property="isbn"/>
 		<result column="KDC" 			property="kdc"/>
-		<result column="KDC_NAME" 		property="kdcName"/>
 		<result column="KDC_NUM" 		property="kdcNum"/>
 		<result column="WRITER" 		property="writer"/>
 		<result column="TITLE" 			property="title"/>
@@ -22,7 +27,75 @@
 		<result column="INPUT_DATE" 	property="inputDate"/>
 		<result column="AREA" 			property="area"/>
 		<result column="STATUS" 		property="status"/>
+		<collection property="bookImgVO" resultMap="bookImg"/>
 	</resultMap>
+	
+	<resultMap type="com.potato.project.common.vo.BookImgVO" id="bookImg">
+		<id column="IMG_CODE" 				property="imgCode"/>
+		<result column="ORIGIN_IMG_NAME" 	property="originImgName"/>
+		<result column="ATTACHED_IMG_NAME" 	property="attachedImgName"/>
+		<result column="BOOK_CODE" 			property="bookCode"/>	
+	</resultMap>
+	
+	<!-- 책 등록 -->
+	<insert id="insertBook">
+		INSERT INTO BOOK (
+		    ISBN
+		    , BOOK_CODE
+		    , KDC
+		    , KDC_NUM
+		    , WRITER
+		    , TITLE
+		    , PAGE
+		    , BOOK_SIZE
+		    , KEYWORD
+		    , PUBLISHER
+		    , PUB_DATE
+		    , SUMMARY
+		    , INTRO
+		    , AREA
+		) VALUES (
+		    #{isbn}
+		    , (SELECT 'BOOK_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(BOOK_CODE,6,4))),0) + 1,4,0) FROM BOOK)
+		    , #{kdc}
+		    , SUBSTR(#{kdc},1,1)
+		    , #{writer}
+		    , #{title}
+		    , #{page}
+		    , #{bookSize}
+		    , #{keyword}
+		    , #{publisher}
+		    , #{pubDate}
+		    , #{summary}
+		    , #{intro}
+			, #{area}
+		)
+	</insert>
+	
+	<!-- 모든 도서(+ 이미지) 조회 + 주제 들어올 시 주제로 조회 가능 -->
+	<select id="selectBookList" resultMap="book">
+		SELECT
+		    ISBN
+		    , B.BOOK_CODE
+		    , KDC
+		    , B.KDC_NUM
+		    , WRITER
+		    , TITLE
+		    , PAGE
+		    , BOOK_SIZE
+		    , KEYWORD
+		    , PUBLISHER
+		    , PUB_DATE
+		    , SUMMARY
+		    , INTRO
+		    , INPUT_DATE
+		    , AREA
+		    , ATTACHED_IMG_NAME
+		FROM BOOK B, BOOK_CATE C, BOOK_IMG I
+		WHERE B.KDC_NUM = C.KDC_NUM
+		AND B.BOOK_CODE = I.BOOK_CODE
+		ORDER BY INPUT_DATE DESC
+	</select>
 	
 </mapper>
 

@@ -8,7 +8,6 @@ public class BookVO {
 	private String 	isbn		  ; // ISBN 		    -- 책 고유 코드 (UNIQUE)
 	private String 	kdc			  ; // KDC	  		    -- 청구기호
 	// 000 총류 100 철학 200 종교 300 사회과학 400 자연과학 500 기술과학 600 예술 700 언어 800 문학 900 역사
-	private String  kdcName	  ; // KDC_NAME			-- 분류명  총류 철학 종교 사회과학 자연과학 기술과학 예술 언어 문학 역사
 	private int		kdcNum		  ; // KDC_NUM 			-- 분류코드  0 1 2 3 4 5 6 7 8 9
 	private String 	writer		  ; // WRITER 		    -- 저자
 	private String 	title		  ; // TITLE 		    -- 표제
@@ -23,6 +22,7 @@ public class BookVO {
 	private String 	area		  ; // AREA 		    -- 자료위치 (종합자료실1 종합자료실2 열람실 어린이실)
 	private int 	status		  ; // STATUS 		    -- 책 상태 (기본값 0 대출가능 / 1 대출중 / 2 연체중 / 3 예약중)
 	
+	private BookImgVO bookImgVO	; // 이미지VO
 	
 	public String getIsbn() {
 		return isbn;
@@ -41,12 +41,6 @@ public class BookVO {
 	}
 	public void setKdc(String kdc) {
 		this.kdc = kdc;
-	}
-	public String getKdcName() {
-		return kdcName;
-	}
-	public void setKdcName(String kdcName) {
-		this.kdcName = kdcName;
 	}
 	public int getKdcNum() {
 		return kdcNum;
@@ -125,6 +119,12 @@ public class BookVO {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public BookImgVO getBookImgVO() {
+		return bookImgVO;
+	}
+	public void setBookImgVO(BookImgVO bookImgVO) {
+		this.bookImgVO = bookImgVO;
 	}
 	
 	

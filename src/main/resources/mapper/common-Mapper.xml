@@ -47,7 +47,7 @@
 		WHERE M.MENU_CODE = S.MENU_CODE
 		AND MENU_AUTO = DECODE(#{isAdmin}, 'Y', 2, 1)
 		</if>
-		ORDER BY MENU_CODE
+		ORDER BY MENU_CODE, SIDE_MENU_CODE
 	</select>
 	
 	<!-- 사이드 메뉴 목록 조회 -->

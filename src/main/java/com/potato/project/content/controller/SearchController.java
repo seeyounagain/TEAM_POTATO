@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 
 @Controller
@@ -18,6 +19,9 @@ public class SearchController {
 	
 	@Resource(name = "commonService")
 	private CommonService commonService;
+	
+	@Resource(name = "searchService")
+	private SearchService searchService;
 	
 	@GetMapping("/bookSearch")
 	// 자료검색 페이지로 이동
@@ -34,6 +38,8 @@ public class SearchController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		model.addAttribute("bookList",searchService.selectBookList());
 		
 		return "search/search_form";
 		

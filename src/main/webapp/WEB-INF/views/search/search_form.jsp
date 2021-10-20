@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,18 @@
 <title>TITLE</title>
 <script type="text/javascript" src="/resources/search/js/search_form.js?ver=1" ></script>
 <style type="text/css">
+body {
+	background-color: white;
+}
 .keyword {
 	width: 10%;
 }
 #searchBox {
 	visibility: hidden;
+}
+#bookT {
+	border-collapse: collapse;
+	border: 1px black solid;
 }
 </style>
 </head>
@@ -66,6 +74,72 @@
 		</div>
 	</div>
 </div>
+
+	<table id="bookT">
+		<caption id="cap">도서 ${bookList.size() }건</caption>
+	<c:choose>
+		<c:when test="${not empty bookList }">
+		<c:forEach var="book" items="${bookList }" varStatus="status">
+		<tr>
+			<td>
+				${book.isbn }
+			</td>
+			<td>
+				${book.bookCode }
+			</td>
+			<td>
+				${book.kdcNum },${book.kdc }
+			</td>
+			<td>
+				${book.writer }
+			</td>
+			<td>
+				${book.title }
+			</td>
+			<td>
+				${book.page }p
+			</td>
+			<td>
+				${book.bookSize }cm
+			</td>
+			<td>
+				#${book.keyword }
+			</td>
+			<td>
+				${book.publisher }
+			</td>
+			<td>
+				${book.pubDate }
+			</td>
+			<td>
+				${book.summary }
+			</td>
+			<td>
+				${book.intro }
+			</td>
+			<td>
+				${book.inputDate }
+			</td>
+			<td>
+				${book.area }
+			</td>
+			<td>
+				${book.status }
+			</td>
+			<td>
+				<img style="width: 200px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
+			</td>
+		</tr>
+		</c:forEach>
+		</c:when>
+		<c:otherwise>
+		<tr>
+			<td>검색된 결과가 없습니다.</td>
+		</tr>
+		</c:otherwise>
+		</c:choose>
+	</table>
+
 
 </body>
 </html>
