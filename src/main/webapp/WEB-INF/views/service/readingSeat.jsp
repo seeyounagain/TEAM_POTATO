@@ -45,9 +45,11 @@ background-color: white;
 
 <c:when test="${not empty seatList }">
 <c:forEach items="${seatList }" var="seat" varStatus="status">
-		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } seatForm 
+		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } 
+		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if> 
 		<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
 		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if>
+		
 		">
 		
 		<input type="hidden" value="${seat.seatCode }">
