@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=1"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=2"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
