@@ -4,6 +4,11 @@
 
 <!-- 봉 생성 -->
 <mapper namespace="sampleMapper">
+	<resultMap type="com.potato.project.common.vo.BookCateVO" id="menu">
+		<id column="KDC_NUM" 				property="kdcNum"/>
+		<result column="KDC_NAME" 			property="kdcName"/>
+		<collection property="bookList" resultMap="bookList"/>
+	</resultMap>
 
 </mapper>
 

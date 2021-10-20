@@ -20,7 +20,7 @@ public class LibInfoController {
 	@Resource(name="commonService")
 	private CommonService commonService;
 	
-	@GetMapping("/libDirections")
+	@GetMapping("/locaInfo")
 	public String libDirections(Model model,String menuCode,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -38,7 +38,7 @@ public class LibInfoController {
 		return "libInfo/lib_directions";
 		
 	}
-	@GetMapping("/libStatusGuide")
+	@GetMapping("/dataInfo")
 	public String libStatusGuide(Model model,String menuCode,HttpSession session){
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -55,6 +55,22 @@ public class LibInfoController {
 		
 		return "libInfo/lib_status_guide";
 		
+	}
+	@GetMapping("/serviceInfo")
+	public String serviceInfo(Model model,String menuCode,HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
+		
+		return "libInfo/lib_service_info";
 	}
 		
 }
