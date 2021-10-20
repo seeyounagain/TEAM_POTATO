@@ -1,3 +1,4 @@
+
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
 	
@@ -8,8 +9,7 @@ $(document).ready(function(){
 	
 	$(document).on('click','.seatForm', function() {
 		var sc = $(this).children().eq(0).val();
-		
-		alert(sc);
+
 		
 				$.ajax({
 			      url: '/service/chooseSeat', //요청경로
@@ -17,7 +17,6 @@ $(document).ready(function(){
 			      data:{'seatCode':sc}, //필요한 데이터
 			      success: function(result) {
 			      	//ajax 실행 성공 시 실행되는 구간
-			      	alert(result.seatCode);
 			      	$('#minimin').empty();
 		var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                      '    ;
