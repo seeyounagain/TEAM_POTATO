@@ -8,6 +8,33 @@
 			
 		});
 		
+		$(document).on('mousedown', '#checkPw' , function() {
+		
+			$('#pwAlert').text('');
+			
+		});
+		
+		$(document).on('keyup', '#checkPw' , function() {
+		
+			var pw = $('#pw').val();
+			var checkPw = $('#checkPw').val();
+			
+			if (pw != checkPw) {
+				
+				$('#pwAlert').css('color', 'red');
+				$('#pwAlert').text('* 비밀번호를 확인해주세요.');
+				return ;
+				
+			}
+			
+			else {
+				
+				$('#pwAlert').text('');
+				return ;				
+				
+			}
+			
+		});
 		
 	});
 
