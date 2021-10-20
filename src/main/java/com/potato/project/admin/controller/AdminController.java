@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.MenuVO;
 import com.potato.project.member.vo.MemberVO;
 
 @Controller
@@ -37,7 +38,7 @@ public class AdminController {
 	
 	//공지사항 작성 페이지로 이동
 	@GetMapping("/noticeForm")
-	public String goNoticeForm(Model model, String menuCode, HttpSession session) {
+	public String goNoticeForm(Model model,MenuVO menuVO, HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
@@ -48,7 +49,7 @@ public class AdminController {
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 
 		return "admin/notice_form";
 	}

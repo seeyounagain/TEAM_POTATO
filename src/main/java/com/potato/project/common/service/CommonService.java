@@ -12,6 +12,6 @@ public interface CommonService {
 	List<MenuVO> selectMenuList(MemberVO memberVO);
 	
 	// 사이드 메뉴 목록 조회
-	List<SideMenuVO> selectSideMenuList(String menuCode);
+	List<SideMenuVO> selectSideMenuList(MenuVO menuVO);
 	
 }

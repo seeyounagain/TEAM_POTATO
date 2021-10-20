@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
+<script type="text/javascript" src="/resources/search/js/search_form.js?ver=1" ></script>
 <style type="text/css">
 .keyword {
 	width: 10%;
+}
+#searchBox {
+	visibility: hidden;
 }
 </style>
 </head>
@@ -26,9 +30,9 @@
 				<button type="button" class="btn btn-primary">검색</button>
 			</div>
 			<div class="col-2 d-grid checkId" style="padding-left: 3px;">
-				<button type="button" class="btn btn-primary">상세검색</button>
+				<button id="detailBtn" type="button" class="btn btn-primary">상세검색</button>
 			</div>
-			<div class="searchBox">
+			<div id="searchBox">
 			<div class="input-group mt-5 mb-3">
 			  <select name="KDC_NAME" class="form-select" id="inputGroupSelect02">
 			    <option selected>분류</option>

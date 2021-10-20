@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.service.ServiceService;
@@ -31,7 +32,7 @@ public class ServiceController {
 	private ServiceService serviceService;
 	
 	@RequestMapping("/libManage")
-	public String goReadingSeat(Model model, String menuCode,HttpSession session) {
+	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -43,7 +44,7 @@ public class ServiceController {
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		return  "service/readingSeat";
 	}

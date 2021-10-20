@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.MenuVO;
 import com.potato.project.member.vo.MemberVO;
 
 @Controller
@@ -20,7 +21,7 @@ public class SearchController {
 	
 	@GetMapping("/bookSearch")
 	// 자료검색 페이지로 이동
-	public String bookSearch(Model model,String menuCode,HttpSession session) {
+	public String bookSearch(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -32,7 +33,7 @@ public class SearchController {
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuCode));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		return "search/search_form";
 		
