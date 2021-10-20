@@ -8,6 +8,8 @@ public class BookVO {
 	private String 	bookCode	  ; // BOOK_CODE  	    -- 책코드 (기본키 BOOK_0001)
 	private String 	kdc			  ; // KDC	  		    -- 청구기호
 	// 000 총류 100 철학 200 종교 300 사회과학 400 자연과학 500 기술과학 600 예술 700 언어 800 문학 900 역사
+	private String  kdc_name	  ; // KDC_NAME			-- 분류명  총류 철학 종교 사회과학 자연과학 기술과학 예술 언어 문학 역사
+	private int		kdc_num		  ; // KDC_NUM 			-- 분류코드  0 1 2 3 4 5 6 7 8 9
 	private String 	writer		  ; // WRITER 		    -- 저자
 	private String 	title		  ; // TITLE 		    -- 표제
 	private String 	page		  ; // PAGE 		    -- 쪽수 (숫자만 입력)
@@ -39,6 +41,18 @@ public class BookVO {
 	}
 	public void setKdc(String kdc) {
 		this.kdc = kdc;
+	}
+	public String getKdc_name() {
+		return kdc_name;
+	}
+	public void setKdc_name(String kdc_name) {
+		this.kdc_name = kdc_name;
+	}
+	public int getKdc_num() {
+		return kdc_num;
+	}
+	public void setKdc_num(int kdc_num) {
+		this.kdc_num = kdc_num;
 	}
 	public String getWriter() {
 		return writer;

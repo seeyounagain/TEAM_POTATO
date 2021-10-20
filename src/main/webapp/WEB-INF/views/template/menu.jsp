@@ -25,13 +25,12 @@
 </style>
 </head>
 <body>
-
 <!-- 최상단 로그인 메뉴 -->
 <div class="row mt-3 mb-1 menu1" style="font-size: 16px;">
 		<div class="col">
 		<!-- 로그인시 -->
 		<c:choose>
-			<c:when test="${not empty sessionScope.loginInfo }">
+			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'N' }">
 	 			<ul class="nav justify-content-end">
 				<li class="nav-item">
 					<a class="title" aria-current="page" href="/myPage/myInfo">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
@@ -44,6 +43,20 @@
 				</li>
 				</ul>
 			</c:when>
+			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'Y' }">
+	 			<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a class="title" aria-current="page" href="/libManage/bookManage">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+				</li>
+				<li class="nav-item">
+					<img class="line" src="/resources/img/top_line.jpg">
+				</li>
+				<li class="nav-item">
+					<a class="title" aria-current="page" onclick="logout();">로그아웃</a>
+				</li>
+				</ul>
+			</c:when>
+			
 			<c:otherwise>
 		<!-- 비로그인시 -->
 			<ul class="nav justify-content-end">
