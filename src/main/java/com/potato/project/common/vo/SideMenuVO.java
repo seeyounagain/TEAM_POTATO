@@ -8,6 +8,7 @@ public class SideMenuVO {
 	private String sideMenuName     ;		// SIDE_MENU_NAME   -- 메뉴명 
 	private String sideMenuUri      ;		// SIDE_MENU_URI    -- 메뉴 경로 
 	private String menuCode			;       // MENU_CODE        -- 상위 메뉴 코드 (외래키)
+	private String menuUri			;       // MENU_URI  		-- 메뉴 경로
 	
 	public String getSideMenuCode() {
 		return sideMenuCode;
@@ -32,6 +33,12 @@ public class SideMenuVO {
 	}
 	public void setMenuCode(String menuCode) {
 		this.menuCode = menuCode;
+	}
+	public String getMenuUri() {
+		return menuUri;
+	}
+	public void setMenuUri(String menuUri) {
+		this.menuUri = menuUri;
 	}
 	
 	

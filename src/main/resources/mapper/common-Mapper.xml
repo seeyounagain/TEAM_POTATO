@@ -17,6 +17,7 @@
 		<result column="SIDE_MENU_NAME" 	property="sideMenuName"/>
 		<result column="SIDE_MENU_URI" 		property="sideMenuUri"/>
 		<result column="MENU_CODE" 			property="menuCode"/>
+		<result column="MENU_URI" 			property="menuUri"/>
 	</resultMap>
 
 	<!-- 메뉴 & 사이드 목록 조회  -->
@@ -56,6 +57,7 @@
 			, SIDE_MENU_NAME
 			, SIDE_MENU_URI
 			, MENU_CODE
+            , (SELECT MENU_URI FROM MENU WHERE MENU_CODE = #{menuCode}) AS MENU_URI
 		FROM SIDE_MENU
 		WHERE MENU_CODE = #{menuCode}
 		ORDER BY SIDE_MENU_CODE
