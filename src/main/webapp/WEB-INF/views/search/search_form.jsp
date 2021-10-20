@@ -28,6 +28,7 @@
 			<div class="col-2 d-grid checkId" style="padding-left: 3px;">
 				<button type="button" class="btn btn-primary">상세검색</button>
 			</div>
+			<div class="searchBox">
 			<div class="input-group mt-5 mb-3">
 			  <select name="KDC_NAME" class="form-select" id="inputGroupSelect02">
 			    <option selected>분류</option>
@@ -56,6 +57,7 @@
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
 			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
 			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
+			</div>
 			</div>
 		</div>
 	</div>
