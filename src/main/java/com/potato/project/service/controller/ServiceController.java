@@ -28,7 +28,6 @@ public class ServiceController {
 	@GetMapping("/libManage")
 	public String goReadingSeat(Model model) {
 		model.addAttribute("menuList",commonService.selectMenuList());
-		
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
 		
 		return  "service/readingSeat";
