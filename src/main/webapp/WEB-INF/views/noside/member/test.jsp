@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-유저 테스트 페이지
+멤버 테스트 페이지
 </body>
 </html>
