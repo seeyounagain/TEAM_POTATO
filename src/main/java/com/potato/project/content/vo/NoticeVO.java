@@ -1,12 +1,16 @@
 package com.potato.project.content.vo;
 
 public class NoticeVO {
-	private String noticeCode;
-	private String title;
-	private String writer;
-	private String content;
-	private String createDate;
-	private int readCnt;
+
+	
+	// 공지사항 테이블 NOTICE
+		
+	private String noticeCode	;	// NOTICE_CODE 			-- 게시글번호 (기본키 NOTICE_001) 
+	private String title		;	// TITLE 				-- 글제목
+	private String writer		;	// WRITER  				-- 작성자 (외래키)
+	private String content		;	// CONTENT 				-- 내용
+	private String createDate	;	// CREATE_DATE 			-- 작성일
+	private int readCnt			;	// READ_CNT 			-- 조회수
 	
 	public String getNoticeCode() {
 		return noticeCode;
@@ -44,7 +48,6 @@ public class NoticeVO {
 	public void setReadCnt(int readCnt) {
 		this.readCnt = readCnt;
 	}
-	
-	
+
 	
 }

@@ -21,32 +21,32 @@
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv" style="background-color: olive;">
+   <div class="col-8 mainDiv" style="background-color: #dddddd;">
    		<div class="titleDiv">
-   			<h3>문의&상담 남기기</h3>
+   			<h3>상담/문의 남기기</h3>
    		</div>
-  			<form action="/board/qnaForm">
+  			<form action="/board/writeQna">
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
 						<tr>
 							<td class="w-20">문의 제목</td>
 							<td class="w-50">
 								<select name="title">
-									<option value="문의">문의드립니다.</option>
-									<option>상담합니다.</option>
+									<option value="문의드립니다.">문의드립니다.</option>
+									<option value="상담합니다.">상담합니다.</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td>login한 멤버의 이름</td>
+							<td><input type="text" value="${sessionScope.loginInfo.id}" name="writer" readonly></td>
 						</tr>
 						<tr>
 							<td>문의 내용</td>
 							<td>
 								<div class="form-floating">
 								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px"></textarea>
-								  <label for="floatingTextarea2">문의사항을 입력해주세요. 답변은 해당 문의글에서 확인 가능합니다.</label>
+								  <label for="floatingTextarea2">답변은 해당 문의글에서 확인 가능합니다.</label>
 								</div>
 							</td>
 						</tr>

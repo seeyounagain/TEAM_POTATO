@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 <div class="row justify-content-center">
    <div class="col-8 mainDiv" style="background-color: olive;">
    		<div class="titleDiv">
-   			<h3>공지사항</h3>
+   			<h3>문의&상담</h3>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
@@ -31,26 +32,27 @@
 							<tr>
 								<th class="w-10">번호</th>
 								<th class="w-60">제목</th>
+								<th class="w-10">작성자</th>
 								<th class="w-20">작성일</th>
-								<th class="w-10">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach items="${qnaList }" var="qnaInfo">
 							<tr>
-								<td>1</td>
-								<td><a href="/content/noticeDetail">2021.10 도서관 이용시간 변경에 대한 공지</a></td>
-								<td>2021-10-01</td>
-								<td>365</td>
+								<td>${qnaInfo.qnaCode }</td>
+								<td><a href="/content/qnaDetail">${qnaInfo.title }</a></td>
+								<td>${qnaInfo.writer }</td>
+								<td>${qnaInfo.createDate }</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td><a>도서관 서버 점검</a></td>
-								<td>2021-09-27</td>
-								<td>12</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
+				<c:if test="${sessionScope.loginInfo.isAdmin eq 'N' }">
+					<div class="btnDiv">
+						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/qnaForm?menuCode=${menuCode}';">문의/상담 등록하기</button>
+					</div>                                                
+				</c:if>
 			</div>
 		</div>
 </body>

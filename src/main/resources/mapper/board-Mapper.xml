@@ -2,4 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="boardMapper">
+
+	<!-- 공지사항 -->
+	<resultMap type="com.potato.project.content.vo.NoticeVO" id="notice">
+		<id column="NOTICE_CODE" 	 property="noticeCode"/>
+		<result column="TITLE" 		 property="title"/>
+		<result column="WRITER" 	 property="writer"/>
+		<result column="CONTENT" 	 property="content"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="READ_CNT"    property="readCnt"/>
+	</resultMap>
+
+	<!-- 문의상담 -->
+	<resultMap type="com.potato.project.content.vo.QnaVO" id="qna">
+		<id column="QNA_CODE" 		 property="qnaCode"/>
+		<result column="TITLE" 		 property="title"/>
+		<result column="WRITER" 	 property="writer"/>
+		<result column="CONTENT" 	 property="content"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="QNA_PW" 	 property="qnaPw"/>
+	</resultMap>
+	
+	<!-- 문의 답변 -->
+	<resultMap type="com.potato.project.content.vo.QnaAnswerVO" id="qnaAnswer">
+		<id column="ANSWER_CODE" 	 property="answerCode"/>
+		<result column="CONTENT" 	 property="content"/>
+		<result column="WRITER" 	 property="writer"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="QNA_CODE" 	 property="qnaCode"/>
+	</resultMap>
+	
+	<!-- 공지사항 리스트 조회 -->
+	<select id="selectNoticeList" resultMap="notice">
+		SELECT NOTICE_CODE
+		     , TITLE
+		     , WRITER
+		     , CREATE_DATE
+		     , READ_CNT
+		FROM NOTICE
+	</select>
+	
+	<!-- 문의상담 리스트 조회 -->
+	<select id="selectQnaList" resultMap="qna">
+		SELECT QNA_CODE
+		     , TITLE
+		     , WRITER
+		     , CREATE_DATE
+		FROM QNA
+	</select>
+	
+	<!-- 문의상담 INSERT -->
+	<insert id="insertQna">
+		INSERT INTO QNA(
+	            QNA_CODE
+	          , TITLE
+	          , WRITER
+	          , CONTENT
+	          , CREATE_DATE
+	          , QNA_PW
+	)VALUES(
+	
+	)
+	</insert>
 </mapper>

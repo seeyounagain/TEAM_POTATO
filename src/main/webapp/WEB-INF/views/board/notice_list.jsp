@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,9 @@
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv" style="background-color: olive;">
+   <div class="col-8 mainDiv" style="background-color: #dddddd;">
    		<div class="titleDiv">
-   			<h3>문의&상담</h3>
+   			<h3>공지사항</h3>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
@@ -31,30 +32,28 @@
 							<tr>
 								<th class="w-10">번호</th>
 								<th class="w-60">제목</th>
-								<th class="w-10">작성자</th>
 								<th class="w-20">작성일</th>
+								<th class="w-10">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td><a href="/content/qnaDetail"> 문의드립니다. </a></td>
-								<td>박**</td>
-								<td>2021-10-01</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td><a>문의드립니다.</a></td>
-								<td>김**</td>
-								<td>2021-09-27</td>
-							</tr>
+							<c:forEach items="${noticeList }" var="noticeInfo">
+								<tr>
+									<td>${noticeInfo.noticeCode }</td>
+									<td><a href="/content/noticeDetail">${noticeInfo.title }</a></td>
+									<td>${noticeInfo.createDate }</td>
+									<td>${noticeInfo.readCnt }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				<div class="btnDiv">
-					<button type="button" class="btn btn-primary btn-lg">등록하기</button>
-				</div>
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
+						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/libManage/noticeForm';">공지사항 등록하기</button>
+					</c:if>
 			</div>
 		</div>
+</div>
 </body>
 </html>
