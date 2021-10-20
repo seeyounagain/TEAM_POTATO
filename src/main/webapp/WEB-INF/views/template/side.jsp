@@ -16,8 +16,9 @@
 </head>
 <body>
 	<div class="list-group" style="padding-right: 5%;">
-		<a href="#" class="list-group-item list-group-item-action active" >관리메뉴1</a>
-		<a href="#" class="list-group-item list-group-item-action" >관리메뉴2</a>
+		<c:forEach var="side" items="${sideMenuList }">
+			<a href="/${side.menuCode }/${side.sideMenuUri }" class="list-group-item list-group-item-action active" >${side.sideMenuName }</a>
+		</c:forEach>
 	</div>
 </body>
 </html>

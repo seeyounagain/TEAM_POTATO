@@ -85,7 +85,7 @@ public class MemberController {
 
 		}
 
-		return "redirect:/common/main";
+		return "/noside/member/login_result";
 		
 	}
 	
