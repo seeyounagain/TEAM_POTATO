@@ -3,10 +3,14 @@
 		
 		$(document).on('click', '#detailBtn' , function() {
 		
-			$('#searchBox').css('visibility','visible');
+			if ($('#searchBox').css('display') == 'none') {
+				$('#searchBox').show();
+			}
+			else {
+				$('#searchBox').hide();
+			}
 			
 		});
-		
 		
 		
 	});

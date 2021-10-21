@@ -23,8 +23,8 @@ public class SearchController {
 	@Resource(name = "searchService")
 	private SearchService searchService;
 	
-	@GetMapping("/bookSearch")
 	// 자료검색 페이지로 이동
+	@GetMapping("/bookSearch")
 	public String bookSearch(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -41,7 +41,31 @@ public class SearchController {
 		
 		model.addAttribute("bookList",searchService.selectBookList());
 		
+		model.addAttribute("cateList",searchService.selectCateList());
+		
 		return "search/search_form";
+		
+	}
+	
+	// 신착도서 페이지로 이동
+	@GetMapping("/newBookList")
+	public String newBookList(Model model,MenuVO menuVO,HttpSession session) {
+		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		model.addAttribute("bookList",searchService.selectBookList());
+		
+		return "search/new_book_list";
 		
 	}
 	

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.potato.project.common.vo.BookCateVO;
 import com.potato.project.common.vo.BookVO;
 
 @Service("searchService")
@@ -22,11 +23,19 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
-	// 모든 도서(+ 이미지) 조회 + 주제 들어올 시 주제로 조회 가능
+	// 모든 도서(+ 이미지) 조회
 	@Override
 	public List<BookVO> selectBookList() {
 		
 		return sqlSession.selectList("searchMapper.selectBookList");
+		
+	}
+	
+	// 책 카테고리 조회
+	@Override
+	public List<BookCateVO> selectCateList() {
+		
+		return sqlSession.selectList("searchMapper.selectCateList");
 		
 	}
 	

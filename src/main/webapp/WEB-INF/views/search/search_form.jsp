@@ -6,139 +6,118 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/search_form.js?ver=1" ></script>
+<script type="text/javascript" src="/resources/search/js/search_form.js?ver=6" ></script>
 <style type="text/css">
-body {
+.content {
 	background-color: white;
 }
 .keyword {
 	width: 10%;
 }
 #searchBox {
-	visibility: hidden;
+	display: none;
 }
-#bookT {
-	border-collapse: collapse;
-	border: 1px black solid;
+.bookTitle {
+	font-size: 22px;
+	font-weight: bold;
+}
+.bookTitle:hover {
+	text-decoration: underline 2px black;
+	cursor: pointer;
+	color: black;
+}
+.titleA:hover {
+	color: black;
 }
 </style>
 </head>
 <body>
 
-	<h1 class="display-6 text-center">자료검색</h1>
-	<hr>
-
 <div class="row justify-content-center">
-	<div class="col-6">
+	<div class="col-8">
+		<h1 class="display-6 text-center">도서검색</h1>
+		<hr>
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<input type="text" class="form-control" id="id" name="id" placeholder="검색어를 입력해주세요.">
 			</div>
-			<div class="col-2 d-grid checkId" style="padding-left: 3px;">
+			<div class="col-2 d-grid" style="padding-left: 3px;">
 				<button type="button" class="btn btn-primary">검색</button>
 			</div>
-			<div class="col-2 d-grid checkId" style="padding-left: 3px;">
+			<div class="col-2 d-grid" style="padding-left: 3px;">
 				<button id="detailBtn" type="button" class="btn btn-primary">상세검색</button>
 			</div>
-			<div id="searchBox">
+		<div id="searchBox">
 			<div class="input-group mt-5 mb-3">
-			  <select name="KDC_NAME" class="form-select" id="inputGroupSelect02">
-			    <option selected>분류</option>
-			    <option value="1">One</option>
-			    <option value="2">Two</option>
-			    <option value="3">Three</option>
+			  <select name="KDC_NUM" class="form-select" id="inputGroupSelect02">
+			    <option value="ALL">전체</option>
+			    <c:forEach var="cate" items="${cateList }">
+			    <option value="${cate.kdcNum }">${cate.kdcName }</option>
+			    </c:forEach>
 			  </select>
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">제목</span>
-			  <input type="text" name="TITLE" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <input type="text" name="TITLE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
-			  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="저자">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
-			  <input type="text" name="PUBLISHER" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <input type="text" name="PUBLISHER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
-			  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
 			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
 			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>
+			<div class="input-group d-grid mb-3" style="padding-left: 3px;">
+				<button type="button" class="btn btn-primary">상세검색</button>
 			</div>
 		</div>
+		</div>
+		
+		<table class="table table-hover table-bordered caption-top text-center" style="height: 400px;">
+			<tr>
+				<td>검색조건을 입력해주세요.</td>
+			</tr>
+		</table>
+		
 	</div>
 </div>
 
-	<table id="bookT">
-		<caption id="cap">도서 ${bookList.size() }건</caption>
+	
+<%-- 	<table class="table table-hover table-bordered caption-top">
+		<caption>도서 ${bookList.size() }건의 검색결과</caption>
 	<c:choose>
 		<c:when test="${not empty bookList }">
 		<c:forEach var="book" items="${bookList }" varStatus="status">
 		<tr>
-			<td>
-				${book.isbn }
+			<td><span>${status.count }.</span>
+				<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}">${book.title }</a></div>
+				<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
+				<div class="mt-2"><c:if test="${book.status eq 0 }">대출 가능</c:if><c:if test="${book.status eq 1 }">대출중</c:if><c:if test="${book.status eq 2 }">예약중</c:if>
+				&nbsp;/&nbsp;${book.area }</div>
 			</td>
-			<td>
-				${book.bookCode }
-			</td>
-			<td>
-				${book.kdcNum },${book.kdc }
-			</td>
-			<td>
-				${book.writer }
-			</td>
-			<td>
-				${book.title }
-			</td>
-			<td>
-				${book.page }p
-			</td>
-			<td>
-				${book.bookSize }cm
-			</td>
-			<td>
-				#${book.keyword }
-			</td>
-			<td>
-				${book.publisher }
-			</td>
-			<td>
-				${book.pubDate }
-			</td>
-			<td>
-				${book.summary }
-			</td>
-			<td>
-				${book.intro }
-			</td>
-			<td>
-				${book.inputDate }
-			</td>
-			<td>
-				${book.area }
-			</td>
-			<td>
-				${book.status }
-			</td>
-			<td>
-				<img style="width: 200px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
+			<td class="text-center">
+				<img style="width: 100px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
 			</td>
 		</tr>
 		</c:forEach>
 		</c:when>
 		<c:otherwise>
 		<tr>
-			<td>검색된 결과가 없습니다.</td>
+			<td>검색어를 입력해주세요.</td>
 		</tr>
 		</c:otherwise>
 		</c:choose>
-	</table>
+	</table> --%>
 
 
 </body>
