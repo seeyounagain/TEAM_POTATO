@@ -50,7 +50,7 @@
 				</div>
 				<div class="btnDiv">
 					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
-						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/libManage/noticeForm';">공지사항 등록하기</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/libManage/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록하기</button>
 					</c:if>
 			</div>
 		</div>

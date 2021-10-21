@@ -25,7 +25,7 @@
    		<div class="titleDiv">
    			<h3>공지사항</h3>
    		</div>
-  			<form action="/libManage/writeNotice" method="post" enctype>
+  			<form action="/libManage/writeNotice" method="post" enctype="multipart/form-data">
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
 						<tr>
@@ -38,7 +38,7 @@
 						</tr>
 						<tr>
 							<td>등록일</td>
-							<td>시스템 데이트</td>
+							<td>${nowDate }</td>
 						</tr>
 						<tr>
 							<td>내용</td>

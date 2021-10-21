@@ -1,6 +1,9 @@
 package com.potato.project.content.controller;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -80,10 +83,24 @@ public class BoardController {
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
-		
+		//오늘 날짜 입력
+		model.addAttribute("nowDate", getDate());
 		
 		return "board/qna_form";
 	}
 	
+	//시스템 날짜 구하는 메소드
+	public String getDate() {
+		//현재 날짜 구하기
+		LocalDate now = LocalDate.now();
+		
+		//포맷 지정
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		
+		//포맷 적용
+		String date = now.format(formatter);
+		
+		return date;
+	}
 }
 

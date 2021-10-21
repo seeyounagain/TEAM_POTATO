@@ -10,10 +10,13 @@ public interface BoardService {
 	//공지사항 리스트
 	List<NoticeVO> selectNoticeList();
 	
+	//공지사항 입력
+	void insertNotice(NoticeVO noticeVO);
+	
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	
 	//상담문의 입력
-	void insertQna(QnaVO qnaVO);
+	//void insertQna(QnaVO qnaVO);
 	
 }

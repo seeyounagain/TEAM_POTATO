@@ -50,7 +50,7 @@
 				</div>
 				<c:if test="${sessionScope.loginInfo.isAdmin eq 'N' }">
 					<div class="btnDiv">
-						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/qnaForm?menuCode=${menuCode}';">문의/상담 등록하기</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/qnaForm?menuCode=${menuVO.menuCode}';">문의/상담 등록하기</button>
 					</div>                                                
 				</c:if>
 			</div>

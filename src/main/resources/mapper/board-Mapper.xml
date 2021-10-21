@@ -52,7 +52,7 @@
 	</select>
 	
 	<!-- 문의상담 INSERT -->
-	<insert id="insertQna">
+	<!-- <insert id="insertQna">
 		INSERT INTO QNA(
 	            QNA_CODE
 	          , TITLE
@@ -60,9 +60,27 @@
 	          , CONTENT
 	          , CREATE_DATE
 	          , QNA_PW
-	)VALUES(
-				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 6, 3))), 0) + 1, 3, '0') FROM ITEM_CATEGORY)
+		)VALUES(
+				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 6, 3))), 0) + 1, 3, '0') FROM QNA)
 	
 	)
+	</insert> -->
+	
+	<!-- 공지사항 INSERT -->
+	<insert id="insertNotice">
+		INSERT INTO NOTICE(
+			   NOTICE_CODE
+			 , TITLE
+			 , WRITER
+			 , CONTENT
+			 , CREATE_DATE
+		)VALUES(
+			   (SELECT 'NOTICE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_CODE, 6, 3))), 0) + 1, 3, '0') FROM NOTICE)	
+			 , #{noticeCode}
+			 , #{title}
+			 , #{writer}
+			 , #{content}
+			 , #{createDate}
+		)	 
 	</insert>
 </mapper>
