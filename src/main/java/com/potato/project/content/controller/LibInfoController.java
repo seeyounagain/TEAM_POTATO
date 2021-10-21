@@ -1,5 +1,8 @@
 package com.potato.project.content.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.SideMenuVO;
 import com.potato.project.content.service.LibInfoService;
 import com.potato.project.member.vo.MemberVO;
 //봉 생성
@@ -23,7 +27,7 @@ public class LibInfoController {
 	
 	//도서관정보 오시는길
 	@GetMapping("/locaInfo")
-	public String libDirections(Model model,MenuVO menuVO,HttpSession session) {
+	public String libDirections(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -36,13 +40,14 @@ public class LibInfoController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		System.out.println(menuVO.getMenuCode());
 		
 		return "libInfo/lib_directions";
 		
 	}
 	//도서관정보 자료현황
 	@GetMapping("/dataInfo")
-	public String libStatusGuide(Model model,MenuVO menuVO,HttpSession session){
+	public String libStatusGuide(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO){
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -64,12 +69,13 @@ public class LibInfoController {
 		//책의 총 개수 던져줌
 		model.addAttribute("totalBookCnt", libInfoService.totalBookCnt());
 		
+		
 		return "libInfo/lib_status_guide";
 		
 	}
 	//도서관정보 이용안내
 	@GetMapping("/serviceInfo")
-	public String serviceInfo(Model model,MenuVO menuVO,HttpSession session) {
+	public String serviceInfo(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
 		if (loginInfo == null) {
@@ -81,6 +87,7 @@ public class LibInfoController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
 		
 		return "libInfo/lib_service_info";
 	}

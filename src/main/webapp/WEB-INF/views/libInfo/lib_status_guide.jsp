@@ -7,102 +7,162 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.container{
+	width: 90%;
+	margin-top: 20px;
+}
+
 .titleDiv {
 	background-color: white;
+	margin-bottom: 20px;
+}
+.tableTitleDiv{
+	background-color: white;
+	margin-bottom: 5px;
+}
+.bookCateTableDiv{
+	background-color: white;
+	margin-bottom: 20px;
 }
 </style>
 </head>
 <body>
 <!-- 큰 div 안에 도서현황div과 테이블div넣음.위에껀 쌩테이블 아래껀은 부트스트랩테이블 -->
-<div>
-	<div class="titleDiv">
-		<h5>도서현황(${bookLastUpdate }기준)</h5>
+<div class="container">
+	<!-- 제일 윗줄 -->
+	<div class="row titleDiv">
+		<div class="col-6">
+			<h5>자료 현황</h5>
+		</div>
+		<!-- 자료현황 화면 우측위에 글자 클릭시 이동 
+			menu.jsp에서 menuVO.menuCode 랑 sideMenuVO.sideMenuCode 데이터 들고옴
+			side
+			-->
+		<div class="col-6 text-end" style="font-size: 14px;">
+			<p>
+				<a href="/common/main">
+					홈 >
+				</a>&nbsp;
+					<c:forEach items="${menuList }" var="menu">
+						<c:if test="${menuVO.menuCode eq menu.menuCode }">
+							<a href="/${menu.menuUri }/locaInfo?menuCode=${menuVO.menuCode}"> <!-- 이거 uri 어카누...아 -->
+							${menu.menuName } >
+							</a>&nbsp;
+						</c:if>
+					</c:forEach>
+				<a>
+					<c:forEach items="${sideMenuList }" var="sideMenu">
+						<c:if test="${sideMenuVO.sideMenuCode eq sideMenu.sideMenuCode }">
+							${sideMenu.sideMenuName } >
+						</c:if>
+					</c:forEach>
+				</a>
+			<p>
+		</div>
 	</div>
-	<div class="text-center">
-		<table>
-		<!-- 책 종류 넣는듯? -->
- 			<tr>
-				<c:forEach items="${bookCateList }" var="bookCate">
-					<td>${bookCate.kdcName}</td>
-				</c:forEach>
-				<td>합계</td>	
-			</tr>
-			<tr>
-				<c:forEach items="${bookCateList }" var="bookCate">
-					<td>${bookCate.kdcCnt }</td>
-				</c:forEach>
-				<td>${totalBookCnt }</td>
-			</tr>
-			<tr>
-				<td>총류</td>
-				<td>철학</td>
-				<td>종교</td>
-				<td>사회과학</td>
-				<td>순수과학</td>
-				<td>기술과학</td>
-				<td>예술</td>
-				<td>언어</td>
-				<td>문학</td>
-				<td>계</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>7</td>
-				<td>8</td>
-				<td>9</td>
-				<td>총합</td>
-			</tr>
-		</table>
+	<!-- 도서현황 -->
+	<div class="row tableTitleDiv">
+		<div class="col-6">
+			도서 현황
+		</div>
+		<div class="col-6 text-end">
+			${bookLastUpdate }기준(단위 : 권) <!-- 새로운책 입력하면 갱신됩니당 -->
+		</div>
+	</div>
+	<!-- 도서현황 테이블 -->
+	<div class="bookCateTableDiv text-center">
 		<table class="table">
-			<thead>
+			<thead class="table-dark">
 	 			<tr>
 					<c:forEach items="${bookCateList }" var="bookCate">
 						<td>${bookCate.kdcName}</td>
 					</c:forEach>
 					<td>합계</td>	
 				</tr>
+			<tbody>	
 				<tr>
 					<c:forEach items="${bookCateList }" var="bookCate">
 						<td>${bookCate.kdcCnt }</td>
 					</c:forEach>
 					<td>${totalBookCnt }</td>
 				</tr>
-				<tr>
-					<th scope="col">000 총류</th>
-					<th scope="col">100 철학</th>
-					<th scope="col">200 종교</th>
-					<th scope="col">300 사회과학</th>
-					<th scope="col">400 자연과학</th>
-					<th scope="col">500 기술과학</th>
-					<th scope="col">600 예술</th>
-					<th scope="col">700 언어</th>
-					<th scope="col">800 문학</th>
-					<th scope="col">900 역사</th>
-					<th scope="col">합계</th>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<!-- 비도서 현황 -->
+	<div class="row tableTitleDiv">
+		<div class="col-6">
+			비도서 현황
+		</div>
+		<div class="col-6 text-end">
+			${bookLastUpdate }기준(단위 : 권) <!-- 새로운책 입력하면 갱신됩니당 -->
+		</div>
+	</div>
+	<!-- 비도서 현황 테이블 -->
+	<div class="bookCateTableDiv text-center">
+		<table class="table">
+			<thead class="table-dark">
+	 			<tr>
+	 				<td>DVD</td>
+	 				<td>기타</td>
+	 				<td>계</td>
 				</tr>
-			</thead>
-			<tbody>
+			<tbody>	
 				<tr>
-					<td scope="row">??</td>
-					<td>100</td>
-					<td>200</td>
-					<td>300</td>
-					<td>400</td>
-					<td>500</td>
-					<td>600</td>
-					<td>700</td>
-					<td>800</td>
-					<td>900</td>
-					<td>??</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	
+	
+	<!-- 연속간행물 현황 -->
+	<div class="row tableTitleDiv">
+		<div class="col-6">
+			연속간행물 현황
+		</div>
+		<div class="col-6 text-end">
+			${bookLastUpdate }기준(단위 : 권) <!-- 새로운책 입력하면 갱신됩니당 -->
+		</div>
+	</div>
+	<!-- 비도서 현황 테이블 -->
+	<div class="bookCateTableDiv text-center">
+		<table class="table">
+			<thead class="table-dark">
+	 			<tr>
+	 				<td rowspan="2">구분</td>
+	 				<td rowspan="2">계</td>
+	 				<td colspan="3">연속간행물</td>
+	 				<td colspan="3">신문</td>
+				</tr>
+				<tr>
+					<td>국내</td>
+					<td>국외</td>
+					<td>전자</td>
+					<td>국내</td>
+					<td>국외</td>
+					<td>전자</td>
+				</tr>
+			<tbody>	
+				<tr>
+					<td scope="row">간행물</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	
 </div>
 </body>
 </html>
