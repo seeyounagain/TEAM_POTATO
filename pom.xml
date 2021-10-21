@@ -15,6 +15,18 @@
 		<org.apache.tiles-version>3.0.8</org.apache.tiles-version>
 	</properties>
 	<dependencies>
+		
+		<!--
+		[오류 원인] 한글때문에 xml 파싱시 오류날 경우 (URI$MalformedURIException 오류) 
+		[소스 시작]
+		-->
+		<dependency>
+		<groupId>xerces</groupId>
+		<artifactId>xercesImpl</artifactId>
+		<version>2.9.1</version>
+		</dependency>
+		<!-- [소스 종료] -->
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
