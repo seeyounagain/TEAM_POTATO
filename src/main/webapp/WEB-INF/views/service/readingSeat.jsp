@@ -132,7 +132,37 @@ background-color: white;
 		<td class="seatList">
 <input type="radio" name="seatStatus${seat2.seatCode }" value="0" <c:if test="${seat2.seatStatus eq 0 }"> checked </c:if> class="seatStatus">대기
 <input type="radio" name="seatStatus${seat2.seatCode }" value="2" <c:if test="${seat2.seatStatus eq 1 }"> checked </c:if> class="seatStatus">배정			
-		<input type="button" value="변경">		
+		<input type="button" value="변경" data-bs-toggle="modal" data-bs-target="<c:if test="${seat2.seatStatus eq 0 }">#seatOn</c:if>
+																				<c:if test="${seat2.seatStatus eq 1 }">#seatOut</c:if>">	
+																				
+<div class="modal fade" id="seatOn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">좌석배정시스템</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="/service/libManage" method="post">
+        <div class="form-floating mb-3">
+		  <input type="text" name="id" class="form-control" id="floatingInput" placeholder="id" required>
+		  <label for="floatingInput">배정받을 아이디</label>
+		</div>
+		<div class="col-12 mt-2 text-end">
+             <input type="submit" class="btn btn-primary" value="확인">
+             <input type="hidden" name="seatCode" value="${seat2.seatCode }">
+           </div>
+           </form>
+      </div>     
+    </div>
+  </div>
+</div>																		
+																				
+																				
+																					
+		
+							
+		
 		</td>
 		</tr>
 </c:forEach>
@@ -160,6 +190,47 @@ background-color: white;
 
 	</c:otherwise>
 </c:choose>
+	
+	
+	
+	
+	
+
+
+
+<div class="modal fade" id="seatOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">좌석배정시스템</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="/service/libManage" method="post">
+        <div class="form-floating mb-3">
+		  상태를 대기중으로 변경합니다.
+		</div>
+		<div class="mt-2 text-end">
+             <input type="submit" class="btn btn-primary" value="변경">
+             <input type="button" class="btn btn-primary" value="취소">
+           </div>
+           </form>
+      </div>
+<!--       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

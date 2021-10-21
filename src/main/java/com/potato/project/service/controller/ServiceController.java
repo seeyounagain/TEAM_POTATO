@@ -32,7 +32,7 @@ public class ServiceController {
 	private ServiceService serviceService;
 	
 	@RequestMapping("/libManage")
-	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
+	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -45,6 +45,8 @@ public class ServiceController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		System.out.println(seatVO.getId());
 		
 		return  "service/readingSeat";
 	}
