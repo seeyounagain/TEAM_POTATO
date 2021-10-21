@@ -21,6 +21,7 @@ public class LibInfoController {
 	@Resource(name="commonService")
 	private CommonService commonService;
 	
+	//도서관정보 오시는길
 	@GetMapping("/locaInfo")
 	public String libDirections(Model model,MenuVO menuVO,HttpSession session) {
 		
@@ -39,6 +40,7 @@ public class LibInfoController {
 		return "libInfo/lib_directions";
 		
 	}
+	//도서관정보 자료현황
 	@GetMapping("/dataInfo")
 	public String libStatusGuide(Model model,MenuVO menuVO,HttpSession session){
 		
@@ -54,9 +56,18 @@ public class LibInfoController {
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
+		//모든책 개수 구하기 최종 갱신일 던지기
+		model.addAttribute("bookLastUpdate", libInfoService.bookLastUpdate());
+		
+		//책의 종류와 책의 개수던져줌
+		model.addAttribute("bookCateList", libInfoService.bookCnt());
+		//책의 총 개수 던져줌
+		model.addAttribute("totalBookCnt", libInfoService.totalBookCnt());
+		
 		return "libInfo/lib_status_guide";
 		
 	}
+	//도서관정보 이용안내
 	@GetMapping("/serviceInfo")
 	public String serviceInfo(Model model,MenuVO menuVO,HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");

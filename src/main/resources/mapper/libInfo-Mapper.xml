@@ -3,12 +3,69 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 
 <!-- 봉 생성 -->
-<mapper namespace="sampleMapper">
-	<resultMap type="com.potato.project.common.vo.BookCateVO" id="menu">
+<!-- bookCate관련 -->
+<mapper namespace="libInfoMapper">
+	<resultMap type="com.potato.project.common.vo.BookCateVO" id="bookCate">
 		<id column="KDC_NUM" 				property="kdcNum"/>
 		<result column="KDC_NAME" 			property="kdcName"/>
-		<collection property="bookList" resultMap="bookList"/>
+		<result column="KDC_CNT" 			property="kdcCnt"/>
+		
+		<collection property="bookList" 	resultMap="book"/>
 	</resultMap>
+
+<!-- bookVO관련 -->
+	<resultMap type="com.potato.project.common.vo.BookVO" id="book">
+		<id column="BOOK_CODE" 			property="bookCode"/>
+		<result column="ISBN" 			property="isbn"/>
+		<result column="KDC" 			property="kdc"/>
+		<result column="KDC_NUM" 		property="kdcNum"/>
+		<result column="WRITER" 		property="writer"/>
+		<result column="TITLE" 			property="title"/>
+		<result column="PAGE" 			property="page"/>
+		<result column="BOOK_SIZE" 		property="bookSize"/>
+		<result column="KEYWORD" 		property="keyword"/>
+		<result column="PUBLISHER" 		property="publisher"/>
+		<result column="PUB_DATE" 		property="pubDate"/>
+		<result column="SUMMARY" 		property="summary"/>
+		<result column="INTRO" 			property="intro"/>
+		<result column="INPUT_DATE" 	property="inputDate"/>
+		<result column="AREA" 			property="area"/>
+		<result column="STATUS" 		property="status"/>
+	</resultMap>
+	
+	<!-- 책종류의 개수 -->
+	<!-- 도서관정보 자료현황 dataInfo 에사용함-->
+	<!-- 와...카운트가 쉽게 안구해진다.B.KDC_NAME에 (+) 없으면 모든컬럼이 안뜬다.
+	BOOK에 있는 컬럼(BOOK이 가지고 있는 책종류)만 조회된다 -->
+	<!-- (+)있으면 없는건 자동으로 0으로 표기해줌 -->
+	<!-- BC.KDC_NUM넣은건 정렬하고 싶은데 네임이랑 카운트로 내뜻대로 정렬이 안된다...
+	그냥 정렬하고 싶어서 넣은거임 -->
+	<select id="bookCnt" resultMap="bookCate">
+		SELECT BC.KDC_NAME 
+			, BC.KDC_NUM
+		    , COUNT(B.KDC_NUM) AS KDC_CNT
+		FROM BOOK_CATE BC, BOOK B
+		WHERE BC.KDC_NUM = B.KDC_NUM(+)
+		GROUP BY BC.KDC_NAME, BC.KDC_NUM 
+		ORDER BY BC.KDC_NUM
+	</select>
+	
+	<!-- 모든책의 개수 -->
+	<!-- 도서관정보 자료현황 dataInfo에 사용함-->
+	<!-- 조회시 한줄만 나오기도 하고 이거 작성시점에 TOTAL_BOOK_CNT이 어떤 VO에도 없어서
+	리절트 타입으로 줌 -->
+	<select id="totalBookCnt" resultType="int">
+		SELECT COUNT(BOOK_CODE) AS TOTAL_BOOK_CNT
+		FROM BOOK
+	</select>
+	
+	<!-- 모든책 개수 구하기  최종 갱신일 -->
+	<!-- 도서관정보 자료현황 dataInfo에 사용함 -->
+	<select id="bookLastUpdate" resultType="String">
+		SELECT TO_CHAR(INPUT_DATE, 'YYYY.MM.DD')
+		FROM BOOK
+		WHERE BOOK_CODE = (SELECT MAX(BOOK_CODE) FROM BOOK)
+	</select>
 
 </mapper>
 

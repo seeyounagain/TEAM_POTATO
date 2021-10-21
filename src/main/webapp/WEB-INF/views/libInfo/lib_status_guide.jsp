@@ -6,27 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.titleDiv {
+	background-color: white;
+}
+</style>
 </head>
-<input type="hidden" name="menuCode" value="">
 <body>
-도서관 현황
+<!-- 큰 div 안에 도서현황div과 테이블div넣음.위에껀 쌩테이블 아래껀은 부트스트랩테이블 -->
 <div>
-	<div>
-		<h5>도서현황(최종 업데이트 기준)</h5>
+	<div class="titleDiv">
+		<h5>도서현황(${bookLastUpdate }기준)</h5>
 	</div>
 	<div class="text-center">
 		<table>
 		<!-- 책 종류 넣는듯? -->
- 		<%-- 	<tr>
-				<c:forEach items="" var="">
-					<td>책종류</td>
+ 			<tr>
+				<c:forEach items="${bookCateList }" var="bookCate">
+					<td>${bookCate.kdcName}</td>
 				</c:forEach>
+				<td>합계</td>	
 			</tr>
 			<tr>
-			<c:forEach items="" var="">
-				<td>책 숫자</td>
-			</c:forEach>
-			</tr> --%>
+				<c:forEach items="${bookCateList }" var="bookCate">
+					<td>${bookCate.kdcCnt }</td>
+				</c:forEach>
+				<td>${totalBookCnt }</td>
+			</tr>
 			<tr>
 				<td>총류</td>
 				<td>철학</td>
@@ -54,16 +60,18 @@
 		</table>
 		<table class="table">
 			<thead>
-<%-- 				<tr>
-					<c:forEach items="" var="">
-						<td>책종류</td>
+	 			<tr>
+					<c:forEach items="${bookCateList }" var="bookCate">
+						<td>${bookCate.kdcName}</td>
 					</c:forEach>
+					<td>합계</td>	
 				</tr>
 				<tr>
-				<c:forEach items="" var="">
-					<td>책 권수</td>
-				</c:forEach>
-				</tr> --%>
+					<c:forEach items="${bookCateList }" var="bookCate">
+						<td>${bookCate.kdcCnt }</td>
+					</c:forEach>
+					<td>${totalBookCnt }</td>
+				</tr>
 				<tr>
 					<th scope="col">000 총류</th>
 					<th scope="col">100 철학</th>
