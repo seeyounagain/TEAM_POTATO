@@ -11,6 +11,9 @@ public class BookCateVO {
 	
 	// 카테고리 내 책 리스트
 	private List<BookVO> bookList	;
+	//카테고리명의 책의 개수
+	private int kdcCnt             ;   // BOOK_CNT -- 숫자로 나옴 0부터 뭐...많으면 거기까지
+	
 
 	public int getKdcNum() {
 		return kdcNum;
@@ -35,5 +38,15 @@ public class BookCateVO {
 	public void setBookList(List<BookVO> bookList) {
 		this.bookList = bookList;
 	}
+
+	public int getKdcCnt() {
+		return kdcCnt;
+	}
+
+	public void setKdcCnt(int kdcCnt) {
+		this.kdcCnt = kdcCnt;
+	}
+	
+	
 	
 }
