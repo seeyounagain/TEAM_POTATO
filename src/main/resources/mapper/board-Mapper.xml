@@ -37,7 +37,7 @@
 		SELECT NOTICE_CODE
 		     , TITLE
 		     , WRITER
-		     , CREATE_DATE
+		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		     , READ_CNT
 		FROM NOTICE
 	</select>
@@ -47,12 +47,12 @@
 		SELECT QNA_CODE
 		     , TITLE
 		     , WRITER
-		     , CREATE_DATE
+		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		FROM QNA
 	</select>
 	
 	<!-- 문의상담 INSERT -->
-	<!-- <insert id="insertQna">
+	<insert id="insertQna">
 		INSERT INTO QNA(
 	            QNA_CODE
 	          , TITLE
@@ -62,9 +62,13 @@
 	          , QNA_PW
 		)VALUES(
 				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 6, 3))), 0) + 1, 3, '0') FROM QNA)
-	
+				,#{title}
+				,#{writer}
+				,#{content}
+				,#{createDate}
+				,#{qnaPw}
 	)
-	</insert> -->
+	</insert>
 	
 	<!-- 공지사항 INSERT -->
 	<insert id="insertNotice">
@@ -76,11 +80,22 @@
 			 , CREATE_DATE
 		)VALUES(
 			   (SELECT 'NOTICE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_CODE, 6, 3))), 0) + 1, 3, '0') FROM NOTICE)	
-			 , #{noticeCode}
 			 , #{title}
 			 , #{writer}
 			 , #{content}
 			 , #{createDate}
-		)	 
+		)
 	</insert>
+	
+	<select id="selectQna" resultMap="qna" resultType="String">
+		SELECT QNA_CODE
+		     , TITLE
+		     , WRITER
+		     , CONTENT
+		     , CREATE_DATE
+		     , QNA_PW
+		FROM QNA
+		WHERE QNA_CODE = #{qnaCode}
+		AND QNA_PW = #{qnaPw}
+	</select>
 </mapper>

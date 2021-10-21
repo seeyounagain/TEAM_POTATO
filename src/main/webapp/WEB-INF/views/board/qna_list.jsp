@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv" style="background-color: olive;">
+   <div class="col-8 mainDiv" style="background-color: #dddddd;">
    		<div class="titleDiv">
    			<h3>문의&상담</h3>
    		</div>
@@ -37,12 +37,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${qnaList }" var="qnaInfo">
+							<c:forEach items="${list }" var="info">
 							<tr>
-								<td>${qnaInfo.qnaCode }</td>
-								<td><a href="/content/qnaDetail">${qnaInfo.title }</a></td>
-								<td>${qnaInfo.writer }</td>
-								<td>${qnaInfo.createDate }</td>
+								<td>${info.qnaCode }</td>
+								<td><a data-bs-toggle="modal" href="#pwModal">${info.title }</a></td>
+								<td>${info.writer }</td>
+								<td>${info.createDate }</td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -55,5 +55,33 @@
 				</c:if>
 			</div>
 		</div>
+
+
+		<div class="modal fade" id="pwModal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="">상담/문의글 비밀번호</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		     <form action="/board/checkQnaPw" method="post">
+			      <div class="modal-body">
+			      	<div class="form-floating mb-3">
+					  <input type="password" class="form-control" id="pwInput" name="pw" required>
+					  <label for="idInput">비밀번호</label>
+					</div>
+			      </div>
+			      <div class="col-12 d-grid p-1">
+		          		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		          		<input type="submit" class="btn btn-primary btn-block" value="확인">
+		          </div>
+				</form>
+		      
+		    </div>
+		  </div>
+		</div>
+
+
+
 </body>
 </html>

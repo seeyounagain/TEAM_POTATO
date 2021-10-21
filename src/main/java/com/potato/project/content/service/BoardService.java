@@ -17,6 +17,8 @@ public interface BoardService {
 	List<QnaVO> selectQnaList();
 	
 	//상담문의 입력
-	//void insertQna(QnaVO qnaVO);
+	void insertQna(QnaVO qnaVO);
 	
+	//상담문의 상세보기
+	QnaVO selectQna(QnaVO qnaVO);
 }

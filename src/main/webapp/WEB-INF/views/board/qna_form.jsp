@@ -25,7 +25,7 @@
    		<div class="titleDiv">
    			<h3>상담/문의 남기기</h3>
    		</div>
-  			<form action="/board/writeQna">
+  			<form action="/board/insertQna" method="post">
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
 						<tr>
@@ -39,7 +39,11 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td><input type="text" value="${sessionScope.loginInfo.id}" name="writer" readonly></td>
+							<td><input type="hidden" value="${sessionScope.loginInfo.id}" name="writer">${sessionScope.loginInfo.id}</td>
+						</tr>
+						<tr>
+							<td>등록일</td>
+							<td><input type="hidden" value="${nowDate }" name="createDate">${nowDate }</td>
 						</tr>
 						<tr>
 							<td>문의 내용</td>

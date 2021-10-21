@@ -37,12 +37,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${noticeList }" var="noticeInfo">
+							<c:forEach items="${list }" var="info">
 								<tr>
-									<td>${noticeInfo.noticeCode }</td>
-									<td><a href="/content/noticeDetail">${noticeInfo.title }</a></td>
-									<td>${noticeInfo.createDate }</td>
-									<td>${noticeInfo.readCnt }</td>
+									<td>${info.noticeCode }</td>
+									<td><a href="/content/noticeDetail">${info.title }</a></td>
+									<td>${info.createDate }</td>
+									<td>${info.readCnt }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -50,7 +50,7 @@
 				</div>
 				<div class="btnDiv">
 					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
-						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/libManage/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록하기</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록하기</button>
 					</c:if>
 			</div>
 		</div>

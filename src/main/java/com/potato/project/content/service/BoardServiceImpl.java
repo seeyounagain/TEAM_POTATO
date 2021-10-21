@@ -24,7 +24,7 @@ public class BoardServiceImpl  implements BoardService{
 	//공지사항 등록
 	@Override
 	public void insertNotice(NoticeVO noticeVO) {
-		sqlSession.insert("boardMapper.insertNotice");
+		sqlSession.insert("boardMapper.insertNotice", noticeVO);
 	}
 
 	//문의상담 목록 조회
@@ -33,13 +33,21 @@ public class BoardServiceImpl  implements BoardService{
 		
 		 return  sqlSession.selectList("boardMapper.selectQnaList");
 	}
+	
+	 //상담문의 입력
+	@Override
+	public void insertQna(QnaVO qnaVO) {
+		sqlSession.insert("boardMapper.insertQna", qnaVO);
+	}
 
-	 
-	/*
-	 * @Override public void insertQna(QnaVO qnaVO) {
-	 * 
-	 * }
-	 */
+	//상담문의 상세보기
+	@Override
+	public QnaVO selectQna(QnaVO qnaVO) {
+		
+		return sqlSession.selectOne("boardMapper.selectQna", qnaVO);
+	}
+
+	
 
 	 
 

@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
+import com.potato.project.content.vo.NoticeVO;
+import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.vo.MemberVO;
 
 
@@ -43,10 +46,43 @@ public class BoardController {
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
-		model.addAttribute("noticeList", boardService.selectNoticeList());
+		model.addAttribute("list", boardService.selectNoticeList());
+		
 		return  "board/notice_list";
 	}
-
+	
+	//공지사항 작성 페이지로 이동
+	@GetMapping("/noticeForm")
+	public String goNoticeForm(Model model, MenuVO menuVO, HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		//오늘 날짜 입력
+		model.addAttribute("nowDate",getDate());
+	
+		return "admin/notice_form";
+	}
+	
+	//공지사항 등록
+	@PostMapping("/insertNotice")
+	public String insertNotice(NoticeVO noticeVO) {
+		
+		boardService.insertNotice(noticeVO);
+		
+		//공지사항 목록으로 이동
+		return "redirect:/board/notice";
+	}
+	
+	
 	//상담 문의 페이지로 이동
 	@GetMapping("/qna")
 	public String goQna(Model model, MenuVO menuVO, HttpSession session) {
@@ -62,7 +98,7 @@ public class BoardController {
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
-		model.addAttribute("qnaList", boardService.selectQnaList());
+		model.addAttribute("list", boardService.selectQnaList());
 		
 		
 		return  "board/qna_list";
@@ -87,6 +123,32 @@ public class BoardController {
 		model.addAttribute("nowDate", getDate());
 		
 		return "board/qna_form";
+	}
+	
+	//상담 문의 등록
+	@PostMapping("/insertQna")
+	public String insertQna(QnaVO qnaVO) {
+		
+		boardService.insertQna(qnaVO);
+		
+		return "redirect:/board/qna";
+	}
+	
+	//상담문의글 비밀번호 확인
+	@PostMapping("/checkQnaPw")
+	public String checkQnaPw() {
+		
+		
+		return "";
+	}
+	
+	//상담문의 글 보기
+	@GetMapping("/qnaDetail")
+	public String goQnaDetail(QnaVO qnaVO) {
+		
+		boardService.selectQna(qnaVO);
+		
+		return "board/qna_password";
 	}
 	
 	//시스템 날짜 구하는 메소드

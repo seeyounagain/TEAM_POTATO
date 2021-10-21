@@ -25,8 +25,8 @@
    		<div class="titleDiv">
    			<h3>공지사항</h3>
    		</div>
-  			<form action="/libManage/writeNotice" method="post" enctype="multipart/form-data">
 			<div class="tableDiv">
+  			<form action="/board/insertNotice" method="post" enctype="multipart/form-data">
 					<table class="table table-striped text-center">
 						<tr>
 							<td class="w-20">제목</td>
@@ -34,11 +34,11 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td>${sessionScope.loginInfo.id}</td>
+							<td><input type="hidden" value="${sessionScope.loginInfo.id}" name="writer">${sessionScope.loginInfo.id}</td>
 						</tr>
 						<tr>
 							<td>등록일</td>
-							<td>${nowDate }</td>
+							<td><input type="hidden" value="${nowDate }" name="createDate">${nowDate }</td>
 						</tr>
 						<tr>
 							<td>내용</td>
@@ -59,8 +59,8 @@
 					<div class="btnDiv">
 						<input class="btn btn-primary" type="submit" value="등록">
 					</div>
-				</div>
 				</form>
+				</div>
 			</div>
 		</div>
 </body>
