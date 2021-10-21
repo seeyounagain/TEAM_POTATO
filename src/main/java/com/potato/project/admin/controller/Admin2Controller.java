@@ -137,7 +137,7 @@ public class Admin2Controller {
 		try {
 			
 			// 업로드 할 파일명 설정
-			String uploadFileName = UploadUtil.getNowDateTime() + "_" + file.getOriginalFilename();
+			String uploadFileName = UploadUtil.getNowDateTime("time") + "_" + file.getOriginalFilename();
 			// 지정한 경로에 파일 첨부
 			file.transferTo(new File(uploadPath + uploadFileName));
 			
