@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=3" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=5" ></script>
 </head>
 <body>
 <form action="/member/login" method="post">

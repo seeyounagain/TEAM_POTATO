@@ -3,7 +3,7 @@
 		
 		$(document).on('click', '#loginBtn' , function() {
 		
-/*			var pw = $('#pw').val();
+			var pw = $('#pw').val();
 			var id = $('#id').val();
 			
 			if (id == '' || pw == '') {
@@ -11,7 +11,13 @@
 				alert('아이디와 비밀번호를 입력해주세요.')
 				return ;
 				
-			}*/
+			}
+			
+			else {
+				
+				$('form').submit();				
+				
+			}
 			
 		});
 		

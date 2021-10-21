@@ -36,6 +36,29 @@
 			
 		});
 		
+		/* 회원가입 */
+		$(document).on('click', '#joinBtn' , function() {
+		
+			var pw = $('#pw').val();
+			var checkPw = $('#checkPw').val();
+			
+			if (pw != checkPw) {
+				
+				alert('비밀번호를 확인해주세요');
+				$('input[type="password"]').val('');
+				$('#pw').focus();
+				return ;
+				
+			}
+			
+			else {
+				
+				$('form').submit();
+				
+			}
+			
+		});
+		
 	});
 
 /* 함수선언 영역
@@ -57,29 +80,6 @@
 				document.getElementById("detailAddress").focus();
 				}
 			}).open();
-		};
-		
-		// 회원가입 버튼 함수
-		goJoin = function() {
-			
-			var pw = $('#pw').val();
-			var checkPw = $('#checkPw').val();
-			
-			if (pw != checkPw) {
-				
-				alert('비밀번호를 확인해주세요');
-				$('input[type="password"]').val('');
-				$('#pw').focus();
-				return ;
-				
-			}
-			
-			else {
-				
-				$('form').submit();
-				
-			}
-			
 		};
 		
 		// 아이디 중복체크 alert
