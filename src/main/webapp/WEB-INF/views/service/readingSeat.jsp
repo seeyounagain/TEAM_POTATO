@@ -37,8 +37,9 @@ background-color: white;
 	
 	
 <div class="container">
-	
+<input type="hidden" value="${menuCode }" class="menuCode">
 <div class="text-center mt-5">열람실 좌석현황</div>
+<div class="text-end"><span class="bg-warning fs-6 ">대기중</span><span class="bg-info fs-6">사용중</span></div>
 <div class="row position-relative map mx-auto">
 <div class="row justify-content-center text-center">
 <c:choose>
@@ -48,9 +49,7 @@ background-color: white;
 		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } 
 		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if> 
 		<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
-		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if>
-		
-		">
+		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if>">
 		
 		<input type="hidden" value="${seat.seatCode }">
 		
@@ -86,7 +85,7 @@ background-color: white;
 	</div>
 	
 	
-	
+
 	
 	<div class="col-12 container mb-5">
 	<div class="row justify-content-center mt-5 align-middle">
@@ -120,51 +119,24 @@ background-color: white;
   <c:choose>
   <c:when test="${not empty seatList }">
 <c:forEach items="${seatList }" var="seat2" varStatus="status">
+
 		<tr>
-		<td class="seat mx-1 ${seat2.seatCode }">열람- ${status.index +1 }</td>
+		<td class="seat mx-1">열람- ${status.index +1 }</td>
 		<td> 
 		<c:if test="${seat2.id eq null }">
-		빈좌석
+		
 		</c:if>
 		${seat2.id } 
 		</td>
-		<td>${seat2.seatStatus }</td>
+		<td>
+		${seat2.seatStatus }
+		</td>
 		<td class="seatList">
-<input type="radio" name="seatStatus${seat2.seatCode }" value="0" <c:if test="${seat2.seatStatus eq 0 }"> checked </c:if> class="seatStatus">대기
-<input type="radio" name="seatStatus${seat2.seatCode }" value="2" <c:if test="${seat2.seatStatus eq 1 }"> checked </c:if> class="seatStatus">배정			
-		<input type="button" value="변경" data-bs-toggle="modal" data-bs-target="<c:if test="${seat2.seatStatus eq 0 }">#seatOn</c:if>
-																				<c:if test="${seat2.seatStatus eq 1 }">#seatOut</c:if>">	
-																				
-<div class="modal fade" id="seatOn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">좌석배정시스템</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="/service/libManage" method="post">
-        <div class="form-floating mb-3">
-		  <input type="text" name="id" class="form-control" id="floatingInput" placeholder="id" required>
-		  <label for="floatingInput">배정받을 아이디</label>
-		</div>
-		<div class="col-12 mt-2 text-end">
-             <input type="submit" class="btn btn-primary" value="확인">
-             <input type="hidden" name="seatCode" value="${seat2.seatCode }">
-           </div>
-           </form>
-      </div>     
-    </div>
-  </div>
-</div>																		
-																				
-																				
-																					
-		
-							
-		
+		<input type="radio" name="seatStatus${seat2.seatCode }" value="0" <c:if test="${seat2.seatStatus eq 0 }"> checked </c:if> class="seatStatus" readonly>대기
+		<input type="radio" name="seatStatus${seat2.seatCode }" value="2" <c:if test="${seat2.seatStatus eq 1 }"> checked </c:if> class="seatStatus" readonly>배정							
 		</td>
 		</tr>
+		
 </c:forEach>
 </c:when>
 </c:choose>
@@ -191,51 +163,6 @@ background-color: white;
 	</c:otherwise>
 </c:choose>
 	
-	
-	
-	
-	
-
-
-
-<div class="modal fade" id="seatOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">좌석배정시스템</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="/service/libManage" method="post">
-        <div class="form-floating mb-3">
-		  상태를 대기중으로 변경합니다.
-		</div>
-		<div class="mt-2 text-end">
-             <input type="submit" class="btn btn-primary" value="변경">
-             <input type="button" class="btn btn-primary" value="취소">
-           </div>
-           </form>
-      </div>
-<!--       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-    </div>
-  </div>
-</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 </body>
 </html>
 

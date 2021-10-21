@@ -2,6 +2,10 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
 	
+	$(document).on('click','#seatOn',function(){
+		alert('dd');
+	});
+	
 	//이벤트 처리
 	$(document).on('focusout','.seatForm',function(){
 		$('#minimin').css('display','none');
@@ -30,9 +34,9 @@ $(document).ready(function(){
    str+='  			<th scope="col">상태변경</th>                                                                				';
    str+='		</tr>                                                                                            			';
    str+='	</thead>                                                                                             			';
-   str+='	<tbody>                                                                                              			';
+   str+='	<tbody>  <input type="hidden" name="menuCode" value="${menuCode }">                                   			';
    str+='		<tr class="text-center">    																				';
-   str+='			<th class="align-middle" scope="row">'+result.seatCode+'</th>	     									';
+   str+='			<th class="align-middle miniSeatCode" scope="row">'+result.seatCode+'</th>	     									';
    str+='			<td class="text-center align-middle">'+result.id+'</td>       								           	';
    str+='			<td class="text-center align-middle">'+result.seatStatus+'</td>       									';
    str+='			<td class="text-center align-middle"><input type="button" value="변경" onclick="statusChange();"</td>    ';
@@ -58,8 +62,74 @@ $(document).ready(function(){
 	//aaa = function(){
 	//};
 	
-		statusChange = function(){
-			alert('wow');
-		}
+	statusChange = function() {
+		var sc = $('.miniSeatCode').text();
+		var menuCode = $('.menuCode').val();
+				alert(sc);
+				$.ajax({
+			      url: '/service/chooseSeat', //요청경로
+			      type: 'post',
+			      data:{'seatCode':sc}, //필요한 데이터
+			      success: function(result) {
+			      	//ajax 실행 성공 시 실행되는 구간
+			      	$('#minimin').empty();
+			      	var checked1 = '';
+			      	var checked2 = '';
+			      	
+			      	if(result.seatStatus == 0){
+			      		checked1 = 'checked';
+			      		checked2 = '';
+			      	}
+			      	else{
+			      		checked1 = '';
+			      		checked2 = 'checked';
+			      	}
+			      	
+			      	
+   var str = '';
+   str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
+   str+='	<div class="col-6 text-center mt-5 mb-5">                                                            			';
+   str+='<form action="/service/seatUpdate" method="post"> 				                                            					';
+   str+='	좌석상태변경 mini                                                                                    				';
+   str+='<table class="table">                                                                                   			';
+   str+='	<thead>                                                                                              			';
+   str+='		<tr class="text-center mt-5">                                                                    			';
+   str+='  			<th scope="col">좌석번호</th>                                                                				';
+   str+=' 			<th scope="col">이용자</th>                                                                  				';
+   str+='  			<th scope="col">상태</th>                                                                    				';
+   str+='  			<th scope="col">상태변경</th>                                                                				';
+   str+='		</tr>                                                                                            			';
+   str+='	</thead>                                                                                             			';
+   str+='	<tbody>                                                                                              			';
+   str+='		<tr class="text-center">   																					';
+   str+='			<th class="align-middle miniSeatCode" scope="row">'+result.seatCode+'</th>	     						';
+   str+='			<input type="hidden" name="seatCode" value="'+result.seatCode+'">			     						';
+   str+='			<input type="hidden" name="menuCode" value="'+menuCode+'">			     						';
+   str+='			<td class="text-center align-middle"><input type="text" name="id" style="width: 100px;"></td>       	';
+   str+='			<td class="text-center align-middle">																	';
+   str+='<input type="radio" name="seatStatus" value="0" '+checked1+'>대기														';
+   str+='<input type="radio" name="seatStatus" value="1" '+checked2+'>배정														';   
+   str+='<td class="text-center align-middle"><input type="submit" value="확인"> </td>    									';
+   str+='		</tr>                                                                      									';                  
+   str+='	</tbody>                                                                       									';
+   str+='</table>                                                                          									';
+   str+='</form>                                                                         									';
+   str+='	</div>                                                                         									';
+   str+='</div>                                                                         									';
+   $('#minimin').append(str);
+	   
+			      },
+			      error: function(){
+			      	//ajax 실행 실패 시 실행되는 구간
+			      	alert('실패');
+			      }
+			});
+		
+	}
+		
+		
+		
+	
+		
    
 })(jQuery);

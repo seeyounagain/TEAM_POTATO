@@ -24,6 +24,12 @@ public class ServiceServiceImpl implements ServiceService {
 	public ReadingSeatVO chooseSeat(String seatCode) {
 		return sqlSession.selectOne("serviceMapper.chooseSeat", seatCode);
 	}
+
+	@Override
+	public void seatUpdate(ReadingSeatVO seatVO) {
+		sqlSession.update("serviceMapper.seatUpdate", seatVO);
+		
+	}
 	
 	
 	

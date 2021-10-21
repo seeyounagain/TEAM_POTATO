@@ -12,4 +12,6 @@ public interface ServiceService {
 	
 	//시트
 	ReadingSeatVO chooseSeat(String seatCode);
+	
+	void seatUpdate(ReadingSeatVO seatVO);
 }

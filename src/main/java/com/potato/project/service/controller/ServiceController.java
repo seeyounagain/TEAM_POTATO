@@ -32,7 +32,7 @@ public class ServiceController {
 	private ServiceService serviceService;
 	
 	@RequestMapping("/libManage")
-	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
+	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		
@@ -45,8 +45,8 @@ public class ServiceController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
 		
-		System.out.println(seatVO.getId());
 		
 		return  "service/readingSeat";
 	}
@@ -57,5 +57,28 @@ public class ServiceController {
 	return serviceService.chooseSeat(seatCode);
 	
 	}
+	
+	@PostMapping("/seatUpdate")
+	public String seatUpdate(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
+		serviceService.seatUpdate(seatVO);
+		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("seatList",serviceService.selectReadingSeat());
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
+		
+		
+		return  "service/readingSeat";
+	}
+	
 
 }

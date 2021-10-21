@@ -29,6 +29,15 @@
 					FROM READING_SEAT
 					WHERE SEAT_CODE = #{seatCode }
 			</select>
+			<update id="seatUpdate">
+			UPDATE READING_SEAT
+			SET ID = #{id} , SEAT_STATUS = #{seatStatus}
+			WHERE SEAT_CODE = #{seatCode}
+			</update>
+			
+			
+			
+			
 </mapper>
 
 
