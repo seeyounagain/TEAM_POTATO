@@ -133,6 +133,18 @@
 		ORDER BY INPUT_DATE DESC
 	</select>	
 	
+	<!-- 상품 이미지 코드 숫자 생성 -->
+	<select id="selectImgCodeNum" resultType="int">
+		SELECT NVL(MAX(TO_NUMBER(SUBSTR(IMG_CODE,5,3))) + 1, 1) 
+		FROM BOOK_IMG
+	</select>
+	
+	<!-- 상품 이미지에 넣을 책 코드 생성 -->
+	<select id="selectBookCode" resultType="String">
+		SELECT 'BOOK_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(BOOK_CODE,6,4))),0) + 1,4,0) 
+		FROM BOOK
+	</select>	
+	
 </mapper>
 
 

@@ -1,5 +1,8 @@
 package com.potato.project.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,9 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.UploadUtil;
+import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
@@ -106,6 +113,48 @@ public class Admin2Controller {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));	
 		
 		return "admin/reg_book_form";
+		
+	}
+	
+	// 도서 등록
+	@PostMapping("/regBook")
+	public String regBook(BookVO bookVO,MultipartHttpServletRequest multi) {
+		
+		// 첨부파일 UPLOAD
+		
+		// 첨부된 파일명 가져오기
+		MultipartFile file = multi.getFile("file"); 
+				
+		// 파일이 첨부될 경로 (끝에 \\ 있는지 체크!)
+		String uploadPath = "C:\\Users\\siyoon\\git\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
+		
+		// 상품 코드 생성
+		String bookCode = searchService.selectBookCode();
+		
+		// 다음에 올 이미지 코드 숫자 생성
+		int nextNum = searchService.selectImgCodeNum();
+		
+		try {
+			
+			// 업로드 할 파일명 설정
+			String uploadFileName = UploadUtil.getNowDateTime() + "_" + file.getOriginalFilename();
+			// 지정한 경로에 파일 첨부
+			file.transferTo(new File(uploadPath + uploadFileName));
+			
+			String imgCode = "IMG_" + String.format("%03d", nextNum++);
+			
+			bookVO.setBookImgVO(new BookImgVO(imgCode, file.getOriginalFilename(), uploadFileName, bookCode));
+			bookVO.setBookCode(bookCode);
+			
+		} catch (IllegalStateException e) {
+			// 업로드 예외 발생 시
+			e.printStackTrace();
+		} catch (IOException e) {
+			// 파일 입출력 예외 발생 시
+			e.printStackTrace();
+		}
+		
+		return "redirect:/libManage2/regBookForm";
 		
 	}
 	

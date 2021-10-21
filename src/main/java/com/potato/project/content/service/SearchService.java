@@ -19,4 +19,10 @@ public interface SearchService {
 	// 상태별 도서 조회
 	List<BookVO> selectStatusBookList(BookVO bookVO);
 	
+	// 책 이미지 코드 숫자 생성
+	int selectImgCodeNum();
+	
+	// 책 코드 생성
+	String selectBookCode();
+	
 }

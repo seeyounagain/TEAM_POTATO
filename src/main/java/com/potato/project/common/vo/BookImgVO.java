@@ -9,6 +9,19 @@ public class BookImgVO {
 	private String attachedImgName  ;		//  ATTACHED_IMG_NAME   -- 첨부된 첨부파일명
 	private String bookCode			;		//  BOOK_CODE           -- 책코드 (외래키)
 	
+	
+	public BookImgVO() {
+		
+	};
+	
+	public BookImgVO(String imgCode, String originImgName, String attachedImgName, String bookCode) {
+		super();
+		this.imgCode = imgCode;
+		this.originImgName = originImgName;
+		this.attachedImgName = attachedImgName;
+		this.bookCode = bookCode;
+	}
+	
 	public String getImgCode() {
 		return imgCode;
 	}

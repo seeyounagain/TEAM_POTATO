@@ -47,4 +47,20 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
+	// 책 이미지 코드 숫자 생성
+	@Override
+	public int selectImgCodeNum() {
+		
+		return sqlSession.selectOne("searchMapper.selectImgCodeNum");
+		
+	}
+
+	// 책 코드 생성
+	@Override
+	public String selectBookCode() {
+		
+		return sqlSession.selectOne("searchMapper.selectBookCode");
+		
+	}
+	
 }
