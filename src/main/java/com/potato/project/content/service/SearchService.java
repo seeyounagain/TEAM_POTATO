@@ -16,4 +16,7 @@ public interface SearchService {
 	// 책 카테고리 조회
 	List<BookCateVO> selectCateList();
 	
+	// 상태별 도서 조회
+	List<BookVO> selectStatusBookList(BookVO bookVO);
+	
 }

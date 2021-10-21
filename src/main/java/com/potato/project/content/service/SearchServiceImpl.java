@@ -38,5 +38,13 @@ public class SearchServiceImpl implements SearchService {
 		return sqlSession.selectList("searchMapper.selectCateList");
 		
 	}
+
+	// 상태별 도서 조회
+	@Override
+	public List<BookVO> selectStatusBookList(BookVO bookVO) {
+		
+		return sqlSession.selectList("searchMapper.selectStatusBookList",bookVO);
+		
+	}
 	
 }

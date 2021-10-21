@@ -90,6 +90,7 @@
 		    , INTRO
 		    , INPUT_DATE
 		    , AREA
+		    , STATUS
 		    , ATTACHED_IMG_NAME
 		FROM BOOK B, BOOK_CATE C, BOOK_IMG I
 		WHERE B.KDC_NUM = C.KDC_NUM
@@ -104,6 +105,33 @@
 			, KDC_NAME
 		FROM BOOK_CATE
 	</select>
+	
+	<!-- 상태별 도서 조회 -->
+	<select id="selectStatusBookList" resultMap="book">
+		SELECT
+		    ISBN
+		    , B.BOOK_CODE
+		    , KDC
+		    , B.KDC_NUM
+		    , WRITER
+		    , TITLE
+		    , PAGE
+		    , BOOK_SIZE
+		    , KEYWORD
+		    , PUBLISHER
+		    , PUB_DATE
+		    , SUMMARY
+		    , INTRO
+		    , INPUT_DATE
+		    , AREA
+		    , STATUS
+		FROM BOOK B, BOOK_CATE C
+		WHERE B.KDC_NUM = C.KDC_NUM
+		<if test="status != 0 and status != 5">
+		AND STATUS = #{status}
+		</if>
+		ORDER BY INPUT_DATE DESC
+	</select>	
 	
 </mapper>
 
