@@ -40,7 +40,6 @@ public class LibInfoController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		System.out.println(menuVO.getMenuCode());
 		
 		return "libInfo/lib_directions";
 		

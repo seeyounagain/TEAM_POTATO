@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 .container{
-	width: 90%;
+	width: 100%;
 	margin-top: 20px;
+	background: aqua;
 }
 
 .titleDiv {
@@ -27,16 +28,15 @@
 </style>
 </head>
 <body>
-<!-- 큰 div 안에 도서현황div과 테이블div넣음.위에껀 쌩테이블 아래껀은 부트스트랩테이블 -->
 <div class="container">
 	<!-- 제일 윗줄 -->
-	<div class="row titleDiv">
+	<div class="row titleDiv" style="border-bottom: 2px solid #0b70b9 ;">
 		<div class="col-6">
-			<h5>자료 현황</h5>
+			<h3 style="font-weight: bold;">자료 현황</h3>
 		</div>
 		<!-- 자료현황 화면 우측위에 글자 클릭시 이동 
 			menu.jsp에서 menuVO.menuCode 랑 sideMenuVO.sideMenuCode 데이터 들고옴
-			side
+			sideMenu.jsp에서도 들고옴(아직안들고옴)
 			-->
 		<div class="col-6 text-end" style="font-size: 14px;">
 			<p>
@@ -45,18 +45,18 @@
 				</a>&nbsp;
 					<c:forEach items="${menuList }" var="menu">
 						<c:if test="${menuVO.menuCode eq menu.menuCode }">
-							<a href="/${menu.menuUri }/locaInfo?menuCode=${menuVO.menuCode}"> <!-- 이거 uri 어카누...아 -->
-							${menu.menuName } >
+							<a href="/${menu.menuUri }/locaInfo?menuCode=${menuVO.menuCode }&sideMenuCode=${sideMenuVO.sideMenuCode }"> <!-- 이거 uri 어카누...아 -->
+								${menu.menuName } >
 							</a>&nbsp;
 						</c:if>
 					</c:forEach>
-				<a>
 					<c:forEach items="${sideMenuList }" var="sideMenu">
 						<c:if test="${sideMenuVO.sideMenuCode eq sideMenu.sideMenuCode }">
-							${sideMenu.sideMenuName } >
+							<a href="/${sideMenu.menuUri }/${sideMenu.sideMenuUri }?menuCode=${menuVO.menuCode }&sideMenuCode=${sideMenuVO.sideMenuCode }">
+								${sideMenu.sideMenuName } >
+							</a>
 						</c:if>
 					</c:forEach>
-				</a>
 			<p>
 		</div>
 	</div>
@@ -72,13 +72,14 @@
 	<!-- 도서현황 테이블 -->
 	<div class="bookCateTableDiv text-center">
 		<table class="table">
-			<thead class="table-dark">
+			<thead class="table-secondary">
 	 			<tr>
 					<c:forEach items="${bookCateList }" var="bookCate">
 						<td>${bookCate.kdcName}</td>
 					</c:forEach>
 					<td>합계</td>	
 				</tr>
+			</thead>
 			<tbody>	
 				<tr>
 					<c:forEach items="${bookCateList }" var="bookCate">
@@ -103,7 +104,7 @@
 	<!-- 비도서 현황 테이블 -->
 	<div class="bookCateTableDiv text-center">
 		<table class="table">
-			<thead class="table-dark">
+			<thead class="table-secondary">
 	 			<tr>
 	 				<td>DVD</td>
 	 				<td>기타</td>
@@ -132,7 +133,7 @@
 	<!-- 비도서 현황 테이블 -->
 	<div class="bookCateTableDiv text-center">
 		<table class="table">
-			<thead class="table-dark">
+			<thead class="table-secondary">
 	 			<tr>
 	 				<td rowspan="2">구분</td>
 	 				<td rowspan="2">계</td>
