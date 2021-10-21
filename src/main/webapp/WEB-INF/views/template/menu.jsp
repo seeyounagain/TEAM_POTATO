@@ -90,7 +90,7 @@
 				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
 				<ul class="dropdown-menu">
 				<c:forEach var="sideMenu" items="${menu.sideMenuList }">
-					<li><a class="dropdown-item" href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}">${sideMenu.sideMenuName }</a></li>
+					<li><a class="dropdown-item" href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}">${sideMenu.sideMenuName }</a></li>
 				</c:forEach>
 				</ul>
 			</li>
