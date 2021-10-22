@@ -17,7 +17,7 @@
 <body>
 	<div class="list-group" style="padding-right: 5%;">
 		<c:forEach var="side" items="${sideMenuList }">
-			<a href="/${side.menuUri }/${side.sideMenuUri }?menuCode=${side.menuCode}" class="list-group-item list-group-item-action active" >${side.sideMenuName }</a>
+			<a href="/${side.menuUri }/${side.sideMenuUri }?menuCode=${side.menuCode}&sideMenuCode=${side.sideMenuCode}" class="list-group-item list-group-item-action active" >${side.sideMenuName }</a>
 		</c:forEach>
 	</div>
 </body>
