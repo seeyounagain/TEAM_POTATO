@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=1"></script>
+<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=2"></script>
 <style type="text/css">
 
 .container{
@@ -27,6 +27,9 @@ height: 200px;
 background-color: white;
 
 }
+.miniSeatBox:hover{
+	cursor: pointer;
+}
 
 </style>
 
@@ -46,10 +49,10 @@ background-color: white;
 
 <c:when test="${not empty seatList }">
 <c:forEach items="${seatList }" var="seat" varStatus="status">
-		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } 
+		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } miniSeatBox 
 		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if> 
 		<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
-		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if>">
+		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if> " >
 		
 		<input type="hidden" value="${seat.seatCode }">
 		

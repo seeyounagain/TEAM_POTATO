@@ -65,25 +65,26 @@ $(document).ready(function(){
 	statusChange = function() {
 		var sc = $('.miniSeatCode').text();
 		var menuCode = $('.menuCode').val();
-				alert(sc);
+		
 				$.ajax({
 			      url: '/service/chooseSeat', //요청경로
 			      type: 'post',
 			      data:{'seatCode':sc}, //필요한 데이터
 			      success: function(result) {
+				
 			      	//ajax 실행 성공 시 실행되는 구간
 			      	$('#minimin').empty();
-			      	var checked1 = '';
-			      	var checked2 = '';
+
 			      	
-			      	if(result.seatStatus == 0){
-			      		checked1 = 'checked';
-			      		checked2 = '';
-			      	}
-			      	else{
-			      		checked1 = '';
-			      		checked2 = 'checked';
-			      	}
+			      	
+			      	var inputOrSpan ='';
+			      	
+			      	//리절트 아이디가 널이면
+			      	if(result.id == null || result.id == ''){
+						inputOrSpan = '<input type="text" name="id">';
+					}else{
+						inputOrSpan = result.id;
+					}
 			      	
 			      	
    var str = '';
@@ -104,16 +105,19 @@ $(document).ready(function(){
    str+='		<tr class="text-center">   																					';
    str+='			<th class="align-middle miniSeatCode" scope="row">'+result.seatCode+'</th>	     						';
    str+='			<input type="hidden" name="seatCode" value="'+result.seatCode+'">			     						';
-   str+='			<input type="hidden" name="menuCode" value="'+menuCode+'">			     						';
-   str+='			<td class="text-center align-middle"><input type="text" name="id" style="width: 100px;"></td>       	';
+   str+='			<input type="hidden" name="menuCode" value="'+menuCode+'">			     								';
+   str+='			<td class="text-center align-middle">'+inputOrSpan+'</td>       								           	';
    str+='			<td class="text-center align-middle">																	';
-   str+='<input type="radio" name="seatStatus" value="0" '+checked1+'>대기														';
-   str+='<input type="radio" name="seatStatus" value="1" '+checked2+'>배정														';   
+   str+='<input type="radio" name="seatStatus" value="0" >퇴실													';
+   str+='<input type="radio" name="seatStatus" value="1" checked>배정													';   
    str+='<td class="text-center align-middle"><input type="submit" value="확인"> </td>    									';
    str+='		</tr>                                                                      									';                  
    str+='	</tbody>                                                                       									';
    str+='</table>                                                                          									';
    str+='</form>                                                                         									';
+   str+='	<div class="text-center">                                                            			';
+   str+='	<input type="button" onclick="closeMinimin();" value="닫기">                                                		';
+   str+='	</div>                                                                         									';
    str+='	</div>                                                                         									';
    str+='</div>                                                                         									';
    $('#minimin').append(str);
