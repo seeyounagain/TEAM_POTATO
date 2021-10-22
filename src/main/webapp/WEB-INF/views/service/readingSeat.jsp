@@ -53,7 +53,6 @@ background-color: white;
 		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if> 
 		<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
 		<c:if test="${seat.seatStatus == 1 }">bg-info</c:if> " >
-		
 		<input type="hidden" value="${seat.seatCode }">
 		
 		
@@ -86,9 +85,6 @@ background-color: white;
 	<div class="col-12 container mb-5" id="minimin">
 
 	</div>
-	
-	
-
 	
 	<div class="col-12 container mb-5">
 	<div class="row justify-content-center mt-5 align-middle">

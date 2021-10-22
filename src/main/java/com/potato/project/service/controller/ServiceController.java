@@ -33,10 +33,21 @@ public class ServiceController {
 	
 	@RequestMapping("/readingSeat")
 	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
-
-		model.addAttribute("seatList",serviceService.selectReadingSeat());
-		model.addAttribute("menuCode", menuVO.getMenuCode());
 		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		//Ajax
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		model.addAttribute("seatList",serviceService.selectReadingSeat());
 		
 		return  "service/readingSeat";
 	}
@@ -44,18 +55,38 @@ public class ServiceController {
 	@ResponseBody
 	@PostMapping("/chooseSeat")
 	public ReadingSeatVO chooseSeat(Model model, String seatCode) {
-		
-		return serviceService.chooseSeat(seatCode);
+	return serviceService.chooseSeat(seatCode);
 	
 	}
 	
+	@ResponseBody
+	@PostMapping("/seatIdCheck")
+	public String seatIdCheck(Model model, String id) {
+	return serviceService.seatIdCheck(id);
+	
+	}
+	
+	
+	
+	
 	@PostMapping("/seatUpdate")
 	public String seatUpdate(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
-		
 		serviceService.seatUpdate(seatVO);
+		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 
+		if (loginInfo == null) {
+			
+			loginInfo = new MemberVO();
+			
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
+		
 		
 		return  "service/readingSeat";
 	}

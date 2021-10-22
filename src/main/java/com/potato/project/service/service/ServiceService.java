@@ -14,4 +14,6 @@ public interface ServiceService {
 	ReadingSeatVO chooseSeat(String seatCode);
 	
 	void seatUpdate(ReadingSeatVO seatVO);
+	
+	String seatIdCheck(String id);
 }

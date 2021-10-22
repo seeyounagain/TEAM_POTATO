@@ -34,6 +34,11 @@
 			SET ID = #{id} , SEAT_STATUS = #{seatStatus}
 			WHERE SEAT_CODE = #{seatCode}
 			</update>
+			<select id="seatIdCheck" resultType="String">
+			SELECT ID
+				FROM READING_SEAT
+				WHERE ID = #{id }			
+			</select>
 			
 			
 			
