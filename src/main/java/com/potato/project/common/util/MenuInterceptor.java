@@ -35,10 +35,15 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 		// menuVO 받아오기
 		MenuVO menuVO = (MenuVO)(modelAndView.getModel().get("menuVO"));
 		
+		if (menuVO != null) {
+			
+			// 사이드 메뉴 전달
+			modelAndView.addObject("sideMenuList",commonService.selectSideMenuList(menuVO));
+			
+		}
+		
 		// 메뉴 전달
 		modelAndView.addObject("menuList",commonService.selectMenuList(loginInfo));
-		// 사이드 메뉴 전달
-		modelAndView.addObject("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		
 	}

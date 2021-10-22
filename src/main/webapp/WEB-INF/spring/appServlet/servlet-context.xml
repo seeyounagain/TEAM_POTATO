@@ -45,6 +45,10 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/*/*"/>
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/checkId"/>
+			<exclude-mapping path="/libManage/selectStatusBookListAjax"/>
+			<exclude-mapping path="/service/chooseSeat"/>
 			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
 <!-- 		<interceptor> 로그인 인터셉터 주석 풀어서 path 추가 + 기존 코드 삭제시 실행
