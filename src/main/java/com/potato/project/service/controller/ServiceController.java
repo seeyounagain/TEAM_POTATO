@@ -31,7 +31,7 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
-	@RequestMapping("/libManage")
+	@RequestMapping("/readingSeat")
 	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
