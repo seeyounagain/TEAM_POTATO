@@ -47,6 +47,20 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.selectOne("boardMapper.selectQna", qnaVO);
 	}
 
+	//파일 첨부를 위한 공지사항 코드	
+	@Override
+	public String selectNoticeCode() {
+		
+		return sqlSession.selectOne("boardMapper.selectNoticeCode");
+	}
+	
+	//파일 첨부를 위한 파일 코드 넘버 조회
+	@Override
+	public int nextFileCodeNum() {
+		
+		return sqlSession.selectOne("boardMapper.nextFileCodeNum");
+	}
+
 	
 
 	 

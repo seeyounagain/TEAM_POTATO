@@ -13,6 +13,12 @@ public interface BoardService {
 	//공지사항 입력
 	void insertNotice(NoticeVO noticeVO);
 	
+	//파일 첨부를 위한 공지사항 코드 생성
+	String selectNoticeCode();
+	
+	//파일 첨부를 위한 파일 코드의 숫자 조회
+	int nextFileCodeNum();
+	
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	

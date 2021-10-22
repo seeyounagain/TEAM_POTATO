@@ -1,18 +1,17 @@
 package com.potato.project.content.controller;
 
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.UploadUtil;
@@ -20,7 +19,6 @@ import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
 import com.potato.project.content.vo.QnaVO;
-import com.potato.project.member.vo.MemberVO;
 
 
 @Controller
@@ -53,15 +51,19 @@ public class BoardController {
 	
 	//공지사항 등록
 	@PostMapping("/insertNotice")
-	public String insertNotice(NoticeVO noticeVO) {
+	public String insertNotice(NoticeVO noticeVO, MultipartHttpServletRequest multi) {
 		
 		//글 업로드
 		boardService.insertNotice(noticeVO);
 		
-		//첨부된 
-		
 		//파일이 첨부될 경로 : 민휘 학원컴
 		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeImgUpload\\";
+		
+		//파일 첨부에 필요한 공지사항 코드 생성
+		String noticeCode = boardService.selectNoticeCode();
+		//파일 첨부에 필요한 파일 코드의 숫자를 조회
+		int nextFileCodeNum = boardService.nextFileCodeNum();
+	
 		
 		
 		
