@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 .container{
-	width: 100%;
+	/* width: 100%; */
 	margin-top: 20px;
-	background-color: aqua;
+	/* background-color: aqua; */
 }
 .titleDiv {
 	background-color: white;
@@ -45,10 +45,12 @@
 </head>
 <body>
 <!-- 맨 윗줄 -->
-<div class="container">
+<div class="row justify-content-center">
+	<div class="col-10" style="background-color: aqua;">
+	
 	<!-- 제일 윗줄 -->
 	<div class="row titleDiv" style="border-bottom: 2px solid #0b70b9 ;">
-		<div class="col-6">
+		<div class="col-6 text-start">
 			<h3 style="font-weight: bold;">찾아오시는길</h3>
 		</div>
 		<!-- 자료현황 화면 우측위에 글자 클릭시 이동 
@@ -80,7 +82,7 @@
 <!-- 타이틀 끝 -->
 
 <!-- 지도 칸 -->
-	<div class="row justify-content-center">
+	<div class="row">
 	<div class="col">
 		여기 넣을수 있으면 지도 넣고
 		<!-- 지도 넣을 div만듬 id는 map으로 해야됨 -->
@@ -368,7 +370,7 @@
 		
 	</div>
 	<!-- 버스안내 div 끝 -->	
-	
+	</div>
 </div>
 
 
