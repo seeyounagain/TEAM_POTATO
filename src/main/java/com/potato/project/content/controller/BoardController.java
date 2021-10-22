@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
@@ -67,7 +68,7 @@ public class BoardController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//오늘 날짜 입력
-		model.addAttribute("nowDate",getDate());
+		model.addAttribute("nowDate",UploadUtil.getNowDateTime("day"));
 	
 		return "admin/notice_form";
 	}
@@ -76,7 +77,16 @@ public class BoardController {
 	@PostMapping("/insertNotice")
 	public String insertNotice(NoticeVO noticeVO) {
 		
+		//글 업로드
 		boardService.insertNotice(noticeVO);
+		
+		//첨부파일 업로드
+		
+		//파일이 첨부될 경로 : 민휘 학원컴
+		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeImgUpload\\";
+		
+		//파일 코드 생성
+		
 		
 		//공지사항 목록으로 이동
 		return "redirect:/board/notice";
@@ -120,7 +130,7 @@ public class BoardController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//오늘 날짜 입력
-		model.addAttribute("nowDate", getDate());
+		model.addAttribute("nowDate", UploadUtil.getNowDateTime("day"));
 		
 		return "board/qna_form";
 	}
@@ -152,17 +162,15 @@ public class BoardController {
 	}
 	
 	//시스템 날짜 구하는 메소드
-	public String getDate() {
-		//현재 날짜 구하기
-		LocalDate now = LocalDate.now();
-		
-		//포맷 지정
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		
-		//포맷 적용
-		String date = now.format(formatter);
-		
-		return date;
-	}
+	/*
+	 * public String getDate() { //현재 날짜 구하기 LocalDate now = LocalDate.now();
+	 * 
+	 * //포맷 지정 DateTimeFormatter formatter =
+	 * DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	 * 
+	 * //포맷 적용 String date = now.format(formatter);
+	 * 
+	 * return date; }
+	 */
 }
 
