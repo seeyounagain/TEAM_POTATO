@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/search_form.js?ver=6" ></script>
+<script type="text/javascript" src="/resources/search/js/search_form.js?ver=7" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -38,12 +38,15 @@
 		<h1 class="display-6 text-center">도서검색</h1>
 		<hr>
 		<div class="row justify-content-center">
+<form action="/search/goSearch" method="post">		
 			<div class="col-8">
 				<input type="text" class="form-control" id="id" name="id" placeholder="검색어를 입력해주세요.">
 			</div>
 			<div class="col-2 d-grid" style="padding-left: 3px;">
-				<button type="button" class="btn btn-primary">검색</button>
+				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary">
 			</div>
+</form>
+<form action="/search/goDetailSearch" method="post">
 			<div class="col-2 d-grid" style="padding-left: 3px;">
 				<button id="detailBtn" type="button" class="btn btn-primary">상세검색</button>
 			</div>
@@ -75,14 +78,17 @@
 			  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 			</div>
 			<div class="input-group mb-3">
-			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년 ${nowDate}   </span>
-			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default" value="${nowDate }">
-			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default" value="${nowDate }">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
+			  <input type="text" name="PUB_DATE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
+			  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이후&nbsp;</span>
+			  <input type="text" name="PUB_DATE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
+			  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이내&nbsp;</span>
 			</div>
 			<div class="input-group d-grid mb-3" style="padding-left: 3px;">
-				<button type="button" class="btn btn-primary">상세검색</button>
+				<input type="submit" value="상세검색" id="goDetailSearchBtn" class="btn btn-primary">
 			</div>
 		</div>
+</form>
 		</div>
 		
 		<table class="table table-hover table-bordered caption-top text-center" style="height: 400px;">

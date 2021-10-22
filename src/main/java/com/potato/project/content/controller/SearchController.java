@@ -32,8 +32,6 @@ public class SearchController {
 		
 		model.addAttribute("cateList",searchService.selectCateList());
 		
-		model.addAttribute("nowDate",UploadUtil.getNowDateTime("time"));
-		
 		return "search/search_form";
 		
 	}

@@ -29,7 +29,7 @@
 
 <h1 class="text-center">도서관리</h1>
 <hr>
-	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage2/regBookForm?menuCode=${menuVO.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">신규도서등록</button>
+	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">신규도서등록</button>
 	<select name="status" class="form-select" id="statusSelect">
 		<option value="0">전체</option>
 		<option value="1">대출가능</option>

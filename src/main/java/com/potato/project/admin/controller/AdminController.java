@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
@@ -85,7 +86,8 @@ public class AdminController {
 		MultipartFile file = multi.getFile("file"); 
 				
 		// 파일이 첨부될 경로 (끝에 \\ 있는지 체크!)
-		String uploadPath = "C:\\Users\\siyoon\\git\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
+		//String uploadPath = "C:\\Users\\siyoon\\git\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
+		String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
 		
 		// 상품 코드 생성
 		String bookCode = searchService.selectBookCode();
@@ -96,7 +98,7 @@ public class AdminController {
 		try {
 			
 			// 업로드 할 파일명 설정
-			String uploadFileName = UploadUtil.getNowDateTime("time") + "_" + file.getOriginalFilename();
+			String uploadFileName = FileUploadUtil.getNowDateTime() + "_" + file.getOriginalFilename();
 			// 지정한 경로에 파일 첨부
 			file.transferTo(new File(uploadPath + uploadFileName));
 			
@@ -111,6 +113,13 @@ public class AdminController {
 		} catch (IOException e) {
 			// 파일 입출력 예외 발생 시
 			e.printStackTrace();
+		}
+		
+		int result1 = adminSerivce.insertBook(bookVO);
+		int result2 = adminSerivce.insertBookImg(bookVO);
+		
+		if (result1 == 1 && result2 == 1) {
+			System.out.println("도서 등록 성공");
 		}
 		
 		return "redirect:/libManage/regBookForm";

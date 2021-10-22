@@ -15,11 +15,15 @@
 </head>
 <body>
 
-<form class="row g-0 mt-3 mb-5" action="/libManage2/regBook" method="post">
+<form class="row g-0 mt-3 mb-5" action="/libManage/regBook" method="post" enctype="multipart/form-data">
 	<h1 class="display-6 text-center">신규도서등록</h1>
 	<div class="row g-0 justify-content-center">
 		<div class="col-7">
 		<hr>
+			<div class="col-12 mt-2">
+				<label for="isbn" class="form-label">ISBN</label>
+				<input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" required>
+			</div>
 			<div class="col-12 mt-2">
 				<label for="name" class="form-label">표제</label>
 				<input type="text" class="form-control" id="title" name="title" placeholder="표제" required>
@@ -69,7 +73,7 @@
 				<input type="file" name="file" class="form-control" id="inputGroupFile01" required>
 			</div>
 			<div class="d-grid mt-3">
-				<button type="submit" id="regBtn" class="btn btn-primary disabled">등록</button>
+				<button type="submit" id="regBtn" class="btn btn-primary">등록</button>
 			</div>
 		</div>
 	</div>

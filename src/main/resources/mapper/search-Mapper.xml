@@ -145,6 +145,21 @@
 		FROM BOOK
 	</select>	
 	
+	<!-- 상품 이미지 등록 -->
+	<insert id="insertBookImg">
+		INSERT INTO BOOK_IMG (
+		    IMG_CODE
+		    , ORIGIN_IMG_NAME
+		    , ATTACHED_IMG_NAME
+		    , BOOK_CODE
+		) VALUES (
+		    #{bookImgVO.imgCode}
+		    , #{bookImgVO.originImgName}
+		    , #{bookImgVO.attachedImgName}
+		    , #{bookImgVO.bookCode}
+		)
+	</insert>
+	
 </mapper>
 
 
