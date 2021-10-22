@@ -80,12 +80,11 @@ public class BoardController {
 		//글 업로드
 		boardService.insertNotice(noticeVO);
 		
-		//첨부파일 업로드
+		//첨부된 
 		
 		//파일이 첨부될 경로 : 민휘 학원컴
 		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeImgUpload\\";
 		
-		//파일 코드 생성
 		
 		
 		//공지사항 목록으로 이동
