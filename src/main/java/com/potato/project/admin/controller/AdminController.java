@@ -43,19 +43,6 @@ public class AdminController {
 	@GetMapping("/bookManage")
 	public String bookManage(Model model,MenuVO menuVO,HttpSession session,BookVO bookVO) {
 		
-		// 메뉴 호출할 정보 가져오기
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-
-		// 메뉴 전달
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		// 사이드 메뉴 전달
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		// 도서 목록 전달
 		model.addAttribute("bookList",searchService.selectStatusBookList(bookVO));
 		
@@ -66,19 +53,6 @@ public class AdminController {
 	// 회원 관리 페이지 이동
 	@GetMapping("/memberManage")
 	public String memberManage(Model model,MenuVO menuVO,HttpSession session) {
-		
-		// 메뉴 호출할 정보 가져오기
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		// 메뉴 전달
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		// 사이드 메뉴 전달
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		return  "admin/member_manage";
 		
@@ -97,20 +71,6 @@ public class AdminController {
 	@GetMapping("/regBookForm")
 	public String regBookForm(Model model,MenuVO menuVO,HttpSession session) {
 
-		// 메뉴 호출할 정보 가져오기
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-				
-			if (loginInfo == null) {
-					
-				loginInfo = new MemberVO();
-					
-			}
-			
-		// 메뉴 전달
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		// 사이드 메뉴 전달
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));	
-		
 		return "admin/reg_book_form";
 		
 	}

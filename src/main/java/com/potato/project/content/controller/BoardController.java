@@ -35,17 +35,6 @@ public class BoardController {
 	//공지사항 페이지로 이동
 	@GetMapping("/notice")
 	public String goNotice(Model model, MenuVO menuVO, HttpSession session) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		model.addAttribute("list", boardService.selectNoticeList());
 		
@@ -55,17 +44,6 @@ public class BoardController {
 	//공지사항 작성 페이지로 이동
 	@GetMapping("/noticeForm")
 	public String goNoticeForm(Model model, MenuVO menuVO, HttpSession session) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//오늘 날짜 입력
 		model.addAttribute("nowDate",UploadUtil.getNowDateTime("day"));
@@ -95,17 +73,6 @@ public class BoardController {
 	//상담 문의 페이지로 이동
 	@GetMapping("/qna")
 	public String goQna(Model model, MenuVO menuVO, HttpSession session) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		model.addAttribute("list", boardService.selectQnaList());
 		
@@ -116,17 +83,6 @@ public class BoardController {
 	//상담 문의 등록으로 이동
 	@GetMapping("/qnaForm")
 	public String goQnaForm(Model model,MenuVO menuVO, HttpSession session) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//오늘 날짜 입력
 		model.addAttribute("nowDate", UploadUtil.getNowDateTime("day"));

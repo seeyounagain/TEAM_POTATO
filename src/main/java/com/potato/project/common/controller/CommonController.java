@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.MenuVO;
 import com.potato.project.member.vo.MemberVO;
 
 @Controller
@@ -19,17 +20,7 @@ public class CommonController {
 	private CommonService commonService;
 	
 	@GetMapping("/main")
-	public String test(Model model, HttpSession session) {
-		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+	public String test(Model model, HttpSession session, MenuVO menuVO) {
 		
 		return "noside/content/main";
 		

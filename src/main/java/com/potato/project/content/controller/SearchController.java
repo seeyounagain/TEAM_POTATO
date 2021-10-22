@@ -28,18 +28,6 @@ public class SearchController {
 	@GetMapping("/bookSearch")
 	public String bookSearch(Model model,MenuVO menuVO,HttpSession session) {
 		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		
 		model.addAttribute("bookList",searchService.selectBookList());
 		
 		model.addAttribute("cateList",searchService.selectCateList());
@@ -53,18 +41,6 @@ public class SearchController {
 	// 신착도서 페이지로 이동
 	@GetMapping("/newBookList")
 	public String newBookList(Model model,MenuVO menuVO,HttpSession session) {
-		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		model.addAttribute("bookList",searchService.selectBookList());
 		

@@ -28,16 +28,6 @@ public class MemberController {
 	@GetMapping("/memberJoinInfo")
 	public String memberJoinInfo(Model model,HttpSession session) {
 		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
 		return "noside/member/member_join_info_form";
 		
 	}
@@ -46,16 +36,6 @@ public class MemberController {
 	@GetMapping("/memberJoinForm")
 	public String memberJoinForm(Model model,HttpSession session) {
 		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
 		return "noside/member/member_join_form";
 		
 	}
@@ -63,16 +43,6 @@ public class MemberController {
 	// 로그인 페이지로 이동
 	@GetMapping("/memberLoginForm")
 	public String memberLoginForm(Model model,HttpSession session) {
-		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		
 		return "noside/member/member_login_form";
 		

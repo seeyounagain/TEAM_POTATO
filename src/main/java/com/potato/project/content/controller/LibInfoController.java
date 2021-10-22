@@ -29,36 +29,12 @@ public class LibInfoController {
 	@GetMapping("/locaInfo")
 	public String libDirections(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
 		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		
 		return "libInfo/lib_directions";
 		
 	}
 	//도서관정보 자료현황
 	@GetMapping("/dataInfo")
 	public String libStatusGuide(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO){
-		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//모든책 개수 구하기 최종 갱신일 던지기
 		model.addAttribute("bookLastUpdate", libInfoService.bookLastUpdate());
@@ -75,18 +51,6 @@ public class LibInfoController {
 	//도서관정보 이용안내
 	@GetMapping("/serviceInfo")
 	public String serviceInfo(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
-		}
-		
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		
 		
 		return "libInfo/lib_service_info";
 	}
