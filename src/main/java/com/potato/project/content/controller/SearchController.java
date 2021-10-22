@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
@@ -42,6 +43,8 @@ public class SearchController {
 		model.addAttribute("bookList",searchService.selectBookList());
 		
 		model.addAttribute("cateList",searchService.selectCateList());
+		
+		model.addAttribute("nowDate",UploadUtil.getNowDateTime("time"));
 		
 		return "search/search_form";
 		

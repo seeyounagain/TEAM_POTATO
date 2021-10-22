@@ -127,7 +127,7 @@
 		    , STATUS
 		FROM BOOK B, BOOK_CATE C
 		WHERE B.KDC_NUM = C.KDC_NUM
-		<if test="status != 0 and status != 5">
+		<if test="status != 0">
 		AND STATUS = #{status}
 		</if>
 		ORDER BY INPUT_DATE DESC

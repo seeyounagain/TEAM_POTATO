@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/search/js/book_manage.js?ver=11" ></script>
+<script type="text/javascript" src="/resources/search/js/book_manage.js?ver=12" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -31,7 +31,7 @@
 <hr>
 	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage2/regBookForm?menuCode=${menuVO.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">신규도서등록</button>
 	<select name="status" class="form-select" id="statusSelect">
-		<option value="5">전체</option>
+		<option value="0">전체</option>
 		<option value="1">대출가능</option>
 		<option value="2">대출중</option>
 		<option value="3">연체중</option>

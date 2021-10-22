@@ -10,7 +10,7 @@
       		
       		// 페이지 이동 없이 쿼리 실행 Ajax
 	   		$.ajax({
-	            url: '/libManage2/selectStatusBookListAjax', // 요청경로
+	            url: '/libManage/selectStatusBookListAjax', // 요청경로
 	            type: 'post', // post 메소드 방식
 	            data: {'status':status}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 	            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.

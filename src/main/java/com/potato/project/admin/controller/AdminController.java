@@ -153,7 +153,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/libManage2/regBookForm";
+		return "redirect:/libManage/regBookForm";
 		
 	}
 	

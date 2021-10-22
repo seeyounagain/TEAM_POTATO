@@ -62,7 +62,9 @@
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
-			  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="저자">
+			  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">역자</span>
+			  <input type="text" name="TRANSLATOR" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
 			</div>
 			<div class="input-group mb-3">
 			  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
@@ -73,9 +75,9 @@
 			  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 			</div>
 			<div class="input-group mb-3">
-			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
-			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
-			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년 ${nowDate}   </span>
+			  <input type="date" class="form-control" aria-describedby="inputGroup-sizing-default" value="${nowDate }">
+			  <span style="align-self: center;">&nbsp;~&nbsp;</span><input type="date" class="form-control" aria-describedby="inputGroup-sizing-default" value="${nowDate }">
 			</div>
 			<div class="input-group d-grid mb-3" style="padding-left: 3px;">
 				<button type="button" class="btn btn-primary">상세검색</button>
