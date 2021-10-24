@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/search/js/book_manage.js?ver=11" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=5" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -61,7 +61,7 @@
 				<input type="text" class="form-control" id="summary" name="summary" placeholder="한줄소개" required>
 			</div>
 			<div class="col-12 mt-2">
-				<label for="intro" class="form-label">목차</label>
+				<label for="intro" class="form-label">소개글</label>
 				<input type="text" class="form-control" id="intro" name="intro" placeholder="목차" required>
 			</div>
 			<div class="col-12 mt-2">
@@ -70,7 +70,7 @@
 			</div>
 			<div class="col-12 mt-2">
 				<label for="file" class="form-label">표지이미지</label>
-				<input type="file" name="file" class="form-control" id="inputGroupFile01" required>
+				<input type="file" name="file" class="form-control" id="inputGroupFile01 file" required>
 			</div>
 			<div class="d-grid mt-3">
 				<button type="submit" id="regBtn" class="btn btn-primary">등록</button>

@@ -37,18 +37,16 @@
 	<div class="col-8">
 		<h1 class="display-6 text-center">도서검색</h1>
 		<hr>
-		<div class="row justify-content-center">
 <form action="/search/goSearch" method="post">		
-			<div class="col-8">
-				<input type="text" class="form-control" id="id" name="id" placeholder="검색어를 입력해주세요.">
+		<div class="row justify-content-center">
+			<div class="col-8 p-3">
+				<input type="text" class="form-control p-2" id="id" name="id" placeholder="검색어를 입력해주세요.">
 			</div>
-			<div class="col-2 d-grid" style="padding-left: 3px;">
-				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary">
+			<div class="col-2 d-grid p-3" style="padding-left: 3px;">
+				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary p-2">
 			</div>
-</form>
-<form action="/search/goDetailSearch" method="post">
-			<div class="col-2 d-grid" style="padding-left: 3px;">
-				<button id="detailBtn" type="button" class="btn btn-primary">상세검색</button>
+			<div class="col-2 d-grid p-3" style="padding-left: 3px;">
+				<button id="detailBtn" type="button" class="btn btn-primary p-2">상세검색</button>
 			</div>
 		<div id="searchBox">
 			<div class="input-group mt-5 mb-3">
@@ -88,8 +86,8 @@
 				<input type="submit" value="상세검색" id="goDetailSearchBtn" class="btn btn-primary">
 			</div>
 		</div>
-</form>
 		</div>
+</form>
 		
 		<table class="table table-hover table-bordered caption-top text-center" style="height: 400px;">
 			<tr>

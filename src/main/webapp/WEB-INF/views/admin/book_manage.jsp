@@ -39,6 +39,13 @@
 	</select>
 	
 <table id="bookT" class="table table-hover table-bordered caption-top">
+
+	<colgroup>
+		<col width="60%">
+		<col width="15%">
+		<col width="15%">
+	</colgroup>
+
 	<thead>
 		<tr class="text-center">
 			<td>도서정보</td>
@@ -57,14 +64,14 @@
 		</td>
 		<td class="text-center">
 				<c:if test="${book.status eq 1 or book.status eq 4 }">
-					<button type="button" class="btn btn-primary">대출</button>
+					<button type="button" class="btn btn-primary px-5">대출</button>
 				</c:if>
 				<c:if test="${book.status eq 2 or book.status eq 3 }">
-					<button type="button" class="btn btn-warning">반납</button>
+					<button type="button" class="btn btn-warning px-5">반납</button>
 				</c:if>
 		</td>
 		<td class="text-center">
-			<button type="button" class="btn btn-danger">도서정보수정</button>
+			<button type="button" class="btn btn-danger px-5">도서정보수정</button>
 		</td>
 		</tr>
 	</c:forEach>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,45 @@
 </head>
 <body>
 <div class="row justify-content-center">
-    <div class="col-10 g-5" id="col1">1</div>
-    <div class="col-5 g-5" id="col2">2</div>
+	<!-- 검색 -->
+    <div class="col-10 g-5" id="col1">
+	    <div class="row justify-content-center pt-5 mt-5">
+		    <div class="col-6 align-self-center">
+				<input type="text" class="form-control p-3" id="id" name="id" placeholder="검색어를 입력해주세요.">
+			</div>
+			<div class="col-2 d-grid align-self-center" style="padding-left: 3px;">
+				<c:forEach var="menu" items="${menuList }">
+					<c:forEach var="sideMenu" items="${menu.sideMenuList }">
+					<c:if test="${menu.menuName eq '자료찾기' and sideMenu.sideMenuName eq '도서검색' }">
+						<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary p-3" onclick="location.href='/search/bookSearch?menuCode=${menu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">
+					</c:if>
+					</c:forEach>
+				</c:forEach>
+			</div>
+	    </div>
+    </div>
     
+    <!-- 신착도서 목록 테이블 -->
+    <div class="col-5 g-5" id="col2">
+    <h1 class="display-6 text-first">신착도서</h1>
+    <div class="row">
+    	<div class="col-5">
+    		<div class="row">
+    			<img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
+    			${bookList[0].title }<br>
+    			${bookList[0].writer }
+    		</div>
+    	</div>
+    	<div class="col-7">
+	    	<div class="row mb-4 mt-4"><a>${bookList[1].title } / ${bookList[1].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a>${bookList[2].title } / ${bookList[2].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a>${bookList[3].title } / ${bookList[3].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a>${bookList[4].title } / ${bookList[4].writer }</a></div>
+    	</div>
+    </div>
+ </div>   
+
+    <!-- 공지사항 이미지 슬라이드 -->
     <div class="col-5 g-5" id="col3">
     	<div class="row justify-content-center">
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
