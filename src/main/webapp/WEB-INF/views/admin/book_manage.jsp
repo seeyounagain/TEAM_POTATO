@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/search/js/book_manage.js?ver=12" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=37" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -64,16 +64,15 @@
 		</td>
 		<td class="text-center">
 				<c:if test="${book.status eq 1 or book.status eq 4 }">
-					<button type="button" class="btn btn-primary px-5">대출</button>
+					<button type="button" class="btn btn-primary px-5 " id="rentalBtn">대출</button>
 				</c:if>
 				<c:if test="${book.status eq 2 or book.status eq 3 }">
-					<button type="button" class="btn btn-warning px-5">반납</button>
+					<button type="button" class="btn btn-warning px-5 " id="returnBtn">반납</button>
 				</c:if>
 		</td>
 		<td class="text-center">
-			<button type="button" class="btn btn-danger px-5">도서정보수정</button>
+			<button type="button" class="btn btn-danger px-5" data-bookCode="${book.bookCode }">도서정보수정</button>
 		</td>
-		</tr>
 	</c:forEach>
 	</tbody>
 </table>

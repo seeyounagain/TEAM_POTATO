@@ -24,6 +24,7 @@ import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.RentalVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 
@@ -123,6 +124,16 @@ public class AdminController {
 		}
 		
 		return "redirect:/libManage/regBookForm";
+		
+	}
+	
+	// 도서 대출
+	@GetMapping("/rentalBook")
+	public String rentalBook(RentalVO rentalVO) {
+		
+		adminSerivce.insertRental(rentalVO);
+		
+		return "redirect:/libManage/bookManage";
 		
 	}
 	

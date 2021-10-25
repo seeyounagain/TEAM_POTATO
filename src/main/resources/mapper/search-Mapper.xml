@@ -37,6 +37,15 @@
 		<result column="BOOK_CODE" 			property="bookCode"/>	
 	</resultMap>
 	
+	<resultMap type="com.potato.project.common.vo.RentalVO" id="rental">
+		<id column="RENTAL_CODE" 		property="rentalCode"/>
+		<result column="ID" 			property="id"/>
+		<result column="BOOK_CODE" 		property="bookCode"/>
+		<result column="RENTAL_DATE" 	property="rentalDate"/>	
+		<result column="RETURN_DATE" 	property="returnDate"/>	
+		<result column="LIMIT_DATE" 	property="limitDate"/>	
+	</resultMap>
+	
 	<!-- 책 등록 -->
 	<insert id="insertBook">
 		INSERT INTO BOOK (
@@ -159,6 +168,26 @@
 		    , #{bookImgVO.bookCode}
 		)
 	</insert>
+	
+	<!-- 도서 대여 & 도서 상태 변경 -->
+	<insert id="insertRental">
+		INSERT INTO RENTAL (
+		    RENTAL_CODE
+		    , ID
+		    , BOOK_CODE
+		) VALUES (
+		    (SELECT 'RENTAL_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RENTAL_CODE,6,4))),0) + 1,4,0) FROM RENTAL)
+		    , #{id}
+		    , #{bookCode}
+		)
+	</insert>
+	
+	<!-- 도서 대여 & 도서 상태 변경 -->
+	<update id="updateRentalStatus">
+		UPDATE BOOK
+		SET STATUS = 2
+		WHERE BOOK_CODE = #{bookCode}
+	</update>
 	
 </mapper>
 

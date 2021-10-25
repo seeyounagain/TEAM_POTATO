@@ -2,6 +2,86 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		/* 대여 버튼 클릭 시 대여자 아이디 입력칸 생성 */
+		$(document).on('click', '#rentalBtn', function() { 
+			
+			$('#rental').remove();
+			
+			var str = "";
+			
+			str += '<tr class="justify-content-center text-center" id="rental" >';
+			str += '<td colspan="3">';
+			str += '대여자 정보&nbsp;';
+			str += '<input type="text" id="id" name="id" placeholder="회원아이디" required style="width: 200x;">';
+			str += '<button type="button" class="btn btn-primary px-3 mx-3" id="rentalB">대출</button>';
+			str += '</td>';
+			str += '</tr>';
+			
+			$(this).parent().parent().after(str);
+		
+			
+		});
+		
+		/* 반납 버튼 클릭 시 반납자 아이디 확인칸 생성 */
+		$(document).on('click', '#returnBtn', function() { 
+			
+			$('#return').remove();
+			
+			var str = "";
+			
+			str += '<tr class="justify-content-center text-center" id="return" >';
+			str += '<td colspan="3">';
+			str += '반납자 정보&nbsp;';
+			str += '<input type="text" id="id" name="id" placeholder="회원아이디" readonly style="width: 200x;">';
+			str += '<button type="button" class="btn btn-warning px-3 mx-3" id="returnB">반납</button>';
+			str += '</td>';
+			str += '</tr>';		
+			
+			$(this).parent().parent().after(str);
+			
+		
+		});
+		
+		/* 대여 버튼 클릭 시 대여자 아이디 입력 체크 후 대여처리 */
+		$(document).on('click', '#rentalB', function() {
+			
+			var id = $(this).prev().val();
+			var bookCode = $(this).parent().parent().prev().children().last().children().attr('data-bookCode');
+			
+			if (id == '') {
+				alert('대여자의 아이디를 입력해주세요.');
+				return ;
+			}
+			
+			
+			var result = confirm('도서를 대여하시겠습니까?')
+			
+			if (result) {
+			
+			location.href = '/libManage/rentalBook?id=' + id + '&bookCode=' + bookCode;
+				
+			}
+			
+			
+		});
+		
+		/* 반납 버튼 클릭 시 확인 체크 후 반납처리 */
+		$(document).on('click', '#returnB', function() {
+			
+			var id = $(this).prev().val();
+			var bookCode = $(this).parent().parent().prev().children().last().children().attr('data-bookCode');
+			
+			var result = confirm('도서를 반납하시겠습니까?')
+			
+			if (result) {
+			
+			location.href = '/libManage/returnBook?id=' + id + '&bookCode=' + bookCode;
+				
+			}
+			
+			
+		});
+		
 		/* Ajax 시작 */
 		// 셀렉트 박스 값 변경 시 (상태별 조회)
 		$(document).on('change', '#statusSelect', function() { 
@@ -97,50 +177,7 @@
 */
 	(function($){
 	
-	// 학생 점수 조회 기능
-	selectScore = function(stuNum){
-		
-      		// 페이지 이동 없이 쿼리 실행 Ajax
-	   		$.ajax({
-	            url: '/student/stuScoreAjax', // 요청경로
-	            type: 'post', // post 메소드 방식
-	            data: {'stuNum':stuNum}, // 필요한 데이터를 classCode라는 이름으로 classCode 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
-	            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
-	            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
-
-	         		$('#scoreT tbody').empty();
-	         		
-	         		// 테이블 그리기
-	         		str = "";
-	         		
-	         		sum = Number(result.korScore) + Number(result.engScore) + Number(result.mathScore);
-	         		
-		         	str += '<tr>';
-					str += '<td id="korScore">' + result.korScore + '</td>';
-					str += '<td id="engScore">' + result.engScore + '</td>';
-					str += '<td id="mathScore">' + result.mathScore + '</td>';
-					str += '<td id="sumScore">' + sum + '</td>';
-		         	str += '</tr>';
-		         	
-		         	str += '<tr>';
-					str += '<td id="btn" colspan="4"><input type="button" id="updateBTN" value="점수변경" data-stuNum="' + result.stuNum +  '"></td>';
-		         	str += '</tr>';
-					
-					str1 = "";
-					
-					str1 += result.stuName + '학생의 성적정보';
-					
-	         		$('#scoreT tbody').prepend(str);
-	         		$('#scoreT caption').text(str1);
-	         		
-	            },
-	            error: function(){
-	           		// ajax 실행 실패 시 실행되는 구간
-	           		alert('실패');
-	            }
-			});
-      		
-	}
+	
 
 	})(jQuery);
 	
