@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=40" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=42" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -57,7 +57,7 @@
 	<c:forEach var="book" items="${bookList }" varStatus="status">
 		<tr>
 		<td><span>${status.count }.</span>
-			<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}">${book.title }</a></div>
+			<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}&sideMenuCode=${menuVO.sideMenuList[0].sideMenuCode}">${book.title }</a></div>
 			<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
 			<div class="mt-2"><c:if test="${book.status eq 1 }">대출 가능</c:if><c:if test="${book.status eq 2 }">대출중</c:if><c:if test="${book.status eq 3 }">연체중</c:if>
 			<c:if test="${book.status eq 4 }">예약중</c:if>&nbsp;/&nbsp;${book.area }</div>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.UploadUtil;
+import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
@@ -43,6 +44,14 @@ public class SearchController {
 		model.addAttribute("bookList",searchService.selectBookList());
 		
 		return "search/new_book_list";
+		
+	}
+	
+	// 도서 상세페이지로 이동
+	@GetMapping("/bookDetail")
+	public String bookDetail(Model model,MenuVO menuVO,HttpSession session,BookVO bookVO) {
+		
+		return "search/book_detail";
 		
 	}
 	

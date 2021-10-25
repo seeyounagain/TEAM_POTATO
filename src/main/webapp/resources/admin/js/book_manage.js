@@ -2,6 +2,9 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		var menuCode = 'MENU_006';
+		var sideMenuCode = 'SIDE_MENU_013';
+		
 		/* 대여 버튼 클릭 시 대여자 아이디 입력칸 생성 */
 		$(document).on('click', '#rentalBtn', function() { 
 			
@@ -67,7 +70,7 @@
 		            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 
 						if (result < 3) {
-							location.href = '/libManage/rentalBook?id=' + id + '&bookCode=' + bookCode + '&menuCode=MENU_006&sideMenuCode=SIDE_MENU_013';
+							location.href = '/libManage/rentalBook?id=' + id + '&bookCode=' + bookCode + '&menuCode=' + menuCode + '&sideMenuCode=' + sideMenuCode;
 						}
 						
 						else {
@@ -96,7 +99,7 @@
 			
 			if (result) {
 			
-			location.href = '/libManage/returnBook?id=' + id + '&bookCode=' + bookCode + '&menuCode=MENU_006&sideMenuCode=SIDE_MENU_013';
+			location.href = '/libManage/returnBook?id=' + id + '&bookCode=' + bookCode + '&menuCode=' + menuCode + '&sideMenuCode=' + sideMenuCode;
 				
 			}
 			
@@ -159,16 +162,16 @@
 		         		str += '<td class="text-center">';
 		         		
 		         		if (element.status == 1 || element.status == 4) {
-							str += '<button type="button" class="btn btn-primary px-5">대출</button>';
+							str += '<button type="button" class="btn btn-primary px-5" id="rentalBtn">대출</button>';
 						}
 						else {
-							str += '<button type="button" class="btn btn-warning px-5">반납</button>';
+							str += '<button type="button" class="btn btn-warning px-5" id="returnBtn">반납</button>';
 						}
 
 		         		str += '</td>';
 		         		
 		         		str += '<td class="text-center">';
-		         		str += '<button type="button" class="btn btn-danger px-5">도서정보수정</button>';
+		         		str += '<button type="button" class="btn btn-danger px-5" data-bookCode="' + element.bookCode + '">도서정보수정</button>';
 						str += '</td>';
 						
 		         		str += '</tr>';

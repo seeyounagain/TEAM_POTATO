@@ -63,6 +63,11 @@ a:hover , button:hover {
     border-color: #0f8ae6;
     background-color: #0f8ae6;
     color: #FFF; }
+hr , hr:not([size]) {
+	background-color: #0b70b9;
+	height: 3px;
+	opacity: 1;
+}
 </style>
 </head>
 <body>
