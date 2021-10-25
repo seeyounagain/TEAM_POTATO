@@ -3,6 +3,7 @@ package com.potato.project.content.service;
 import java.util.List;
 
 import com.potato.project.content.vo.NoticeVO;
+import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
 
 public interface BoardService {
@@ -30,4 +31,7 @@ public interface BoardService {
 	
 	//상담문의 상세보기
 	QnaVO selectQna(QnaVO qnaVO);
+	
+	//상담문의 답변추가
+	int insertAnswer(QnaAnswerVO qnaAnswerVO);
 }

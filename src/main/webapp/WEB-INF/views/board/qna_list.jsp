@@ -39,10 +39,6 @@
 						<tbody>
 							<c:forEach items="${list }" var="info">
 							<tr>
-								<c:choose>
-									<c:when test=""></c:when>
-									<c:otherwise></c:otherwise>
-								</c:choose>
 								<td>${info.qnaCode }</td>
 								<td>
 								<!-- 관리자 로그인 상태로 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
@@ -72,33 +68,5 @@
 				</c:if>
 			</div>
 		</div>
-
-
-		<div class="modal fade" id="pwModal" tabindex="-1">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="">상담/문의글 비밀번호</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		     <form action="/board/checkQnaPw" method="post">
-			      <div class="modal-body">
-			      	<div class="form-floating mb-3">
-					  <input type="password" class="form-control" id="pwInput" name="pw" required>
-					  <label for="idInput">비밀번호</label>
-					</div>
-			      </div>
-			      <div class="col-12 d-grid p-1">
-		          		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-		          		<input type="submit" class="btn btn-primary btn-block" value="확인">
-		          </div>
-				</form>
-		      
-		    </div>
-		  </div>
-		</div>
-
-
-
 </body>
 </html>

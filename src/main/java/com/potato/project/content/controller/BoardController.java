@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +24,7 @@ import com.potato.project.common.vo.AttachFileVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
+import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
 
 
@@ -110,7 +110,6 @@ public class BoardController {
 		
 		model.addAttribute("list", boardService.selectQnaList());
 		
-		
 		return  "board/qna_list";
 	}
 	
@@ -129,7 +128,7 @@ public class BoardController {
 	public String insertQna(QnaVO qnaVO) {
 		
 		boardService.insertQna(qnaVO);
-		
+		//등록하고 다시 목록으로 돌아갈 때 사이드 메뉴 없음 해결해야 함//
 		return "redirect:/board/qna";
 	}
 	
@@ -142,13 +141,24 @@ public class BoardController {
 	
 	//상담문의 상세보기
 	@GetMapping("/qnaDetail")
-	public String goQnaDetail(Model model, QnaVO qnaVO) {
+	public String goQnaDetail(Model model, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
 
+		//오늘 날짜 입력
+		model.addAttribute("nowDate", UploadUtil.getNowDateTime("day"));
+		
 		model.addAttribute("qna",boardService.selectQna(qnaVO));
 		
 		return "board/qna_detail";
 	}
 	
+	//상담문의 답변 추가하기
+	@PostMapping("/insertAnswer")
+	public String insertAnswer(Model model, QnaAnswerVO qnaAnswerVO) {
+		
+		boardService.insertAnswer(qnaAnswerVO);
+		
+		return "redirect:/board/qnaDetail";
+	}
 	//시스템 날짜 구하는 메소드
 	/*
 	 * public String getDate() { //현재 날짜 구하기 LocalDate now = LocalDate.now();

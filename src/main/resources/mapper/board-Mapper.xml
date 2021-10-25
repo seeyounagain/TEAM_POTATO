@@ -127,12 +127,42 @@
 	
 	<!-- 상담문의 상세보기 -->
 	<select id="selectQna" resultMap="qna">
-		SELECT QNA_CODE
+	<!-- 	SELECT QNA_CODE
 		     , TITLE
 		     , WRITER
 		     , CONTENT
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		FROM QNA
-		WHERE QNA_CODE = #{qnaCode}
+		WHERE QNA_CODE = #{qnaCode}  -->
+		SELECT Q.QNA_CODE
+		     , Q.TITLE
+		     , Q.WRITER
+		     , Q.CONTENT
+		     , TO_CHAR(Q.CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+             , A.ANSWER_CODE
+             , A.CONTENT
+             , A.CREATE_DATE
+             , A.QNA_CODE
+		FROM QNA Q, QNA_ANSWER A
+		WHERE Q.QNA_CODE = A.QNA_CODE
+		AND Q.QNA_CODE = #{qnaCode}
+		
 	</select>
+	
+	<!-- 상담문의 답변 추가하기 -->
+	<insert id="insertAnswer">
+		INSERT INTO QNA_ANSWER(
+		            ANSWER_CODE
+		          , CONTENT
+		          , WRITER
+		          , CREATE_DATE
+		          , QNA_CODE
+		)VALUES(
+		        (SELECT 'ANSWER_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(ANSWER_CODE, 8, 3))), 0) + 1, 3, '0') FROM QNA_ANSWER)
+		        ,#{content}
+		        ,#{writer}
+		        ,#{createDate}
+		        ,#{qnaCode}
+		)
+	</insert>
 </mapper>

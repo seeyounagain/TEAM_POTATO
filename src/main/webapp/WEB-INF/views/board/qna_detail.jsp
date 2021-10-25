@@ -36,19 +36,30 @@
    		<div class="tableDiv">
    			<table class="table answerTable">
    				<tr>
-   					<td>답변자</td>
-   					<td>답변 내용</td>
+   					<td>${qna.content }</td>
+   					<td>${qna.createDate }</td>
    				</tr>
    			</table>
    		</div>
    		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
    			<div class="tableDiv">
+   			<form action="/board/insertAnswer" method="post">
+   			<input type="hidden" value="${sessionScope.loginInfo.id }" name="writer">
+   			<input type="hidden" value="${nowDate }" name="createDate">
+   			<input type="hidden" value="${qna.qnaCode}" name="qnaCode">
    			<table class="table adminAnswerTable">
    				<tr>
    					<td>${sessionScope.loginInfo.id }</td>
-   					<td>답변 내용</td>
+   					<td>
+   						<div class="form-floating">
+						  <textarea class="form-control" id="floatingTextarea" name="content" style="height: 100px"></textarea>
+						  <label for="floatingTextarea">답변을 등록해주세요.</label>
+						</div>
+   					</td>
+   					<td><input class="btn btn-primary" type="submit" value="등록"></td>
    				</tr>
    			</table>
+   			</form>
    		</div>
    		</c:if>
 	</div>

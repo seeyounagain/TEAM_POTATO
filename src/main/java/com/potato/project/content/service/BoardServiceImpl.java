@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.potato.project.content.vo.NoticeVO;
+import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
 
 @Service("boardService")
@@ -28,26 +29,6 @@ public class BoardServiceImpl  implements BoardService{
 	public int insertNotice(NoticeVO noticeVO) {
 		
 		return sqlSession.insert("boardMapper.insertNotice", noticeVO);
-	}
-
-	//문의상담 목록 조회
-	 @Override
-	 public List<QnaVO> selectQnaList() {
-		
-		 return  sqlSession.selectList("boardMapper.selectQnaList");
-	}
-	
-	 //상담문의 입력
-	@Override
-	public void insertQna(QnaVO qnaVO) {
-		sqlSession.insert("boardMapper.insertQna", qnaVO);
-	}
-
-	//상담문의 상세보기
-	@Override
-	public QnaVO selectQna(QnaVO qnaVO) {
-		
-		return sqlSession.selectOne("boardMapper.selectQna", qnaVO);
 	}
 
 	//파일 첨부를 위한 공지사항 코드	
@@ -70,12 +51,33 @@ public class BoardServiceImpl  implements BoardService{
 
 		return sqlSession.insert("boardMapper.insertNoticeFile", noticeVO);
 	}
-
 	
-
-	 
-
+	//문의상담 목록 조회
+	 @Override
+	 public List<QnaVO> selectQnaList() {
+		
+		 return  sqlSession.selectList("boardMapper.selectQnaList");
+	}
 	
+	 //상담문의 입력
+	@Override
+	public void insertQna(QnaVO qnaVO) {
+		sqlSession.insert("boardMapper.insertQna", qnaVO);
+	}
 
+	//상담문의 상세보기
+	@Override
+	public QnaVO selectQna(QnaVO qnaVO) {
+		
+		return sqlSession.selectOne("boardMapper.selectQna", qnaVO);
+	}
+
+	//상담문의 답변 추가
+	@Override
+	public int insertAnswer(QnaAnswerVO qnaAnswerVO) {
+
+		return sqlSession.insert("boardMapper.insertAnswer", qnaAnswerVO);
+	}
+	
 	
 }
