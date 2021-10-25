@@ -46,6 +46,14 @@
 		<result column="LIMIT_DATE" 	property="limitDate"/>	
 	</resultMap>
 	
+	<resultMap type="com.potato.project.common.vo.ReserveVO" id="reserve">
+		<id column="RESERVE_CODE" 				property="reserveCode"/>
+		<result column="ID" 					property="id"/>
+		<result column="BOOK_CODE" 				property="bookCode"/>
+		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>	
+		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
+	</resultMap>
+	
 	<!-- 책 등록 -->
 	<insert id="insertBook">
 		INSERT INTO BOOK (
@@ -176,7 +184,7 @@
 		    , ID
 		    , BOOK_CODE
 		) VALUES (
-		    (SELECT 'RENTAL_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RENTAL_CODE,6,4))),0) + 1,4,0) FROM RENTAL)
+		    (SELECT 'RENTAL_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RENTAL_CODE,8,4))),0) + 1,4,0) FROM RENTAL)
 		    , #{id}
 		    , #{bookCode}
 		)

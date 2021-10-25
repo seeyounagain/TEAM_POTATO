@@ -129,11 +129,22 @@ public class AdminController {
 	
 	// 도서 대출
 	@GetMapping("/rentalBook")
-	public String rentalBook(RentalVO rentalVO) {
+	public String rentalBook(RentalVO rentalVO,MenuVO menuVO) {
 		
 		adminSerivce.insertRental(rentalVO);
 		
 		return "redirect:/libManage/bookManage";
+		
+	}
+	
+	// 대여&예약 횟수 조회 Ajax
+	@ResponseBody
+	@PostMapping("/selectUserBookCntAjax")
+	public int selectUserBookCntAjax() {
+	
+		
+		
+		return 1;
 		
 	}
 	
