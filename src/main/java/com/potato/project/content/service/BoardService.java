@@ -11,7 +11,10 @@ public interface BoardService {
 	List<NoticeVO> selectNoticeList();
 	
 	//공지사항 입력
-	void insertNotice(NoticeVO noticeVO);
+	int insertNotice(NoticeVO noticeVO);
+	
+	//공지사항 파일 첨부
+	int insertNoticeFile(NoticeVO noticeVO);
 	
 	//파일 첨부를 위한 공지사항 코드 생성
 	String selectNoticeCode();

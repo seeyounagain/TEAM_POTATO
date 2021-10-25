@@ -52,7 +52,7 @@
 						<tr>
 							<td>첨부파일</td>
 							<td> 
-								<input class="form-control" type="file" id="formFile" name="">
+								<input class="form-control" type="file" id="formFile" name="file">
   							</td>
 						</tr>
 					</table>

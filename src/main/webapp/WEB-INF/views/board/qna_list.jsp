@@ -39,8 +39,25 @@
 						<tbody>
 							<c:forEach items="${list }" var="info">
 							<tr>
+								<c:choose>
+									<c:when test=""></c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
 								<td>${info.qnaCode }</td>
-								<td><a data-bs-toggle="modal" href="#pwModal">${info.title }</a></td>
+								<td>
+								<!-- 관리자 로그인 상태로 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
+								<a 
+									<c:choose>
+										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
+											href="/board/qnaDetail?qnaCode=${info.qnaCode}"
+										</c:when>
+										<c:otherwise>
+											href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}"
+										</c:otherwise>
+									</c:choose>
+								>
+								${info.title }</a>	
+								</td>
 								<td>${info.writer }</td>
 								<td>${info.createDate }</td>
 							</tr>

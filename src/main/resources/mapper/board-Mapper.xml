@@ -13,6 +13,14 @@
 		<result column="READ_CNT"    property="readCnt"/>
 	</resultMap>
 
+	<!-- 공지사항 파일 첨부 -->
+	<resultMap type="com.potato.project.common.vo.AttachFileVO" id="noticeFile">
+		<id 	column="FILE_CODE" 			property="fileCode"/>
+		<result column="ORIGIN_FILE_NAME" 	property="originFileName"/>
+		<result column="ATTACHED_FILE_NAME" property="attachedFileName"/>
+		<result column="NOTICE_CODE" 		property="noticeCode"/>
+ 	</resultMap>
+ 	
 	<!-- 문의상담 -->
 	<resultMap type="com.potato.project.content.vo.QnaVO" id="qna">
 		<id column="QNA_CODE" 		 property="qnaCode"/>
@@ -42,34 +50,6 @@
 		FROM NOTICE
 	</select>
 	
-	<!-- 문의상담 리스트 조회 -->
-	<select id="selectQnaList" resultMap="qna">
-		SELECT QNA_CODE
-		     , TITLE
-		     , WRITER
-		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
-		FROM QNA
-	</select>
-	
-	<!-- 문의상담 INSERT -->
-	<insert id="insertQna">
-		INSERT INTO QNA(
-	            QNA_CODE
-	          , TITLE
-	          , WRITER
-	          , CONTENT
-	          , CREATE_DATE
-	          , QNA_PW
-		)VALUES(
-				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 5, 3))), 0) + 1, 3, '0') FROM QNA)
-				,#{title}
-				,#{writer}
-				,#{content}
-				,#{createDate}
-				,#{qnaPw}
-	)
-	</insert>
-	
 	<!-- 공지사항 INSERT -->
 	<insert id="insertNotice">
 		INSERT INTO NOTICE(
@@ -96,8 +76,54 @@
 	<!-- 공지사항 파일 첨부를 위한 파일 코드 넘버 조회 -->
 	<select id="nextFileCodeNum" resultType="int">
 		SELECT NVL(MAX(TO_NUMBER(SUBSTR(FILE_CODE, 6, 3))) + 1, 1) 
-		FROM BOOK_IMG
+		FROM ATTACH_FILE
 	</select>
+	
+	<!-- 공지사항 파일 첨부 insert -->
+	<insert id="insertNoticeFile">
+		INSERT INTO ATTACH_FILE(
+		    FILE_CODE
+		    ,ORIGIN_FILE_NAME
+		    ,ATTACHED_FILE_NAME
+		    ,NOTICE_CODE
+		) VALUES (
+		    #{attachFileVO.fileCode}
+		    ,#{attachFileVO.originFileName}
+		    ,#{attachFileVO.attachedFileName}
+		    ,#{attachFileVO.noticeCode}
+		)
+	</insert>
+	
+	<!--............................... 상담문의 부분 .....................................-->
+	
+	<!-- 문의상담 리스트 조회 -->
+	<select id="selectQnaList" resultMap="qna">
+		SELECT QNA_CODE
+		     , TITLE
+		     , WRITER
+		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		     , QNA_PW
+		FROM QNA
+	</select>
+	
+	<!-- 문의상담 INSERT -->
+	<insert id="insertQna">
+		INSERT INTO QNA(
+	            QNA_CODE
+	          , TITLE
+	          , WRITER
+	          , CONTENT
+	          , CREATE_DATE
+	          , QNA_PW
+		)VALUES(
+				(SELECT 'QNA_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(QNA_CODE, 5, 3))), 0) + 1, 3, '0') FROM QNA)
+				,#{title}
+				,#{writer}
+				,#{content}
+				,#{createDate}
+				,#{qnaPw}
+	)
+	</insert>
 	
 	<!-- 상담문의 상세보기 -->
 	<select id="selectQna" resultMap="qna">
@@ -105,10 +131,8 @@
 		     , TITLE
 		     , WRITER
 		     , CONTENT
-		     , CREATE_DATE
-		     , QNA_PW
+		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		FROM QNA
 		WHERE QNA_CODE = #{qnaCode}
-		AND QNA_PW = #{qnaPw}
 	</select>
 </mapper>

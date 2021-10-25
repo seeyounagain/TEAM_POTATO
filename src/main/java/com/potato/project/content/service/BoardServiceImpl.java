@@ -2,6 +2,8 @@ package com.potato.project.content.service;
 
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,9 @@ public class BoardServiceImpl  implements BoardService{
 	
 	//공지사항 등록
 	@Override
-	public void insertNotice(NoticeVO noticeVO) {
-		sqlSession.insert("boardMapper.insertNotice", noticeVO);
+	public int insertNotice(NoticeVO noticeVO) {
+		
+		return sqlSession.insert("boardMapper.insertNotice", noticeVO);
 	}
 
 	//문의상담 목록 조회
@@ -59,6 +62,13 @@ public class BoardServiceImpl  implements BoardService{
 	public int nextFileCodeNum() {
 		
 		return sqlSession.selectOne("boardMapper.nextFileCodeNum");
+	}
+	
+	//공지사항 파일 첨부
+	@Override
+	public int insertNoticeFile(NoticeVO noticeVO) {
+
+		return sqlSession.insert("boardMapper.insertNoticeFile", noticeVO);
 	}
 
 	

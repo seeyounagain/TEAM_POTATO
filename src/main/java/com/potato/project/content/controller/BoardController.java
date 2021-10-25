@@ -3,6 +3,9 @@ package com.potato.project.content.controller;
 
 
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.util.UploadUtil;
+import com.potato.project.common.vo.AttachFileVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
@@ -53,17 +60,42 @@ public class BoardController {
 	@PostMapping("/insertNotice")
 	public String insertNotice(NoticeVO noticeVO, MultipartHttpServletRequest multi) {
 		
-		//글 업로드
-		boardService.insertNotice(noticeVO);
+		//파일명 가져오기
+		MultipartFile inputName = multi.getFile("file");
 		
-		//파일이 첨부될 경로 : 민휘 학원컴
-		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeImgUpload\\";
+		//파일이 첨부될 경로
+		//학원
+		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//집
+		String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
 		//파일 첨부에 필요한 공지사항 코드 생성
 		String noticeCode = boardService.selectNoticeCode();
 		//파일 첨부에 필요한 파일 코드의 숫자를 조회
 		int nextFileCodeNum = boardService.nextFileCodeNum();
-	
+		System.out.println(nextFileCodeNum);
+		try {
+			//업로드될 파일명 설정
+			String uploadFileName = FileUploadUtil.getNowDateTime() + "_" + inputName.getOriginalFilename();
+			inputName.transferTo(new File(uploadPath + uploadFileName));
+			
+			String fileCode = "FILE_" + String.format("%03d", nextFileCodeNum++);
+			
+			noticeVO.setAttachFileVO(new AttachFileVO(fileCode, inputName.getOriginalFilename(), uploadFileName, noticeCode));
+			noticeVO.setNoticeCode(noticeCode);
+			
+		}catch(IllegalStateException e) {
+			//업로드 예외 발생 시
+			e.printStackTrace();
+		}catch(IOException e) {
+			//파일 입출력 예외 발생 시
+			e.printStackTrace();
+		}
+		
+		//공지사항 등록
+		boardService.insertNotice(noticeVO);
+		//첨부파일 등록
+		boardService.insertNoticeFile(noticeVO);
 		
 		
 		
@@ -101,21 +133,20 @@ public class BoardController {
 		return "redirect:/board/qna";
 	}
 	
-	//상담문의글 비밀번호 확인
-	@PostMapping("/checkQnaPw")
-	public String checkQnaPw() {
-		
-		
-		return "";
+	//상담문의 비밀번호 확인
+	@GetMapping("/qnaPassword")
+	public String qnaPassword(QnaVO qnaVO, MenuVO menuVO, HttpSession session) {
+
+		return "board/qna_password";
 	}
 	
-	//상담문의 글 보기
+	//상담문의 상세보기
 	@GetMapping("/qnaDetail")
-	public String goQnaDetail(QnaVO qnaVO) {
+	public String goQnaDetail(Model model, QnaVO qnaVO) {
+
+		model.addAttribute("qna",boardService.selectQna(qnaVO));
 		
-		boardService.selectQna(qnaVO);
-		
-		return "board/qna_password";
+		return "board/qna_detail";
 	}
 	
 	//시스템 날짜 구하는 메소드
