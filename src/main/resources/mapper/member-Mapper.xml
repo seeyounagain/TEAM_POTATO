@@ -3,7 +3,7 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="memberMapper">
 	
-	<!-- resultmap 작성 -->
+	<!-- resultmap 작성 카운트용 추가 1025봉 -->
 	<resultMap type="com.potato.project.member.vo.MemberVO" id="member">
 		<id column="ID" 				property="id"/>
 		<result column="PW" 			property="pw"/>
@@ -14,6 +14,28 @@
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
 		<result column="FAVORITE" 		property="favorite"/>
+		<result column="RENTAL_CNT" 		property="rentalCnt"/>
+		<result column="RESERVE_CNT" 		property="reserveCnt"/>
+		<result column="RETURN_CNT" 		property="returnCnt"/>
+	</resultMap>
+	
+	<!-- 대출resultmap 추가 2025-봉 -->
+	<resultMap type="com.potato.project.common.vo.RentalVO" id="rental">
+		<id column="RENTAL_CODE" 		property="rentalCode"/>
+		<result column="ID" 			property="id"/>
+		<result column="BOOK_CODE" 		property="bookCode"/>
+		<result column="RENTAL_DATE" 	property="rentalDate"/>
+		<result column="LIMIT_DATE" 	property="returnDate"/>	
+		<result column="RETURN_DATE" 	property="limitDate"/>	
+	</resultMap>
+	
+	<!-- 예약resultmap 추가 2025-봉 -->
+	<resultMap type="com.potato.project.common.vo.ReserveVO" id="reserve">
+		<id column="RESERVE_CODE" 				property="reserveCode"/>
+		<result column="ID" 					property="id"/>
+		<result column="BOOK_CODE" 				property="bookCode"/>
+		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>
+		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
 	</resultMap>
 	
 	<!-- 회원등록 -->
@@ -61,6 +83,14 @@
 		SELECT ID
 		FROM MEMBER
 		WHERE ID = #{id}
+	</select>
+	
+	<select id="memberBookSituation" resultMap="member">
+		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
+    		, COUNT(RESERVE_CODE) AS RESERVE_CNT
+    		, COUNT(RETURN_DATE) AS RETURN_CNT
+		FROM RENTAL A, RESERVE B, MEMBER C
+		WHERE C.ID = #{id}
 	</select>
 	
 </mapper>

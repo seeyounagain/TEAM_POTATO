@@ -98,8 +98,8 @@ public class MemberController {
 	//나의 도서관 클릭시 오는 페이지--추가--봉
 	@GetMapping("/myPage")
 	public String myLib(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
-		
+		//로그인정보 MemberVO에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
+		model.addAttribute("memberBookSituationCnt", memberSerivce.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
 		
 		return "member/my_page";
 		

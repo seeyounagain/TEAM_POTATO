@@ -37,5 +37,11 @@ public class MemberServiceImpl implements MemberService{
 		return sqlSession.selectOne("memberMapper.selectMember",memberVO);
 		
 	}
+	//나의 도서관 대출 예약 반납 카운트용 추가 --1025 봉
+	@Override
+	public MemberVO memberBookSituation(MemberVO memberVO) {
+		
+		return sqlSession.selectOne("memberMapper.memberBookSituation",memberVO);
+	}
 	
 }

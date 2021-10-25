@@ -46,8 +46,13 @@
 		<!-- 타이틀 끝 -->
 		
 		
+		<div class="row mb-2">
+			<div class="col-3" style="border-bottom: 1px solid  #e2e3e5;">
+				<h5>나의 도서관 현황</h5>
+			</div>
+		</div>
 		<!-- 대여현황 테이블 -->
-		<div class="row justify-content-center text-center">	
+		<div class="row justify-content-center text-center mb-4">	
 			<div class="col-8">
 				<table class="table">
 					<colgroup>
@@ -64,9 +69,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
+							<td>${memberBookSituationCnt.rentalCnt }</td>
+							<td>${memberBookSituationCnt.reserveCnt }</td>
+							<td>${memberBookSituationCnt.returnCnt }</td>
 						</tr>
 					</tbody>
 				</table>
