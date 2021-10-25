@@ -85,6 +85,7 @@
 		WHERE ID = #{id}
 	</select>
 	
+	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
 	<select id="memberBookSituation" resultMap="member">
 		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
     		, COUNT(RESERVE_CODE) AS RESERVE_CNT
@@ -93,6 +94,17 @@
 		WHERE C.ID = #{id}
 	</select>
 	
+	<!-- 회원 정보 조회//1025 봉 -->
+	<select id="selectMemberInfo" resultMap="member">
+		SELECT ID
+			, NAME
+			, ADDR
+			, TELL
+			, GENDER
+			, FAVORITE
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
 </mapper>
 
 

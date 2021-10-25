@@ -108,10 +108,18 @@ public class MemberController {
 	//나의 정보 클릭시 오는 페이지--추가--봉
 	@GetMapping("/myInfo")
 	public String myInfo(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
-		
+		//로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
+		model.addAttribute("memberInfo", memberSerivce.selectMemberInfo((MemberVO)session.getAttribute("loginInfo")));
 		return "member/my_info";
 		
 	}
+	//나의 정보 수정하기 ajax
+	@ResponseBody
+	@PostMapping("/myInfoAjax")
+	public MemberVO  myInfoAjax(MemberVO memberVO) {
+		return memberSerivce.selectMemberInfo(memberVO);
+	}
+	
 	
 	
 }
