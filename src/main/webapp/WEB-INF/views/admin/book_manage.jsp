@@ -29,7 +29,7 @@
 
 <h1 class="text-center">도서관리</h1>
 <hr>
-	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">신규도서등록</button>
+	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}'">신규도서등록</button>
 	<select name="status" class="form-select" id="statusSelect">
 		<option value="0">전체</option>
 		<option value="1">대출가능</option>
@@ -57,7 +57,7 @@
 	<c:forEach var="book" items="${bookList }" varStatus="status">
 		<tr>
 		<td><span>${status.count }.</span>
-			<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}&sideMenuCode=${menuVO.sideMenuList[0].sideMenuCode}">${book.title }</a></div>
+			<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}&sideMenuCode=SIDE_MENU_013">${book.title }</a></div>
 			<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
 			<div class="mt-2"><c:if test="${book.status eq 1 }">대출 가능</c:if><c:if test="${book.status eq 2 }">대출중</c:if><c:if test="${book.status eq 3 }">연체중</c:if>
 			<c:if test="${book.status eq 4 }">예약중</c:if>&nbsp;/&nbsp;${book.area }</div>

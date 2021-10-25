@@ -33,7 +33,7 @@ body {
 	font-size: 20px;
 }
 .content {
-	background-color: gray;
+	/* background-color: gray; */
 }
 a , .nav-link {
 	text-decoration: none;

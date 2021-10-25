@@ -29,7 +29,20 @@
 
 <div class="row justify-content-center">
 	<div class="col-8">
-
+	<img src="/resources/bookImgUpload/${bookVO.bookImgVO.attachedImgName }"><br>
+	${bookVO.bookCode }<br>
+	${bookVO.title }<br>
+	${bookVO.writer }<br>
+	${bookVO.kdc }<br>
+	${bookVO.page }<br>
+	${bookVO.bookSize }<br>
+	${bookVO.keyword }<br>
+	${bookVO.publisher }<br>
+	${bookVO.pubDate }<br>
+	${bookVO.summary }<br>
+	${bookVO.intro }<br>
+	${bookVO.area }<br>
+	${bookVO.status }<br>
 	</div>
 </div>
 </body>

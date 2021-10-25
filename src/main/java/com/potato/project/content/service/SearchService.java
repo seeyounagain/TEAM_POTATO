@@ -13,6 +13,9 @@ public interface SearchService {
 	// 모든 도서(+ 이미지) 조회
 	List<BookVO> selectBookList();
 	
+	// 도서 상세정보 (+ 이미지) 조회
+	BookVO selectBookDetail(BookVO bookVO);
+	
 	// 책 카테고리 조회
 	List<BookCateVO> selectCateList();
 	

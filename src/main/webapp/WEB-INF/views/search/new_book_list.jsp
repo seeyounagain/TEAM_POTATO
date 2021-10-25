@@ -38,7 +38,7 @@
 					<c:forEach var="book" items="${bookList }" varStatus="status">
 					<tr>
 						<td><span>${status.count }.</span>
-							<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}">${book.title }</a></div>
+							<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}">${book.title }</a></div>
 							<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
 							<div class="mt-2"><c:if test="${book.status eq 0 }">대출 가능</c:if><c:if test="${book.status eq 1 }">대출중</c:if><c:if test="${book.status eq 2 }">예약중</c:if>
 							&nbsp;/&nbsp;${book.area }</div>

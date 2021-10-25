@@ -204,6 +204,31 @@
 		FROM DUAL	
 	</select>
 	
+	<!-- 책 상세정보 조회 -->
+	<select id="selectBookDetail" resultMap="book">
+		SELECT
+		    ISBN
+		    , B.BOOK_CODE
+		    , KDC
+		    , B.KDC_NUM
+		    , WRITER
+		    , TITLE
+		    , PAGE
+		    , BOOK_SIZE
+		    , KEYWORD
+		    , PUBLISHER
+		    , PUB_DATE
+		    , SUMMARY
+		    , INTRO
+		    , INPUT_DATE
+		    , AREA
+		    , STATUS
+		    , ATTACHED_IMG_NAME
+		FROM BOOK B, BOOK_CATE C, BOOK_IMG I
+		WHERE B.KDC_NUM = C.KDC_NUM
+		AND B.BOOK_CODE = I.BOOK_CODE
+		AND B.BOOK_CODE = #{bookCode}
+	</select>
 	
 </mapper>
 

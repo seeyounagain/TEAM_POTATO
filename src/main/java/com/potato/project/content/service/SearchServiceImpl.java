@@ -63,4 +63,12 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
+	// 도서 상세정보 조회 (+ 이미지)
+	@Override
+	public BookVO selectBookDetail(BookVO bookVO) {
+
+		return sqlSession.selectOne("searchMapper.selectBookDetail",bookVO);
+		
+	}
+	
 }

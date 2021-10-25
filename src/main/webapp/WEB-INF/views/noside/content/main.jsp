@@ -9,15 +9,15 @@
 <style type="text/css">
 #col1 {
 	height: 15rem;
-	background-color: blue;
+	background-color: #0b70b9;
 }
 #col2 {
 	height: 23rem;
-	background-color: yellow;
+	background-color: #0b70b9;
 }
 #col3 {
 	height: 23rem;
-	background-color: green;
+	background-color: #0b70b9;
 }
 .carousel {
 	width: 590px;
@@ -28,6 +28,13 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+.titleA {
+	color: black;
+}
+.titleA:hover {
+	text-decoration: underline 1px black;
+	color: black;
 }
 </style>
 </head>
@@ -43,7 +50,7 @@
 				<c:forEach var="menu" items="${menuList }">
 					<c:forEach var="sideMenu" items="${menu.sideMenuList }">
 					<c:if test="${menu.menuName eq '자료찾기' and sideMenu.sideMenuName eq '도서검색' }">
-						<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary p-3" onclick="location.href='/search/bookSearch?menuCode=${menu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">
+						<input type="button" value="검색" id="goSearchBtn" class="btn btn-light p-3" onclick="location.href='/search/bookSearch?menuCode=${menu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">
 					</c:if>
 					</c:forEach>
 				</c:forEach>
@@ -53,20 +60,20 @@
     
     <!-- 신착도서 목록 테이블 -->
     <div class="col-5 g-5" id="col2">
-    <h1 class="display-6 text-first">신착도서</h1>
-    <div class="row">
+    <h1 class="display-6 text-first" style="color: white;">신착도서</h1>
+    <div class="row"  style="background-color: white;">
     	<div class="col-5">
     		<div class="row">
-    			<img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
-    			${bookList[0].title }<br>
-    			${bookList[0].writer }
+    			<a class="titleA" href="/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002"><img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
+    			<span>${bookList[0].title }</span><br>
+    			<span>${bookList[0].writer }</span></a>
     		</div>
     	</div>
     	<div class="col-7">
-	    	<div class="row mb-4 mt-4"><a>${bookList[1].title } / ${bookList[1].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a>${bookList[2].title } / ${bookList[2].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a>${bookList[3].title } / ${bookList[3].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a>${bookList[4].title } / ${bookList[4].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[1].bookCode }&menuCode=MENU_002">${bookList[1].title } / ${bookList[1].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[2].bookCode }&menuCode=MENU_002">${bookList[2].title } / ${bookList[2].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[3].bookCode }&menuCode=MENU_002">${bookList[3].title } / ${bookList[3].writer }</a></div>
+	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[4].bookCode }&menuCode=MENU_002">${bookList[4].title } / ${bookList[4].writer }</a></div>
     	</div>
     </div>
  </div>   

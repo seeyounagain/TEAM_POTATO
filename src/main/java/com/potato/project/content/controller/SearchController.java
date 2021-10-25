@@ -51,6 +51,8 @@ public class SearchController {
 	@GetMapping("/bookDetail")
 	public String bookDetail(Model model,MenuVO menuVO,HttpSession session,BookVO bookVO) {
 		
+		model.addAttribute("bookVO",searchService.selectBookDetail(bookVO));
+		
 		return "search/book_detail";
 		
 	}
