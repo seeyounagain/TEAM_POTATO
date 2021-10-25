@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.SideMenuVO;
 import com.potato.project.member.service.MemberService;
 import com.potato.project.member.vo.MemberVO;
 
@@ -92,5 +94,24 @@ public class MemberController {
 		return "redirect:/common/main";
 		
 	}
+	
+	//나의 도서관 클릭시 오는 페이지--추가--봉
+	@GetMapping("/myPage")
+	public String myLib(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		
+		
+		return "member/my_page";
+		
+		
+	}
+	//나의 정보 클릭시 오는 페이지--추가--봉
+	@GetMapping("/myInfo")
+	public String myInfo(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
+		
+		return "member/my_info";
+		
+	}
+	
 	
 }

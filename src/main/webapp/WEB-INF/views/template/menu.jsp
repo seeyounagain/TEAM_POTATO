@@ -87,7 +87,8 @@
 			</li>
 		<c:forEach var="menu" items="${menuList }">
 			<li class="nav-item">
-				<a class="dropdown-toggle title" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">${menu.menuName}</a>
+				<!-- 나만의 도서관 클릭시 바로 페이지 이동하게 수정 --봉  -->
+				<a class="dropdown-toggle title" <c:if test ="${menu.menuAuto eq '1'}">href="/member/${menu.menuUri }?menuCode=${menu.menuCode }"</c:if> <c:if test="${menu.menuAuto ne '1'}">id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"</c:if>>${menu.menuName}</a>
 				<ul class="dropdown-menu">
 				<c:forEach var="sideMenu" items="${menu.sideMenuList }">
 					<li><a class="dropdown-item" href="/${menu.menuUri}/${sideMenu.sideMenuUri }?menuCode=${sideMenu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}">${sideMenu.sideMenuName }</a></li>
