@@ -19,15 +19,16 @@
 	height: 23rem;
 	background-color: #0b70b9;
 }
-.carousel {
+.carousel , .carousel-inner {
 	width: 590px;
-	height: 380px;
+	height: 350px;
 }
+
 .carousel-item > img {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	height: 80%;
 }
 .titleA {
 	color: black;
@@ -42,7 +43,10 @@
 <div class="row justify-content-center">
 	<!-- 검색 -->
     <div class="col-10 g-5" id="col1">
-	    <div class="row justify-content-center pt-5 mt-5">
+	    <div class="row justify-content-center pt-5 mt-2">
+    		<div class="col-8 text-center fs-1 mb-3">
+    			<div style="color: white;"> 울산 도서관에 오신 것을 환영합니다.</div>
+    		</div>
 		    <div class="col-6 align-self-center">
 				<input type="text" class="form-control p-3" id="id" name="id" placeholder="검색어를 입력해주세요.">
 			</div>
