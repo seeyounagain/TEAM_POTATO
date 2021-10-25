@@ -140,11 +140,9 @@ public class AdminController {
 	// 대여&예약 횟수 조회 Ajax
 	@ResponseBody
 	@PostMapping("/selectUserBookCntAjax")
-	public int selectUserBookCntAjax() {
-	
+	public int selectUserBookCntAjax(String id) {
 		
-		
-		return 1;
+		return adminSerivce.selectIdAllCount(id);
 		
 	}
 	

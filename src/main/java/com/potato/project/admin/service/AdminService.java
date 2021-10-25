@@ -13,6 +13,8 @@ public interface AdminService {
 	
 	// 도서 대여 정보 등록 + 도서 상태 변경
 	int insertRental(RentalVO rentalVO);
-
+	
+	// ID로 대여&예약 도서 객수 조회
+	int selectIdAllCount(String id);
 	
 }

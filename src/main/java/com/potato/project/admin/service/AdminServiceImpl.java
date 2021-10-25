@@ -41,4 +41,12 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
+	// ID로 대여&예약 도서 객수 조회
+	@Override
+	public int selectIdAllCount(String id) {
+		
+		return sqlSession.selectOne("searchMapper.selectIdAllCount",id);
+		
+	}
+	
 }

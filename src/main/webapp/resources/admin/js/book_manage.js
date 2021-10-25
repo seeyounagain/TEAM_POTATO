@@ -159,16 +159,16 @@
 		         		str += '<td class="text-center">';
 		         		
 		         		if (element.status == 1 || element.status == 4) {
-							str += '<button type="button" class="btn btn-primary">대출</button>';
+							str += '<button type="button" class="btn btn-primary px-5">대출</button>';
 						}
 						else {
-							str += '<button type="button" class="btn btn-warning">반납</button>';
+							str += '<button type="button" class="btn btn-warning px-5">반납</button>';
 						}
 
 		         		str += '</td>';
 		         		
 		         		str += '<td class="text-center">';
-		         		str += '<button type="button" class="btn btn-danger">도서정보수정</button>';
+		         		str += '<button type="button" class="btn btn-danger px-5">도서정보수정</button>';
 						str += '</td>';
 						
 		         		str += '</tr>';

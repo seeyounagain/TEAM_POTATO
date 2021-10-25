@@ -197,6 +197,14 @@
 		WHERE BOOK_CODE = #{bookCode}
 	</update>
 	
+	<!-- ID로 대여&예약 도서 객수 조회 -->
+	<select id="selectIdAllCount" resultType="int">
+		SELECT (SELECT COUNT(ID) FROM RENTAL WHERE ID = #{id})
+		+ (SELECT COUNT(ID) FROM RESERVE WHERE ID = #{id}) AS COUNT_ID
+		FROM DUAL	
+	</select>
+	
+	
 </mapper>
 
 

@@ -48,8 +48,9 @@
 			<exclude-mapping path="/member/login"/>
 			<exclude-mapping path="/member/checkId"/>
 			<exclude-mapping path="/libManage/selectStatusBookListAjax"/>
-			<exclude-mapping path="/service/chooseSeat"/>
+			<exclude-mapping path="/libManage/selectUserBookCntAjax"/>
 			<exclude-mapping path="/libManage/regItem"/>
+			<exclude-mapping path="/service/chooseSeat"/>
 			<exclude-mapping path="/service/seatIdCheck"/>
 			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
