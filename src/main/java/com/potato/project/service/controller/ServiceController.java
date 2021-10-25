@@ -66,6 +66,12 @@ public class ServiceController {
 	
 	}
 	
+	@ResponseBody
+	@PostMapping("/seatMemberIdCheck")
+	public String seatMemberIdCheck(Model model, String id) {
+	return serviceService.seatMemberIdCheck(id);
+	
+	}
 	
 	
 	

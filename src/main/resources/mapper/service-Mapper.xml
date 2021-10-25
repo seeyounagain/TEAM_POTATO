@@ -39,7 +39,11 @@
 				FROM READING_SEAT
 				WHERE ID = #{id }			
 			</select>
-			
+			<select id="seatMemberIdCheck" resultType="String">
+			SELECT ID
+				FROM MEMBER
+				WHERE ID = #{id }
+			</select> 
 			
 			
 			

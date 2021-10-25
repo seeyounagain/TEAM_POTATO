@@ -16,4 +16,9 @@ public interface ServiceService {
 	void seatUpdate(ReadingSeatVO seatVO);
 	
 	String seatIdCheck(String id);
+
+	String seatMemberIdCheck(String id);
+	
+	
+	
 }

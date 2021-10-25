@@ -35,6 +35,11 @@ public class ServiceServiceImpl implements ServiceService {
 	public String seatIdCheck(String id) {
 		return sqlSession.selectOne("serviceMapper.seatIdCheck", id);
 	}
+
+	@Override
+	public String seatMemberIdCheck(String id) {
+		return sqlSession.selectOne("serviceMapper.seatMemberIdCheck", id);
+	}
 	
 	
 	
