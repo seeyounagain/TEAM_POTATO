@@ -56,4 +56,12 @@ public class AdminServiceImpl implements AdminService{
 		return sqlSession.selectOne("searchMapper.selectIsMember",id);
 	}
 	
+	// 기간에 따른 신착도서 갯수 조회()
+	@Override
+	public int countBookInputDate(BookVO bookVO) {
+		
+		return sqlSession.selectOne("searchMapper.countBook",bookVO);
+		
+	}
+	
 }

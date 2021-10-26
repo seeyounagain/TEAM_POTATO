@@ -20,4 +20,7 @@ public interface AdminService {
 	// ID로 회원여부 조회
 	int selectIsMember(String id);
 	
+	// 기간에 따른 신착도서 갯수 조회
+	int countBookInputDate(BookVO bookVO);
+	
 }

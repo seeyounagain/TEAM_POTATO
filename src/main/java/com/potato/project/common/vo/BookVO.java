@@ -1,6 +1,6 @@
 package com.potato.project.common.vo;
 
-public class BookVO {
+public class BookVO extends PageVO{
 	
 	// 책 정보 테이블 BOOK
 	

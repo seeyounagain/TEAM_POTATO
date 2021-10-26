@@ -246,6 +246,16 @@
 		AND B.BOOK_CODE = #{bookCode}
 	</select>
 	
+	<!-- 페이지 처리를 위한 총 게시글 수 조회 -->
+	<select id="countBook" resultType="int">
+		SELECT COUNT(BOOK_CODE)
+		FROM BOOK
+		<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
+		WHERE INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYYMMDD')
+		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYYMMDD')
+		</if>
+	</select>
+	
 </mapper>
 
 
