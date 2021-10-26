@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=11"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=14"></script>
 </head>
 <body>
 <div class="row justify-content-center">

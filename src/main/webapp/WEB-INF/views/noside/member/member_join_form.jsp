@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=18" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=21" ></script>
 </head>
 <body>
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
