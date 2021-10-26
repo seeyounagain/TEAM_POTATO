@@ -87,17 +87,14 @@ public class ServiceController {
 		if (loginInfo == null) {		
 			loginInfo = new MemberVO();		
 		}
-		//시트정보 변경
 		
+		//시트정보 변경
+		serviceService.seatUpdate(seatVO);
+		//시트 배정(IN),퇴실(OUT) 기록
 		if(seatVO.getSeatStatus() == 1) {
-			//시트 배정 기록
-			serviceService.seatUpdate(seatVO);
 			serviceService.seatInRecord(seatVO);			
-		}
-		else{
-			//시트 퇴실 기록
+		}else{
 			serviceService.seatOutRecord(seatVO);			
-			serviceService.seatUpdate(seatVO);
 		}
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));

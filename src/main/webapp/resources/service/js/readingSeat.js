@@ -170,7 +170,7 @@ $(document).ready(function(){
 	
 	//퇴실하는 에이잭스
 	}else{
-	inputOrSpan = result.id + '<input type="hidden" name="id" value="'+result.id+'">';													
+	inputOrSpan = '<input type="text" name="id" value="'+result.id+'" readOnly>';													
 	statusReadOr+='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
 	checkSubmit+='<input type="submit" value="확인">																			';
 	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  					';

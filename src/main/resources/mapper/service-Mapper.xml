@@ -16,6 +16,23 @@
 			<result column="SEAT_STATUS" 		property="seatStatus" 	/>
 			<result column="ID" 				property="id" 			/>
 			</resultMap>
+			
+			<resultMap type="com.potato.project.member.vo.MemberVO" id="member">
+			<id column="ID" 				property="id"/>
+			<result column="PW" 			property="pw"/>
+			<result column="NAME" 			property="name"/>
+			<result column="ADDR" 			property="addr"/>
+			<result column="TELL" 			property="tell"/>
+			<result column="IS_ADMIN" 		property="isAdmin"/>
+			<result column="IS_DELETE" 		property="isDelete"/>
+			<result column="GENDER" 		property="gender"/>
+			<result column="FAVORITE" 		property="favorite"/>
+			</resultMap>
+			
+			
+			
+			
+			
 			<select id="selectReadingSeat" resultMap="seat">
 			SELECT SEAT_CODE
 					,SEAT_STATUS
@@ -31,8 +48,15 @@
 			</select>
 			<update id="seatUpdate">
 			UPDATE READING_SEAT
-			SET ID = #{id} , SEAT_STATUS = #{seatStatus}
-			WHERE SEAT_CODE = #{seatCode}
+			SET 
+			<if test="seatStatus != 0">
+			ID = #{id},
+			</if>
+			<if test="seatStatus == 0">
+			ID = null,
+			</if>
+			SEAT_STATUS = #{seatStatus }
+			WHERE SEAT_CODE = #{seatCode }
 			</update>
 			<select id="seatIdCheck" resultType="String">
 			SELECT ID
@@ -70,6 +94,8 @@
 			, SEAT_IN_DATE
 			, SEAT_OUT_DATE 
 			FROM READING_RECORD
+			ORDER BY SEAT_OUT_DATE DESC
+            ,SEAT_IN_DATE DESC
 			</select>
 </mapper>
 
