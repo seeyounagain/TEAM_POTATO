@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title"/></title>
 <!-- 태그 초기화 작업 -->
-<link rel="stylesheet" href="/resources/common/reset.css?ver=7">
+<link rel="stylesheet" href="/resources/common/reset.css?ver=8">
 
 <!-- 제이쿼리 문법을 로딩 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>

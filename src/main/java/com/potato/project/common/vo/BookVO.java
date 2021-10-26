@@ -9,6 +9,7 @@ public class BookVO {
 	private String 	kdc			  ; // KDC	  		    -- 청구기호
 	// 000 총류 100 철학 200 종교 300 사회과학 400 자연과학 500 기술과학 600 예술 700 언어 800 문학 900 역사
 	private int		kdcNum		  ; // KDC_NUM 			-- 분류코드  0 1 2 3 4 5 6 7 8 9
+	private String	kdcName		  ; // KDC_NAME 		-- 분류명
 	private String 	writer		  ; // WRITER 		    -- 저자
 	private String 	translator	  ; // TRANSLATOR 		-- 역자
 	private String 	title		  ; // TITLE 		    -- 표제
@@ -48,6 +49,12 @@ public class BookVO {
 	}
 	public void setKdcNum(int kdcNum) {
 		this.kdcNum = kdcNum;
+	}
+	public String getKdcName() {
+		return kdcName;
+	}
+	public void setKdcName(String kdcName) {
+		this.kdcName = kdcName;
 	}
 	public String getWriter() {
 		return writer;

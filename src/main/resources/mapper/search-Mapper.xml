@@ -15,6 +15,7 @@
 		<result column="ISBN" 			property="isbn"/>
 		<result column="KDC" 			property="kdc"/>
 		<result column="KDC_NUM" 		property="kdcNum"/>
+		<result column="KDC_NAME" 		property="kdcName"/>
 		<result column="WRITER" 		property="writer"/>
 		<result column="TRANSLATOR" 	property="translator"/>
 		<result column="TITLE" 			property="title"/>
@@ -98,7 +99,7 @@
 		    ISBN
 		    , B.BOOK_CODE
 		    , KDC
-		    , B.KDC_NUM
+		    , C.KDC_NAME
 		    , WRITER
 		    , TRANSLATOR
 		    , TITLE
@@ -133,7 +134,7 @@
 		    ISBN
 		    , B.BOOK_CODE
 		    , KDC
-		    , B.KDC_NUM
+		    , C.KDC_NAME
 		    , WRITER
 		    , TRANSLATOR
 		    , TITLE
@@ -224,7 +225,7 @@
 		    ISBN
 		    , B.BOOK_CODE
 		    , KDC
-		    , B.KDC_NUM
+		    , C.KDC_NAME
 		    , WRITER
 		    , TRANSLATOR
 		    , TITLE

@@ -23,65 +23,64 @@
 .titleA:hover {
 	color: black;
 }
+#mainImg {
+	width: 460px;
+}
 </style>
 </head>
 <body>
 
 <div class="row justify-content-center">
-	<div class="col-8">
-		<table>
-			<tr>
-				<td colspan="2">
-					${bookVO.title }
-				</td>
-			</tr>
-			<tr>
-				<td>
-					지은이 / 옮긴이
-				</td>
-				<td>
-					${bookVO.writer }
-				</td>
-			</tr>
-			<tr>
-				<td>
-					출판사
-				</td>
-				<td>
-					${bookVO.publisher }
-				</td>
-			</tr>
-			<tr>
-				<td>
-					발행년
-				</td>
-				<td>
-					${bookVO.pubDate }
-				</td>
-			</tr>
-			<tr>
-				<td>
-					청구기호
-				</td>
-				<td>
-					${bookVO.kdc }
-				</td>
-			</tr>
-		</table>
-	<img src="/resources/bookImgUpload/${bookVO.bookImgVO.attachedImgName }"><br>
-	${bookVO.bookCode }<br>
-	<br>
-	<br>
-	${bookVO.page }<br>
-	${bookVO.bookSize }<br>
-	${bookVO.keyword }<br>
-	<br>
-	<br>
-	${bookVO.summary }<br>
-	${bookVO.intro }<br>
-	${bookVO.area }<br>
-	${bookVO.status }<br>
-	</div>
+	<div class="col-8 mt-3">
+		<div class="row">
+			<div class="col-12 fs-5 mb-3 fst-italic">
+				${bookVO.summary }
+			</div>
+			<hr>
+	    	<div class="col-5">
+	    		<div class="row justify-content-center">
+	    			<img id="mainImg" src="/resources/bookImgUpload/${bookVO.bookImgVO.attachedImgName }">
+	    		</div>
+	    	</div>
+	    	<div class="col-7">
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		표제사항 : ${bookVO.title }
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		저자사항 : ${bookVO.writer }&nbsp;지음<c:if test="${not empty bookVO.translator }">&nbsp;/&nbsp;${bookVO.translator }&nbsp;옮김</c:if>
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		발행사항 : ${bookVO.publisher },&nbsp;${bookVO.pubDate }
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		형태사항 : 	${bookVO.page }&nbsp;p&nbsp;,&nbsp;${bookVO.bookSize }&nbsp;cm
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		청구기호 : ${bookVO.kdc } / ${bookVO.kdcName }
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		표준번호(ISBN) : ${bookVO.isbn }
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		주제 : #${bookVO.keyword }
+		    	</div>
+		    	<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		자료이용장소 : ${bookVO.area }
+		    	</div>
+	    		<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		자료상태 : <c:if test="${bookVO.status eq 1 }">대출가능</c:if>
+		   		<c:if test="${bookVO.status eq 2 }">대출중</c:if>
+		   		<c:if test="${bookVO.status eq 3 }">연체중</c:if>
+		   		<c:if test="${bookVO.status eq 4 }">예약중</c:if>
+		    	</div>
+	    	</div>
+	    	<div class="col-12">
+	    		<div class="row mb-4 mt-4 lh-base">
+		   		${bookVO.intro }
+		    	</div>
+	    	</div>
+	    </div>
+    </div>
 </div>
 </body>
 </html>

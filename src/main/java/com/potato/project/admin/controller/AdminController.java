@@ -87,8 +87,8 @@ public class AdminController {
 		MultipartFile file = multi.getFile("file"); 
 				
 		// 파일이 첨부될 경로 (끝에 \\ 있는지 체크!)
-		String uploadPath = "C:\\Users\\siyoon\\git\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
-		//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
+		//String uploadPath = "C:\\Users\\siyoon\\git\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
+		String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\bookImgUpload\\";
 		
 		// 상품 코드 생성
 		String bookCode = searchService.selectBookCode();
