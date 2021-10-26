@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 //천화 
 @Service("serviceService")
@@ -39,6 +40,23 @@ public class ServiceServiceImpl implements ServiceService {
 	@Override
 	public String seatMemberIdCheck(String id) {
 		return sqlSession.selectOne("serviceMapper.seatMemberIdCheck", id);
+	}
+
+	@Override
+	public void seatInRecord(ReadingSeatVO seatVO) {
+		sqlSession.insert("serviceMapper.seatInRecord", seatVO);
+		
+	}
+
+	@Override
+	public void seatOutRecord(ReadingSeatVO seatVO) {
+		sqlSession.update("serviceMapper.seatOutRecord", seatVO);
+	}
+
+	@Override
+	public List<ReadingRecordVO> seatRecordList() {
+		return sqlSession.selectList("serviceMapper.seatRecordList");
+		
 	}
 	
 	

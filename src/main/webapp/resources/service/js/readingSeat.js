@@ -69,11 +69,11 @@ $(document).ready(function(){
 			      	$('#minimin').empty();
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
-   str+='	<div class="col-6 text-center mt-5 mb-5">                                                            			';
+   str+='	<div class="col-6 text-center mb-5">                             		                               			';
    str+='	좌석상태변경 mini                                                                                    				';
    str+='<table class="table">                                                                                   			';
    str+='	<thead>                                                                                              			';
-   str+='		<tr class="text-center mt-5">                                                                    			';
+   str+='		<tr class="text-center">                                                                    				';
    str+='  			<th scope="col">좌석번호</th>                                                                				';
    str+=' 			<th scope="col">이용자</th>                                                                  				';
    str+='  			<th scope="col">상태</th>                                                                    				';
@@ -140,7 +140,7 @@ $(document).ready(function(){
 			      	var closeMinimin = '';
 		
 			      	
-			      	//리절트 아이디가 널이면
+	//리절트 아이디가 널이면
 	if(result.id == null || result.id == ''){
 	inputOrSpan ='<input type="text" name="id" class="seatUpdateId" style="width:100px"><input type="button" value="체크" class="mx-1 seatIdCheck">';
    	checkSubmit+='<span class="checkSubmit1" style="display: none"><input type="submit" value="확인"></span>   				';
@@ -150,22 +150,23 @@ $(document).ready(function(){
 	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';  
 	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기">                                              ';
 	
+	//퇴실하는 에이잭스
 	}else{
-	inputOrSpan = result.id;
+	inputOrSpan = '<input type="text" name="id" value="'+result.id+'">														';
+	statusReadOr+='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
 	checkSubmit+='<input type="submit" value="확인">																			';
 	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  					';
-	statusReadOr+='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
 	closeMinimin+='<input type="button" onclick="closeMinimin();" value="취소">                                              ';
-	
 	}
+	
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
-   str+='	<div class="col-6 text-center mt-5 mb-5">                                                            			';
+   str+='	<div class="col-6 text-center mb-5">                             		                               			';
    str+='<form action="/service/seatUpdate" method="post"> 				                                            		';
    str+='	좌석상태변경 mini                                                                                    				';
    str+='<table class="table">                                                                                   			';
    str+='	<thead>                                                                                              			';
-   str+='		<tr class="text-center mt-5">                                                                    			';
+   str+='		<tr class="text-center">                                                                    				';
    str+='  			<th scope="col">좌석번호</th>                                                                				';
    str+=' 			<th scope="col">이용자</th>                                                                  				';
    str+='  			<th scope="col">상태</th>                                                                    				';

@@ -2,6 +2,7 @@ package com.potato.project.service.service;
 
 import java.util.List;
 
+import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 
  
@@ -18,6 +19,12 @@ public interface ServiceService {
 	String seatIdCheck(String id);
 
 	String seatMemberIdCheck(String id);
+	
+	void seatInRecord(ReadingSeatVO seatVO); 
+	
+	void seatOutRecord(ReadingSeatVO seatVO);
+	
+	List<ReadingRecordVO> seatRecordList();
 	
 	
 	

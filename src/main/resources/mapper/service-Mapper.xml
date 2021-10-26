@@ -44,9 +44,33 @@
 				FROM MEMBER
 				WHERE ID = #{id }
 			</select> 
-			
-			
-			
+			<insert id="seatInRecord">                                             
+			INSERT INTO READING_RECORD(
+			RECORD_CODE     
+ 			, SEAT_CODE        
+ 			, ID                  	                                                        
+			)VALUES(                                                
+			(SELECT 'RECORD_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RECORD_CODE,8,3))),0)+1,3,'0')AS RECORD_CODE FROM READING_RECORD)
+			, #{seatCode }                                                        
+			, #{id }
+			)			                                            
+			</insert>                                                              
+			<update id="seatOutRecord">
+			UPDATE READING_RECORD
+			SET SEAT_OUT_DATE = SYSDATE
+			WHERE RECORD_CODE = 
+			(SELECT 'RECORD_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RECORD_CODE,8,3))),0),3,'0') AS RECORD_CODE 
+			FROM READING_RECORD WHERE ID = #{id })
+			</update>
+			<select id="seatRecordList" resultMap="record">
+			SELECT 
+			RECORD_CODE
+			, SEAT_CODE
+			, ID
+			, SEAT_IN_DATE
+			, SEAT_OUT_DATE 
+			FROM READING_RECORD
+			</select>
 </mapper>
 
 

@@ -1,5 +1,7 @@
 package com.potato.project.service.controller;
 
+
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.service.ServiceService;
+import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 
 // 천화 
@@ -44,6 +47,7 @@ public class ServiceController {
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("seatRecordList",serviceService.seatRecordList());
 		
 		//Ajax
 		model.addAttribute("menuCode", menuVO.getMenuCode());
@@ -75,23 +79,31 @@ public class ServiceController {
 	
 	
 	
+	
+	
 	@PostMapping("/seatUpdate")
 	public String seatUpdate(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
-		serviceService.seatUpdate(seatVO);
-		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-
-		if (loginInfo == null) {
-			
-			loginInfo = new MemberVO();
-			
+		if (loginInfo == null) {		
+			loginInfo = new MemberVO();		
+		}
+		//시트정보 변경
+		
+		if(seatVO.getSeatStatus() == 1) {
+			//시트 배정 기록
+			serviceService.seatUpdate(seatVO);
+			serviceService.seatInRecord(seatVO);			
+		}else{
+			//시트 퇴실 기록
+			serviceService.seatUpdate(seatVO);
+			serviceService.seatOutRecord(seatVO);			
 		}
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
-		
+		model.addAttribute("seatRecordList",serviceService.seatRecordList());
 		
 		
 		return  "service/readingSeat";
