@@ -16,6 +16,7 @@ public class MemberVO {
 	
 	private String[] tells;
 	private String[] addrs;
+	
 	//나의도서관 대출 예약 반납 카운트용 추가
 	private String rentalCnt;  //대출 카운트
 	private String reserveCnt; //예약 카운트
@@ -90,7 +91,6 @@ public class MemberVO {
 		String addr = addrs[0] + " " + addrs[1] + " " + addrs[2];
 		setAddr(addr);
 	}
-	// 나의도서관 대출 예약 반납용 카운트 추가 --1025--봉
 	public String getRentalCnt() {
 		return rentalCnt;
 	}
@@ -109,7 +109,6 @@ public class MemberVO {
 	public void setReturnCnt(String returnCnt) {
 		this.returnCnt = returnCnt;
 	}
-	//여기까지
 	
 	
 }

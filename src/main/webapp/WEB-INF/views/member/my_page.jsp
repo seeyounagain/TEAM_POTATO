@@ -102,7 +102,7 @@
 				<h3>회원관련</h3>
 			</div>
 			<div class="col-12 mb-2">
-				<a href="/member/${sideMenuList[0].sideMenuUri }?menuCode=${menuVO.menuCode }">내정보</a>
+				<a href="/myPage/${sideMenuList[0].sideMenuUri }?menuCode=${menuVO.menuCode }">내정보</a>
 			</div>
 			<div class="col-12">
 				<a>문의내역</a>
@@ -111,6 +111,5 @@
 		<!-- 회원관련끝 -->
 	</div>		
 </div>
-<div>${menuVO.menuCode }</div>
 </body>
 </html>

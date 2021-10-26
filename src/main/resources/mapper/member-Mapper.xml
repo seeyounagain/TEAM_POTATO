@@ -14,28 +14,6 @@
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
 		<result column="FAVORITE" 		property="favorite"/>
-		<result column="RENTAL_CNT" 		property="rentalCnt"/>
-		<result column="RESERVE_CNT" 		property="reserveCnt"/>
-		<result column="RETURN_CNT" 		property="returnCnt"/>
-	</resultMap>
-	
-	<!-- 대출resultmap 추가 2025-봉 -->
-	<resultMap type="com.potato.project.common.vo.RentalVO" id="rental">
-		<id column="RENTAL_CODE" 		property="rentalCode"/>
-		<result column="ID" 			property="id"/>
-		<result column="BOOK_CODE" 		property="bookCode"/>
-		<result column="RENTAL_DATE" 	property="rentalDate"/>
-		<result column="LIMIT_DATE" 	property="returnDate"/>	
-		<result column="RETURN_DATE" 	property="limitDate"/>	
-	</resultMap>
-	
-	<!-- 예약resultmap 추가 2025-봉 -->
-	<resultMap type="com.potato.project.common.vo.ReserveVO" id="reserve">
-		<id column="RESERVE_CODE" 				property="reserveCode"/>
-		<result column="ID" 					property="id"/>
-		<result column="BOOK_CODE" 				property="bookCode"/>
-		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>
-		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
 	</resultMap>
 	
 	<!-- 회원등록 -->
@@ -81,27 +59,6 @@
 	<!-- 아이디 중복체크 -->
 	<select id="selectMemberId" resultType="String">
 		SELECT ID
-		FROM MEMBER
-		WHERE ID = #{id}
-	</select>
-	
-	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
-	<select id="memberBookSituation" resultMap="member">
-		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
-    		, COUNT(RESERVE_CODE) AS RESERVE_CNT
-    		, COUNT(RETURN_DATE) AS RETURN_CNT
-		FROM RENTAL A, RESERVE B, MEMBER C
-		WHERE C.ID = #{id}
-	</select>
-	
-	<!-- 회원 정보 조회//1025 봉 -->
-	<select id="selectMemberInfo" resultMap="member">
-		SELECT ID
-			, NAME
-			, ADDR
-			, TELL
-			, GENDER
-			, FAVORITE
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
