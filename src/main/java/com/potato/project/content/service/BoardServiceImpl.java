@@ -86,5 +86,12 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.selectList("boardMapper.selectAnsewerList", qnaAnswerVO);
 	}
 	
+	//공지사항 상세보기
+	@Override
+	public NoticeVO selectNotice(NoticeVO noticeVO) {
+
+		return sqlSession.selectOne("boardMapper.selectNotice", noticeVO);
+	}
+	
 	
 }

@@ -42,7 +42,7 @@ public class BoardController {
 	public String goNotice(Model model, MenuVO menuVO, HttpSession session) {
 		
 		model.addAttribute("list", boardService.selectNoticeList());
-		
+
 		return  "board/notice_list";
 	}
 	
@@ -58,7 +58,7 @@ public class BoardController {
 	
 	//공지사항 등록
 	@PostMapping("/insertNotice")
-	public String insertNotice(NoticeVO noticeVO, MultipartHttpServletRequest multi) {
+	public String insertNotice(MenuVO menuVO,NoticeVO noticeVO, MultipartHttpServletRequest multi) {
 		
 		//파일명 가져오기
 		MultipartFile inputName = multi.getFile("file");
@@ -101,9 +101,18 @@ public class BoardController {
 		
 		
 		//공지사항 목록으로 이동
-		return "redirect:/board/notice";
+		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
 	}
 	
+	//공지사항 상세보기
+	public String noticeDetail() {
+		
+		
+		
+		return "";
+	}
+	
+	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
 	//상담 문의 페이지로 이동
 	@GetMapping("/qna")
@@ -126,11 +135,11 @@ public class BoardController {
 	
 	//상담 문의 등록
 	@PostMapping("/insertQna")
-	public String insertQna(QnaVO qnaVO) {
+	public String insertQna(QnaVO qnaVO, MenuVO menuVO) {
 		
 		boardService.insertQna(qnaVO);
-		//등록하고 다시 목록으로 돌아갈 때 사이드 메뉴 없음 해결해야 함//
-		return "redirect:/board/qna";
+
+		return "redirect:/board/qna?menuCode=" + menuVO.getMenuCode();
 	}
 	
 	//상담문의 비밀번호 확인
@@ -142,7 +151,7 @@ public class BoardController {
 	
 	//상담문의 상세보기
 	@GetMapping("/qnaDetail")
-	public String goQnaDetail(Model model, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
+	public String goQnaDetail(Model model, MenuVO menuVO, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
 		//오늘 날짜 입력
 		model.addAttribute("nowDate", UploadUtil.getNowDateTime("day"));
 		
@@ -154,10 +163,11 @@ public class BoardController {
 	
 	//상담문의 답변 추가하기
 	@PostMapping("/insertAnswer")
-	public String insertAnswer(Model model, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
+	public String insertAnswer(Model model, MenuVO menuVO, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
 
 		boardService.insertAnswer(qnaAnswerVO);
 		
+		//redirect 방식은 데이터값을 가져가지 않기 때문에 다시 호출해주어야 함
 		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode();
 	}
 	//시스템 날짜 구하는 메소드

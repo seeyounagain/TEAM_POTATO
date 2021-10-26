@@ -23,6 +23,9 @@ public interface BoardService {
 	//파일 첨부를 위한 파일 코드의 숫자 조회
 	int nextFileCodeNum();
 	
+	//공지사항 상세보기
+	NoticeVO selectNotice(NoticeVO noticeVO);
+	
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	
