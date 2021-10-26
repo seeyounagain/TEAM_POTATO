@@ -79,7 +79,7 @@ public class AdminController {
 	
 	// 도서 등록
 	@PostMapping("/regBook")
-	public String regBook(BookVO bookVO,MultipartHttpServletRequest multi) {
+	public String regBook(BookVO bookVO,MenuVO menuVO,MultipartHttpServletRequest multi) {
 		
 		// 첨부파일 UPLOAD
 		
@@ -123,7 +123,7 @@ public class AdminController {
 			System.out.println("도서 등록 성공");
 		}
 		
-		return "redirect:/libManage/regBookForm";
+		return "redirect:/libManage/regBookForm?menuCode=" + menuVO.getMenuCode();
 		
 	}
 	

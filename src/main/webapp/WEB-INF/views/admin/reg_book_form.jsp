@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form class="row g-0 mt-3 mb-5" action="/libManage/regBook" method="post" enctype="multipart/form-data">
+<form class="row g-0 mt-3 mb-5" action="/libManage/regBook?menuCode=${menuVO.menuCode }" method="post" enctype="multipart/form-data">
 	<h1 class="display-6 text-center">신규도서등록</h1>
 	<div class="row g-0 justify-content-center">
 		<div class="col-7">
@@ -38,7 +38,7 @@
 			</div>
 			<div class="col-12 mt-2">
 				<label for="translator" class="form-label">옮긴이</label>
-				<input type="text" class="form-control" id="translator" name="translator" placeholder="역자" required>
+				<input type="text" class="form-control" id="translator" name="translator" placeholder="역자">
 			</div>
 			<div class="col-12 mt-2">
 				<label for="publisher" class="form-label">발행자</label>
