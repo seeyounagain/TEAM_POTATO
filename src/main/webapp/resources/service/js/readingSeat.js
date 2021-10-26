@@ -78,6 +78,14 @@ $(document).ready(function(){
 			      success: function(result) {
 			      	//ajax 실행 성공 시 실행되는 구간
 			      	$('#minimin').empty();
+			      	
+			      	if(result.seatStatus == 0){
+						result.id = '';
+						result.seatStatus ='배정대기중';
+					}else{
+						result.seatStatus ='사용중';
+					}
+			      	
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
    str+='	<div class="col-6 text-center mb-5">                             		                               			';
