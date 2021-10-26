@@ -2,6 +2,8 @@ package com.potato.project.service.controller;
 
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -60,26 +62,25 @@ public class ServiceController {
 	@PostMapping("/chooseSeat")
 	public ReadingSeatVO chooseSeat(Model model, String seatCode) {
 	return serviceService.chooseSeat(seatCode);
-	
 	}
 	
 	@ResponseBody
 	@PostMapping("/seatIdCheck")
 	public String seatIdCheck(Model model, String id) {
 	return serviceService.seatIdCheck(id);
-	
 	}
 	
 	@ResponseBody
 	@PostMapping("/seatMemberIdCheck")
 	public String seatMemberIdCheck(Model model, String id) {
 	return serviceService.seatMemberIdCheck(id);
-	
 	}
 	
-	
-	
-	
+	@ResponseBody
+	@PostMapping("/searchRecord")
+	public List<ReadingRecordVO> searchRecord(Model model,ReadingRecordVO recordVO) {
+	return serviceService.searchRecord(recordVO);
+	}
 	
 	@PostMapping("/seatUpdate")
 	public String seatUpdate(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {

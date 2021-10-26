@@ -1,10 +1,154 @@
 
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
-	
-	$(document).on('click','#seatOn',function(){
-		alert('dd');
+		
+		//검색 초기화 ajax
+		$(document).on('click','.searchRecordReset',function(){
+		var searchId = '';
+		
+				$.ajax({
+	            url: '/service/searchRecord', //요청경로
+	            type: 'post',
+	            data:{'id':searchId}, //필요한 데이터
+	            success: function(recordList) {
+				
+				$('.recordListTitleDiv').empty();
+	var title = '';
+	title+='<div><h3>열람실좌석 이용기록</h3></div>';
+	title+='<div>(전체기록 조회)</div>';							
+				$('.recordListTitleDiv').append(title);
+				
+				$('.searchRecordList').empty();
+				var str='';		                                                            
+   str+='	<table class="table text-center">                                           ';
+   str+='  	<thead>                                                                     ';
+   str+='    	<tr class="text-center mt-5">                                           ';
+   str+='     		<th scope="col">기록번호</th>                       					';
+   str+='     		<th scope="col">사용자</th>                                     		';
+   str+='     		<th scope="col">좌석번호</th>                                        	';
+   str+='     		<th scope="col">입실시간</th>                                        	';
+   str+='     		<th scope="col">퇴실시간</th>                                        	';
+   str+='    	</tr>                                                                   ';
+   str+='  	</thead>                                                                    ';
+   str+=' 	 <tbody>                                                                    ';
+				$(recordList).each(function(index, record){
+   str+='		<tr>                                                                    ';
+   str+='			<td class="seat mx-1">열람-'+record.recordCode+'</td>                ';
+   str+='			<td>'+record.id+'</td>                                              ';
+   str+='			<td>열람-'+record.seatCode+'</td>                                    ';
+   str+='			<td>'+record.seatInDate+'</td>                                      ';
+   					if(record.seatOutDate == null){record.seatOutDate = '';}
+   str+='			<td>'+record.seatOutDate+'</td>                                     ';
+   str+='		</tr>	                                                                ';
+ 				});
+   str+='                                                                               ';
+   str+=' 	</tbody>                                                                    ';
+   str+='	</table>																	';
+   				$('.searchRecordList').append(str);
+   
+	            },
+	            error: function(){
+	             //ajax 실행 실패 시 실행되는 구간
+	               alert('실패');
+	            }
+	      	});	
+		
+		
 	});
+	
+	
+	//시트기록 검색ajax
+	$(document).on('click','.searchRecord',function(){
+		var searchId = $('#searchId').val();
+
+				$.ajax({
+	            url: '/service/searchRecord', //요청경로
+	            type: 'post',
+	            data:{'id':searchId}, //필요한 데이터
+	            success: function(recordList) {
+				
+
+				
+				$('.recordListTitleDiv').empty();
+	var title = '';
+	title+='<div><h3>열람실좌석 이용기록</h3></div>';
+	title+='<div>(검색기록 조회)</div>';							
+				$('.recordListTitleDiv').append(title);
+				
+				$('.searchRecordList').empty();
+				var str='';	
+				if(recordList == null || recordList == ''){
+
+   str+='	<table class="table text-center">                                           ';
+   str+='  	<thead>                                                                     ';
+   str+='    	<tr class="text-center mt-5">                                           ';
+   str+='     		<th scope="col">기록번호</th>                       					';
+   str+='     		<th scope="col">사용자</th>                                     		';
+   str+='     		<th scope="col">좌석번호</th>                                        	';
+   str+='     		<th scope="col">입실시간</th>                                        	';
+   str+='     		<th scope="col">퇴실시간</th>                                        	';
+   str+='    	</tr>                                                                   ';
+   str+='  	</thead>                                                                    ';
+   str+=' 	 <tbody>                                                                    ';
+   str+='		<tr>                                                        			';
+   str+='			<td rowspan="2" colspan="5" class="seat mx-auto">	     			';					
+   str+='			<h4>검색한 ID의 정보가 없습니다.</h4>										';
+   str+='			<h5>상세한 정보조회를 위하여 자세한 ID를 입력해주세요.							';			
+   str+='			</td>      															';				
+   str+='		</tr>	                                                              	';
+   str+=' 	</tbody>                                                                    ';
+   str+='	</table>																	';					
+					
+					
+					
+					$('.searchRecordList').append(str);
+					
+				}else{
+				
+						                                                            
+   str+='	<table class="table text-center">                                           ';
+   str+='  	<thead>                                                                     ';
+   str+='    	<tr class="text-center mt-5">                                           ';
+   str+='     		<th scope="col">기록번호</th>                       					';
+   str+='     		<th scope="col">사용자</th>                                     		';
+   str+='     		<th scope="col">좌석번호</th>                                        	';
+   str+='     		<th scope="col">입실시간</th>                                        	';
+   str+='     		<th scope="col">퇴실시간</th>                                        	';
+   str+='    	</tr>                                                                   ';
+   str+='  	</thead>                                                                    ';
+   str+=' 	 <tbody>                                                                    ';
+				$(recordList).each(function(index, record){
+   str+='		<tr>                                                                    ';
+   str+='			<td class="seat mx-1">열람-'+record.recordCode+'</td>                ';
+   str+='			<td>'+record.id+'</td>                                              ';
+   str+='			<td>열람-'+record.seatCode+'</td>                                    ';
+   str+='			<td>'+record.seatInDate+'</td>                                      ';
+   					if(record.seatOutDate == null){record.seatOutDate = '';}
+   str+='			<td>'+record.seatOutDate+'</td>                                     ';
+   str+='		</tr>	                                                                ';
+ 				});
+   str+='                                                                               ';
+   str+=' 	</tbody>                                                                    ';
+   str+='	</table>																	';
+   				$('.searchRecordList').append(str);
+   				}
+   
+	            },
+	            error: function(){
+	             //ajax 실행 실패 시 실행되는 구간
+	               alert('실패');
+	            }
+	      	});	
+		
+		
+	});
+	
+
+	
+	
+	//////////////////////////////// AJAX 이벤트
+	
+	
 	
 	$(document).on('click','.seatIdCheck',function(){
 			if($('.seatUpdateId').val() == '' || $('.seatUpdateId').val() == null){
@@ -54,10 +198,6 @@ $(document).ready(function(){
 				
 			}
 			
-			
-
-
-
  		});
  		
  	});
@@ -162,33 +302,33 @@ $(document).ready(function(){
 	//리절트 아이디가 널이면
 	if(result.id == null || result.id == ''){
 	inputOrSpan ='<input type="text" name="id" class="seatUpdateId" style="width:100px"><input type="button" value="체크" class="mx-1 seatIdCheck">';
-	ment += '   <div class="text-center mb-2"> 회원의 ID 정보와 중복된 좌석을 확인합니다. [체크]버튼을 눌러주세요. </div>                  	';
+	ment += '   <div class="text-center mb-2"> 회원의 ID 정보와 중복된 좌석을 확인합니다. [체크]버튼을 눌러주세요. </div>       	';
 	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';  
    	checkSubmit+='<span class="checkSubmit1" style="display: none"><input type="submit" value="확인"></span>   				';
   	checkSubmit+='<span class="checkSubmit2" style="display: inline">정보확인중</span></td>    								';
-	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기">                                              ';
+	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기">                                             ';
 	
 	//퇴실하는 에이잭스
 	}else{
-	inputOrSpan = '<input type="text" name="id" value="'+result.id+'" readOnly>';													
-	statusReadOr+='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
-	checkSubmit+='<input type="submit" value="확인">																			';
-	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  					';
-	closeMinimin+='<input type="button" onclick="closeMinimin();" value="취소">                                              ';
+	inputOrSpan = '<input type="text" name="id" value="'+result.id+'" readOnly style="width:100px" >						';													
+	statusReadOr +='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
+	checkSubmit +='<input type="submit" value="확인">																		';
+	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  			';
+	closeMinimin +='<input type="button" onclick="closeMinimin();" value="취소">                                             ';
 	}
 	
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
    str+='	<div class="col-6 text-center mb-5">                             		                               			';
    str+='<form action="/service/seatUpdate" method="post"> 				                                            		';
-   str+='	좌석상태변경 mini                                                                                    				';
+   str+='	좌석상태변경 mini                                                                                    			';
    str+='<table class="table">                                                                                   			';
    str+='	<thead>                                                                                              			';
    str+='		<tr class="text-center">                                                                    				';
-   str+='  			<th scope="col">좌석번호</th>                                                                				';
-   str+=' 			<th scope="col">이용자</th>                                                                  				';
-   str+='  			<th scope="col">상태</th>                                                                    				';
-   str+='  			<th scope="col">상태변경</th>                                                                				';
+   str+='  			<th scope="col">좌석번호</th>                                                                			';
+   str+=' 			<th scope="col">이용자</th>                                                                  			';
+   str+='  			<th scope="col">상태</th>                                                                    			';
+   str+='  			<th scope="col">상태변경</th>                                                                			';
    str+='		</tr>                                                                                            			';
    str+='	</thead>                                                                                             			';
    str+='	<tbody>                                                                                              			';

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=3"></script>
+<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=4"></script>
 <style type="text/css">
 
 .container{
@@ -102,15 +102,24 @@ background-color: white;
 	
 	<!-- 스크롤 구획 -->
 	<div class="row justify-content-center mb-3 mt-3">
-		<div class="col-11">
-			열람실좌석 이용기록
+		<div class="col-11 text-center recordListTitleDiv">
+			<div><h3>열람실좌석 이용기록</h3></div>
+			<div>(전체기록 조회)</div>		
+		
+		</div>
+		<div class="col-10 text-end me-0 px-0">
+			<input type="text" name="searchId" id="searchId" placeholder="아이디를 검색하세요.">
+		</div>
+		<div class="col-2 text-start ml-0 ps-1">
+			<input type="button" value="검색" class="searchRecord">
+			<input type="button" value="초기화" class="searchRecordReset" style="margin-left : 3px;">
 		</div>
     </div>
-    <div class="tableDiv overflow-auto" style="height: 600px;">
+    <div class="tableDiv overflow-auto searchRecordList" style="height: 600px;">
 	<table class="table text-center">
   	<thead>
     	<tr class="text-center mt-5">
-     		<th scope="col">기록번호 </th>
+     		<th scope="col">기록번호</th>
      		<th scope="col">사용자</th>
      		<th scope="col">좌석번호</th>
      		<th scope="col">입실시간</th>

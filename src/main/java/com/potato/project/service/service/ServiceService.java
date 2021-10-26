@@ -26,6 +26,7 @@ public interface ServiceService {
 	
 	List<ReadingRecordVO> seatRecordList();
 	
+	List<ReadingRecordVO> searchRecord(ReadingRecordVO recordVO);
 	
 	
 }

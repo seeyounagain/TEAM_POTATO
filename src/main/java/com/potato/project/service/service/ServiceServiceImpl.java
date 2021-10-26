@@ -58,6 +58,12 @@ public class ServiceServiceImpl implements ServiceService {
 		return sqlSession.selectList("serviceMapper.seatRecordList");
 		
 	}
+
+	@Override
+	public List<ReadingRecordVO> searchRecord(ReadingRecordVO recordVO) {
+		return sqlSession.selectList("serviceMapper.searchRecord", recordVO);
+		
+	}
 	
 	
 	

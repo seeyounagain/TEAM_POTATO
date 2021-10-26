@@ -97,6 +97,21 @@
 			ORDER BY SEAT_OUT_DATE DESC
             ,SEAT_IN_DATE DESC
 			</select>
+			
+			<select id="searchRecord" resultMap="record">
+			SELECT 
+			RECORD_CODE
+			, SEAT_CODE
+			, ID
+			, SEAT_IN_DATE
+			, SEAT_OUT_DATE 
+			FROM READING_RECORD
+			<if test="id != null and !id.equals('')">
+			WHERE ID = #{id }			
+			</if>
+			ORDER BY SEAT_OUT_DATE DESC
+            ,SEAT_IN_DATE DESC
+			</select>		
 </mapper>
 
 
