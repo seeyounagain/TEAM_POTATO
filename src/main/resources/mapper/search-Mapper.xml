@@ -96,7 +96,7 @@
 	<!-- 모든 도서(+ 이미지) 조회 -->
 	<select id="selectBookList" resultMap="book">
 		SELECT
-		    ISBN
+            ISBN
 		    , B.BOOK_CODE
 		    , KDC
 		    , C.KDC_NAME
@@ -118,6 +118,81 @@
 		WHERE B.KDC_NUM = C.KDC_NUM
 		AND B.BOOK_CODE = I.BOOK_CODE
 		ORDER BY INPUT_DATE DESC
+	</select>
+	
+	<!-- 모든 도서(+ 이미지) 조회 + 페이징 -->
+	<select id="selectBookListPaging" resultMap="book">
+		SELECT
+            ROW_NUM
+		    , ISBN
+		    , BOOK_CODE
+		    , KDC
+		    , KDC_NAME
+		    , WRITER
+		    , TRANSLATOR
+		    , TITLE
+		    , PAGE
+		    , BOOK_SIZE
+		    , KEYWORD
+		    , PUBLISHER
+		    , PUB_DATE
+		    , SUMMARY
+		    , INTRO
+		    , INPUT_DATE
+		    , AREA
+		    , STATUS
+		    , ATTACHED_IMG_NAME
+        FROM (
+                SELECT ROWNUM AS ROW_NUM
+                , ISBN
+                , BOOK_CODE
+                , KDC
+                , KDC_NAME
+                , WRITER
+                , TRANSLATOR
+                , TITLE
+                , PAGE
+                , BOOK_SIZE
+                , KEYWORD
+                , PUBLISHER
+                , PUB_DATE
+                , SUMMARY
+                , INTRO
+                , INPUT_DATE
+                , AREA
+                , STATUS
+                , ATTACHED_IMG_NAME           
+            FROM    (
+                SELECT ROWNUM AS ROW_NUM
+                , ISBN
+                , B.BOOK_CODE
+                , KDC
+                , C.KDC_NAME
+                , WRITER
+                , TRANSLATOR
+                , TITLE
+                , PAGE
+                , BOOK_SIZE
+                , KEYWORD
+                , PUBLISHER
+                , PUB_DATE
+                , SUMMARY
+                , INTRO
+                , INPUT_DATE
+                , AREA
+                , STATUS
+                , ATTACHED_IMG_NAME        
+                FROM
+                BOOK B, BOOK_CATE C, BOOK_IMG I
+                WHERE B.KDC_NUM = C.KDC_NUM
+                AND B.BOOK_CODE = I.BOOK_CODE
+				<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
+				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYYMMDD')
+				AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYYMMDD')
+				</if>
+                ORDER BY INPUT_DATE DESC)
+        )
+        WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
 	<!-- 책 카테고리 목록 조회 -->

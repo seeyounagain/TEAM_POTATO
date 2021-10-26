@@ -33,8 +33,12 @@
 				<input type="text" class="form-control" id="kdc" name="kdc" placeholder="청구기호" required>
 			</div>
 			<div class="col-12 mt-2">
-				<label for="writer" class="form-label">저자</label>
+				<label for="writer" class="form-label">지은이</label>
 				<input type="text" class="form-control" id="writer" name="writer" placeholder="저자" required>
+			</div>
+			<div class="col-12 mt-2">
+				<label for="translator" class="form-label">옮긴이</label>
+				<input type="text" class="form-control" id="translator" name="translator" placeholder="역자" required>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="publisher" class="form-label">발행자</label>
@@ -62,7 +66,7 @@
 			</div>
 			<div class="col-12 mt-2">
 				<label for="intro" class="form-label">소개글</label>
-				<input type="text" class="form-control" id="intro" name="intro" placeholder="목차" required>
+				<input type="text" class="form-control" id="intro" name="intro" placeholder="소개글" required>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="area" class="form-label">자료위치</label>

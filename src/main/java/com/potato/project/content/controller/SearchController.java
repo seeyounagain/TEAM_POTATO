@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookVO;
@@ -25,6 +26,9 @@ public class SearchController {
 	@Resource(name = "searchService")
 	private SearchService searchService;
 	
+	@Resource(name = "adminService")
+	private AdminService adminService;
+	
 	// 자료검색 페이지로 이동
 	@GetMapping("/bookSearch")
 	public String bookSearch(Model model,MenuVO menuVO,HttpSession session) {
@@ -39,9 +43,14 @@ public class SearchController {
 	
 	// 신착도서 페이지로 이동
 	@GetMapping("/newBookList")
-	public String newBookList(Model model,MenuVO menuVO,HttpSession session) {
+	public String newBookList(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
 		
-		model.addAttribute("bookList",searchService.selectBookList());
+		int totalCnt = adminService.countBookInputDate(bookVO);
+		
+		bookVO.setTotalCnt(totalCnt);
+		bookVO.setPageInfo();
+		
+		model.addAttribute("bookList",searchService.selectBookListPaging(bookVO));
 		
 		return "search/new_book_list";
 		

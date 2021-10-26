@@ -75,7 +75,7 @@
 		    	</div>
 	    	</div>
 	    	<div class="col-12">
-	    		<div class="row mb-4 mt-4 lh-base">
+	    		<div class="row mb-4 mt-4 lh-lg">
 		   		${bookVO.intro }
 		    	</div>
 	    	</div>

@@ -71,4 +71,12 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
+	// 모든 도서(+ 이미지) 조회 + 페이징
+	@Override
+	public List<BookVO> selectBookListPaging(BookVO bookVO) {
+		
+		return sqlSession.selectList("searchMapper.selectBookListPaging",bookVO);
+		
+	}
+	
 }
