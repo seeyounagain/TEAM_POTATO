@@ -52,6 +52,8 @@
 			<exclude-mapping path="/libManage/regItem"/>
 			<exclude-mapping path="/service/chooseSeat"/>
 			<exclude-mapping path="/service/seatIdCheck"/>
+			<!-- ajax 컨트롤러는 무조건 인터셉터에서 제외시켜줘야 함! -->
+			<exclude-mapping path="/member/myInfoAjax"/>
 			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
 	<!-- 로그인 인터셉터 주석 풀어서 path 추가 + 기존 코드 삭제시 실행 -->
