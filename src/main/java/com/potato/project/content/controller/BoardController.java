@@ -26,6 +26,7 @@ import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
 import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
+import com.sun.java.swing.plaf.motif.resources.motif;
 
 
 @Controller
@@ -105,12 +106,23 @@ public class BoardController {
 	}
 	
 	//공지사항 상세보기
-	public String noticeDetail() {
+	@GetMapping("/noticeDetail")
+	public String noticeDetail(MenuVO menuVO, Model model, NoticeVO noticeVO) {
 		
+		model.addAttribute("notice", boardService.selectNotice(noticeVO));
 		
-		
-		return "";
+		return "board/notice_detail";
 	}
+	
+	//공지사항 삭제하기
+	@GetMapping("/deleteNotice")
+	public String deleteNotice(MenuVO menuVO, NoticeVO noticeVO) {
+		
+		boardService.deleteNotice(noticeVO);
+		
+		return "redirect:/board/notice";
+	}
+	
 	
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	

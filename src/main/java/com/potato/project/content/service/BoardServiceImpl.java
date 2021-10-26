@@ -92,6 +92,12 @@ public class BoardServiceImpl  implements BoardService{
 
 		return sqlSession.selectOne("boardMapper.selectNotice", noticeVO);
 	}
+
+	@Override
+	public int deleteNotice(NoticeVO noticeVO) {
+		
+		return sqlSession.delete("boardMapper.deleteNotice", noticeVO);
+	}
 	
 	
 }

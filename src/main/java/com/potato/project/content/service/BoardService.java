@@ -26,6 +26,11 @@ public interface BoardService {
 	//공지사항 상세보기
 	NoticeVO selectNotice(NoticeVO noticeVO);
 	
+	//공지사항 삭제
+	int deleteNotice(NoticeVO noticeVO);
+	
+	//---------------------------------- 상담 문의 부분 -------------------------------------\\
+	
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	
@@ -40,4 +45,6 @@ public interface BoardService {
 	
 	//상담문의 답변 조회
 	List<QnaAnswerVO> selectAnsewerList(QnaAnswerVO qnaAnswerVO);
+	
+	
 }

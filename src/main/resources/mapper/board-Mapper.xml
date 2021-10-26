@@ -110,8 +110,14 @@
 		     , CONTENT
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		FROM NOTICE
-		WHERE NOTICE_CODE = #{qnaCode} 
+		WHERE NOTICE_CODE = #{noticeCode}
 	</select>
+	
+	<delete id="deleteNotice">
+		DELETE 
+		FROM NOTICE
+		WHERE NOTICE_CODE = #{noticeCode}
+	</delete>
 	
 	<!--............................... 상담문의 부분 .....................................-->
 	
@@ -190,4 +196,16 @@
 		FROM QNA_ANSWER
 		WHERE QNA_CODE = #{qnaCode}
 	</select>
+	
+	<delete id="deleteQna">
+		DELETE 
+		FROM QNA
+		WHERE QNA_CODE = ${qnaCode}
+	</delete>
+	
+	<delete id="deleteAnswer">
+		DELETE 
+		FROM QNA
+		WHERE QNA_CODE = ${qnaCode}
+	</delete>
 </mapper>

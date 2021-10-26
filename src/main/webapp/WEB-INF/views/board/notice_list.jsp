@@ -40,7 +40,7 @@
 							<c:forEach items="${list }" var="info" varStatus="status">
 								<tr>
 									<td>${status.count }</td>
-									<td><a href="/content/noticeDetail">${info.title }</a></td>
+									<td><a href="/board/noticeDetail?noticeCode=${info.noticeCode }">${info.title }</a></td>
 									<td>${info.createDate }</td>
 									<td>${info.readCnt }</td>
 								</tr>
