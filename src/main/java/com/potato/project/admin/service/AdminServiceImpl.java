@@ -49,4 +49,11 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
+	// ID로 회원여부 조회
+	@Override
+	public int selectIsMember(String id) {
+		
+		return sqlSession.selectOne("searchMapper.selectIsMember",id);
+	}
+	
 }

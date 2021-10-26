@@ -17,4 +17,7 @@ public interface AdminService {
 	// ID로 대여&예약 도서 객수 조회
 	int selectIdAllCount(String id);
 	
+	// ID로 회원여부 조회
+	int selectIsMember(String id);
+	
 }

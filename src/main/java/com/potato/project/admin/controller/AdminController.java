@@ -128,12 +128,11 @@ public class AdminController {
 	}
 	
 	// 도서 대출
-	@GetMapping("/rentalBook")
-	public String rentalBook(RentalVO rentalVO,MenuVO menuVO) {
+	@ResponseBody
+	@GetMapping("/rentalBookAjax")
+	public int rentalBook(RentalVO rentalVO) {
 		
-		adminSerivce.insertRental(rentalVO);
-		
-		return "redirect:/libManage/bookManage";
+		return adminSerivce.insertRental(rentalVO);
 		
 	}
 	
@@ -143,6 +142,15 @@ public class AdminController {
 	public int selectUserBookCntAjax(String id) {
 		
 		return adminSerivce.selectIdAllCount(id);
+		
+	}
+	
+	// 아이디 회원유무 조회 Ajax
+	@ResponseBody
+	@PostMapping("/selectIsMemberAjax")
+	public int selectIsMemberAjax(String id) {
+		
+		return adminSerivce.selectIsMember(id);
 		
 	}
 	

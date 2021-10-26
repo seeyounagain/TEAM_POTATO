@@ -4,7 +4,7 @@
 		// 아이디 입력칸에 마우스 클릭 시 가입버튼 비활성화
 		$(document).on('mousedown', '#id' , function() {
 		
-			$('#idCheck').text('');
+			$('#idAlert').text('');
 			$('#joinBtn').addClass('disabled');
 			
 		});
@@ -182,43 +182,42 @@
 			
 			if (id == '') {
 				
-				$('#idCheck').css('color', 'red');
-				$('#idCheck').text('* 아이디를 입력해주세요.');
+				$('#idAlert').css('color', 'red');
+				$('#idAlert').text('* 아이디를 입력해주세요.');
 				return ;
 			}
 			
-		};
-			
-		// 아이디 중복체크 Ajax
-		$.ajax({
-			url: '/member/checkId', //요청경로
-			type: 'post',
-			data:{'id':id}, //필요한 데이터
-			success: function(result) {
-			//ajax 실행 성공 후 실행할 코드 작성
-					
-				if (result) {
-					$('#idCheck').css('color', 'red');
-					$('#idCheck').text('! 이미 사용중인 아이디입니다.');
-					$('#joinBtn').addClass('disabled');
-					$('#id').val('');
-					$('#id').focus();
-					return ;
+			// 아이디 중복체크 Ajax
+			$.ajax({
+				url: '/member/checkId', //요청경로
+				type: 'post',
+				data:{'id':id}, //필요한 데이터
+				success: function(result) {
+				//ajax 실행 성공 후 실행할 코드 작성
+						
+					if (result) {
+						$('#idAlert').css('color', 'red');
+						$('#idAlert').text('! 이미 사용중인 아이디입니다.');
+						$('#joinBtn').addClass('disabled');
+						$('#id').val('');
+						$('#id').focus();
+						return ;
+					}
+					else {
+						$('#idAlert').css('color', 'blue');
+						$('#idAlert').text('사용가능한 아이디입니다.');
+						$('#joinBtn').removeClass('disabled');
+						return ;
+					}	
+		
+				},
+				error: function(){
+					//ajax 실행 실패 시 실행되는 구간
+					alert('실패');
 				}
-				else {
-					$('#idCheck').css('color', 'blue');
-					$('#idCheck').text('사용가능한 아이디입니다.');
-					$('#idAlert').text('');
-					$('#joinBtn').removeClass('disabled');
-					return ;
-				}	
-	
-			},
-			error: function(){
-				//ajax 실행 실패 시 실행되는 구간
-				alert('실패');
-			}
-		});
+			});
+		
+	};
 		
 		
 	})(jQuery);

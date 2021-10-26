@@ -1,9 +1,7 @@
 
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
-		
-		var menuCode = 'MENU_006';
-		var sideMenuCode = 'SIDE_MENU_013';
+
 		
 		/* 대여 버튼 클릭 시 대여자 아이디 입력칸 생성 */
 		$(document).on('click', '#rentalBtn', function() { 
@@ -56,39 +54,92 @@
 				return ;
 			}
 			
+					
+			var menuCode = 'MENU_006';
+			var sideMenuCode = 'SIDE_MENU_013';
 			
 			var result = confirm('도서를 대여하시겠습니까?')
 			
+			// if 시작
 			if (result) {
 			
-				// 페이지 이동 없이 쿼리 실행 Ajax
+				// 페이지 이동 없이 쿼리 실행 Ajax1
 		   		$.ajax({
-		            url: '/libManage/selectUserBookCntAjax', // 요청경로
+		            url: '/libManage/selectIsMemberAjax', // 요청경로
 		            type: 'post', // post 메소드 방식
+		            async : false, // 다중 Ajax 실행 시 success 실행 후에도 다음 Ajax 실행
 		            data: {'id':id}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 		            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 		            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 
-						if (result < 3) {
-							location.href = '/libManage/rentalBook?id=' + id + '&bookCode=' + bookCode + '&menuCode=' + menuCode + '&sideMenuCode=' + sideMenuCode;
-						}
+						if (result == 1) {
+								
+								// Ajax2 
+								$.ajax({
+					            url: '/libManage/selectUserBookCntAjax', // 요청경로
+					            type: 'post', // post 메소드 방식
+					            async : false, // 다중 Ajax 실행 시 success 실행 후에도 다음 Ajax 실행
+					            data: {'id':id}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+					            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+					            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+			
+								if (result < 3) {
+										
+										/* Ajax 시작 */
+							
+							      		// 페이지 이동 없이 쿼리 실행 Ajax
+								   		$.ajax({
+								            url: '/libManage/rentalBookAjax', // 요청경로
+								            type: 'post', // post 메소드 방식
+								            data: {'id':id,'bookCode':bookCode}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+								            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+								            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+								         		alert('도서가 대출되었습니다.');
+							
+								            },
+								            error: function(){
+								           		// ajax 실행 실패 시 실행되는 구간
+								           		alert('실패');
+								            }
+										});
+							   		/* Ajax 종료 */										
+								}
+									
+									
+								else {
+									alert('대출 또는 예약가능 권수를 초과하셨습니다.');
+								}
+					         		
+					            },
+					            error: function(){
+					           		// ajax 실행 실패 시 실행되는 구간
+					           		alert('실패');
+					            }
+							});
+				   			/* Ajax 종료 */							
 						
-						else {
-							alert('대출 또는 예약가능 권수를 초과하셨습니다.');
-						}
+				}
+				/* if 끝 */
+						
+			else {
+			
+				alert('존재하는 회원이 아닙니다.');
+				
+			}
 		         		
-		            },
-		            error: function(){
-		           		// ajax 실행 실패 시 실행되는 구간
-		           		alert('실패');
-		            }
-				});
-	   		/* Ajax 종료 */
+		    },
+		       error: function(){
+		     // ajax 실행 실패 시 실행되는 구간
+		         alert('실패');
+		       }
+			});
+		   		
 				
 		}
 			
 		});
-		
+		/* 이벤트 종료 */
+
 		/* 반납 버튼 클릭 시 확인 체크 후 반납처리 */
 		$(document).on('click', '#returnB', function() {
 			
@@ -189,7 +240,9 @@
 			
    		});
    		/* Ajax 종료 */
-
+	
+	
+	
 		
 	});
 
