@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=7" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=14" ></script>
 </head>
 <body>
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
@@ -20,33 +20,36 @@
 			<div class="col-12 mt-2">
 				<label for="name" class="form-label">이름</label>
 				<input type="text" class="form-control" id="name" name="name" placeholder="10자리 내의 한글로 입력" required>
+				<div class="col-12 mt-2" id="nameAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<div class="row">
 						<label for="id" class="form-label">아이디</label>
 					<div class="col">
-						<input type="text" class="form-control" id="id" name="id" placeholder="4자~12자리의 영문자, 숫자 / @,#$등 특수문자는 제외" required>
+						<input type="text" class="form-control" id="id" name="id" placeholder="4자~12자리의 영문 소문자, 숫자 / @,#$등 특수문자는 제외" required>
 					</div>
 					<div class="col-2 d-grid checkId" style="padding-left: 3px;">
 					<button type="button" class="btn btn-primary" onclick="checkId();">중복확인</button>
 					</div>
+					<div class="col-12 mt-2" id="idCheck" style="color: red; font-size: 14px;"></div>
 					<div class="col-12 mt-2" id="idAlert" style="color: red; font-size: 14px;"></div>
 				</div>	
 			</div>
 			<div class="col-12 mt-2">
 				<label for="pw" class="form-label">비밀번호</label>
-				<input type="password" class="form-control" id="pw" name="pw" placeholder="영문 대문자, 소문자, 숫자, 특수문자를 3가지 이상 사용하여 8자 이상, 20자 이하로 설정하십시오." required>
+				<input type="password" class="form-control" id="pw" name="pw" placeholder="영문 대문자, 소문자, 숫자를 사용하여 8자 이상, 20자 이하로 설정하십시오." required>
+				<div class="col-12 mt-2" id="pwAlert" style="color: red; font-size: 14px;"></div>			
 			</div>
 			<div class="col-12 mt-2">
 				<label for="pw" class="form-label">비밀번호 확인</label>
 				<input type="password" class="form-control" id="checkPw" placeholder="비밀번호를 다시 한번 입력해주세요." required>
-				<div class="col-12 mt-2" id="pwAlert" style="color: red; font-size: 14px;"></div>
+				<div class="col-12 mt-2" id="pwCheck" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<div class="row">
 				<label for="tell" class="form-label">연락처</label>
 					<div class="col">
-					<select class="form-select" name="tells">
+					<select class="form-select" name="tells" id="tell1">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
@@ -54,11 +57,12 @@
 					</select>
 					</div>
 					<div class="col">
-						<input type="text" class="form-control" name="tells" required>
+						<input type="text" id="tell2" class="form-control" name="tells" required>
 					</div>
 					<div class="col">
-						<input type="text" class="form-control" name="tells" required>
+						<input type="text" id="tell3" class="form-control" name="tells" required>
 					</div>
+					<div class="col-12 mt-2" id="tellCheck" style="color: red; font-size: 14px;"></div>
 				</div>
 			</div>
 			<div class="col-12 mt-2">
