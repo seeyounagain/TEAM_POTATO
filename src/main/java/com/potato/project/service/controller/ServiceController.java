@@ -93,10 +93,11 @@ public class ServiceController {
 			//시트 배정 기록
 			serviceService.seatUpdate(seatVO);
 			serviceService.seatInRecord(seatVO);			
-		}else{
+		}
+		else{
 			//시트 퇴실 기록
-			serviceService.seatUpdate(seatVO);
 			serviceService.seatOutRecord(seatVO);			
+			serviceService.seatUpdate(seatVO);
 		}
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));

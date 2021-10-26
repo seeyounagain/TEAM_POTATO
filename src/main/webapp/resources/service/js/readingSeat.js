@@ -7,26 +7,31 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click','.seatIdCheck',function(){
-			var id = $('.seatUpdateId').val();
-
- 	 		$.ajax({
+			if($('.seatUpdateId').val() == '' || $('.seatUpdateId').val() == null){
+				alert('ID를 입력해주세요.');
+			}else{
+				var id = $('.seatUpdateId').val();
+				
+				 	 		$.ajax({
             url: '/service/seatMemberIdCheck', //요청경로
             type: 'post',
             data:{'id':id}, //필요한 데이터
-            success: function(result) {
-	
-				if(result == null && result == ''){
-					
-				}else{
-				var id2 = result;
+            success: function(memberId) {
+				
+				if(memberId == '' || memberId == ''){
+					alert('없는 ID 입니다. 회원가입을 해주세요.');
+				}else{	
+				memberId;
+				
 				$.ajax({
 	            url: '/service/seatIdCheck', //요청경로
 	            type: 'post',
-	            data:{'id':id2}, //필요한 데이터
-	            success: function(result) {
+	            data:{'id':memberId}, //필요한 데이터
+	            success: function(seatId) {
 					
-					if(result == id){
+					if(seatId == id && seatId != null){
 						alert('이미 배정된 좌석이 있습니다.');
+						
 					}else{
 						alert('좌석 및 ID 확인 완료');
 						$('.checkSubmit1').css('display','inline');
@@ -37,15 +42,21 @@ $(document).ready(function(){
 	             //ajax 실행 실패 시 실행되는 구간
 	               alert('실패1');
 	            }
-	      	});
-					
-				}
-            },
+	      	});		
+			}
+			
+		},
             error: function(){
              //ajax 실행 실패 시 실행되는 구간
                alert('없는 ID 입니다. 회원가입을 해주세요.');
             }
       	});
+				
+			}
+			
+			
+
+
 
  		});
  		
@@ -143,16 +154,15 @@ $(document).ready(function(){
 	//리절트 아이디가 널이면
 	if(result.id == null || result.id == ''){
 	inputOrSpan ='<input type="text" name="id" class="seatUpdateId" style="width:100px"><input type="button" value="체크" class="mx-1 seatIdCheck">';
+	ment += '   <div class="text-center mb-2"> 회원의 ID 정보와 중복된 좌석을 확인합니다. [체크]버튼을 눌러주세요. </div>                  	';
+	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';  
    	checkSubmit+='<span class="checkSubmit1" style="display: none"><input type="submit" value="확인"></span>   				';
   	checkSubmit+='<span class="checkSubmit2" style="display: inline">정보확인중</span></td>    								';
-	ment += '   <div class="text-center mb-2"> 회원의 ID 정보와 중복된 좌석을 확인합니다. [체크]버튼을 눌러주세요. </div>                  	';
-	statusReadOr+='<input type="radio" name="seatStatus" value="0" >퇴실														';
-	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';  
 	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기">                                              ';
 	
 	//퇴실하는 에이잭스
 	}else{
-	inputOrSpan = '<input type="text" name="id" value="'+result.id+'">														';
+	inputOrSpan = result.id + '<input type="hidden" name="id" value="'+result.id+'">';													
 	statusReadOr+='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
 	checkSubmit+='<input type="submit" value="확인">																			';
 	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  					';
@@ -182,7 +192,7 @@ $(document).ready(function(){
    str+='			<td class="text-center align-middle">																	';
    str+=statusReadOr;  
    str+='<td class="text-center align-middle">																				';
-   str+=checkSubmit;
+   str+=checkSubmit;	/*퇴실 or 입실*/
    str+='		</tr>                                                                      									';                  
    str+='	</tbody>                                                                       									';
    str+='</table>                                                                          									';
