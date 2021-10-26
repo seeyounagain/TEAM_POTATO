@@ -64,8 +64,10 @@
     
     <!-- 신착도서 목록 테이블 -->
     <div class="col-5 g-5" id="col2">
-    <h1 class="display-6 text-first" style="color: white;">신착도서</h1>
+    <h1 class="display-6 text-center mt-1" style="color: white;">신착도서</h1>
     <div class="row"  style="background-color: white;">
+    	<c:choose>
+    		<c:when test="${not empty bookList }">
     	<div class="col-5">
     		<div class="row">
     			<a class="titleA" href="/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002"><img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
@@ -79,6 +81,13 @@
 	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[3].bookCode }&menuCode=MENU_002">${bookList[3].title } / ${bookList[3].writer }</a></div>
 	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[4].bookCode }&menuCode=MENU_002">${bookList[4].title } / ${bookList[4].writer }</a></div>
     	</div>
+    		</c:when>
+    		<c:otherwise>
+    	<div class="col-12 text-center px-5 py-5">
+    		신착도서가 없습니다.
+    	</div>
+    		</c:otherwise>
+    	</c:choose>
     </div>
  </div>   
 
