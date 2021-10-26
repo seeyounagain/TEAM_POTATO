@@ -24,7 +24,7 @@
 <div class="row justify-content-center">
    <div class="col-8 mainDiv" style="background-color: #dddddd;">
    		<div class="titleDiv">
-   			<h3>문의&상담</h3>
+   			<h3>상담/문의</h3>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
@@ -37,9 +37,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list }" var="info">
+							<c:forEach items="${list }" var="info" varStatus="status">
 							<tr>
-								<td>${info.qnaCode }</td>
+								<td>${status.count }</td>
 								<td>
 								<!-- 관리자 로그인 상태로 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 								<a 
@@ -54,7 +54,7 @@
 								>
 								${info.title }</a>	
 								</td>
-								<td>${info.writer }</td>
+								<td>${info.name }</td>
 								<td>${info.createDate }</td>
 							</tr>
 							</c:forEach>

@@ -37,9 +37,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list }" var="info">
+							<c:forEach items="${list }" var="info" varStatus="status">
 								<tr>
-									<td>${info.noticeCode }</td>
+									<td>${status.count }</td>
 									<td><a href="/content/noticeDetail">${info.title }</a></td>
 									<td>${info.createDate }</td>
 									<td>${info.readCnt }</td>

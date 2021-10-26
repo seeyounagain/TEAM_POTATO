@@ -65,15 +65,17 @@ public class BoardController {
 		
 		//파일이 첨부될 경로
 		//학원
-		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//집
-		String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
 		//파일 첨부에 필요한 공지사항 코드 생성
 		String noticeCode = boardService.selectNoticeCode();
 		//파일 첨부에 필요한 파일 코드의 숫자를 조회
 		int nextFileCodeNum = boardService.nextFileCodeNum();
+		
 		System.out.println(nextFileCodeNum);
+		
 		try {
 			//업로드될 파일명 설정
 			String uploadFileName = FileUploadUtil.getNowDateTime() + "_" + inputName.getOriginalFilename();
@@ -96,7 +98,6 @@ public class BoardController {
 		boardService.insertNotice(noticeVO);
 		//첨부파일 등록
 		boardService.insertNoticeFile(noticeVO);
-		
 		
 		
 		//공지사항 목록으로 이동
@@ -142,22 +143,22 @@ public class BoardController {
 	//상담문의 상세보기
 	@GetMapping("/qnaDetail")
 	public String goQnaDetail(Model model, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
-
 		//오늘 날짜 입력
 		model.addAttribute("nowDate", UploadUtil.getNowDateTime("day"));
 		
 		model.addAttribute("qna",boardService.selectQna(qnaVO));
+		model.addAttribute("answer", boardService.selectAnsewerList(qnaAnswerVO));
 		
 		return "board/qna_detail";
 	}
 	
 	//상담문의 답변 추가하기
 	@PostMapping("/insertAnswer")
-	public String insertAnswer(Model model, QnaAnswerVO qnaAnswerVO) {
-		
+	public String insertAnswer(Model model, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
+
 		boardService.insertAnswer(qnaAnswerVO);
 		
-		return "redirect:/board/qnaDetail";
+		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode();
 	}
 	//시스템 날짜 구하는 메소드
 	/*

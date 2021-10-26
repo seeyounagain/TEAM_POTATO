@@ -78,6 +78,13 @@ public class BoardServiceImpl  implements BoardService{
 
 		return sqlSession.insert("boardMapper.insertAnswer", qnaAnswerVO);
 	}
+
+	//상담문의 답변 조회
+	@Override
+	public List<QnaAnswerVO> selectAnsewerList(QnaAnswerVO qnaAnswerVO) {
+
+		return sqlSession.selectList("boardMapper.selectAnsewerList", qnaAnswerVO);
+	}
 	
 	
 }

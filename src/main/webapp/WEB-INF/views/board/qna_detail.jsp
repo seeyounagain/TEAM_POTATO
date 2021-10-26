@@ -21,7 +21,7 @@
    				</tr>
    				<tr>
    					<td>작성자</td>
-   					<td>${qna.writer}</td>
+   					<td>${qna.name}</td>
    				</tr>
    				<tr>
    					<td>등록일</td>
@@ -33,33 +33,45 @@
    				</tr>
    			</table>
    		</div>
-   		<div class="tableDiv">
-   			<table class="table answerTable">
-   				<tr>
-   					<td>${qna.content }</td>
-   					<td>${qna.createDate }</td>
-   				</tr>
-   			</table>
-   		</div>
+   		
+   	 
+   				<c:forEach items="${answer }" var="info">
+   					<div class="tableDiv">
+			   			<table class="table answerTable">
+			   				<tr>
+			   					<td>작성자: ${info.name }</td>
+			   					<td>답변일: ${info.createDate }</td>
+			   				</tr>
+			   				<tr>
+			   					<td>${info.content }</td>   				
+			   				</tr>
+			   			</table>
+			   		</div>
+   				</c:forEach>
+   			
+   		
+   
+   		
    		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
    			<div class="tableDiv">
-   			<form action="/board/insertAnswer" method="post">
-   			<input type="hidden" value="${sessionScope.loginInfo.id }" name="writer">
-   			<input type="hidden" value="${nowDate }" name="createDate">
-   			<input type="hidden" value="${qna.qnaCode}" name="qnaCode">
-   			<table class="table adminAnswerTable">
-   				<tr>
-   					<td>${sessionScope.loginInfo.id }</td>
-   					<td>
-   						<div class="form-floating">
-						  <textarea class="form-control" id="floatingTextarea" name="content" style="height: 100px"></textarea>
-						  <label for="floatingTextarea">답변을 등록해주세요.</label>
-						</div>
-   					</td>
-   					<td><input class="btn btn-primary" type="submit" value="등록"></td>
-   				</tr>
-   			</table>
-   			</form>
+	   			<form action="/board/insertAnswer" method="post">
+	   			<input type="hidden" value="${sessionScope.loginInfo.id}" name="id">
+	   			<input type="hidden" value="${sessionScope.loginInfo.name}" name="name">
+	   			<input type="hidden" value="${nowDate }" name="createDate">
+	   			<input type="hidden" value="${qnaVO.qnaCode}" name="qnaCode">
+		   			<table class="table adminAnswerTable">
+		   				<tr>
+		   					<td>
+		   						<div class="form-floating">
+								  <textarea class="form-control" id="floatingTextarea" name="content" style="height: 100px"></textarea>
+								  <label for="floatingTextarea">답변을 등록해주세요.</label>
+								</div>
+		   					</td>
+		   					<td>${qnaVO.qnaCode}</td>
+		   					<td><input class="btn btn-primary" type="submit" value="등록"></td>
+		   				</tr>
+		   			</table>
+	   			</form>
    		</div>
    		</c:if>
 	</div>

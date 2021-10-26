@@ -1,11 +1,12 @@
 package com.potato.project.content.vo;
 
 public class QnaAnswerVO {
-	private String answerCode;
-	private String content;
-	private String writer;
-	private String createDate;
-	private String qnaCode;
+	private String answerCode	;
+	private String content		;
+	private String id			;
+	private String name			;
+	private String createDate	;
+	private String qnaCode		;
 	
 	public String getAnswerCode() {
 		return answerCode;
@@ -19,11 +20,17 @@ public class QnaAnswerVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriter() {
-		return writer;
+	public String getId() {
+		return id;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getCreateDate() {
 		return createDate;

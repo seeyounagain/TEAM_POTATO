@@ -34,4 +34,7 @@ public interface BoardService {
 	
 	//상담문의 답변추가
 	int insertAnswer(QnaAnswerVO qnaAnswerVO);
+	
+	//상담문의 답변 조회
+	List<QnaAnswerVO> selectAnsewerList(QnaAnswerVO qnaAnswerVO);
 }

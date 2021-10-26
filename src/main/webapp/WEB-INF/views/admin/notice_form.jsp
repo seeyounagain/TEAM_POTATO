@@ -27,6 +27,7 @@
    		</div>
 			<div class="tableDiv">
   			<form action="/board/insertNotice" method="post" enctype="multipart/form-data">
+  				<input type="hidden" value="${sessionScope.loginInfo.id}" name="id">
 					<table class="table table-striped text-center">
 						<tr>
 							<td class="w-20">제목</td>
@@ -34,7 +35,7 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td><input type="hidden" value="${sessionScope.loginInfo.id}" name="writer">${sessionScope.loginInfo.id}</td>
+							<td><input type="hidden" value="${sessionScope.loginInfo.name}" name="name">${sessionScope.loginInfo.name}</td>
 						</tr>
 						<tr>
 							<td>등록일</td>

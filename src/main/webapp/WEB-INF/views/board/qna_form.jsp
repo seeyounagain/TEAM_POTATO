@@ -27,6 +27,7 @@
    		</div>
   			<form action="/board/insertQna" method="post">
 			<div class="tableDiv">
+					<input type="hidden" value="${sessionScope.loginInfo.id}" name="id">
 					<table class="table table-striped text-center">
 						<tr>
 							<td class="w-20">문의 제목</td>
@@ -39,7 +40,7 @@
 						</tr>
 						<tr>
 							<td>작성자</td>
-							<td><input type="hidden" value="${sessionScope.loginInfo.id}" name="writer">${sessionScope.loginInfo.id}</td>
+							<td><input type="hidden" value="${sessionScope.loginInfo.name}" name="name">${sessionScope.loginInfo.name}</td>
 						</tr>
 						<tr>
 							<td>등록일</td>
