@@ -29,16 +29,54 @@
 
 <div class="row justify-content-center">
 	<div class="col-8">
+		<table>
+			<tr>
+				<td colspan="2">
+					${bookVO.title }
+				</td>
+			</tr>
+			<tr>
+				<td>
+					지은이 / 옮긴이
+				</td>
+				<td>
+					${bookVO.writer }
+				</td>
+			</tr>
+			<tr>
+				<td>
+					출판사
+				</td>
+				<td>
+					${bookVO.publisher }
+				</td>
+			</tr>
+			<tr>
+				<td>
+					발행년
+				</td>
+				<td>
+					${bookVO.pubDate }
+				</td>
+			</tr>
+			<tr>
+				<td>
+					청구기호
+				</td>
+				<td>
+					${bookVO.kdc }
+				</td>
+			</tr>
+		</table>
 	<img src="/resources/bookImgUpload/${bookVO.bookImgVO.attachedImgName }"><br>
 	${bookVO.bookCode }<br>
-	${bookVO.title }<br>
-	${bookVO.writer }<br>
-	${bookVO.kdc }<br>
+	<br>
+	<br>
 	${bookVO.page }<br>
 	${bookVO.bookSize }<br>
 	${bookVO.keyword }<br>
-	${bookVO.publisher }<br>
-	${bookVO.pubDate }<br>
+	<br>
+	<br>
 	${bookVO.summary }<br>
 	${bookVO.intro }<br>
 	${bookVO.area }<br>

@@ -95,6 +95,7 @@
 								            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 								            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 								         		alert('도서가 대출되었습니다.');
+								         		location.href='/libManage/bookManage?menuCode=' + menuCode;
 							
 								            },
 								            error: function(){

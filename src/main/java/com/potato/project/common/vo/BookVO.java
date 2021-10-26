@@ -10,7 +10,7 @@ public class BookVO {
 	// 000 총류 100 철학 200 종교 300 사회과학 400 자연과학 500 기술과학 600 예술 700 언어 800 문학 900 역사
 	private int		kdcNum		  ; // KDC_NUM 			-- 분류코드  0 1 2 3 4 5 6 7 8 9
 	private String 	writer		  ; // WRITER 		    -- 저자
-	private String 	translator	  ; // TRANSLATOR 		    -- 역자
+	private String 	translator	  ; // TRANSLATOR 		-- 역자
 	private String 	title		  ; // TITLE 		    -- 표제
 	private String 	page		  ; // PAGE 		    -- 쪽수 (숫자만 입력)
 	private String  bookSize	  ; // BOOK_SIZE	    -- 크기 (150*150)

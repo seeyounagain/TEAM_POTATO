@@ -16,6 +16,7 @@
 		<result column="KDC" 			property="kdc"/>
 		<result column="KDC_NUM" 		property="kdcNum"/>
 		<result column="WRITER" 		property="writer"/>
+		<result column="TRANSLATOR" 	property="translator"/>
 		<result column="TITLE" 			property="title"/>
 		<result column="PAGE" 			property="page"/>
 		<result column="BOOK_SIZE" 		property="bookSize"/>
@@ -62,6 +63,7 @@
 		    , KDC
 		    , KDC_NUM
 		    , WRITER
+		    , TRANSLATOR
 		    , TITLE
 		    , PAGE
 		    , BOOK_SIZE
@@ -77,6 +79,7 @@
 		    , #{kdc}
 		    , SUBSTR(#{kdc},1,1)
 		    , #{writer}
+		    , #{translator}
 		    , #{title}
 		    , #{page}
 		    , #{bookSize}
@@ -97,6 +100,7 @@
 		    , KDC
 		    , B.KDC_NUM
 		    , WRITER
+		    , TRANSLATOR
 		    , TITLE
 		    , PAGE
 		    , BOOK_SIZE
@@ -131,6 +135,7 @@
 		    , KDC
 		    , B.KDC_NUM
 		    , WRITER
+		    , TRANSLATOR
 		    , TITLE
 		    , PAGE
 		    , BOOK_SIZE
@@ -221,6 +226,7 @@
 		    , KDC
 		    , B.KDC_NUM
 		    , WRITER
+		    , TRANSLATOR
 		    , TITLE
 		    , PAGE
 		    , BOOK_SIZE

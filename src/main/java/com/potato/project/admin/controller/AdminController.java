@@ -129,7 +129,7 @@ public class AdminController {
 	
 	// 도서 대출
 	@ResponseBody
-	@GetMapping("/rentalBookAjax")
+	@PostMapping("/rentalBookAjax")
 	public int rentalBook(RentalVO rentalVO) {
 		
 		return adminSerivce.insertRental(rentalVO);
