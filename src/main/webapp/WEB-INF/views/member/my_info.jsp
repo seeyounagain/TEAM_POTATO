@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=2"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=11"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -43,68 +43,85 @@
 			</div>
 		</div>
 				<!-- 타이틀 끝 -->
-
-		<!-- 내 정보 -->
-		<div class="row justify-content-center">
-			<div class="col-10 mb-4">
-				<h3>개인정보</h3>
-				<table class="table mt-2" style="border-top: 2px solid #0b70b9;">
-					<colgroup>
-						<col width="20%">
-						<col width="80%">
-					</colgroup>
-						<tr>
-							<td class="table-secondary">이름</td>
-							<td>${memberInfo.name }</td>
-						</tr>
-						<tr>
-							<td class="table-secondary">성별</td>
-							<td>${memberInfo.gender }</td>
-						</tr>
-				</table>
+				<input type="radio" checked>
+			<c:choose>
+				<c:when test="">
+				
+				</c:when>
+				<c:when test="">
+				
+				</c:when>
+				<c:otherwise>
+				
+				</c:otherwise>
+			</c:choose>
+		
+		<!-- 아이작스로 하위태크 지우기 위해 추가 -->
+		<div class="row">
+			<div class="col" id="ajaxStart">
+	
+				<!-- 내 정보 -->
+				<div class="row justify-content-center">
+					<div class="col-10 mb-4">
+						<h3>개인정보</h3>
+						<table class="table mt-2" style="border-top: 2px solid #0b70b9;">
+							<colgroup>
+								<col width="20%">
+								<col width="80%">
+							</colgroup>
+								<tr>
+									<td class="table-secondary">이름</td>
+									<td id="name">${memberInfo.name }</td>
+								</tr>
+								<tr>
+									<td class="table-secondary">성별</td>
+									<td id="gender">${memberInfo.gender }</td>
+								</tr>
+						</table>
+					</div>
+				</div>
+				<!-- 내정보 테이블 끝 -->
+				
+				<input type="radio" name="gender">
+					<!-- 내 정보 -->
+				<div class="row justify-content-center">
+					<div class="col-10 mb-4">
+						<h3>회원정보</h3>
+						<table class="table mt-2" style="border-top: 2px solid #0b70b9;">
+							<colgroup>
+								<col width="20%">
+								<col width="80%">
+							</colgroup>
+								<tr>
+									<td class="table-secondary">아이디</td>
+									<td id="id">${memberInfo.id }</td>
+								</tr>
+								<tr>
+									<td class="table-secondary">휴대전화</td>
+									<td id="tell">${memberInfo.tell }</td>
+								</tr>
+								<tr>
+									<td class="table-secondary">주소</td>
+									<td id="addr">${memberInfo.addr }</td>
+								</tr>
+								<tr>
+									<td class="table-secondary">관심카테고리</td>
+									<td>${memberInfo.favorite }</td>
+								</tr>
+						</table>
+					</div>
+				</div>
+				<!-- 내정보 테이블 끝 -->
+				
+				<!-- 수정버튼 -->
+				<div class="row  justify-content-center">
+					<div class="col-2 d-grid">
+						<button type="submit" id="changeBtn" class="btn btn-primary">수정하기</button>
+					</div>
+				</div>
+				<!-- 수정버튼 끝 -->
 			</div>
 		</div>
-		<!-- 내정보 테이블 끝 -->
-		
-		
-			<!-- 내 정보 -->
-		<div class="row justify-content-center">
-			<div class="col-10 mb-4">
-				<h3>회원정보</h3>
-				<table class="table mt-2" style="border-top: 2px solid #0b70b9;">
-					<colgroup>
-						<col width="20%">
-						<col width="80%">
-					</colgroup>
-						<tr>
-							<td class="table-secondary">아이디</td>
-							<td id="id">${memberInfo.id }</td>
-						</tr>
-						<tr>
-							<td class="table-secondary">휴대전화</td>
-							<td>${memberInfo.tell }</td>
-						</tr>
-						<tr>
-							<td class="table-secondary">주소</td>
-							<td>${memberInfo.addr }</td>
-						</tr>
-						<tr>
-							<td class="table-secondary">관심카테고리</td>
-							<td>${memberInfo.favorite }</td>
-						</tr>
-				</table>
-			</div>
-		</div>
-		<!-- 내정보 테이블 끝 -->
-		
-		<!-- 수정버튼 -->
-		<div class="row  justify-content-center">
-			<div class="col-2 d-grid">
-				<button type="submit" id="changeBtn" class="btn btn-primary">수정하기</button>
-			</div>
-		</div>
-		<!-- 수정버튼 끝 -->
-		
 	</div>
 </div>
 </body>
