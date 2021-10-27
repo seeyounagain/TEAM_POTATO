@@ -50,6 +50,9 @@
 			
 			var str = "";
 			
+			str += '<tr class="justify-content-center text-center" id="return" >';
+			str += '<td colspan="3">';
+			
 			if (reserveId != null) {
 				
 			str += '&nbsp;&nbsp;예약자&nbsp;:&nbsp;';
@@ -57,13 +60,8 @@
 				
 			}
 			
-			str += '<tr class="justify-content-center text-center" id="return" >';
-			str += '<td colspan="3">';
-			str += '반납자&nbsp;:&nbsp;';
+			str += '&nbsp;&nbsp;반납자&nbsp;:&nbsp;';
 			str += '<input type="text" id="id" name="id" value="' + rentalId + '" readonly style="width: 200x;">';
-			
-			
-			
 			
 			str += '<button type="button" class="btn btn-warning px-3 mx-3" id="returnB">반납</button>';
 			str += '</td>';
@@ -263,7 +261,7 @@
 	         		
 		         		str += '<tr>';
 						str += '<td>';
-						str += '<span>' + (index+1) + ' .</span>';
+						str += '<span>' + (index+1) + '.</span>';
 						str += '<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=' + element.bookCode + '&menuCode=MENU_006&sideMenuCode=SIDE_MENU_013">' + element.title + '</a></div>';
 		         		str += '<div class="mt-2">' + element.writer + ' / ' + element.publisher + ' / ' + element.pubDate + '</div>';
 		         		

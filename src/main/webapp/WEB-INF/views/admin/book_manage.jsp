@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=71" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=74" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
