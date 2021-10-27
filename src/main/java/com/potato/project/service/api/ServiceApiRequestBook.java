@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,43 +20,45 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.io.JsonEOFException;
 
 public class ServiceApiRequestBook {
-	
-   
-	
-	public static void main(String[] args)  {
+
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		HttpURLConnection conn = null;
 		JSONObject responseJson = null;
-		    
+		
 		String strUrl ="https://www.nl.go.kr/NL/search/openApi/search.do";
 		String sendMessage ="";
-		String book = "가시고기";			
-//		sendMessage = (URLDecoder.decode("systemType=오프라인자료&category=도서&kwd=", "utf-8"));
+				
 		JSONArray commandlist = null;
 	    try {
-	    	
-	    	
 	        //URL 설정
-	        URL url = new URL(strUrl);
+	    	URL url = new URL(strUrl);
 
 	        conn = (HttpURLConnection) url.openConnection();
 	        //Request 형식 설정
 	        conn.setRequestMethod("POST");
-//	        conn.setRequestProperty("key", "14422d834c6677f2968b3261ad1766e8fc102ed5fb25b93e29abd78489bc71e5");
+	        conn.setRequestProperty("Accept-Charset", "UTF-8");
 	        conn.setRequestProperty("apiType", "json");
-
+//	        conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
+	        
 	        //request에 JSON data 준비
 	        conn.setDoOutput(true);
 	        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(),"UTF-8"));
 	        //commands라는 JSONArray를 담을 JSONObject 생성
 	        JSONObject commands = new JSONObject();
-	        commands.put("commands", "도서");
-	        commands.put("key", "14422d834c6677f2968b3261ad1766e8fc102ed5fb25b93e29abd78489bc71e5");
-
+//	        commands.put("key", "14422d834c6677f2968b3261ad1766e8fc102ed5fb25b93e29abd78489bc71e5");
+//	        commands.put("systemType", "오프라인자료");
+//	        commands.put("category", "도서");
+//	        commands.toString()
 	        //request에 쓰기
-	        bw.write("kwd="+commands.toString());
+	        String book = "가시고기";	
+	        
+	        bw.write(
+	        		"key=14422d834c6677f2968b3261ad1766e8fc102ed5fb25b93e29abd78489bc71e5"
+	        		+ "&kwd="+URLEncoder.encode(book,"UTF-8")
+	        		+ "&apiType=xml");
+	        
 	        bw.flush();
 	        bw.close();
-	        
 	        //보내고 결과값 받기
 	        int responseCode = conn.getResponseCode();
 	        if (responseCode == 400) {
@@ -63,24 +66,22 @@ public class ServiceApiRequestBook {
 	        } else if (responseCode == 500) {
 	            System.out.println("500:: 서버 에러, 문의 필요");
 	        } else { // 성공 후 응답 JSON 데이터받기
-	            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        	BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
 	            StringBuilder sb = new StringBuilder();
 	            String line = "";
 	            while ((line = br.readLine()) != null) {
 	                sb.append(line).append("\n");
 	            }
-	            System.out.println(sb.toString());
-	            
-	            
-	            responseJson.put("apiData", sb.toString());
-	            
+	            System.out.println(sb.toString());  
 	        }
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+		
 	}
+	   
 	
 }
 		
@@ -111,5 +112,14 @@ public class ServiceApiRequestBook {
 //			 	                                    R ([국립중앙도서관,정기이용증소지자]-무료)
 //			 	                                    D ([국립중앙도서관,국립어린이청소년도서관,국립세종도서관]-무료)
 //			 	                                    A ([국립중앙도서관,국립어린이청소년도서관,국립세종도서관,정기이용증소지자]-무료)
+
+
+
+
+
+
+
+
+
 
 

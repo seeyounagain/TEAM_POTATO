@@ -26,12 +26,14 @@ import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
+import com.potato.project.service.api.ServiceApiRequestBook;
 import com.potato.project.service.service.ServiceService;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 
 // 천화 
 @Controller
+
 @RequestMapping("/service")
 public class ServiceController {
 	
@@ -44,7 +46,8 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
-	@RequestMapping("/bookRequest")
+
+	@RequestMapping("/bookRequest") // (value = "/bookRequest", produces="application/String;xml=UTF-8")
 	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {
 		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -53,10 +56,14 @@ public class ServiceController {
 		}
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-
-		
+	
 		return  "service/bookRequest";
 	}
+	
+	
+	
+	
+	
 
 	@RequestMapping("/bookRequest22")
 	public String bookRequest22(Model model,MenuVO menuVO,HttpSession session) {
