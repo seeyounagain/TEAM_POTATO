@@ -22,6 +22,15 @@ public class MemberVO {
 	private String reserveCnt; //예약 카운트
 	private String returnCnt;  //반납 카운트
 	
+	//나의정보에 전화번호 넣을려고
+	private String tellCnt; //전화번호 숫자 조회용
+	private String tell1;
+	private String tell2;
+	private String tell3;
+	
+	//나의정보에 우편번호 넣을려고
+	private String postCode;
+	
 	public String getId() {
 		return id;
 	}
@@ -79,7 +88,8 @@ public class MemberVO {
 	
 	public String[] getTells() {
 		return tells;
-	}	
+	}
+	
 	public void setTells(String[] tells) {
 		String tell = tells[0] + "-" + tells[1] + "-" + tells[2];
 		setTell(tell);
@@ -108,6 +118,36 @@ public class MemberVO {
 	}
 	public void setReturnCnt(String returnCnt) {
 		this.returnCnt = returnCnt;
+	}
+	public String getTellCnt() {
+		return tellCnt;
+	}
+	public void setTellCnt(String tellCnt) {
+		this.tellCnt = tellCnt;
+	}
+	public String getTell1() {
+		return tell1;
+	}
+	public void setTell1(String tell1) {
+		this.tell1 = tell1;
+	}
+	public String getTell2() {
+		return tell2;
+	}
+	public void setTell2(String tell2) {
+		this.tell2 = tell2;
+	}
+	public String getTell3() {
+		return tell3;
+	}
+	public void setTell3(String tell3) {
+		this.tell3 = tell3;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
 	}
 	
 	

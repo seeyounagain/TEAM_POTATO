@@ -6,9 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=14"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=2"></script>
 </head>
 <body>
+<div>${myTells.tell1 }</div>
+<div>${myTells.tell2 }</div>
+<div>${myTells.tell3 }</div>
+<div>${menuVO.menuCode }메뉴코드</div>
 <div class="row justify-content-center">
 	<div class="col-10" style="background-color: white;">
 	<!-- 제일 윗줄 -->
@@ -43,23 +47,10 @@
 			</div>
 		</div>
 				<!-- 타이틀 끝 -->
-				<input type="radio" checked>
-			<c:choose>
-				<c:when test="">
-				
-				</c:when>
-				<c:when test="">
-				
-				</c:when>
-				<c:otherwise>
-				
-				</c:otherwise>
-			</c:choose>
-		
+
 		<!-- 아이작스로 하위태크 지우기 위해 추가 -->
 		<div class="row">
 			<div class="col" id="ajaxStart">
-	
 				<!-- 내 정보 -->
 				<div class="row justify-content-center">
 					<div class="col-10 mb-4">
@@ -82,7 +73,6 @@
 				</div>
 				<!-- 내정보 테이블 끝 -->
 				
-				<input type="radio" name="gender">
 					<!-- 내 정보 -->
 				<div class="row justify-content-center">
 					<div class="col-10 mb-4">
@@ -119,6 +109,7 @@
 						<button type="submit" id="changeBtn" class="btn btn-primary">수정하기</button>
 					</div>
 				</div>
+				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">
 				<!-- 수정버튼 끝 -->
 			</div>
 		</div>

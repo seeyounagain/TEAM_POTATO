@@ -25,8 +25,7 @@ public class MyPageController {
 	@GetMapping("/myPage")
 	public String myLib(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO) {
 		// 로그인정보 MemberVO에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
-		model.addAttribute("memberBookSituationCnt",
-		myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
+		model.addAttribute("memberBookSituationCnt",myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
 
 		return "member/my_page";
 
@@ -36,7 +35,8 @@ public class MyPageController {
 	@GetMapping("/myInfo")
 	public String myInfo(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO) {
 		// 로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
-		model.addAttribute("memberInfo", myPageService.selectMemberInfo((MemberVO) session.getAttribute("loginInfo")));
+		model.addAttribute("memberInfo", myPageService.selectMemberInfo((MemberVO)session.getAttribute("loginInfo")));
+		model.addAttribute("myTells", myPageService.selectTell(myPageService.selectTellCnt((MemberVO)session.getAttribute("loginInfo"))));
 		return "member/my_info";
 
 	}
@@ -44,8 +44,17 @@ public class MyPageController {
 	// 나의 정보 수정하기 ajax
 	@ResponseBody
 	@PostMapping("/myInfoAjax")
-	public MemberVO myInfoAjax(MemberVO MemberVO) {
-		return myPageService.selectMemberInfo(MemberVO);
+	public MemberVO myInfoAjax(MemberVO memberVO) {
+		//전화번호 주소 따로따로 뽑아서 보냄
+		return myPageService.selectTell(myPageService.selectTellCnt(memberVO));
+	}
+	
+	//나의 정보 수정
+	@PostMapping("/updateMyInfo")
+	public String updateMyInfo(MemberVO memberVO) {
+		System.out.println("여긴 오냐!!!!!!!!");
+		myPageService.updateMyInfo(memberVO);
+		return "redirect:/myPage/myInfo";
 	}
 
 }

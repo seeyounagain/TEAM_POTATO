@@ -4,7 +4,7 @@
 <mapper namespace="myPageMapper">
 	
 	<!-- resultmap 작성 카운트용 추가 1025봉 -->
-	<resultMap type="com.potato.project.member.vo.MemberVO" id="myPage">
+	<resultMap type="com.potato.project.member.vo.MemberVO" id="memberVO">
 		<id column="ID" 				property="id"/>
 		<result column="PW" 			property="pw"/>
 		<result column="NAME" 			property="name"/>
@@ -14,9 +14,14 @@
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
 		<result column="FAVORITE" 		property="favorite"/>
-		<result column="RENTAL_CNT" 		property="rentalCnt"/>
-		<result column="RESERVE_CNT" 		property="reserveCnt"/>
-		<result column="RETURN_CNT" 		property="returnCnt"/>
+		<result column="RENTAL_CNT" 	property="rentalCnt"/>
+		<result column="RESERVE_CNT" 	property="reserveCnt"/>
+		<result column="RETURN_CNT" 	property="returnCnt"/>
+		<result column="TELL_CNT" 		property="tellCnt"/>
+		<result column="TELL1" 			property="tell1"/>
+		<result column="TELL2" 			property="tell2"/>
+		<result column="TELL3" 			property="tell3"/>
+		<result column="POST_CODE" 		property="postCode"/>
 	</resultMap>
 	
 	<!-- 대출resultmap 추가 2025-봉 -->
@@ -39,7 +44,7 @@
 	</resultMap>
 	
 	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
-	<select id="memberBookSituation" resultMap="myPage">
+	<select id="memberBookSituation" resultMap="memberVO">
 		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
     		, COUNT(RESERVE_CODE) AS RESERVE_CNT
     		, COUNT(RETURN_DATE) AS RETURN_CNT
@@ -47,8 +52,16 @@
 		WHERE C.ID = #{id}
 	</select>
 	
-	<!-- 회원 정보 조회//1025 봉 -->
-	<select id="selectMemberInfo" resultMap="myPage">
+	<!-- 전화번호 길이 구하기 -->
+	<select id="selectTellCnt" resultMap="memberVO">
+		SELECT ID 
+			, LENGTH(TELL) AS TELL_CNT
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
+	
+		<!-- 회원 정보 조회//1025 봉 -->
+	<select id="selectMemberInfo" resultMap="memberVO">
 		SELECT ID
 			, NAME
 			, ADDR
@@ -58,6 +71,37 @@
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
+	
+	<!-- 전화번호&주소 빼고이 -->
+	<select id="selectTell" resultMap="memberVO">
+		SELECT ID
+			, NAME
+			, GENDER
+			, FAVORITE
+			, SUBSTR(TELL,0,3) AS TELL1
+			<if test="tellCnt == 12">
+    		, SUBSTR(TELL,5,3) AS TELL2
+    		, SUBSTR(TELL,9,4) AS TELL3
+			</if>
+			<if test="tellCnt == 13">
+    		, SUBSTR(TELL,5,4) AS TELL2
+    		, SUBSTR(TELL,10,4) AS TELL3
+			</if>
+			, SUBSTR(ADDR,0,5) AS POST_CODE
+			, SUBSTR(ADDR,6) AS ADDR
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMyInfo">
+		UPDATE MEMBER
+		SET ADDR = #{addr}
+    		, TELL = #{tell}
+    		, GENDER = #{gender}
+    		, FAVORITE = #{favorite}
+		WHERE ID = #{id}
+	</update>
 </mapper>
 
 
