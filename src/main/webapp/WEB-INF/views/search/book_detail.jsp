@@ -72,6 +72,7 @@
 		   		<c:if test="${bookVO.status eq 2 }">대출중</c:if>
 		   		<c:if test="${bookVO.status eq 3 }">연체중</c:if>
 		   		<c:if test="${bookVO.status eq 4 }">대출중 / 예약중</c:if>
+		   		<c:if test="${bookVO.status eq 5 }">대출대기중 / 예약중</c:if>
 		    	</div>
 		   		<c:if test="${bookVO.status eq 2 }">
 	    		<div class="row mb-4 mt-4 pb-2 border-bottom">

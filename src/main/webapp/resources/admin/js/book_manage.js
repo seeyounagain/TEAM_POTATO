@@ -8,12 +8,29 @@
 			
 			$('#rental').remove();
 			
+			
 			var str = "";
 			
 			str += '<tr class="justify-content-center text-center" id="rental" >';
 			str += '<td colspan="3">';
+
+			
+			var reserveId = $(this).next().val();
+			
+			if (reserveId != null) {
+				
+			str += '예약자&nbsp;:&nbsp;';
+			str += '<input type="text" id="reserveId" name="id" value="' + reserveId + '" readonly style="width: 200x;">';
+				
+			}
+			
+			else {
+			
 			str += '대여자&nbsp;:&nbsp;';
 			str += '<input type="text" id="id" name="id" placeholder="회원아이디" required style="width: 200x;">';
+			
+			}
+			
 			str += '<button type="button" class="btn btn-primary px-3 mx-3" id="rentalB">대출</button>';
 			str += '</td>';
 			str += '</tr>';
@@ -33,18 +50,19 @@
 			
 			var str = "";
 			
-			str += '<tr class="justify-content-center text-center" id="return" >';
-			str += '<td colspan="3">';
-			str += '반납자&nbsp;:&nbsp;';
-			str += '<input type="text" id="id" name="id" value="' + rentalId + '" readonly style="width: 200x;">';
-			
-			
 			if (reserveId != null) {
 				
 			str += '&nbsp;&nbsp;예약자&nbsp;:&nbsp;';
 			str += '<input type="text" id="reserveId" name="id" value="' + reserveId + '" readonly style="width: 200x;">';
 				
 			}
+			
+			str += '<tr class="justify-content-center text-center" id="return" >';
+			str += '<td colspan="3">';
+			str += '반납자&nbsp;:&nbsp;';
+			str += '<input type="text" id="id" name="id" value="' + rentalId + '" readonly style="width: 200x;">';
+			
+			
 			
 			
 			str += '<button type="button" class="btn btn-warning px-3 mx-3" id="returnB">반납</button>';
@@ -67,6 +85,17 @@
 				return ;
 			}
 			
+			var reserveId;
+			
+			var statusText = $(this).parent().parent().prev().children().eq(1).children().text();
+			
+			console.log(statusText);
+			
+			if (statusText == '대출대기') {
+				
+				reserveId = id;
+				
+			}
 					
 			var menuCode = 'MENU_006';
 			var sideMenuCode = 'SIDE_MENU_013';
@@ -104,7 +133,7 @@
 								   		$.ajax({
 								            url: '/libManage/rentalBookAjax', // 요청경로
 								            type: 'post', // post 메소드 방식
-								            data: {'id':id,'bookCode':bookCode,'status':2}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+								            data: {'id':id,'bookCode':bookCode,'status':2,'reserveId':reserveId}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 								            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 								            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 								         		alert('도서가 대출되었습니다.');
@@ -160,20 +189,21 @@
 			var menuCode = 'MENU_006';
 			var sideMenuCode = 'SIDE_MENU_013';		
 				
-			var id = $(this).prev().prev().val();
-			var reserveId = $(this).prev().val();
+			var id = $(this).prev().val();
+			var reserveId = $(this).prev().prev().val();
 			var bookCode = $(this).parent().parent().prev().children().last().children().attr('data-bookCode');
+			
+			console.log('반납자 : ' + id);
+			console.log('예약자 : ' + reserveId);
 			
 			var result = confirm('도서를 반납하시겠습니까?')
 			
 			if (result) {
 			
-				/* 예약자 있을 경우 */
 				
-				var status = 0;
+				var status = 1;
 				
-				console.log('예약자 아이디 : ' + reserveId)
-				
+				/* 예약자 있을 경우 5 */
 				if (reserveId != null) {
 					status = 5;
 				}
@@ -182,7 +212,7 @@
 		   		$.ajax({
 		            url: '/libManage/returnBookAjax', // 요청경로
 		            type: 'post', // post 메소드 방식
-		            data: {'id':id,'bookCode':bookCode,'status':status}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+		            data: {'id':id,'bookCode':bookCode,'status':status,'reserveId':reserveId}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 		            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 		            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 		         		alert('도서가 반납되었습니다.');
@@ -250,6 +280,9 @@
 		         		else if (element.status == 4) {
 							str += '<div class="mt-2">예약중';
 						}
+		         		else if (element.status == 5) {
+							str += '<div class="mt-2">대출대기중';
+						}
 		         		
 		         		str += '&nbsp;/&nbsp;' + element.area + '</div>'
 		         		str += '</td>';
@@ -270,7 +303,7 @@
 						}
 						
 						else if (element.status == 5) {
-							str += '<button type="button" class="btn btn-primary px-5" id="rentalBtn">대출</button>';
+							str += '<button type="button" class="btn btn-primary rentalB" id="rentalBtn">대출대기</button>';
 							str += '<input type="hidden" id="reserveId" value="' + element.reserveId + '">';
 						}
 						

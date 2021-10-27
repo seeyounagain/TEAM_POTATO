@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=58" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=71" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -23,6 +23,10 @@
 .titleA:hover {
 	color: black;
 }
+.rentalB {
+    padding-right: 2.2rem!important;
+    padding-left: 2.2rem!important;
+}
 </style>
 </head>
 <body>
@@ -36,6 +40,7 @@
 		<option value="2">대출중</option>
 		<option value="3">연체중</option>
 		<option value="4">예약중</option>
+		<option value="5">대출대기중</option>
 	</select>
 	
 <table id="bookT" class="table table-hover table-bordered caption-top">
@@ -60,7 +65,7 @@
 			<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}&sideMenuCode=SIDE_MENU_013">${book.title }</a></div>
 			<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
 			<div class="mt-2"><c:if test="${book.status eq 1 }">대출 가능</c:if><c:if test="${book.status eq 2 }">대출중</c:if><c:if test="${book.status eq 3 }">연체중</c:if>
-			<c:if test="${book.status eq 4 }">예약중</c:if>&nbsp;/&nbsp;${book.area }</div>
+			<c:if test="${book.status eq 4 }">예약중</c:if><c:if test="${book.status eq 5 }">대출대기중</c:if>&nbsp;/&nbsp;${book.area }</div>
 		</td>
 		<td class="text-center">
 				<c:if test="${book.status eq 1 }">
@@ -76,7 +81,7 @@
 					<input type="hidden" id="reserveId" value="${book.reserveId }">
 				</c:if>
 				<c:if test="${book.status eq 5 }">
-					<button type="button" class="btn btn-warning px-5 " id="rentalBtn">대출대기</button>
+					<button type="button" class="btn btn-primary rentalB " id="rentalBtn">대출대기</button>
 					<input type="hidden" id="reserveId" value="${book.reserveId }">
 				</c:if>
 		</td>
