@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.RentalVO;
+import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.common.vo.SideMenuVO;
 import com.potato.project.member.service.MemberService;
 import com.potato.project.member.vo.MemberVO;
@@ -25,6 +29,9 @@ public class MemberController {
 	
 	@Resource(name = "commonService")
 	private CommonService commonService;
+	
+	@Resource(name = "adminService")
+	private AdminService adminService;
 	
 	// 회원가입 안내 페이지로 이동
 	@GetMapping("/memberJoinInfo")
@@ -92,6 +99,15 @@ public class MemberController {
 		session.removeAttribute("loginInfo");
 		
 		return "redirect:/common/main";
+		
+	}
+	
+	// 도서 예약
+	@ResponseBody
+	@PostMapping("/reserveBookAjax")
+	public int reserveBookAjax(ReserveVO reserveVO,BookVO bookVO) {
+		
+		return adminService.insertReserve(reserveVO, bookVO);
 		
 	}
 

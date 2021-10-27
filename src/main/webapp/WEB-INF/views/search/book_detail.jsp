@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/search_form.js?ver=1" ></script>
+<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=4" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -71,7 +71,15 @@
 		   		자료상태 : <c:if test="${bookVO.status eq 1 }">대출가능</c:if>
 		   		<c:if test="${bookVO.status eq 2 }">대출중</c:if>
 		   		<c:if test="${bookVO.status eq 3 }">연체중</c:if>
-		   		<c:if test="${bookVO.status eq 4 }">예약중</c:if>
+		   		<c:if test="${bookVO.status eq 4 }">대출중 / 예약중</c:if>
+		    	</div>
+	    		<div class="row mb-4 mt-4 pb-2 border-bottom">
+		   		<c:if test="${bookVO.status eq 2 }">
+		   		<input type="button" class="btn btn-primary" id="reserveBtn" value="예약">
+		   		<input type="hidden" id="id" value="${sessionScope.loginInfo.id }">
+		   		<input type="hidden" id="menuCode" value="${menuVO.menuCode }">
+		   		<input type="hidden" id="bookCode" value="${bookVO.bookCode }">
+		   		</c:if>
 		    	</div>
 	    	</div>
 	    	<div class="col-12">

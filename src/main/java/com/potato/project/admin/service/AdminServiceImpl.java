@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.RentalVO;
+import com.potato.project.common.vo.ReserveVO;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
@@ -30,14 +31,14 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
-	// 도서 대여 정보 등록
+	// 도서 대여 정보 등록 + 상태 변경
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int insertRental(RentalVO rentalVO) {
+	public int insertRental(RentalVO rentalVO,BookVO bookVO) {
 		
 		sqlSession.insert("searchMapper.insertRental",rentalVO);
 		
-		return sqlSession.update("searchMapper.updateRentalStatus",rentalVO);
+		return sqlSession.update("searchMapper.updateBookStatus",bookVO);
 		
 	}
 	
@@ -61,6 +62,17 @@ public class AdminServiceImpl implements AdminService{
 	public int countBookInputDate(BookVO bookVO) {
 		
 		return sqlSession.selectOne("searchMapper.countBook",bookVO);
+		
+	}
+	
+	// 도서 예약 정보 등록 + 상태 변경
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertReserve(ReserveVO reserveVO, BookVO bookVO) {
+		
+		sqlSession.insert("searchMapper.insertReserve",reserveVO);
+		
+		return sqlSession.update("searchMapper.updateBookStatus",bookVO);
 		
 	}
 	

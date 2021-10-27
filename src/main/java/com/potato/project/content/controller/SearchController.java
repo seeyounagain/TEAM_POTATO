@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
@@ -41,7 +43,7 @@ public class SearchController {
 		
 	}
 	
-	// 신착도서 페이지로 이동
+	// 신착도서 페이지로 이동 + 페이징
 	@GetMapping("/newBookList")
 	public String newBookList(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
 		
@@ -49,7 +51,7 @@ public class SearchController {
 		
 		bookVO.setTotalCnt(totalCnt);
 		bookVO.setPageInfo();
-		
+	
 		model.addAttribute("bookList",searchService.selectBookListPaging(bookVO));
 		
 		return "search/new_book_list";
@@ -65,5 +67,23 @@ public class SearchController {
 		return "search/book_detail";
 		
 	}
+	
+	// 도서 상세페이지에서 예약 버튼 클릭 시 로그인 조회 Ajax
+	@ResponseBody
+	@PostMapping("/isLoginAjax")
+	public boolean isLoginAjax(HttpSession session) {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginInfo");
+		
+		if (memberVO == null) {
+			return false;
+		}
+		
+		else {
+			return true;
+		}
+		
+	}
+	
 	
 }

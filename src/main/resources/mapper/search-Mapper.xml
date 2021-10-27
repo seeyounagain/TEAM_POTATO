@@ -187,8 +187,8 @@
                 WHERE B.KDC_NUM = C.KDC_NUM
                 AND B.BOOK_CODE = I.BOOK_CODE
 				<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
-				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYYMMDD')
-				AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYYMMDD')
+				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
+				AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
 				</if>
                 ORDER BY INPUT_DATE DESC)
         )
@@ -258,7 +258,7 @@
 		)
 	</insert>
 	
-	<!-- 도서 대여 & 도서 상태 변경 -->
+	<!-- 도서 대여  -->
 	<insert id="insertRental">
 		INSERT INTO RENTAL (
 		    RENTAL_CODE
@@ -271,16 +271,29 @@
 		)
 	</insert>
 	
-	<!-- 도서 대여 & 도서 상태 변경 -->
-	<update id="updateRentalStatus">
+	<!-- 도서 상태 변경 -->
+	<update id="updateBookStatus">
 		UPDATE BOOK
-		SET STATUS = 2
+		SET STATUS = #{status}
 		WHERE BOOK_CODE = #{bookCode}
 	</update>
 	
+	<!-- 도서 예약 -->
+	<insert id="insertReserve">
+		INSERT INTO RESERVE (
+		      RESERVE_CODE
+		    , ID
+		    , BOOK_CODE
+		) VALUES (
+		    (SELECT 'RESERVE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RESERVE_CODE,9,4))),0) + 1,4,0) FROM RESERVE)
+		    , #{id}
+		    , #{bookCode}
+		)
+	</insert>
+		
 	<!-- ID로 대여&예약 도서 객수 조회 -->
 	<select id="selectIdAllCount" resultType="int">
-		SELECT (SELECT COUNT(ID) FROM RENTAL WHERE ID = #{id})
+		SELECT (SELECT COUNT(ID) FROM RENTAL WHERE ID = #{id} AND RETURN_DATE IS NULL)
 		+ (SELECT COUNT(ID) FROM RESERVE WHERE ID = #{id}) AS COUNT_ID
 		FROM DUAL	
 	</select>
@@ -292,7 +305,6 @@
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
-	
 	
 	<!-- 책 상세정보 조회 -->
 	<select id="selectBookDetail" resultMap="book">
@@ -321,13 +333,13 @@
 		AND B.BOOK_CODE = #{bookCode}
 	</select>
 	
-	<!-- 페이지 처리를 위한 총 게시글 수 조회 -->
+	<!-- 페이징 처리를 위한 총 도서 수 조회 -->
 	<select id="countBook" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
 		<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
-		WHERE INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYYMMDD')
-		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYYMMDD')
+		WHERE INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
+		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
 		</if>
 	</select>
 	

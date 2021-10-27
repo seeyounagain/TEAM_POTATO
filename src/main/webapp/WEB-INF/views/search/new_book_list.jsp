@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/search_form.js?ver=1" ></script>
+<script type="text/javascript" src="/resources/search/js/new_book_list.js?ver=13" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -31,6 +31,7 @@
 	background-color: #6c757d;
 	color: white;
     border-color: #6c757d;
+}
 </style>
 </head>
 <body>
@@ -41,21 +42,40 @@
 		<hr>
 		<h5>도서관에 새로 들어온 책을 안내해드립니다.</h5>
 		<div class="row justify-content-center">
+			<div class="input-group mb-3">
+			  <input type="date" <c:if test="${not empty bookVO.searchBegin }">value="${bookVO.searchBegin }"</c:if> id="searchBegin" name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <span style="align-self: center;">&nbsp;~&nbsp;이후&nbsp;</span>
+			  <input type="date" <c:if test="${not empty bookVO.searchEnd }">value="${bookVO.searchEnd }"</c:if> id="searchEnd" name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default">
+			  <span style="align-self: center;">&nbsp;~&nbsp;이내&nbsp;에 들어온 도서는 총 ${bookList.size() } 권입니다.</span>
+			  <input type="hidden" id="menuCode" value="${menuVO.menuCode}">
+			</div>		
 			<div class="col-12">
 			<table class="table table-hover table-bordered caption-top">
-					<c:forEach var="book" items="${bookList }" varStatus="status">
-					<tr>
-						<td><span>${status.count }.</span>
-							<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}">${book.title }</a></div>
-							<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
-							<div class="mt-2"><c:if test="${book.status eq 0 }">대출 가능</c:if><c:if test="${book.status eq 1 }">대출중</c:if><c:if test="${book.status eq 2 }">예약중</c:if>
-							&nbsp;/&nbsp;${book.area }</div>
-						</td>
-						<td class="text-center">
-							<img style="width: 100px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
-						</td>
-					</tr>
-					</c:forEach>
+				<c:choose>
+					<c:when test="${not empty bookList }">
+						<c:forEach var="book" items="${bookList }" varStatus="status">
+						<tr>
+							<td><span>${status.count }.</span>
+								<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}">${book.title }</a></div>
+								<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
+								<div class="mt-2"><c:if test="${book.status eq 0 }">대출 가능</c:if><c:if test="${book.status eq 1 }">대출중</c:if><c:if test="${book.status eq 2 }">예약중</c:if>
+								&nbsp;/&nbsp;${book.area }</div>
+							</td>
+							<td class="text-center">
+								<img style="width: 100px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
+							</td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="2" class="text-center">
+								해당되는 도서가 없습니다.
+							</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+					
 			</table>
 			</div>
 			<div class="col-12">

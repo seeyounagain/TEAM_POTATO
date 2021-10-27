@@ -41,8 +41,8 @@ public class PageVO extends SearchVO {
 	// 1페이지 부터 시작, 글 10개씩 5페이지씩 보여주기로 기본값 설정
 	public PageVO() {
 		nowPage = 1;
-		displayCnt = 1;
-		displayPageCnt = 2;
+		displayCnt = 5;
+		displayPageCnt = 3;
 	}
 
 	public int getNowPage() {
