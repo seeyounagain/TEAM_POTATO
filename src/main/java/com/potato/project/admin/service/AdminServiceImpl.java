@@ -36,9 +36,41 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int insertRental(RentalVO rentalVO,BookVO bookVO) {
 		
+		// 대출대기중 -> 예약자가 대출할 경우 예약 데이터 삭제
+		if (bookVO.getReserveId() != null) {
+			sqlSession.delete("searchMapper.deleteReserve",rentalVO);
+		}
+		
 		sqlSession.insert("searchMapper.insertRental",rentalVO);
 		
+		
 		return sqlSession.update("searchMapper.updateBookStatus",bookVO);
+		
+	}
+	
+	// 도서 예약 정보 등록 + 상태 변경
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertReserve(ReserveVO reserveVO, BookVO bookVO) {
+		
+		sqlSession.insert("searchMapper.insertReserve",reserveVO);
+		
+		return sqlSession.update("searchMapper.updateBookStatus",bookVO);
+		
+	}
+	
+	// 도서 반납일 업데이트 + 도서 상태 변경 + 예약자 유무에 따라 데이터 업데이트
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateReturn(ReserveVO reserveVO, BookVO bookVO) {
+		System.out.println("예약자 있으면 5 아니면 0 : " + bookVO.getStatus());
+		// 예약자 있을 경우 도서상태 대출대기중으로 변경, 도서 대출가능 기간 업데이트
+		if (bookVO.getStatus() == 5) {
+			sqlSession.update("searchMapper.updateBookStatus",bookVO);
+			sqlSession.update("searchMapper.updateReserveDate",reserveVO);
+		}
+		
+		return sqlSession.update("searchMapper.updateReturnDate",reserveVO);
 		
 	}
 	
@@ -65,15 +97,5 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
-	// 도서 예약 정보 등록 + 상태 변경
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int insertReserve(ReserveVO reserveVO, BookVO bookVO) {
-		
-		sqlSession.insert("searchMapper.insertReserve",reserveVO);
-		
-		return sqlSession.update("searchMapper.updateBookStatus",bookVO);
-		
-	}
 	
 }

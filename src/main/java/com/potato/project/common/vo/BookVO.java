@@ -26,6 +26,9 @@ public class BookVO extends PageVO{
 	
 	private BookImgVO bookImgVO	; // 이미지VO
 	
+	private String rentalId	; 		// 대여자 ID
+	private String reserveId	; 	// 예약자 ID
+	
 	public String getIsbn() {
 		return isbn;
 	}
@@ -139,6 +142,18 @@ public class BookVO extends PageVO{
 	}
 	public void setBookImgVO(BookImgVO bookImgVO) {
 		this.bookImgVO = bookImgVO;
+	}
+	public String getRentalId() {
+		return rentalId;
+	}
+	public void setRentalId(String rentalId) {
+		this.rentalId = rentalId;
+	}
+	public String getReserveId() {
+		return reserveId;
+	}
+	public void setReserveId(String reserveId) {
+		this.reserveId = reserveId;
 	}
 	
 	

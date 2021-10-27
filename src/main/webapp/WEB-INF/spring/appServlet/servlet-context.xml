@@ -52,7 +52,9 @@
 			<exclude-mapping path="/libManage/selectUserBookCntAjax"/>
 			<exclude-mapping path="/libManage/selectIsMemberAjax"/>
 			<exclude-mapping path="/libManage/rentalBookAjax"/>
+			<exclude-mapping path="/libManage/returnBookAjax"/>
 			<exclude-mapping path="/libManage/regItem"/>
+			<exclude-mapping path="/search/isLoginAjax"/>
 			<exclude-mapping path="/service/chooseSeat"/>
 			<exclude-mapping path="/service/seatIdCheck"/>
 			<exclude-mapping path="/service/seatMemberIdCheck"/>

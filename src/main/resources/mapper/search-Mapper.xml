@@ -29,6 +29,8 @@
 		<result column="INPUT_DATE" 	property="inputDate"/>
 		<result column="AREA" 			property="area"/>
 		<result column="STATUS" 		property="status"/>
+		<result column="RENTAL_ID" 		property="rentalId"/>
+		<result column="RESERVE_ID" 	property="reserveId"/>
 		<collection property="bookImgVO" resultMap="bookImg"/>
 	</resultMap>
 	
@@ -203,7 +205,7 @@
 		FROM BOOK_CATE
 	</select>
 	
-	<!-- 상태별 도서 조회 -->
+	<!-- 상태별 도서 조회 (도서관리 페이지) -->
 	<select id="selectStatusBookList" resultMap="book">
 		SELECT
 		    ISBN
@@ -223,6 +225,8 @@
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
+		    , (SELECT ID FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RESERVE_ID
+		    , (SELECT ID FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS RENTAL_ID
 		FROM BOOK B, BOOK_CATE C
 		WHERE B.KDC_NUM = C.KDC_NUM
 		<if test="status != 0">
@@ -290,7 +294,32 @@
 		    , #{bookCode}
 		)
 	</insert>
-		
+	
+	<!-- 도서 예약 데이터 삭제 -->
+	<delete id="deleteReserve">
+		DELETE RESERVE
+		WHERE ID = #{id}
+		AND BOOK_CODE = #{bookCode}
+	</delete>
+	
+	<!-- 도서 반납. 실제 도서 반납일 업데이트 -->
+	<update id="updateReturnDate">
+		UPDATE RENTAL 
+		SET RETURN_DATE = SYSDATE
+		WHERE ID = #{id}
+		AND BOOK_CODE = #{bookCode} 
+		AND RETURN_DATE IS NULL
+	</update>
+	
+	<!-- 도서 반납. 도서 예약 기간 업데이트 -->
+	<update id="updateReserveDate">
+		UPDATE RESERVE
+		SET RENTABLE_START_DATE = SYSDATE,
+		RENTABLE_END_DATE = SYSDATE + 2
+		WHERE ID = #{id}
+		AND BOOK_CODE = #{bookCode}
+	</update>
+	
 	<!-- ID로 대여&예약 도서 객수 조회 -->
 	<select id="selectIdAllCount" resultType="int">
 		SELECT (SELECT COUNT(ID) FROM RENTAL WHERE ID = #{id} AND RETURN_DATE IS NULL)
@@ -327,6 +356,8 @@
 		    , AREA
 		    , STATUS
 		    , ATTACHED_IMG_NAME
+            , (SELECT ID FROM RESERVE WHERE BOOK_CODE = #{bookCode}) AS RESERVE_ID
+            , (SELECT ID FROM RENTAL WHERE BOOK_CODE = #{bookCode} AND RETURN_DATE IS NULL) AS RENTAL_ID
 		FROM BOOK B, BOOK_CATE C, BOOK_IMG I
 		WHERE B.KDC_NUM = C.KDC_NUM
 		AND B.BOOK_CODE = I.BOOK_CODE

@@ -18,6 +18,9 @@ public interface AdminService {
 	// 도서 예약 정보 등록 + 도서 상태 변경
 	int insertReserve(ReserveVO reserveVO,BookVO bookVO);
 	
+	// 도서 반납 + 도서 상태 변경
+	int updateReturn(ReserveVO reserveVO,BookVO bookVO);
+	
 	// ID로 대여&예약 도서 객수 조회
 	int selectIdAllCount(String id);
 	

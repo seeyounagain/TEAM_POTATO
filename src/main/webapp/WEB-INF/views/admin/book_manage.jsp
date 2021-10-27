@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=44" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=58" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -63,11 +63,21 @@
 			<c:if test="${book.status eq 4 }">예약중</c:if>&nbsp;/&nbsp;${book.area }</div>
 		</td>
 		<td class="text-center">
-				<c:if test="${book.status eq 1 or book.status eq 4 }">
-					<button type="button" class="btn btn-primary px-5 " id="rentalBtn">대출</button>
+				<c:if test="${book.status eq 1 }">
+					<button type="button" class="btn btn-primary px-5" id="rentalBtn">대출</button>
 				</c:if>
-				<c:if test="${book.status eq 2 or book.status eq 3 }">
+				<c:if test="${book.status eq 2 or book.status eq 3}">
 					<button type="button" class="btn btn-warning px-5 " id="returnBtn">반납</button>
+					<input type="hidden" id="rentalId" value="${book.rentalId }">
+				</c:if>
+				<c:if test="${book.status eq 4 }">
+					<button type="button" class="btn btn-warning px-5 " id="returnBtn">반납</button>
+					<input type="hidden" id="rentalId" value="${book.rentalId }">
+					<input type="hidden" id="reserveId" value="${book.reserveId }">
+				</c:if>
+				<c:if test="${book.status eq 5 }">
+					<button type="button" class="btn btn-warning px-5 " id="rentalBtn">대출대기</button>
+					<input type="hidden" id="reserveId" value="${book.reserveId }">
 				</c:if>
 		</td>
 		<td class="text-center">

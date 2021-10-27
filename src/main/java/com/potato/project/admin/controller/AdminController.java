@@ -25,6 +25,7 @@ import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.common.vo.RentalVO;
+import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 
@@ -133,6 +134,15 @@ public class AdminController {
 	public int rentalBook(RentalVO rentalVO,BookVO bookVO) {
 		
 		return adminSerivce.insertRental(rentalVO,bookVO);
+		
+	}
+	
+	// 도서 반납
+	@ResponseBody
+	@PostMapping("/returnBookAjax")
+	public int returnBook(ReserveVO reserveVO,BookVO bookVO) {
+		
+		return adminSerivce.updateReturn(reserveVO, bookVO);
 		
 	}
 	
