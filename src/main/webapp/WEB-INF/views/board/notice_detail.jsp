@@ -11,14 +11,15 @@
 <div class="row justify-content-center">
    <div class="col-8 mainDiv">
    		<div class="titleDiv">
-   			<h3>공지사항</h3>
+   			<h1 class="display-6 text-center">공지사항</h1>
+   			<hr>
    		</div>
    		
    		<div class="tableDiv">
    			<table class="table">
    				<thead>
    					<tr>
-	   					<th colspan="6">${notice.title }</th>
+	   					<td colspan="6" style="font-size: x-large;">${notice.title }</td>
    					</tr>
    				</thead>
    				<tbody>
@@ -28,28 +29,27 @@
 	   					<td>작성일</td>
 	   					<td>${notice.createDate }</td>
 	   					<td>조회수</td>
-	   					<td>100</td>
+	   					<td>${notice.readCnt }</td>
 	   				</tr>
 	   				<tr>
-	   					<td>
+	   					<td colspan="6">${notice.content }</td>
+	   				</tr>
+					<tr>
+						<td colspan="6">
 	   						<div class="row justify-content-center">
 				    			<img id="noticeImg" src="/resources/noticeFileUpload/${noticeVO.attachFileVO.attachedImgName }">
 				    		</div>
 	   					</td>
-	   					<td>${notice.content }</td>
-	   				</tr>
+					</tr>
    				</tbody>
    			</table>
    		</div>
-   		<div class="btnDiv">
-	   		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
-	   			<input type="button" value="삭제" onclick="location.href='/board/deleteNotice?noticeCode=${notice.noticeCode}&menuCode=${menuVO.menuCode }';">
+   		<div class="btnDiv text-center">
+	   		<c:if test="${sessionScope.loginInfo.isAdmin  eq 'Y' }">
+	   			<input class="btn btn-primary btn-md" type="button" value="삭제" onclick="location.href='/board/deleteNotice?noticeCode=${notice.noticeCode}&menuCode=${menuVO.menuCode }';">
 	   		</c:if>
-	   			<input type="button" value="뒤로가기" onclick="history.back();">
+	   			<input class="btn btn-primary btn-md" type="button" value="뒤로가기" onclick="location.href='/board/notice?menuCode=${menuVO.menuCode}';">
    		</div>
-   		
-   			
-   		
    	</div>
 </div>
 </body>

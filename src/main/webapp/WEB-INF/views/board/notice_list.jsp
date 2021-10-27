@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.mainDiv{
+	background-color: white;
+}
 .titleDiv{
 	width: 100%;
 	margin: 0 auto;
@@ -18,13 +21,17 @@
 .table{
 	width: 100%;
 }
+a:hover{
+	color: black;
+}
 </style>
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv" style="background-color: #dddddd;">
+   <div class="col-8 mainDiv">
    		<div class="titleDiv">
-   			<h3>공지사항</h3>
+   			<h1 class="display-6 text-center">공지사항</h1>
+   			<hr>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
@@ -37,20 +44,29 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list }" var="info" varStatus="status">
-								<tr>
-									<td>${status.count }</td>
-									<td><a href="/board/noticeDetail?noticeCode=${info.noticeCode }">${info.title }</a></td>
-									<td>${info.createDate }</td>
-									<td>${info.readCnt }</td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr style="height: 200px;">
+										<td colspan="4">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list }" var="info" varStatus="status">
+										<tr>
+											<td>${status.count }</td>
+											<td><a href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
+											<td>${info.createDate }</td>
+											<td>${info.readCnt }</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
-				<div class="btnDiv">
+				<div class="btnDiv text-center">
 					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
-						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록하기</button>
+						<button type="button" class="btn btn-primary btn-md" onclick="location.href='/board/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록</button>
 					</c:if>
 			</div>
 		</div>

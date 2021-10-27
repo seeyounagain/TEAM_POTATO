@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.mainDiv{
+	background-color: white;
+}
 .titleDiv{
 	width: 100%;
 	margin: 0 auto;
@@ -18,13 +21,23 @@
 .table{
 	width: 100%;
 }
+a:hover{
+	color: black;
+}
+.answerCnt{
+	padding-left: 10px;
+	color: gray;
+	font-size: small;
+	
+}
 </style>
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv" style="background-color: #dddddd;">
+   <div class="col-8 mainDiv">
    		<div class="titleDiv">
-   			<h3>상담/문의</h3>
+   			<h1 class="display-6 text-center">상담 / 문의</h1>
+   			<hr>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
@@ -37,22 +50,29 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:if test="${empty list}">
+								<tr style="height: 200px;">
+									<td colspan="4">등록된 글이 없습니다.</td>
+								</tr>
+							</c:if>
+							
 							<c:forEach items="${list }" var="info" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
 								<td>
-								<!-- 관리자 로그인 상태로 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
-								<a 
+								<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 									<c:choose>
-										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
-											href="/board/qnaDetail?qnaCode=${info.qnaCode}"
+										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' or empty info.qnaPw}">
+											<a href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>	
 										</c:when>
 										<c:otherwise>
-											href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}"
+											<img src="/resources/img/icon_secret.png" width="13px;"> 
+											<a href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>	
 										</c:otherwise>
-									</c:choose>
-								>
-								${info.title }</a>	
+									</c:choose>	
+									<c:if test="${not empty acnt}">
+										<img src="/resources/img/icon_new.png" width="25px;"> 
+									</c:if>
 								</td>
 								<td>${info.name }</td>
 								<td>${info.createDate }</td>
@@ -62,8 +82,8 @@
 					</table>
 				</div>
 				<c:if test="${sessionScope.loginInfo.isAdmin eq 'N' }">
-					<div class="btnDiv">
-						<button type="button" class="btn btn-primary btn-lg" onclick="location.href='/board/qnaForm?menuCode=${menuVO.menuCode}';">문의/상담 등록하기</button>
+					<div class="btnDiv text-center">
+						<button type="button" class="btn btn-primary btn-md" onclick="location.href='/board/qnaForm?menuCode=${menuVO.menuCode}';">상담 / 문의 등록</button>
 					</div>                                                
 				</c:if>
 			</div>

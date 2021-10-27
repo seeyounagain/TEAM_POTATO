@@ -29,10 +29,16 @@ public interface BoardService {
 	//공지사항 삭제
 	int deleteNotice(NoticeVO noticeVO);
 	
+	//조회수 증가
+	int updateReadCnt(NoticeVO noticeVO);
+	
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
+	
+	//답변 갯수 카운트
+	int answerCnt(QnaVO qnaVO);
 	
 	//상담문의 입력
 	void insertQna(QnaVO qnaVO);
@@ -45,6 +51,12 @@ public interface BoardService {
 	
 	//상담문의 답변 조회
 	List<QnaAnswerVO> selectAnsewerList(QnaAnswerVO qnaAnswerVO);
+	
+	//문의글, 답변 동시 삭제
+	int deleteQna(QnaVO qnaVO);
+	
+	//답변만 삭제
+	int deleteAnswer(QnaVO qnaVO);
 	
 	
 }

@@ -109,10 +109,19 @@
 		     , NAME
 		     , CONTENT
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		     , READ_CNT
 		FROM NOTICE
 		WHERE NOTICE_CODE = #{noticeCode}
 	</select>
 	
+	<!-- 조회수 증가 -->
+	<update id="updateReadCnt">
+		UPDATE NOTICE
+		SET
+		READ_CNT = READ_CNT + 1
+		WHERE NOTICE_CODE = #{noticeCode}
+	</update>
+	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice">
 		DELETE 
 		FROM NOTICE
@@ -185,6 +194,13 @@
 		)
 	</insert>
 	
+	<!-- 답변 갯수 카운트  -->
+	<select id="answerCnt" resultType="int">
+		SELECT COUNT(ANSWER_CODE) AS ACNT
+		FROM QNA_ANSWER
+		WHERE QNA_CODE = #{qnaCode}
+	</select>
+	
 	<!-- 상담문의 답변 조회 -->
 	<select id="selectAnsewerList" resultMap="qnaAnswer">
 		SELECT ANSWER_CODE
@@ -197,15 +213,19 @@
 		WHERE QNA_CODE = #{qnaCode}
 	</select>
 	
+	<!-- 문의글, 답변 동시 삭제 -->
 	<delete id="deleteQna">
 		DELETE 
 		FROM QNA
-		WHERE QNA_CODE = ${qnaCode}
+		WHERE QNA_CODE = #{qnaCode}
 	</delete>
 	
+	<!-- 답변만 삭제 -->
 	<delete id="deleteAnswer">
 		DELETE 
-		FROM QNA
-		WHERE QNA_CODE = ${qnaCode}
+		FROM (SELECT A.ANSWER_CODE
+		      FROM QNA Q, QNA_ANSWER A
+		      WHERE Q.QNA_CODE = A.QNA_CODE
+		      AND A.QNA_CODE = #{qnaCode})
 	</delete>
 </mapper>

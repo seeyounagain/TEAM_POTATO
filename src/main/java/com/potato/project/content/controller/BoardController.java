@@ -26,7 +26,6 @@ import com.potato.project.content.service.BoardService;
 import com.potato.project.content.vo.NoticeVO;
 import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
-import com.sun.java.swing.plaf.motif.resources.motif;
 
 
 @Controller
@@ -66,16 +65,14 @@ public class BoardController {
 		
 		//파일이 첨부될 경로
 		//학원
-		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//집
-		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
 		//파일 첨부에 필요한 공지사항 코드 생성
 		String noticeCode = boardService.selectNoticeCode();
 		//파일 첨부에 필요한 파일 코드의 숫자를 조회
 		int nextFileCodeNum = boardService.nextFileCodeNum();
-		
-		System.out.println(nextFileCodeNum);
 		
 		try {
 			//업로드될 파일명 설정
@@ -90,6 +87,7 @@ public class BoardController {
 		}catch(IllegalStateException e) {
 			//업로드 예외 발생 시
 			e.printStackTrace();
+
 		}catch(IOException e) {
 			//파일 입출력 예외 발생 시
 			e.printStackTrace();
@@ -110,6 +108,7 @@ public class BoardController {
 	public String noticeDetail(MenuVO menuVO, Model model, NoticeVO noticeVO) {
 		
 		model.addAttribute("notice", boardService.selectNotice(noticeVO));
+		boardService.updateReadCnt(noticeVO);
 		
 		return "board/notice_detail";
 	}
@@ -128,10 +127,10 @@ public class BoardController {
 	
 	//상담 문의 페이지로 이동
 	@GetMapping("/qna")
-	public String goQna(Model model, MenuVO menuVO, HttpSession session) {
+	public String goQna(Model model, QnaVO qnaVO, MenuVO menuVO, HttpSession session) {
 		
 		model.addAttribute("list", boardService.selectQnaList());
-		
+		model.addAttribute("acnt", boardService.answerCnt(qnaVO));
 		return  "board/qna_list";
 	}
 	
@@ -180,8 +179,25 @@ public class BoardController {
 		boardService.insertAnswer(qnaAnswerVO);
 		
 		//redirect 방식은 데이터값을 가져가지 않기 때문에 다시 호출해주어야 함
-		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode();
+		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode() + "&menuCode=" + menuVO.getMenuCode();
 	}
+	//문의, 답변 동시에 삭제
+	@GetMapping("/deleteQna")
+	public String deleteQna(MenuVO menuVO, QnaVO qnaVO) {
+		
+		boardService.deleteQna(qnaVO);
+		
+		return "redirect:/board/qna?menuCode=" + menuVO.getMenuCode();
+	}
+	//답변만 삭제
+	@GetMapping("/deleteAnswer")
+	public String deleteAnswer(MenuVO menuVO, QnaVO qnaVO) {
+		
+		boardService.deleteAnswer(qnaVO);
+		
+		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode() + "&menuCode=" + menuVO.getMenuCode();
+	}
+	
 	//시스템 날짜 구하는 메소드
 	/*
 	 * public String getDate() { //현재 날짜 구하기 LocalDate now = LocalDate.now();
