@@ -75,6 +75,7 @@
 	<!-- 전화번호&주소 빼고이 -->
 	<select id="selectTell" resultMap="memberVO">
 		SELECT ID
+			, PW
 			, NAME
 			, GENDER
 			, FAVORITE
@@ -99,7 +100,13 @@
 		SET ADDR = #{addr}
     		, TELL = #{tell}
     		, GENDER = #{gender}
-    		, FAVORITE = #{favorite}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원 비밀번호 수정 -->
+	<update id="">
+		UPDATE MEMBER
+		SET PW = #{pw}
 		WHERE ID = #{id}
 	</update>
 </mapper>

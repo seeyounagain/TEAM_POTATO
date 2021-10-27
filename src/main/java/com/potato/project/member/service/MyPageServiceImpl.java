@@ -43,4 +43,10 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 
+	@Override
+	public void updatePw(MemberVO memberVO) {
+		sqlSession.update("myPageMapper.updatePw",memberVO);
+		
+	}
+
 }

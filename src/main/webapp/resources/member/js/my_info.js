@@ -2,109 +2,302 @@
 $(document).ready(function(){
 	//이벤트 처리
 	$(document).on('click', '#changeBtn', function() {
-    var id = $('#id').text();
-    var menuCode = $('#menuCode').val();
-    alert(id);
-    alert(menuCode);
-   
-		$.ajax({
-	        url: '/myPage/myInfoAjax', //요청경로
-	        type: 'post',
-	        data:{'id':id,'menuCode':menuCode}, //필요한 데이터/        
-	        success: function(result) {
-	        	//ajax 실행 성공 시 실행되는 구간
-	        	alert('성공');
-	        	$('#ajaxStart').empty();
-	        	var str = '';
-	        	str += '<form action="/myPage/updateMyInfo" method="post">'; 
-				str += '<div class="row justify-content-center">';
-				str += '<div class="col-10 mb-4">';
-				str += '<h3>개인정보</h3>';
-				str += '<table class="table mt-2" style="border-top: 2px solid #0b70b9;">';
-				str += '<colgroup>';
-				str += '<col width="20%">';
-				str += '<col width="80%">';
-				str += '</colgroup>';
-				str += '<tr>';
-				str += '<td class="table-secondary">이름</td>';
-				str += '<td>' + result.name + '</td>';
-				str += '</tr>';
-				str += '<tr>';
-				str += '<td class="table-secondary">성별</td>';
-				
-				if(result.gender == '남'){
-					str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="남" checked><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="여"><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value=""><label class="form-check-label" for="none">선택안함</label></div></td>';      
-				}
-				else if(result.gender == '여'){
-					str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="남"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="여" checked><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value=""><label class="form-check-label" for="none">선택안함</label></div></td>';      
-				}
-				else if(result.gender == ''){
-					str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="남"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="여"><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="" checked><label class="form-check-label" for="none">선택안함</label></div></td>';
-				}
-				str += '</tr>';
-				str += '</table>';
-				str += '</div>';
-				str += '</div>';
-			
-			
-				str += '<div class="row justify-content-center">';
-				str += '<div class="col-10 mb-4">';
-				str += '<h3>회원정보</h3>';
-				str += '<table class="table mt-2" style="border-top: 2px solid #0b70b9;">';
-				str += '<colgroup>';
-				str += '<col width="20%">';
-				str += '<col width="80%">';
-				str += '</colgroup>';
-				str += '<tr>';
-				str += '<td class="table-secondary"><span style="color: #ff5058">*</span>아이디</td>';
-				str += '<td id="id">'+result.id+'</td>';
-				str += '</tr>';
-				str += '<tr>';
-				str += '<td class="table-secondary"><span style="color: #ff5058">*</span>비밀번호 변경</td>';
-				str += '<td><button type="submit" id="changeBtn" class="btn btn-primary">비밀번호 변경</button>';
-				str += '</tr>';
-				str += '<tr>';
-				str += '<td class="table-secondary"><span style="color: #ff5058">*</span>연락처</td>';
-				str += '<td><div class="row"><div class="col"><select class="form-select" name="tells" id="tell1" value="'+ result.tell1 +'"><option value="010">010</option><option value="011">011</option><option value="016">016</option><option value="018">018</option></select></div><div class="col"><input type="text" id="tell2" class="form-control" name="tells" value="'+ result.tell2 +'" required></div><div class="col"><input type="text" id="tell3" class="form-control" name="tells" value="'+ result.tell3 +'" required></div><div></td>';     
-				str += '</tr>';
-				str += '<tr>';
-				str += '<td class="table-secondary"><span style="color: #ff5058">*</span>주소</td>';
-				str += '<td><div class="row"><div class="col-10 text-start"><input type="text" class="post form-control" name="addrs" id="postcode" value="'+ result.postCode +'" readonly required></div><div class="col-2 text-end"><input type="button" class="post btn btn-primary" onclick="openPostcode()" value="우편번호찾기"></div><div class="col-12"><input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="address" value="'+ result.addr +'" required></div></div></td>';
-				str += '</tr>';
-				str += '<tr>';
-				str += '<td class="table-secondary">관심카테고리</td>';
-				str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" name="favorite" value="자기계발"> <label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
-				
-
-				str += '</table>';
-				str += '</div>';
-				str += '</div>';
-			
-				str += '<input type="hidden" id="menuCode" name="menuCode" value="'+ menuCode +'">';
-				str += '<div class="row  justify-content-center">';
-				str += '<div class="col-2 d-grid">';
-				str += '<button type="submit" class="btn btn-primary">수정하기</button>';
-				str += '</div>';
-				str += '</div>';
-				str += '</form>';
-	        	
-				$('#ajaxStart').append(str);
-	        	
-	        	
-	        },
-	        error: function(){
-	        	//ajax 실행 실패 시 실행되는 구간
-	        	alert('실패');
-	        }
-	  });
+	    var id = $('#id').text();
+	    var menuCode = $('#menuCode').val();
+	    var male = '남';
+	    var female = '여';
+	    var none = '';
 	
+    
+    
+    
+    
+	    $.ajax({
+		        url: '/myPage/myInfoAjax', //요청경로
+		        type: 'post',
+		        data:{'id':id,'menuCode':menuCode}, //필요한 데이터/        
+		        success: function(result) {
+		        	//ajax 실행 성공 시 실행되는 구간
+		        	alert('성공');
+		        	$('#ajaxStart').empty();
+		        	var str = '';
+		        	str += '<form action="/myPage/updateMyInfo" method="post">'; 
+					str += '<div class="row justify-content-center">';
+					str += '<div class="col-10 mb-4">';
+					str += '<h3>개인정보</h3>';
+					str += '<table class="table mt-2" style="border-top: 2px solid #0b70b9;">';
+					str += '<colgroup>';
+					str += '<col width="20%">';
+					str += '<col width="80%">';
+					str += '</colgroup>';
+					str += '<tr>';
+					str += '<td class="table-secondary">이름</td>';
+					str += '<td>' + result.name + '</td>';
+					str += '</tr>';
+					str += '<tr>';
+					str += '<td class="table-secondary">성별</td>';
+					
+					if(result.gender == '남'){
+						str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="'+male+'" checked><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="'+female+'"><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="'+none+'"><label class="form-check-label" for="none">선택안함</label></div></td>';      
+					}
+					else if(result.gender == '여'){
+						str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="'+male+'"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="'+female+'" checked><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="'+none+'"><label class="form-check-label" for="none">선택안함</label></div></td>';      
+					}
+					else if(result.gender == ''){
+						str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="'+male+'"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="'+female+'"><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="'+none+'" checked><label class="form-check-label" for="none">선택안함</label></div></td>';
+					}
+					str += '</tr>';
+					str += '</table>';
+					str += '</div>';
+					str += '</div>';
+				
+				
+					str += '<div class="row justify-content-center">';
+					str += '<div class="col-10 mb-4">';
+					str += '<h3>회원정보</h3>';
+					str += '<table class="table mt-2" style="border-top: 2px solid #0b70b9;">';
+					str += '<colgroup>';
+					str += '<col width="20%">';
+					str += '<col width="80%">';
+					str += '</colgroup>';
+					str += '<tr>';
+					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>아이디</td>';
+					str += '<td>'+result.id+'</td>';
+					str += '</tr>';
+					str += '<tr>';
+					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>비밀번호 변경</td>';
+					str += '<td><button type="button" id="changePwBtn" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#changePwModal">비밀번호 변경</button>';
+					str += '</tr>';
+					str += '<tr>';
+					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>연락처</td>';
+					str += '<td><div class="row"><div class="col"><select class="form-select" name="tells" id="tell1" value="'+ result.tell1 +'"><option value="010">010</option><option value="011">011</option><option value="016">016</option><option value="018">018</option></select></div><div class="col"><input type="text" id="tell2" class="form-control" name="tells" value="'+ result.tell2 +'" required></div><div class="col"><input type="text" id="tell3" class="form-control" name="tells" value="'+ result.tell3 +'" required></div><div class="col-12 mt-2" id="tellCheck" style="color: red; font-size: 14px;"></div><div></td>';     
+					str += '</tr>';
+					str += '<tr>';
+					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>주소</td>';
+					str += '<td><div class="row"><div class="col-10 text-start"><input type="text" class="post form-control" name="addrs" id="postcode" value="'+ result.postCode +'" readonly required></div><div class="col-2 text-end"><input type="button" class="post btn btn-primary" id="openPostcode" value="우편번호찾기"></div><div class="col-12"><input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="address" value="'+ result.addr +'" readonly required><input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="detailAddress" placeholder="상세주소"></div></div></td>';
+					str += '</tr>';
+					str += '<tr>';
+					str += '<td class="table-secondary">관심카테고리</td>';
+	//				str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" name="favorite" value="자기계발"> <label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
+					
 	
+					str += '</table>';
+					str += '</div>';
+					str += '</div>';
+				
+					str += '<input type="hidden" name="id" value="'+ result.id +'">';
+					str += '<input type="hidden" id="existingPw" value="'+ result.pw +'">';
+					str += '<input type="hidden" id="menuCode" name="menuCode" value="'+ menuCode +'">';
+					str += '<div class="row  justify-content-center">';
+					str += '<div class="col-2 d-grid">';
+					str += '<button type="submit" class="btn btn-primary" id="updateBtn">수정하기</button>';
+					str += '</div>';
+					str += '</div>';
+					str += '</form>';
+		        	
+					$('#ajaxStart').append(str);
+		        	alert(result.pw);
+		        	
+		        },
+		        error: function(){
+		        	//ajax 실행 실패 시 실행되는 구간
+		        	alert('실패');
+		        }
+		  });
 	});
+	
+	//휴대번호 정규식
+	$(document).on('keyup', '#tell, #tell2, #tell3', function() { 
+		var tell1J = /^01[0||1||6||8]{1}$/;
+		var tell2J = /^[0-9]{3,4}$/;
+		var tell3J = /^[0-9]{4}$/;
+  		
+  		// 모든 조건에 부합한다면
+		if(tell1J.test($('#tell1').val()) && tell2J.test($('#tell2').val()) && tell3J.test($('#tell3').val())){
+			
+			$('#tellCheck').text('');
+			$('#updateBtn').removeClass('disabled');
+			return ;
+		}
+		else{
+			
+			$('#tellCheck').text('* 휴대전화 번호를 확인해주세요.');
+			$('#updateBtn').addClass('disabled');
+			return ;
+		}
+	});
+	
+	//우편번호 버튼클릭
+	$(document).on('click','#openPostcode', function() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+			// 우편번호와 주소 정보를 해당 필드에 넣는다.
+			document.getElementById('postcode').value = data.zonecode;
+			document.getElementById("address").value = data.roadAddress;
+			// 커서를 주소 필드로 이동한다.
+			document.getElementById("detailAddress").focus();
+			}
+		}).open();
+	});
+	//우편번호 창클릭
+	$(document).on('mousedown','#postcode, #address, #detailAddress', function() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('postcode').value = data.zonecode;
+				document.getElementById("address").value = data.roadAddress;
+				// 커서를 주소 필드로 이동한다.
+				document.getElementById("detailAddress").focus();
+			}
+		}).open();
+	});
+	
+//	var changePwModal = document.getElementById('changePwModal');
+//	var loginModal = $('#loginModal');위에거가 이거랑 같은거임
+//	
+//	changePwModal.addEventListener('show.bs.modal', function (event) {
+// 	 // do something...
+// 	 
+//	 	//비밀번호 정규식
+//	 	$(document).on('keyup', '#pw1', function() { 
+//	 		
+//	 		//소대문자a~z,0~9,특수문자로 8~20자리 만들기
+//	 		var pwJ = /^[a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]]{8,20}$/;
+//	 		
+//	 		// 조건에 부합하다면
+//	 		if(pwJ.test($('#pw1').val())){
+//	 		
+//	 			$('#pwCheck').text('');
+//	 			$('#changePwBtn').removeClass('disabled');
+//	 			return ;
+//	 		}
+//	 		
+//	 		else{
+//	 		
+//	 			$('#pwCheck').text('* 영문 대문자, 소문자, 숫자, 특수문자를 사용하여 8자 이상, 20자 이하로 설정하십시오');
+//	 			$('#changePwBtn').addClass('disabled');
+//	 			return ;
+//	 		}
+//	 	});
+//	 	
+//	 	// 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
+//	 	$(document).on('keyup', '#checkPw' , function() {
+//	 		
+//	 		var pw = $('#pw1').val();
+//	 		var checkPw = $('#checkPw').val();
+//	 		
+//	 		if (pw != checkPw) {
+//	 			
+//	 			$('#pwCheck').text('* 비밀번호를 확인해주세요.');
+//	 			return ;
+//	 			
+//	 		}
+//	 		
+//	 		else {
+//	 			
+//	 			$('#pwCheck').text('');
+//	 			return ;				
+//	 			
+//	 		}
+//	 		
+//	 	});
+// 	 
+//	})
+
+	
+	
+	
+	
+	
+	//비밀번호 정규식
+	$(document).on('keyup', '#newPw', function() { 
+		//소대문자a~z,0~9,특수문자로 8~20자리 만들기
+		var pwJ = /^[a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$/;
+		
+		// 조건에 부합하다면
+		if(pwJ.test($('#newPw').val())){
+			$('#pwCheck1').text('');
+			$('#changePwBtn2').removeClass('disabled');
+			return ;
+		}
+		else{
+		
+			$('#pwCheck1').text('* 영문 대문자, 소문자, 숫자, 특수문자를 사용하여 8자 이상, 20자 이하로 설정하십시오');
+			$('#changePwBtn2').addClass('disabled');
+			return ;
+		}
+	});
+	
+	// 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
+	$(document).on('keyup', '#checkPw' , function() {
+		var newPw = $('#newPw').val();
+		var checkPw = $('#checkPw').val();
+		
+		if (newPw != checkPw) {
+			$('#pwCheck2').text('* 비밀번호를 확인해주세요.');
+			$('#changePwBtn2').addClass('disabled');
+			return ;
+		}
+		else {
+			$('#pwCheck2').text('');
+			$('#changePwBtn2').removeClass('disabled');
+			return ;				
+		}
+	});
+	//capslpck 확인
+	$(document).on('keyup','#pw, #newPw, #checkPw', function() { 
+		  if (event.getModifierState("CapsLock")) {
+			    document.getElementById("checkCapsLock2").innerText 
+			      = "Caps Lock이 켜져 있습니다."
+			  }else {
+			    document.getElementById("checkCapsLock2").innerText 
+			      = ""
+			  }
+		}); 
+	//모달창 닫으면
+	var changePwModal = document.getElementById('changePwModal');
+	//var loginModal = $('#loginModal');위에거가 이거랑 같은거임
+	changePwModal.addEventListener('hidden.bs.modal', function (event) {
+	 	 // do something...
+		$('#pwCheck1').text('');
+		$('#pwCheck2').text('');
+		$('#checkCapsLock2').text('');
+		$('.modal input[type="password"]').val('');
+	})
+	//기존 비밀번호 확인
+	$(document).on('click', '#changePwBtn2' , function() {
+		
+		var existingPw = $('#existingPw').val();
+		var pw = $('#pw').val();
+		alert(existingPw);
+		alert(pw);
+		
+		if (existingPw != pw) {
+			
+			alert('비밀번호를 다시 확인해 주세요.')
+			return ;
+			
+		}
+		
+		else {
+			alert('변경되었습니다.')
+			$('form').submit();				
+			
+		}
+		
+	});
+	
+	
 });
+
+
 
 //함수 선언 영역
 (function($){
 	//aaa = function(){
 	//};
+	
+
+	
    
 })(jQuery);

@@ -6,13 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=2"></script>
+<!-- 우편번호 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=51"></script>
 </head>
 <body>
-<div>${myTells.tell1 }</div>
-<div>${myTells.tell2 }</div>
-<div>${myTells.tell3 }</div>
-<div>${menuVO.menuCode }메뉴코드</div>
 <div class="row justify-content-center">
 	<div class="col-10" style="background-color: white;">
 	<!-- 제일 윗줄 -->
@@ -106,13 +104,53 @@
 				<!-- 수정버튼 -->
 				<div class="row  justify-content-center">
 					<div class="col-2 d-grid">
-						<button type="submit" id="changeBtn" class="btn btn-primary">수정하기</button>
+						<button type="button" id="changeBtn" class="btn btn-primary">수정하기</button>
 					</div>
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">
+				<input type="hidden" id="existingPw" value="${memberInfo.pw }">
 				<!-- 수정버튼 끝 -->
 			</div>
 		</div>
 	</div>
 </div>
+<!-- 여기까지끝 -->
+
+
+<!-- 모달창 -->
+<form action="/myPage/updatePw" method="post">
+	<div class="modal fade" id="changePwModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호 변경하기</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating mb-4">
+						<input type="password" class="form-control" id="pw" placeholder="Password" required>
+						<label for="floatingPassword">비밀번호</label>
+					</div>
+					<div class="form-floating mb-1">
+						<input type="password" class="form-control" id="newPw" name="newPw" placeholder="Password" required> 
+						<label for="floatingPassword">새 비밀번호</label>
+						<div class="col-12 mt-2" id="pwCheck1" style="color: red; font-size: 14px;"></div>
+					</div>
+					<div class="form-floating">
+						<input type="password" class="form-control" id="checkPw" placeholder="Password" required> 
+						<label for="floatingPassword">비밀번호 확인</label>
+						<div class="col-12 mt-2" id="pwCheck2" style="color: red; font-size: 14px;"></div>
+						<div class="col-12 mt-2" id="checkCapsLock2" style="color: red;; font-size: 14px;"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary disabled" id="changePwBtn2">비밀번호 변경</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+
 </body>

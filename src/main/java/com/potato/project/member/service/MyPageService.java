@@ -18,5 +18,8 @@ public interface MyPageService {
 	
 	//회원정보수정
 	void updateMyInfo(MemberVO memberVO);
+	
+	//회원 비밀번호 수정
+	void updatePw(MemberVO memberVO);
 
 }

@@ -23,7 +23,7 @@ public class MyPageController {
 
 	// 나의 도서관 클릭시 오는 페이지--추가--봉
 	@GetMapping("/myPage")
-	public String myLib(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO) {
+	public String myLib(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO,MemberVO memberVO) {
 		// 로그인정보 MemberVO에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
 		model.addAttribute("memberBookSituationCnt",myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
 
@@ -43,18 +43,27 @@ public class MyPageController {
 
 	// 나의 정보 수정하기 ajax
 	@ResponseBody
-	@PostMapping("/myInfoAjax")
+	@RequestMapping("/myInfoAjax")
 	public MemberVO myInfoAjax(MemberVO memberVO) {
 		//전화번호 주소 따로따로 뽑아서 보냄
 		return myPageService.selectTell(myPageService.selectTellCnt(memberVO));
 	}
 	
-	//나의 정보 수정
+	//나의 정보수정
 	@PostMapping("/updateMyInfo")
-	public String updateMyInfo(MemberVO memberVO) {
-		System.out.println("여긴 오냐!!!!!!!!");
+	public String updateMyInfo(MenuVO menuVO, MemberVO memberVO) {
 		myPageService.updateMyInfo(memberVO);
-		return "redirect:/myPage/myInfo";
+		return "redirect:/myPage/myInfo?menuCode="+menuVO.getMenuCode();
+	}
+	
+	@PostMapping("/updatePw")
+	public String updatePw(HttpSession session,MemberVO memberVO) {
+		
+		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
+		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
+		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
+		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
+		return "redirect:/myPage/myInfoAjax?id="+((MemberVO)session.getAttribute("loginInfo")).getId();
 	}
 
 }
