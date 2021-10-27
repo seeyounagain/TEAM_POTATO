@@ -2,11 +2,19 @@ package com.potato.project.service.controller;
 
 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +44,43 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
+	@RequestMapping("/bookRequest")
+	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {
+		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+
+		
+		return  "service/bookRequest";
+	}
+
+	@RequestMapping("/bookRequest22")
+	public String bookRequest22(Model model,MenuVO menuVO,HttpSession session) {
+		
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		return  "service/bookRequest";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//열람실 좌석현황 관련 
 	@RequestMapping("/readingSeat")
 	public String goReadingSeat(Model model,MenuVO menuVO,HttpSession session) {
 		
@@ -103,7 +148,6 @@ public class ServiceController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		model.addAttribute("seatRecordList",serviceService.seatRecordList());
-		
 		
 		return  "service/readingSeat";
 	}
