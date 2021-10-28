@@ -78,11 +78,13 @@ public class MemberController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String join(MemberVO memberVO, HttpSession session) {
+	public String join(MemberVO memberVO, HttpSession session, Model model) {
 		
 		MemberVO loginInfo = memberSerivce.selectMember(memberVO);
 		
 		String isDelete = loginInfo.getIsDelete();
+		
+		model.addAttribute("isDelete",isDelete);
 		
 		if (loginInfo != null && loginInfo.getIsDelete().equals("N")) {
 
@@ -90,7 +92,7 @@ public class MemberController {
 
 		}
 
-		return "/noside/member/login_result?isDelete=" + isDelete;
+		return "noside/member/login_result";
 		
 	}
 	
