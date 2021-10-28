@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
+import com.potato.project.service.vo.RequestBoardVO;
 //천화 
 @Service("serviceService")
 public class ServiceServiceImpl implements ServiceService {
@@ -63,6 +65,16 @@ public class ServiceServiceImpl implements ServiceService {
 	public List<ReadingRecordVO> searchRecord(ReadingRecordVO recordVO) {
 		return sqlSession.selectList("serviceMapper.searchRecord", recordVO);
 		
+	}
+
+	@Override
+	public List<RequestBoardVO> requestBoardList(MemberVO loginInfo) {
+		return sqlSession.selectList("serviceMapper.requestBoardList",loginInfo);
+	}
+
+	@Override
+	public MemberVO requestIdAndIsAdminCheck(MemberVO loginInfo) {
+		return sqlSession.selectOne("serviceMapper.requestIdAndIsAdminCheck",loginInfo);
 	}
 	
 	

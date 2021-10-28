@@ -49,40 +49,22 @@ public class ServiceController {
 
 	@RequestMapping("/bookRequest") // (value = "/bookRequest", produces="application/String;xml=UTF-8")
 	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {
-		
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-	
-		return  "service/bookRequest";
-	}
-	
-	
-	
-	
-	
-
-	@RequestMapping("/bookRequest22")
-	public String bookRequest22(Model model,MenuVO menuVO,HttpSession session) {
-		
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			loginInfo = new MemberVO();
-		}
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("requestBoardList", serviceService.requestBoardList(serviceService.requestIdAndIsAdminCheck(loginInfo)));
 		
 		return  "service/bookRequest";
 	}
 	
-	
-	
-	
-	
-	
+	@GetMapping("/regRequest")
+	public String goRegRequest(Model model,MenuVO menuVO) {
+		
+		return  "service/bookRequest_Insert";
+	}
 	
 	
 	

@@ -18,21 +18,42 @@
 			</resultMap>
 			
 			<resultMap type="com.potato.project.member.vo.MemberVO" id="member">
-			<id column="ID" 				property="id"/>
+			<id 	column="ID" 				property="id"/>
 			<result column="PW" 			property="pw"/>
-			<result column="NAME" 			property="name"/>
-			<result column="ADDR" 			property="addr"/>
-			<result column="TELL" 			property="tell"/>
-			<result column="IS_ADMIN" 		property="isAdmin"/>
-			<result column="IS_DELETE" 		property="isDelete"/>
-			<result column="GENDER" 		property="gender"/>
-			<result column="FAVORITE" 		property="favorite"/>
+			<result column="NAME" 			property="name"/>                                           	      
+			<result column="ADDR" 			property="addr"/>                                           	  
+			<result column="TELL" 			property="tell"/>                                           	  
+			<result column="IS_ADMIN" 		property="isAdmin"/>                                        	  
+			<result column="IS_DELETE" 		property="isDelete"/>                                       	      
+			<result column="GENDER" 		property="gender"/>                                         	      
+			<result column="FAVORITE" 		property="favorite"/>                                                           
 			</resultMap>
 			
+			<resultMap type="com.potato.project.service.vo.RequestBoardVO" id="requestBoard">
+			<id 	column="REQUEST_CODE"	property="requestCode"/>
+			<result column="ID"				property="id"/>
+			<result column="TITLE"			property="title"/>                                              
+			<result column="WRITER"			property="writer"/>                                              
+			<result column="ISBN"			property="isbn"/>                                              
+			<result column="PUB_DATE"		property="pubDate"/>                                                                                                                                                                  
+			<result column="CREATE_DATE"	property="createDate"/>                                                                                                                                                                  
+			</resultMap>
 			
+			<select id="requestIdAndIsAdminCheck" resultMap="member">
+			SELECT ID, IS_ADMIN FROM MEMBER WHERE ID = #{id } AND IS_ADMIN = #{isAdmin }
+			</select>	
 			
-			
-			
+			<select id="requestBoardList" resultMap="requestBoard">
+					SELECT 
+                    REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE
+					FROM REQUEST_BOARD
+                    WHERE  ID = (SELECT ID 
+                                 FROM MEMBER 
+                                 WHERE ID = #{id }
+                                 AND IS_ADMIN = #{isAdmin } )
+					ORDER BY REQUEST_CODE			
+			</select>
+
 			<select id="selectReadingSeat" resultMap="seat">
 			SELECT SEAT_CODE
 					,SEAT_STATUS

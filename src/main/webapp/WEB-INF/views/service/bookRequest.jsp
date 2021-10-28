@@ -27,8 +27,8 @@ height: 200px;
 background-color: white;
 
 }
-.miniSeatBox:hover{
-	cursor: pointer;
+.a:hover{
+color: inherit;	
 }
 
 </style>
@@ -64,36 +64,85 @@ background-color: white;
 	<table class="table text-center">
   	<thead>
     	<tr class="text-center mt-5">
-     		<th scope="col">기록번호</th>
-     		<th scope="col">사용자</th>
-     		<th scope="col">좌석번호</th>
-     		<th scope="col">입실시간</th>
-     		<th scope="col">퇴실시간</th>
+     		<th scope="col">No.</th>
+     		<th scope="col">ISBN코드</th>
+     		<th scope="col">책제목</th>
+     		<th scope="col">저자</th>
+     		<th scope="col">발행/간행일</th>
+     		<th scope="col">신청자ID</th>
+     		<th scope="col">신청일</th>
     	</tr>
   	</thead>
  	 <tbody>
   		<c:choose>
-		<c:when test="${not empty seatRecordList }">
-		<c:forEach items="${seatRecordList }" var="record" varStatus="status">
-
+		<c:when test="${not empty requestBoardList }">
+		<c:forEach items="${requestBoardList }" var="a" varStatus="status">
 		<tr>
-			<td class="seat mx-1">열람-${record.recordCode }</td>
-			<td>${record.id }</td>
-			<td>열람-${record.seatCode }</td> 
-			<td>${record.seatInDate }</td>
-			<td>${record.seatOutDate }</td>
-		</tr>	
-		
+			
+			<td class="seat mx-1">도서-${a.requestCode }</td>	
+			<td><a href="#">${a.isbn }</a></td>
+			<td><a href="#">${a.title }</a></td> 
+			<td><a href="#">${a.writer }</a></td>   		
+			<td><a href="#">${a.pubDate }</a></td> 	
+			<td><a href="#">${a.id }</a></td> 
+			<td><a href="#">${a.createDate }</a></td> 
+					
+		</tr>	                                             		
 		</c:forEach>
 		</c:when>
 		</c:choose>
 
  	</tbody>
 	</table>
+	
 	</div>
 	</div>
 </div>
-
+</div>
+<div class="row justify-content-center">
+   <div class="col-8 mainDiv">
+   		<div class="titleDiv">
+   			<h1 class="display-6 text-center">공지사항</h1>
+   			<hr>
+   		</div>
+			<div class="tableDiv">
+					<table class="table table-striped text-center">
+						<thead>
+							<tr>
+								<th class="w-10">번호</th>
+								<th class="w-60">제목</th>
+								<th class="w-20">작성일</th>
+								<th class="w-10">조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${empty list}">
+									<tr style="height: 200px;">
+										<td colspan="4">등록된 글이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list }" var="info" varStatus="status">
+										<tr>
+											<td>${status.count }</td>
+											<td><a href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
+											<td>${info.createDate }</td>
+											<td>${info.readCnt }</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+				<div class="btnDiv text-center">
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
+						<button type="button" class="btn btn-primary btn-md" onclick="location.href='/board/noticeForm?menuCode=${menuVO.menuCode}';">공지사항 등록</button>
+					</c:if>
+			</div>
+		</div>
+</div>
 	
 </body>
 </html>
