@@ -9,6 +9,7 @@ public class MemberVO {
 	private String name     ;		//  NAME        -- 이름
 	private String addr		;		//  ADDR        -- 주소
 	private String tell		;		//  TELL        -- 연락처
+	private String birth	;		// 	BIRTH		-- 생년월일
 	private String isAdmin	;		//  IS_ADMIN    -- 관리자 여부 (기본값 N 관리자 Y)
 	private String isDelete ;		//  IS_DELETE   -- 탈퇴여부 (기본값 N 탈퇴시 Y)
 	private String gender 	;		//  GENDER      -- 성별
@@ -60,6 +61,12 @@ public class MemberVO {
 	}
 	public void setTell(String tell) {
 		this.tell = tell;
+	}
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	public String getIsAdmin() {
 		return isAdmin;

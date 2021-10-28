@@ -10,6 +10,7 @@
 		<result column="NAME" 			property="name"/>
 		<result column="ADDR" 			property="addr"/>
 		<result column="TELL" 			property="tell"/>
+		<result column="BIRTH" 			property="birth"/>
 		<result column="IS_ADMIN" 		property="isAdmin"/>
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
@@ -23,6 +24,7 @@
 			, PW
 			, NAME
 			, TELL
+			, BIRTH
 			, ADDR
 			<if test="gender != null and !gender.equals('')">
 			, GENDER
@@ -35,6 +37,7 @@
 			, #{pw}
 			, #{name}
 			, #{tell}
+			, #{birth}
 			, #{addr}
 			<if test="gender != null and !gender.equals('')">
 			, #{gender}

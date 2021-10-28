@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=21" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=22" ></script>
 </head>
 <body>
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
@@ -43,6 +43,11 @@
 				<label for="pw" class="form-label">비밀번호 확인</label>
 				<input type="password" class="form-control" id="checkPw" placeholder="비밀번호를 다시 한번 입력해주세요." required>
 				<div class="col-12 mt-2" id="pwCheck" style="color: red; font-size: 14px;"></div>
+			</div>
+			<div class="col-12 mt-2">
+				<label for="birth" class="form-label">생년월일</label>
+				<input type="date" class="form-control" id="birth" required>
+				<div class="col-12 mt-2" id="birthAlert" style="color: green; font-size: 14px;">만 14세 이상인 경우에만 가입이 가능합니다.</div>
 			</div>
 			<div class="col-12 mt-2">
 				<div class="row">

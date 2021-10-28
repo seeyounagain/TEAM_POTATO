@@ -1,6 +1,35 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		// 현재 날짜
+		function getToday(){
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = ("0" + (1 + date.getMonth())).slice(-2);
+			var day = ("0" + date.getDate()).slice(-2);
+			
+			return year + "-" + month + "-" + day;
+		};
+		
+		// 14년전 날짜
+		function get14yearAgo(){
+			var date = new Date();
+			var year = date.getFullYear() - 14;
+			var month = ("0" + (1 + date.getMonth())).slice(-2);
+			var day = ("0" + date.getDate()).slice(-2);
+			
+			return year + "-" + month + "-" + day;
+		};
+		
+		var nowDate = getToday();
+		
+		var minDate = get14yearAgo();
+		
+		// 생년월일 최대값 현재 날짜로 지정
+		$('#birth').attr('max', nowDate);
+		// 생년월일 최소값 만 14세 이상 날짜로 지정
+		$('#birth').attr('min', minDate);
+		
 		// 아이디 입력칸에 마우스 클릭 시 가입버튼 비활성화
 		$(document).on('mousedown', '#id' , function() {
 		
