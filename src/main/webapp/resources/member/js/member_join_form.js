@@ -25,10 +25,8 @@
 		
 		var minDate = get14yearAgo();
 		
-		// 생년월일 최대값 현재 날짜로 지정
-		$('#birth').attr('max', nowDate);
-		// 생년월일 최소값 만 14세 이상 날짜로 지정
-		$('#birth').attr('min', minDate);
+		// 생년월일 최대값 만 14세 이상 날짜로 지정
+		$('#birth').attr('max', minDate);
 		
 		// 아이디 입력칸에 마우스 클릭 시 가입버튼 비활성화
 		$(document).on('mousedown', '#id' , function() {

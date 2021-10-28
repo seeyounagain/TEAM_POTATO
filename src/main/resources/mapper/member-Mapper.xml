@@ -15,6 +15,7 @@
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
 		<result column="FAVORITE" 		property="favorite"/>
+		<result column="BOOK_CNT" 		property="bookCnt"/>
 	</resultMap>
 	
 	<!-- 회원등록 -->
@@ -65,6 +66,19 @@
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
+	
+	<!-- 회원목록조회 -->
+	<select id="selectMemberListAndBookCnt">
+		SELECT
+		    (SELECT COUNT(BOOK_CODE) FROM RENTAL WHERE ID = 'java' AND RETURN_DATE IS NULL) + 
+		    (SELECT COUNT(BOOK_CODE) FROM RESERVE WHERE ID = 'java') AS BOOK_CNT
+		    , ID
+		    , NAME
+		    , BIRTH
+		FROM MEMBER
+		WHERE IS_DELETE = 'N'	
+	</select>
+	
 </mapper>
 
 
