@@ -28,7 +28,12 @@ a:hover{
 	padding-left: 10px;
 	color: gray;
 	font-size: small;
-	
+}
+.complete {
+	color: gray;
+	font-size: 14px;
+	text-decoration: underline 1px gray;
+	vertical-align: baseline;
 }
 </style>
 </head>
@@ -63,16 +68,21 @@ a:hover{
 								<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 									<c:choose>
 										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' or empty info.qnaPw}">
-											<a href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>	
+											<a href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+												<c:if test="${not empty acnt}">
+													<!-- <img src="/resources/img/icon_new.png" width="25px;">  --><span class="m-2 complete">답변완료</span>
+												</c:if>
+											</a>	
 										</c:when>
 										<c:otherwise>
 											<img src="/resources/img/icon_secret.png" width="13px;"> 
-											<a href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>	
+											<a href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+												<c:if test="${not empty acnt}">
+													<!-- <img src="/resources/img/icon_new.png" width="25px;">  --><span class="m-2 complete">답변완료</span>
+												</c:if>
+											</a>	
 										</c:otherwise>
 									</c:choose>	
-									<c:if test="${not empty acnt}">
-										<img src="/resources/img/icon_new.png" width="25px;"> 
-									</c:if>
 								</td>
 								<td>${info.name }</td>
 								<td>${info.createDate }</td>
