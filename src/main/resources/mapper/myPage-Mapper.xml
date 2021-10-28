@@ -10,6 +10,7 @@
 		<result column="NAME" 			property="name"/>
 		<result column="ADDR" 			property="addr"/>
 		<result column="TELL" 			property="tell"/>
+		<result column="BIRTH" 			property="birth"/>
 		<result column="IS_ADMIN" 		property="isAdmin"/>
 		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="GENDER" 		property="gender"/>
@@ -66,6 +67,9 @@
 			, NAME
 			, ADDR
 			, TELL
+			, SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),9,2)||'일' AS BIRTH
 			, GENDER
 			, FAVORITE
 		FROM MEMBER
@@ -90,6 +94,9 @@
 			</if>
 			, SUBSTR(ADDR,0,5) AS POST_CODE
 			, SUBSTR(ADDR,6) AS ADDR
+			, SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),9,2)||'일' AS BIRTH
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
@@ -104,9 +111,16 @@
 	</update>
 	
 	<!-- 회원 비밀번호 수정 -->
-	<update id="">
+	<update id="updatePw">
 		UPDATE MEMBER
 		SET PW = #{pw}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="checkMemberquit">
+		UPDATE MEMBER
+		SET IS_DELETE = 'Y'
 		WHERE ID = #{id}
 	</update>
 </mapper>

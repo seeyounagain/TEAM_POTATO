@@ -7,10 +7,6 @@ $(document).ready(function(){
 	    var male = '남';
 	    var female = '여';
 	    var none = '';
-	
-    
-    
-    
     
 	    $.ajax({
 		        url: '/myPage/myInfoAjax', //요청경로
@@ -77,9 +73,12 @@ $(document).ready(function(){
 					str += '<td><div class="row"><div class="col-10 text-start"><input type="text" class="post form-control" name="addrs" id="postcode" value="'+ result.postCode +'" readonly required></div><div class="col-2 text-end"><input type="button" class="post btn btn-primary" id="openPostcode" value="우편번호찾기"></div><div class="col-12"><input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="address" value="'+ result.addr +'" readonly required><input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="detailAddress" placeholder="상세주소"></div></div></td>';
 					str += '</tr>';
 					str += '<tr>';
+					str += '<td class="table-secondary">생년월일</td><td id="birth">'+result.birth+'</td>';
+					str += '</tr>';
+					str += '<tr>';
 					str += '<td class="table-secondary">관심카테고리</td>';
 	//				str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" name="favorite" value="자기계발"> <label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
-					
+					str += '</tr>'
 	
 					str += '</table>';
 					str += '</div>';
@@ -228,7 +227,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	// 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
+	//비밀번호 변경에서 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
 	$(document).on('keyup', '#checkPw' , function() {
 		var newPw = $('#newPw').val();
 		var checkPw = $('#checkPw').val();
@@ -244,7 +243,7 @@ $(document).ready(function(){
 			return ;				
 		}
 	});
-	//capslpck 확인
+	//비밀번호 변경에서 capslpck 확인
 	$(document).on('keyup','#pw, #newPw, #checkPw', function() { 
 		  if (event.getModifierState("CapsLock")) {
 			    document.getElementById("checkCapsLock2").innerText 
@@ -264,11 +263,12 @@ $(document).ready(function(){
 		$('#checkCapsLock2').text('');
 		$('.modal input[type="password"]').val('');
 	})
-	//기존 비밀번호 확인
+	//기존 비밀번호 확인 후 모달창 닫는거까지
 	$(document).on('click', '#changePwBtn2' , function() {
 		
 		var existingPw = $('#existingPw').val();
 		var pw = $('#pw').val();
+		var newPw = $('#newPw').val();
 		alert(existingPw);
 		alert(pw);
 		
@@ -280,12 +280,75 @@ $(document).ready(function(){
 		}
 		
 		else {
-			alert('변경되었습니다.')
-			$('form').submit();				
+			$.ajax({
+				 url: '/myPage/updatePw', //요청경로
+				type: 'post',
+			 	data:{'pw':newPw}, //필요한 데이터/        
+			 success: function(result) {
+			        	//ajax 실행 성공 시 실행되는 구간
+				 	alert(result+"ㅇㅇㅇㅇ");
+				 	$('#changePwModal').modal("hide");
+				 	return ; //뚜껑닫기
+		    	
+		    },
+		    error: function(){
+		    	//ajax 실행 실패 시 실행되는 구간
+		    	alert('실패');
+		    }
+					
+			
+		})		
 			
 		}
 		
 	});
+	
+	//회원탈퇴 모달창
+	$(document).on('click', '#checkMemberquitBtn' , function() {
+			
+			var id = $('#id').text();
+			var existingPw = $('#existingPw').val();
+			var pw2 = $('#pw2').val();
+			alert(existingPw);
+			alert(pw2);
+			alert(id);
+			if (existingPw != pw2) {
+				
+				alert('비밀번호를 다시 확인해 주세요.')
+				return ;
+				
+			}
+			
+			else {
+				
+				var result = confirm("정말 탈퇴하시겠습니까?");
+				
+				if (result) {
+					
+					$.ajax({
+						url: '/myPage/checkMemberquit', //요청경로
+						type: 'post',
+						data:{'id':id}, //필요한 데이터/        
+						success: function(result) {
+							alert('탈퇴하였습니다');
+							location.href = '/common/main';
+							
+						},
+						error: function(){
+							//ajax 실행 실패 시 실행되는 구간
+							alert('실패');
+						}
+						
+					})		
+					
+				}
+				
+				
+			}
+			
+		});
+	
+	
 	
 	
 });

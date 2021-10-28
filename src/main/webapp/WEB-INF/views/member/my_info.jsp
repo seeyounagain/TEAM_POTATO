@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=51"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=54"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -93,8 +93,18 @@
 									<td id="addr">${memberInfo.addr }</td>
 								</tr>
 								<tr>
+									<td class="table-secondary">생년월일</td>
+									<td id="birth">${memberInfo.birth }</td>
+								</tr>
+								<tr>
 									<td class="table-secondary">관심카테고리</td>
 									<td>${memberInfo.favorite }</td>
+								</tr>
+								<tr>
+									<td class="table-secondary">회원탈퇴</td>
+									<td>
+										<button type="button" id="memberquitBtn" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#memberquitModal">탈퇴하기</button>
+									</td>
 								</tr>
 						</table>
 					</div>
@@ -108,7 +118,8 @@
 					</div>
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">
-				<input type="hidden" id="existingPw" value="${memberInfo.pw }">
+				<input type="hidden" id="existingPw" value="${myTells.pw }">
+				<div>${myTells.pw }</div>
 				<!-- 수정버튼 끝 -->
 			</div>
 		</div>
@@ -117,7 +128,7 @@
 <!-- 여기까지끝 -->
 
 
-<!-- 모달창 -->
+<!-- 비밀번호 변경 모달창 -->
 <form action="/myPage/updatePw" method="post">
 	<div class="modal fade" id="changePwModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -151,6 +162,25 @@
 		</div>
 	</div>
 </form>
+<!-- 비밀번호 변경 모달창 끝  -->
 
+
+<!-- 회원탈퇴 모달창 시작  -->
+<div class="modal" id="memberquitModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">비밀번호를 입력하세요</h5>
+      </div>
+      <div class="modal-body">
+        <input type="password" class="form-control" id="pw2" placeholder="Password" required>
+		<div class="col-12 mt-2" id="checkCapsLock2" style="color: red;; font-size: 14px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>

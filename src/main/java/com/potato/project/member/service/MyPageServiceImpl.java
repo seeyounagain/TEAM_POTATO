@@ -49,4 +49,10 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 
+	@Override
+	public boolean checkMemberquit(MemberVO memberVO) {
+		int result = sqlSession.update("myPageMapper.checkMemberquit", memberVO);
+		return result == 0 ? false : true ;
+	}
+
 }

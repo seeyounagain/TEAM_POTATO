@@ -21,5 +21,8 @@ public interface MyPageService {
 	
 	//회원 비밀번호 수정
 	void updatePw(MemberVO memberVO);
+	
+	//회원 탈퇴
+	boolean checkMemberquit(MemberVO memberVO);
 
 }

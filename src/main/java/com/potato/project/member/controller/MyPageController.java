@@ -56,14 +56,17 @@ public class MyPageController {
 		return "redirect:/myPage/myInfo?menuCode="+menuVO.getMenuCode();
 	}
 	
+	//비밀번호 수정하기
+	@ResponseBody
 	@PostMapping("/updatePw")
-	public String updatePw(HttpSession session,MemberVO memberVO) {
+	public String updatePw(MemberVO memberVO) { //아이디 비밀번호
+		return memberVO.getPw();
+	}
+	@ResponseBody
+	@PostMapping("/checkMemberquit")
+	public boolean checkMemberquit(MemberVO memberVO) {
 		
-		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
-		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
-		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
-		System.out.println(((MemberVO)session.getAttribute("loginInfo")).getId()+"아이디 가져오나확인");
-		return "redirect:/myPage/myInfoAjax?id="+((MemberVO)session.getAttribute("loginInfo")).getId();
+		return myPageService.checkMemberquit(memberVO);
 	}
 
 }
