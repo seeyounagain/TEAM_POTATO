@@ -383,11 +383,12 @@
             , TITLE
             , WRITER
             , STATUS
-            , RENTAL_DATE
-            , LIMIT_DATE
+            , TO_CHAR(RENTAL_DATE,'YYYY-MM-DD') AS RENTAL_DATE            
+            , TO_CHAR(LIMIT_DATE,'YYYY-MM-DD') AS LIMIT_DATE
         FROM BOOK B, RENTAL R
         WHERE B.BOOK_CODE = R.BOOK_CODE
-        AND ID = #{id}		
+        AND ID = #{id}
+        AND RETURN_DATE IS NULL	
 	</select>
 	
 	<!-- 회원이 예약하고 있는 도서 정보 조회 -->
@@ -397,8 +398,8 @@
             , TITLE
             , WRITER
             , STATUS
-            , RENTABLE_START_DATE
-            , RENTABLE_END_DATE
+            , TO_CHAR(RENTABLE_START_DATE,'YYYY-MM-DD') AS RENTABLE_START_DATE
+            , TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') AS RENTABLE_END_DATE
         FROM BOOK B, RESERVE R
         WHERE B.BOOK_CODE = R.BOOK_CODE
         AND ID = #{id}		

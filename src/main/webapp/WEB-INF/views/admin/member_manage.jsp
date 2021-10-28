@@ -6,12 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=3" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=15" ></script>
 <style type="text/css">
 #bookT > caption {
 	text-align: right;
 }
 .cap {
+	color: black;
+}
+.titleA:hover {
 	color: black;
 }
 </style>
@@ -42,7 +45,7 @@
 		    	<tr id="reserveTr">
 		    		<td>표제 / 저자</td>
 		    		<td>도서상태</td>
-		    		<td>대여가능일시</td>
+		    		<td colspan="2">대여가능일시</td>
 		    	</tr>
 		    </table>
 		  </div>
@@ -95,7 +98,7 @@
 					<td>${member.rentalCnt }</td>
 					<td>${member.reserveCnt }</td>
 					<td>
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${member.id }" >도서정보조회</button>
+					<button type="button" class="btn btn-primary modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${member.id }" >도서정보조회</button>
 					</td>
 				</tr>
 			</c:forEach>
