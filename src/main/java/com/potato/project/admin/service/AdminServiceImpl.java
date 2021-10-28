@@ -1,5 +1,7 @@
 package com.potato.project.admin.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
+import com.potato.project.member.vo.MemberVO;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService{
@@ -95,6 +98,14 @@ public class AdminServiceImpl implements AdminService{
 	public int countBookInputDate(BookVO bookVO) {
 		
 		return sqlSession.selectOne("searchMapper.countBook",bookVO);
+		
+	}
+	
+	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회
+	@Override
+	public List<MemberVO> selectMemberListAndBookCnt() {
+		
+		return sqlSession.selectList("memberMapper.selectMemberListAndBookCnt");
 		
 	}
 	

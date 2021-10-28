@@ -18,9 +18,6 @@ public class MemberVO {
 	private String[] tells;
 	private String[] addrs;
 	
-	// 관리자 회원관리용 카운트 추가
-	private String bookCnt;
-	
 	//나의도서관 대출 예약 반납 카운트용 추가
 	private String rentalCnt;  //대출 카운트
 	private String reserveCnt; //예약 카운트
@@ -159,12 +156,5 @@ public class MemberVO {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
-	public String getBookCnt() {
-		return bookCnt;
-	}
-	public void setBookCnt(String bookCnt) {
-		this.bookCnt = bookCnt;
-	}
-	
 	
 }

@@ -1,8 +1,11 @@
 package com.potato.project.admin.service;
 
+import java.util.List;
+
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
+import com.potato.project.member.vo.MemberVO;
 
 public interface AdminService {
 	
@@ -29,5 +32,8 @@ public interface AdminService {
 	
 	// 기간에 따른 신착도서 갯수 조회
 	int countBookInputDate(BookVO bookVO);
+	
+	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회
+	List<MemberVO> selectMemberListAndBookCnt();
 	
 }

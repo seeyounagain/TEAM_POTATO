@@ -11,6 +11,8 @@ public class RentalVO {
 	private String  returnDate	;	// RETURN_DATE  -- 실제 반납일
 	private String  limitDate	;	// LIMIT_DATE	-- 반납 마감일 (대출일 + 7일)
 	
+	private BookVO bookVO		;
+	
 	public String getRentalCode() {
 		return rentalCode;
 	}
@@ -46,6 +48,12 @@ public class RentalVO {
 	}
 	public void setLimitDate(String limitDate) {
 		this.limitDate = limitDate;
+	}
+	public BookVO getBookVO() {
+		return bookVO;
+	}
+	public void setBookVO(BookVO bookVO) {
+		this.bookVO = bookVO;
 	}
 	 
 

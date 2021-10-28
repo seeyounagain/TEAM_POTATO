@@ -47,7 +47,8 @@
 		<result column="BOOK_CODE" 		property="bookCode"/>
 		<result column="RENTAL_DATE" 	property="rentalDate"/>	
 		<result column="RETURN_DATE" 	property="returnDate"/>	
-		<result column="LIMIT_DATE" 	property="limitDate"/>	
+		<result column="LIMIT_DATE" 	property="limitDate"/>
+		<association property="bookVO" resultMap="book"/>	
 	</resultMap>
 	
 	<resultMap type="com.potato.project.common.vo.ReserveVO" id="reserve">
@@ -55,7 +56,8 @@
 		<result column="ID" 					property="id"/>
 		<result column="BOOK_CODE" 				property="bookCode"/>
 		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>	
-		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
+		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>
+		<association property="bookVO" resultMap="book"/>
 	</resultMap>
 
 	<!-- 책 등록 -->
@@ -332,6 +334,7 @@
 		    COUNT(ID)
 		FROM MEMBER
 		WHERE ID = #{id}
+		AND IS_DELETE = 'N'
 	</select>
 	
 	<!-- 책 상세정보 조회 -->
@@ -371,6 +374,16 @@
 		WHERE INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
 		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
 		</if>
+	</select>
+	
+	<!-- 회원이 대여하고 있는 도서 정보 조회 -->
+	<select id="selectMemberRentalList" resultMap="rental">
+		
+	</select>
+	
+	<!-- 회원이 예약하고 있는 도서 정보 조회 -->
+	<select id="selectMemberReserveList" resultMap="reserve">
+		
 	</select>
 	
 </mapper>

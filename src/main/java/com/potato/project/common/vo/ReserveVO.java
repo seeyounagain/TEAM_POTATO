@@ -10,6 +10,8 @@ public class ReserveVO {
 	private String rentableStartDate	;	// RENTABLE_START_DATE  -- 대출 가능 시작일
 	private String rentableEndDate		;	// RENTABLE_END_DATE	-- 대출 가능 마감일 (기존 책 반납일 다음날로부터 2일간)
 	
+	private BookVO bookVO		;
+	
 	public String getReserveCode() {
 		return reserveCode;
 	}
@@ -40,5 +42,12 @@ public class ReserveVO {
 	public void setRentableEndDate(String rentableEndDate) {
 		this.rentableEndDate = rentableEndDate;
 	}
-        
+	public BookVO getBookVO() {
+		return bookVO;
+	}
+	public void setBookVO(BookVO bookVO) {
+		this.bookVO = bookVO;
+	}
+   
+	
 }

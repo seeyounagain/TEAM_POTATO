@@ -57,6 +57,9 @@ public class AdminController {
 	@GetMapping("/memberManage")
 	public String memberManage(Model model,MenuVO menuVO,HttpSession session) {
 		
+		// 회원 정보 전달
+		model.addAttribute("memberList",adminSerivce.selectMemberListAndBookCnt());
+		
 		return  "admin/member_manage";
 		
 	}

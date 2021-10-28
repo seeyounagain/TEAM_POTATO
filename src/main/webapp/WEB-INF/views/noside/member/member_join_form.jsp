@@ -8,6 +8,11 @@
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=23" ></script>
+<style type="text/css">
+.pointer:hover {
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
@@ -73,13 +78,13 @@
 				<div class="row">
 					<label for="addr" class="form-label">주소</label>
 					<div class="col">
-					<input type="text" class="post form-control" name="addrs" id="postcode"  placeholder="우편번호" readonly required>
+					<input type="text" class="post form-control pointer" name="addrs" id="postcode" onclick="openPostcode()" placeholder="우편번호" readonly required>
 					</div>
 					<div class="col-2 d-grid" style="padding-left: 3px;">
-					<input type="button" class="post btn btn-primary" onclick="openPostcode()" value="우편번호찾기">
+					<input type="button" class="post pointer btn btn-primary" onclick="openPostcode()" value="우편번호찾기">
 					</div>
 					<div class="col-12">
-					<input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="address" placeholder="주소" readonly required>
+					<input type="text" style="margin-top: 5px;" onclick="openPostcode()" class="post form-control pointer" name="addrs" id="address" placeholder="주소" readonly required>
 					<input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="detailAddress" placeholder="상세주소">
 					</div>
 				</div>

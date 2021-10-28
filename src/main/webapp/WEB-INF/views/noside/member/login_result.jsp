@@ -15,6 +15,12 @@
 			location.href = '/common/main';
 		</script>
 	</c:when>
+	<c:when test="${isDelete eq 'Y' }">
+		<script type="text/javascript">
+			alert('이미 탈퇴한 회원의 정보입니다.');
+			location.href = '/member/memberLoginForm';
+		</script>
+	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
 			alert('아이디 또는 비밀번호를 확인해주세요');

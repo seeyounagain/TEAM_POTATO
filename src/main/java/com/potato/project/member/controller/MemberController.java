@@ -81,14 +81,16 @@ public class MemberController {
 	public String join(MemberVO memberVO, HttpSession session) {
 		
 		MemberVO loginInfo = memberSerivce.selectMember(memberVO);
-
-		if (loginInfo != null) {
+		
+		String isDelete = loginInfo.getIsDelete();
+		
+		if (loginInfo != null && loginInfo.getIsDelete().equals("N")) {
 
 			session.setAttribute("loginInfo", loginInfo);
 
 		}
 
-		return "/noside/member/login_result";
+		return "/noside/member/login_result?isDelete=" + isDelete;
 		
 	}
 	
