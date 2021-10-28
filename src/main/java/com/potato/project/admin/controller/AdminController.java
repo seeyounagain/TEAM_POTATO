@@ -167,5 +167,23 @@ public class AdminController {
 		
 	}
 	
+	// 회원이 보유한 대여 도서 정보 조회 Ajax
+	@ResponseBody
+	@PostMapping("/selectMemberRentalListAjax")
+	public List<RentalVO> selectMemberRentalListAjax(String id) {
+		
+		return adminSerivce.selectMemberRentalList(id);
+		
+	}
+	
+	// 회원이 보유한 예약 도서 정보 조회 Ajax
+	@ResponseBody
+	@PostMapping("/selectMemberReserveListAjax")
+	public List<ReserveVO> selectMemberReserveList(String id) {
+		
+		return adminSerivce.selectMemberReserveList(id);
+		
+	}
+	
 	
 }

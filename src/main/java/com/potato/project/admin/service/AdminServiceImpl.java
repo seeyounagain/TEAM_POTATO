@@ -109,5 +109,21 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
+	// 회원이 보유한 대여 도서 정보 조회
+	@Override
+	public List<RentalVO> selectMemberRentalList(String id) {
+		
+		return sqlSession.selectList("searchMapper.selectMemberRentalList",id);
+				
+	}
+
+	// 회원이 보유한 예약 도서 정보 조회
+	@Override
+	public List<ReserveVO> selectMemberReserveList(String id) {
+		
+		return sqlSession.selectList("searchMapper.selectMemberReserveList",id);
+		
+	}
+	
 	
 }

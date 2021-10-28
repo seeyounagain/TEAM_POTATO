@@ -31,7 +31,7 @@
 		<result column="STATUS" 		property="status"/>
 		<result column="RENTAL_ID" 		property="rentalId"/>
 		<result column="RESERVE_ID" 	property="reserveId"/>
-		<collection property="bookImgVO" resultMap="bookImg"/>
+		<association property="bookImgVO" resultMap="bookImg"/>
 	</resultMap>
 	
 	<resultMap type="com.potato.project.common.vo.BookImgVO" id="bookImg">
@@ -378,12 +378,30 @@
 	
 	<!-- 회원이 대여하고 있는 도서 정보 조회 -->
 	<select id="selectMemberRentalList" resultMap="rental">
-		
+        SELECT
+            B.BOOK_CODE
+            , TITLE
+            , WRITER
+            , STATUS
+            , RENTAL_DATE
+            , LIMIT_DATE
+        FROM BOOK B, RENTAL R
+        WHERE B.BOOK_CODE = R.BOOK_CODE
+        AND ID = #{id}		
 	</select>
 	
 	<!-- 회원이 예약하고 있는 도서 정보 조회 -->
 	<select id="selectMemberReserveList" resultMap="reserve">
-		
+        SELECT
+            B.BOOK_CODE
+            , TITLE
+            , WRITER
+            , STATUS
+            , RENTABLE_START_DATE
+            , RENTABLE_END_DATE
+        FROM BOOK B, RESERVE R
+        WHERE B.BOOK_CODE = R.BOOK_CODE
+        AND ID = #{id}		
 	</select>
 	
 </mapper>

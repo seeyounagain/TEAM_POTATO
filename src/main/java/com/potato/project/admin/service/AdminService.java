@@ -36,4 +36,11 @@ public interface AdminService {
 	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회
 	List<MemberVO> selectMemberListAndBookCnt();
 	
+	// 회원이 보유한 대여 도서 정보 조회
+	List<RentalVO> selectMemberRentalList(String id);
+	
+	// 회원이 보유한 예약 도서 정보 조회
+	List<ReserveVO> selectMemberReserveList(String id);
+	
+	
 }

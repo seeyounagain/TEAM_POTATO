@@ -11,6 +11,9 @@
 #bookT > caption {
 	text-align: right;
 }
+.cap {
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -26,8 +29,8 @@
 		<div class="modal-body">
 		  <div class="container-fluid">
 		    <table class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
-		    	<caption>대여도서정보</caption>
-		    	<tr>
+		    	<caption class="cap" >&lt;대여도서정보&gt;</caption>
+		    	<tr id="rentalTr">
 		    		<td>표제 / 저자</td>
 		    		<td>도서상태</td>
 		    		<td>대여일시</td>
@@ -35,8 +38,8 @@
 		    	</tr>
 		    </table>
 		    <table class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
-		    	<caption>예약도서정보</caption>
-		    	<tr>
+		    	<caption class="cap" >&lt;예약도서정보&gt;</caption>
+		    	<tr id="reserveTr">
 		    		<td>표제 / 저자</td>
 		    		<td>도서상태</td>
 		    		<td>대여가능일시</td>
@@ -92,7 +95,7 @@
 					<td>${member.rentalCnt }</td>
 					<td>${member.reserveCnt }</td>
 					<td>
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">도서정보조회</button>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${member.id }" >도서정보조회</button>
 					</td>
 				</tr>
 			</c:forEach>
