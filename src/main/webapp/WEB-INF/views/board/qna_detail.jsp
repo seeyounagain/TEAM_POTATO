@@ -55,6 +55,29 @@
 		}
 	}
 	
+	function checkPw() {
+		var qnaCode = document.getElementById('qnaCode').value;
+		var menuCode = document.getElementById('menuCode').value;
+		var qnaPw = document.getElementById('qnaPw').value;
+		
+		if(	confirm("상담 / 문의 글을 삭제하시겠습니까?") == true){
+			
+			 var inputPw = prompt("상담 / 문의글 비밀 번호 확인");
+			 
+			 if(inputPw = qnaPw){
+				 
+				 location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
+				 
+			 }
+			
+			
+			/* location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode; */
+		
+		}else{
+			return;
+		}
+	}
+	
 	function deleAnswer() {
 		var qnaCode = document.getElementById('qnaCode').value;
 		var menuCode = document.getElementById('menuCode').value;
@@ -141,10 +164,12 @@
    		<div class="deleBtnDiv text-center">
 				<input type="hidden" value="${menuVO.menuCode}" id="menuCode">
 				<input type="hidden" value="${qnaVO.qnaCode}" name="qnaCode" id="qnaCode">
+				<input type="hidden" value="${qnaVO.qnaPw}" name="qnaPw" id="qnaPw">
 			<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
 				<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
+				<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="deleQna();">
 			</c:if>
- 			<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="deleQna();">
+ 			<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="checkPw();">
  			<input class="btn btn-primary btn-md" type="button" value="뒤로가기" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
    		</div>
 	</div>

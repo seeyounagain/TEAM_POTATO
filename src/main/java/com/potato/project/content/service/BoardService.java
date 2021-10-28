@@ -37,8 +37,11 @@ public interface BoardService {
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	
-	//답변 갯수 카운트
-	int answerCnt(QnaVO qnaVO);
+	//답변 등록 개수 + 업데이트
+	int updateAcnt(QnaVO qnaVO);
+	
+	//답변 삭제 개수 - 업데이트
+	int updateDeleteAcnt(QnaVO qnaVO);
 	
 	//상담문의 입력
 	void insertQna(QnaVO qnaVO);

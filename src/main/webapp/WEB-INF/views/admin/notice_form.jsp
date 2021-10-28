@@ -40,7 +40,7 @@ input{
    			<hr>
    		</div>
 			<div class="tableDiv">
-  			<form action="/board/insertNotice" method="post" enctype="multipart/form-data">
+  			<form action="/board/insertNotice?menuCode=${menuVO.menuCode }" method="post" enctype="multipart/form-data">
   				<input type="hidden" value="${sessionScope.loginInfo.id}" name="id">
 					<table class="table text-center">
 						<tr>

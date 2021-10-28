@@ -7,6 +7,7 @@ public class QnaAnswerVO {
 	private String name			;
 	private String createDate	;
 	private String qnaCode		;
+	private String acnt			;
 	
 	public String getAnswerCode() {
 		return answerCode;
@@ -43,6 +44,12 @@ public class QnaAnswerVO {
 	}
 	public void setQnaCode(String qnaCode) {
 		this.qnaCode = qnaCode;
+	}
+	public String getAcnt() {
+		return acnt;
+	}
+	public void setAcnt(String acnt) {
+		this.acnt = acnt;
 	}
 	
 	

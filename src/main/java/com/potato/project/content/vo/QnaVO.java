@@ -11,6 +11,7 @@ public class QnaVO extends QnaAnswerVO{
 	private String content   ;		//  CONTENT		-- 내용
 	private String createDate;		//  CREATE_DATE	-- 작성일
 	private String qnaPw     ;		//  QNA_PW		-- 비밀번호 (NULL이 아닐경우 비밀글)
+	private String answerCnt ;
 	
 	public String getQnaCode() {
 		return qnaCode;
@@ -53,6 +54,12 @@ public class QnaVO extends QnaAnswerVO{
 	}
 	public void setQnaPw(String qnaPw) {
 		this.qnaPw = qnaPw;
+	}
+	public String getAnswerCnt() {
+		return answerCnt;
+	}
+	public void setAnswerCnt(String answerCnt) {
+		this.answerCnt = answerCnt;
 	}
 	
 	

@@ -20,15 +20,20 @@
 	width: 100%;
 	text-align: center;
 }
+.table > tr, td{
+	border-style: none;
+}
 .table tr > td:first-child{
 	background-color: #dddddd;
 }
-.table tr > td:last-child{
-	padding-left: 20px;
+input[type="password"]{
+	width: 100%;
+}
+input[type="button"] {
 	text-align: left;
 }
-input{
-	width: 100%;
+.table tr > td:nth-child(3n,4n) {
+	padding-left: 0px;
 }
 </style>
 <script type="text/javascript">
@@ -57,7 +62,7 @@ input{
    			<h1 class="display-6 text-center">상담 / 문의</h1>
    			<hr>
    		</div>
-   		<div class="tableDiv">
+   		<div class="tableDiv text-center">
    		<input type="hidden" value="${qnaVO.qnaPw}" id="qnaPw">
    		<input type="hidden" value="${qnaVO.qnaCode}" id="qnaCode">
    		<input type="hidden" value="${menuVO.menuCode}" id="menuCode">
@@ -65,7 +70,10 @@ input{
    				<tr>
    					<td>비밀번호</td>
    					<td><input type="password" id="inputPw" autofocus="autofocus" placeholder="비밀번호를 입력해 주세요."></td>
-   					<td><input class="btn btn-primary" type="button" value="확인" onclick="checkPw();"></td>
+   					<td>
+   						<input class="btn btn-primary" type="button" value="확인" onclick="checkPw();">
+   						<input class="btn btn-primary" type="button" value="뒤로가기" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
+   					</td>
    				</tr>
    			</table>
    		</div>

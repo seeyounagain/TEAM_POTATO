@@ -12,6 +12,7 @@
 		<result column="CONTENT" 	 property="content"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="READ_CNT"    property="readCnt"/>
+		<association property="attachFileVO" resultMap="noticeFile"></association>
 	</resultMap>
 
 	<!-- 공지사항 파일 첨부 -->
@@ -31,6 +32,7 @@
 		<result column="CONTENT" 	 property="content"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="QNA_PW" 	 property="qnaPw"/>
+		<result column="ANSWER_CNT" 	property="answerCnt"/>
 	</resultMap>
 	
 	<!-- 문의 답변 -->
@@ -41,6 +43,7 @@
 		<result column="NAME" 		 property="name"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="QNA_CODE" 	 property="qnaCode"/>
+		<result column="ACNT"        property="acnt"/>
 	</resultMap>
 	
 	<!-- 공지사항 리스트 조회 -->
@@ -103,15 +106,17 @@
 	
 	<!-- 공지사항 상세보기 -->
 	<select id="selectNotice" resultMap="notice">
-		SELECT NOTICE_CODE
-		     , TITLE
-		     , ID
-		     , NAME
-		     , CONTENT
-		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
-		     , READ_CNT
-		FROM NOTICE
-		WHERE NOTICE_CODE = #{noticeCode}
+		SELECT N.NOTICE_CODE
+			 , TITLE
+			 , ID
+			 , NAME
+			 , CONTENT
+			 , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+			 , READ_CNT
+			 , ATTACHED_FILE_NAME
+		FROM NOTICE N, ATTACH_FILE A
+		WHERE N.NOTICE_CODE = A.NOTICE_CODE
+		AND N.NOTICE_CODE = #{noticeCode}
 	</select>
 	
 	<!-- 조회수 증가 -->
@@ -138,8 +143,9 @@
 		     , NAME
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 		     , QNA_PW
+		     , ANSWER_CNT
 		FROM QNA
-		ORDER BY QNA_CODE DESC
+        ORDER BY QNA_CODE DESC
 	</select>
 	
 	<!-- 문의상담 INSERT -->
@@ -194,12 +200,19 @@
 		)
 	</insert>
 	
-	<!-- 답변 갯수 카운트  -->
-	<select id="answerCnt" resultType="int">
-		SELECT COUNT(ANSWER_CODE) AS ACNT
-		FROM QNA_ANSWER
+	<!-- 문의글 답변 등록 후 답변CNT 업데이트 -->
+	<update id="updateAcnt">
+		UPDATE QNA
+		SET ANSWER_CNT = ANSWER_CNT + 1
 		WHERE QNA_CODE = #{qnaCode}
-	</select>
+	</update>
+	
+	<!-- 문의글 답변 삭제 후 답변CNT 업데이트 -->
+	<update id="updateDeleteAcnt">
+		UPDATE QNA
+		SET ANSWER_CNT = ANSWER_CNT - 1
+		WHERE QNA_CODE = #{qnaCode}
+	</update>
 	
 	<!-- 상담문의 답변 조회 -->
 	<select id="selectAnsewerList" resultMap="qnaAnswer">

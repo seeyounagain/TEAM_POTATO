@@ -109,8 +109,8 @@ public class BoardController {
 	@GetMapping("/noticeDetail")
 	public String noticeDetail(MenuVO menuVO, Model model, NoticeVO noticeVO) {
 		
-		model.addAttribute("notice", boardService.selectNotice(noticeVO));
 		boardService.updateReadCnt(noticeVO);
+		model.addAttribute("notice", boardService.selectNotice(noticeVO));
 		
 		return "board/notice_detail";
 	}
@@ -121,7 +121,7 @@ public class BoardController {
 		
 		boardService.deleteNotice(noticeVO);
 		
-		return "redirect:/board/notice";
+		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
 	}
 	
 	
@@ -130,9 +130,9 @@ public class BoardController {
 	//상담 문의 페이지로 이동
 	@GetMapping("/qna")
 	public String goQna(Model model, QnaVO qnaVO, MenuVO menuVO, HttpSession session) {
-		
+
 		model.addAttribute("list", boardService.selectQnaList());
-		model.addAttribute("acnt", boardService.answerCnt(qnaVO));
+		
 		return  "board/qna_list";
 	}
 	
@@ -151,7 +151,8 @@ public class BoardController {
 	public String insertQna(QnaVO qnaVO, MenuVO menuVO) {
 		
 		boardService.insertQna(qnaVO);
-
+		
+		
 		return "redirect:/board/qna?menuCode=" + menuVO.getMenuCode();
 	}
 	
@@ -179,6 +180,7 @@ public class BoardController {
 	public String insertAnswer(Model model, MenuVO menuVO, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
 
 		boardService.insertAnswer(qnaAnswerVO);
+		boardService.updateAcnt(qnaVO);
 		
 		//redirect 방식은 데이터값을 가져가지 않기 때문에 다시 호출해주어야 함
 		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode() + "&menuCode=" + menuVO.getMenuCode();
@@ -196,6 +198,7 @@ public class BoardController {
 	public String deleteAnswer(MenuVO menuVO, QnaVO qnaVO) {
 		
 		boardService.deleteAnswer(qnaVO);
+		boardService.updateDeleteAcnt(qnaVO);
 		
 		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode() + "&menuCode=" + menuVO.getMenuCode();
 	}

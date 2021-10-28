@@ -114,18 +114,27 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.delete("boardMapper.deleteAnswer", qnaVO);
 	}
 	
-	//답변 갯수 카운트
-	@Override
-	public int answerCnt(QnaVO qnaVO) {
-
-		return sqlSession.selectOne("boardMapper.answerCnt");
-	}
 	
 	//공지사항 조회수 증가
 	@Override
 	public int updateReadCnt(NoticeVO noticeVO) {
 	
 		return sqlSession.update("boardMapper.updateReadCnt", noticeVO);
+	}
+
+	//답변 등록 개수 + 업데이트
+	@Override
+	public int updateAcnt(QnaVO qnaVO) {
+
+		return sqlSession.update("boardMapper.updateAcnt", qnaVO);
+	}
+	
+	//답변 삭제 개수 - 업데이트
+	@Override
+	public int updateDeleteAcnt(QnaVO qnaVO) {
+		
+		return sqlSession.update("boardMapper.updateDeleteAcnt", qnaVO);
+		
 	}
 	
 	
