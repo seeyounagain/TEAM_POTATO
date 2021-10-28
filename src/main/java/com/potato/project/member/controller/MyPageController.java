@@ -35,7 +35,9 @@ public class MyPageController {
 	@GetMapping("/myInfo")
 	public String myInfo(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO) {
 		// 로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
+		//전하번호 따로 뺴기위해 조회함
 		model.addAttribute("memberInfo", myPageService.selectMemberInfo((MemberVO)session.getAttribute("loginInfo")));
+		//전화번호 빼고 또 다시 담고 보냄
 		model.addAttribute("myTells", myPageService.selectTell(myPageService.selectTellCnt((MemberVO)session.getAttribute("loginInfo"))));
 		return "member/my_info";
 
@@ -59,8 +61,11 @@ public class MyPageController {
 	//비밀번호 수정하기
 	@ResponseBody
 	@PostMapping("/updatePw")
-	public String updatePw(MemberVO memberVO) { //아이디 비밀번호
-		return memberVO.getPw();
+	public boolean updatePw(MemberVO memberVO) { //아이디 비밀번호
+		
+		
+		System.out.println(memberVO.getId());
+		return myPageService.updatePw(memberVO);
 	}
 	@ResponseBody
 	@PostMapping("/checkMemberquit")

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=54"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=60"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -82,7 +82,7 @@
 							</colgroup>
 								<tr>
 									<td class="table-secondary">아이디</td>
-									<td id="id">${memberInfo.id }</td>
+									<td id="id1">${memberInfo.id }</td>
 								</tr>
 								<tr>
 									<td class="table-secondary">휴대전화</td>
@@ -139,7 +139,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-floating mb-4">
-						<input type="password" class="form-control" id="pw" placeholder="Password" required>
+						<input type="password" class="form-control" id="pw1" placeholder="Password" required>
 						<label for="floatingPassword">비밀번호</label>
 					</div>
 					<div class="form-floating mb-1">

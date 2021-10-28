@@ -77,7 +77,7 @@ $(document).ready(function(){
 					str += '</tr>';
 					str += '<tr>';
 					str += '<td class="table-secondary">관심카테고리</td>';
-	//				str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" name="favorite" value="자기계발"> <label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
+					str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" name="favorite" value="자기계발"> <label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
 					str += '</tr>'
 	
 					str += '</table>';
@@ -265,14 +265,18 @@ $(document).ready(function(){
 	})
 	//기존 비밀번호 확인 후 모달창 닫는거까지
 	$(document).on('click', '#changePwBtn2' , function() {
-		
+		var id = $('#id1').val();
 		var existingPw = $('#existingPw').val();
-		var pw = $('#pw').val();
+		var pw1 = $('#pw1').val();
 		var newPw = $('#newPw').val();
+		var checkPw = $('#checkPw').val();
+		alert(id)
 		alert(existingPw);
-		alert(pw);
+		alert(pw1);
+		alert(newPw)
+		alert(checkPw)
 		
-		if (existingPw != pw) {
+		if (existingPw != pw1) {
 			
 			alert('비밀번호를 다시 확인해 주세요.')
 			return ;
@@ -283,10 +287,10 @@ $(document).ready(function(){
 			$.ajax({
 				 url: '/myPage/updatePw', //요청경로
 				type: 'post',
-			 	data:{'pw':newPw}, //필요한 데이터/        
+			 	data:{'pw':newPw,'id':id}, //필요한 데이터/        
 			 success: function(result) {
 			        	//ajax 실행 성공 시 실행되는 구간
-				 	alert(result+"ㅇㅇㅇㅇ");
+				 	alert('비밀번호가 변경되었습니다.');
 				 	$('#changePwModal').modal("hide");
 				 	return ; //뚜껑닫기
 		    	
@@ -347,7 +351,15 @@ $(document).ready(function(){
 			}
 			
 		});
-	
+	var changePwModal = document.getElementById('memberquitModal');
+	//var loginModal = $('#loginModal');위에거가 이거랑 같은거임
+	changePwModal.addEventListener('hidden.bs.modal', function (event) {
+	 	 // do something...
+		$('#pwCheck1').text('');
+		$('#pwCheck2').text('');
+		$('#checkCapsLock2').text('');
+		$('.modal input[type="password"]').val('');
+	})
 	
 	
 	
