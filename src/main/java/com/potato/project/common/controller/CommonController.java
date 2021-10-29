@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.content.service.BoardService;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 
@@ -23,11 +24,15 @@ public class CommonController {
 	@Resource(name = "searchService")
 	private SearchService searchService;
 	
+	@Resource(name = "boardService")
+	private BoardService boardService;
+	
 	@GetMapping("/main")
 	public String test(Model model, HttpSession session, MenuVO menuVO) {
 		
 		// 신착도서목록
 		model.addAttribute("bookList",searchService.selectBookList());
+		model.addAttribute("noticeList", boardService.selectNoticeList());
 		
 		return "noside/content/main";
 		

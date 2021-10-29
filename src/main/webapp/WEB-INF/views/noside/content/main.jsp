@@ -107,13 +107,19 @@
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				      <img src="/resources/img/notice1.png" class="d-block" alt="#">
+				      <a href="/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004">
+				     	<img  height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[0].attachFileVO.attachedFileName }" class="d-block" alt="#">
+				      </a>
 				    </div>
 				    <div class="carousel-item">
-				      <img src="/resources/img/notice2.png" class="d-block" alt="#">
+				    	<a href="/board/noticeDetail?noticeCode=${noticeList[1].noticeCode }&menuCode=MENU_004">
+				      		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[1].attachFileVO.attachedFileName }" class="d-block" alt="#">
+				    	</a>
 				    </div>
 				    <div class="carousel-item">
-				      <img src="/resources/img/notice3.png" class="d-block" alt="#">
+				    	<a href="/board/noticeDetail?noticeCode=${noticeList[2].noticeCode }&menuCode=MENU_004">
+				    		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[2].attachFileVO.attachedFileName }" class="d-block" alt="#">
+				    	</a>
 				    </div>
 				  </div>
 				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
