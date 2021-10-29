@@ -37,6 +37,16 @@
 	text-decoration: underline 1px black;
 	color: black;
 }
+.searchBar input{
+	background-image: url(/resources/img/search_b.png);
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	background-size: 30px;
+	padding-left: 60px;
+}
+.searchBar input:focus{
+	background-image:none;
+}
 </style>
 </head>
 <body>
@@ -48,7 +58,7 @@
     			<div style="color: white;"> 울산 도서관에 오신 것을 환영합니다.</div>
     		</div>
 		    <div class="col-6 align-self-center">
-				<input type="text" class="form-control p-3" id="id" name="id" placeholder="검색어를 입력해주세요.">
+				<div class="searchBar"><input type="text" class="form-control p-3" id="id" name="id" placeholder="       검색어를 입력해주세요."></div>
 			</div>
 			<div class="col-2 d-grid align-self-center" style="padding-left: 3px;">
 				<c:forEach var="menu" items="${menuList }">

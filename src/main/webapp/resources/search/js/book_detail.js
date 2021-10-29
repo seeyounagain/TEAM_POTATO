@@ -1,6 +1,12 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		$('#backIcon').hover(function () {
+		    $(this).attr("src", $(this).attr("src").replace("/resources/img/back_off.png", "/resources/img/back_on.png"));
+		}, function () {
+		    $(this).attr("src", $(this).attr("src").replace("/resources/img/back_on.png", "/resources/img/back_off.png"));
+		});
+				
 		/* 이벤트 시작 */
 		// 예약 버튼 클릭 시
 		$(document).on('click', '#reserveBtn' , function() {

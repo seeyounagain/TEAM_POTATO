@@ -2,6 +2,23 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 	
+	
+	$(document).on('click', '#goSearchBtn' , function() {
+		
+		var searchValue = $('#searchValue').val();
+		
+		location.href = '/libManage/memberManage?searchValue=' + searchValue + '&menuCode=MENU_006';	
+		
+	});
+	
+	$(document).on('click', '#searchValue' , function() {
+		
+		$('#searchValue').val('');
+		
+	});
+	
+	
+	// 도서정보조회 버튼 클릭 시 정보 조회
 	$(document).on('click', '.modalBtn' , function() {
 		
 		var id = $(this).attr('data-id');

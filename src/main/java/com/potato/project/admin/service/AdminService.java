@@ -33,8 +33,8 @@ public interface AdminService {
 	// 기간에 따른 신착도서 갯수 조회
 	int countBookInputDate(BookVO bookVO);
 	
-	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회
-	List<MemberVO> selectMemberListAndBookCnt();
+	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회 + 페이징
+	List<MemberVO> selectMemberListAndBookCnt(MemberVO memberVO);
 	
 	// 회원이 보유한 대여 도서 정보 조회
 	List<RentalVO> selectMemberRentalList(String id);
@@ -42,5 +42,7 @@ public interface AdminService {
 	// 회원이 보유한 예약 도서 정보 조회
 	List<ReserveVO> selectMemberReserveList(String id);
 	
+	// 검색어 결과에 따른 회원수 조회
+	int countMemberAndSearchId(MemberVO memberVO);
 	
 }

@@ -1,6 +1,8 @@
 package com.potato.project.member.vo;
 
-public class MemberVO {
+import com.potato.project.common.vo.PageVO;
+
+public class MemberVO extends PageVO {
 	
 	// 이용자 테이블 MEMBER
 		                  

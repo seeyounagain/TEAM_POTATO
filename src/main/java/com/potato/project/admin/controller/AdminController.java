@@ -53,12 +53,17 @@ public class AdminController {
 		
 	}
 	
-	// 회원 관리 페이지 이동
+	// 회원 관리 페이지 이동 + 페이징
 	@GetMapping("/memberManage")
-	public String memberManage(Model model,MenuVO menuVO,HttpSession session) {
+	public String memberManage(Model model,MenuVO menuVO,MemberVO memberVO,HttpSession session) {
+		
+		int totalCnt = adminSerivce.countMemberAndSearchId(memberVO);
+		
+		memberVO.setTotalCnt(totalCnt);
+		memberVO.setPageInfo();
 		
 		// 회원 정보 전달
-		model.addAttribute("memberList",adminSerivce.selectMemberListAndBookCnt());
+		model.addAttribute("memberList",adminSerivce.selectMemberListAndBookCnt(memberVO));
 		
 		return  "admin/member_manage";
 		

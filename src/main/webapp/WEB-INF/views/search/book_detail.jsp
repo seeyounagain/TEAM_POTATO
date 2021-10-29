@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=4" ></script>
+<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=8" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -26,6 +26,9 @@
 #mainImg {
 	width: 460px;
 }
+#backIcon:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -33,6 +36,9 @@
 <div class="row justify-content-center">
 	<div class="col-8 mt-3">
 		<div class="row">
+			<div class="col-sm-12 mb-3 text-end">
+				<img id="backIcon" src="/resources/img/back_off.png" onclick="javascript:history.back();" width="30px;" title="뒤로가기">
+			</div>
 			<div class="col-12 fs-5 mb-3 fst-italic">
 				${bookVO.summary }
 			</div>

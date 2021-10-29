@@ -27,6 +27,11 @@
     padding-right: 2.2rem!important;
     padding-left: 2.2rem!important;
 }
+#bookT {
+	max-height: 1000px;
+	min-height: 400px;
+	overflow: scroll;
+}
 </style>
 </head>
 <body>

@@ -6,16 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=15" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=18" ></script>
 <style type="text/css">
-#bookT > caption {
+.rightC {
 	text-align: right;
+}
+.leftC {
+	text-align: left;
 }
 .cap {
 	color: black;
 }
 .titleA:hover {
 	color: black;
+}
+#searchValue {
+	width: 250px;
+	display: inline-block;
+}
+#goSearchBtn {
+	vertical-align: baseline;
+}
+.page-link {
+	color: black;
+}
+.page-item.active .page-link {
+    z-index: 3;
+	background-color: #6c757d;
+	color: white;
+    border-color: #6c757d;
+}
+.leftC input[type=text]{
+	background-image: url(/resources/img/search_g.png);
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	padding-left: 60px;
+}
+.leftC input[type=text]:focus{
+	background-image:none;
 }
 </style>
 </head>
@@ -63,7 +92,13 @@
 
 <table id="bookT" class="table table-hover table-bordered caption-top text-center">
 	
-	<caption>현재 대여 또는 예약중인 도서의 수 입니다. (반납 완료, 예약 종료 등은 제외)</caption>
+	
+	<caption class="leftC">
+	<input type="text" class="form-control p-2" id="searchValue" name="searchValue" placeholder="         회원 아이디를 입력해주세요." <c:if test="${not empty memberVO.searchValue }">value="${memberVO.searchValue}"</c:if> >
+	<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary px-5 py-2">
+	</caption>
+	
+	<caption class="rightC">현재 대여 또는 예약중인 도서의 수 입니다. (반납 완료, 예약 종료 등은 제외)</caption>
 		
 	<colgroup>
 		<col width="10%">
@@ -111,5 +146,32 @@
 		</c:choose>
 	</tbody>
 </table>
+
+	<div class="col-12">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+			 <c:if test="${memberVO.prev }">
+				<li class="page-item">
+				<a class="page-link" href="/libManage/memberManage?nowPage=${memberVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				</a>
+				</li>
+			 </c:if> 
+				<c:forEach var="pageNum" begin="${memberVO.startPage }" end="${memberVO.endPage }">
+					<li class="page-item  <c:if test="${memberVO.nowPage eq pageNum }">active</c:if>  ">
+					<a class="page-link" href="/libManage/memberManage?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+					</li>
+				</c:forEach>
+			<c:if test="${memberVO.next }">
+				<li class="page-item">
+				<a class="page-link" href="/libManage/memberManage?nowPage=${memberVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
+	</div>	
+
 </body>
 </html>

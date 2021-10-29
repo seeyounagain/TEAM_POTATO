@@ -29,6 +29,16 @@
 .titleA:hover {
 	color: black;
 }
+.searchB input{
+	background-image: url(/resources/img/search_g.png);
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	padding-left: 60px;
+}
+.searchB input:focus{
+	background-image:none;
+}
 </style>
 </head>
 <body>
@@ -40,7 +50,7 @@
 <form action="/search/goSearch" method="post">		
 		<div class="row justify-content-center">
 			<div class="col-8 p-3">
-				<input type="text" class="form-control p-2" id="id" name="id" placeholder="검색어를 입력해주세요.">
+				<div class="searchB"><input type="text" class="form-control p-2" id="id" name="id" placeholder="       검색어를 입력해주세요."></div>
 			</div>
 			<div class="col-2 d-grid p-3" style="padding-left: 3px;">
 				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary p-2">

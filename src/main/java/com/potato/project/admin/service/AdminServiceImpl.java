@@ -101,11 +101,11 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
-	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회
+	// 회원정보 & 회원이 보유한 대여, 예약 권수 조회 + 페이징
 	@Override
-	public List<MemberVO> selectMemberListAndBookCnt() {
+	public List<MemberVO> selectMemberListAndBookCnt(MemberVO memberVO) {
 		
-		return sqlSession.selectList("memberMapper.selectMemberListAndBookCnt");
+		return sqlSession.selectList("memberMapper.selectMemberListAndBookCnt",memberVO);
 		
 	}
 	
@@ -122,6 +122,14 @@ public class AdminServiceImpl implements AdminService{
 	public List<ReserveVO> selectMemberReserveList(String id) {
 		
 		return sqlSession.selectList("searchMapper.selectMemberReserveList",id);
+		
+	}
+	
+	// 검색어 결과에 따른 회원수 조회
+	@Override
+	public int countMemberAndSearchId(MemberVO memberVO) {
+		
+		return sqlSession.selectOne("memberMapper.countMember",memberVO);
 		
 	}
 	
