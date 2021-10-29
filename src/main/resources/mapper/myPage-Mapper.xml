@@ -31,8 +31,9 @@
 		<result column="ID" 			property="id"/>
 		<result column="BOOK_CODE" 		property="bookCode"/>
 		<result column="RENTAL_DATE" 	property="rentalDate"/>
-		<result column="LIMIT_DATE" 	property="returnDate"/>	
-		<result column="RETURN_DATE" 	property="limitDate"/>	
+		<result column="LIMIT_DATE" 	property="limitDate"/>	
+		<result column="RETURN_DATE" 	property="returnDate"/>	
+		<association property="bookVO"  resultMap="book"/>
 	</resultMap>
 	
 	<!-- 예약resultmap 추가 2025-봉 -->
@@ -44,6 +45,52 @@
 		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
 	</resultMap>
 	
+	<!-- 문의상담 스틸 2029-봉-->
+	<resultMap type="com.potato.project.content.vo.QnaVO" id="qna">
+		<id column="QNA_CODE" 			property="qnaCode"/>
+		<result column="TITLE" 			property="title"/>
+		<result column="ID" 	 	 	property="id"/>
+		<result column="NAME" 		 	property="name"/>
+		<result column="CONTENT" 	 	property="content"/>
+		<result column="CREATE_DATE" 	property="createDate"/>
+		<result column="QNA_PW" 	 	property="qnaPw"/>
+		<result column="ANSWER_CNT" 	property="answerCnt"/>
+	</resultMap>
+	
+	<!-- 북 스틸 2029-봉 -->
+	<resultMap type="com.potato.project.common.vo.BookVO" id="book">
+		<id column="BOOK_CODE" 				property="bookCode"/>
+		<result column="ISBN" 				property="isbn"/>
+		<result column="KDC" 				property="kdc"/>
+		<result column="KDC_NUM" 			property="kdcNum"/>
+		<result column="KDC_NAME" 			property="kdcName"/>
+		<result column="WRITER" 			property="writer"/>
+		<result column="TRANSLATOR" 		property="translator"/>
+		<result column="TITLE" 				property="title"/>
+		<result column="PAGE" 				property="page"/>
+		<result column="BOOK_SIZE" 			property="bookSize"/>
+		<result column="KEYWORD" 			property="keyword"/>
+		<result column="PUBLISHER" 			property="publisher"/>
+		<result column="PUB_DATE" 			property="pubDate"/>
+		<result column="SUMMARY" 			property="summary"/>
+		<result column="INTRO" 				property="intro"/>
+		<result column="INPUT_DATE" 		property="inputDate"/>
+		<result column="AREA" 				property="area"/>
+		<result column="STATUS" 			property="status"/>
+		<result column="RENTAL_ID" 			property="rentalId"/>
+		<result column="RESERVE_ID" 		property="reserveId"/>
+		<association property="bookImgVO" 	resultMap="bookImg"/>
+	</resultMap>
+	
+	<!-- 북이미지 스틸 2029-봉 -->
+	<resultMap type="com.potato.project.common.vo.BookImgVO" id="bookImg">
+		<id column="IMG_CODE" 				property="imgCode"/>
+		<result column="ORIGIN_IMG_NAME" 	property="originImgName"/>
+		<result column="ATTACHED_IMG_NAME" 	property="attachedImgName"/>
+		<result column="BOOK_CODE" 			property="bookCode"/>	
+	</resultMap>
+	
+		
 	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
 	<select id="memberBookSituation" resultMap="memberVO">
 		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
@@ -53,6 +100,7 @@
 		WHERE C.ID = #{id}
 	</select>
 	
+	<!-- 내정보 -->
 	<!-- 전화번호 길이 구하기 -->
 	<select id="selectTellCnt" resultMap="memberVO">
 		SELECT ID 
@@ -76,13 +124,11 @@
 		WHERE ID = #{id}
 	</select>
 	
-	<!-- 전화번호&주소 빼고이 -->
+	<!-- 전화번호&주소 빼옴 -->
 	<select id="selectTell" resultMap="memberVO">
 		SELECT ID
 			, PW
 			, NAME
-			, GENDER
-			, FAVORITE
 			, SUBSTR(TELL,0,3) AS TELL1
 			<if test="tellCnt == 12">
     		, SUBSTR(TELL,5,3) AS TELL2
@@ -93,10 +139,12 @@
     		, SUBSTR(TELL,10,4) AS TELL3
 			</if>
 			, SUBSTR(ADDR,0,5) AS POST_CODE
-			, SUBSTR(ADDR,6) AS ADDR
+			, SUBSTR(ADDR,7) AS ADDR
 			, SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),0,4)||'년'
   			||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),6,2)||'월'
     		||SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),9,2)||'일' AS BIRTH
+    		, GENDER
+			, FAVORITE
 		FROM MEMBER
 		WHERE ID = #{id}
 	</select>
@@ -107,6 +155,7 @@
 		SET ADDR = #{addr}
     		, TELL = #{tell}
     		, GENDER = #{gender}
+    		, FAVORITE = #{favorite}
 		WHERE ID = #{id}
 	</update>
 	
@@ -123,6 +172,68 @@
 		SET IS_DELETE = 'Y'
 		WHERE ID = #{id}
 	</update>
+	<!-- 내정보끝  -->
+	
+	
+	<!-- 내 문의 상담 내역 -->
+	<!-- 내 문의상담 리스트 조회 -->
+	<select id="selectMyQnaList" resultMap="qna">
+		SELECT QNA_CODE 
+		     , TITLE
+		     , Q.ID
+		     , Q.NAME
+		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		     , QNA_PW
+		     , ANSWER_CNT
+		FROM QNA Q, MEMBER M
+		WHERE Q.ID = M.ID
+        AND M.ID = #{id}
+        ORDER BY QNA_CODE DESC
+	</select>
+	<!-- 문의 상담내역 끝 -->
+	
+	
+	<!-- 내 대출/예약 현황 -->
+	<!-- 대출중인거 조회 -->
+	<select id="selectRentalingList" resultMap="rental">
+		SELECT RENTAL_CODE 
+		    ,R.ID
+		    ,R.BOOK_CODE
+		    ,TITLE
+		    ,RENTAL_DATE
+		    ,LIMIT_DATE
+		FROM RENTAL R, MEMBER M, BOOK B
+		WHERE R.ID = M.ID
+		AND R.BOOK_CODE = B.BOOK_CODE
+		AND 
+		AND M.ID = #{id}
+		RETURN_DATE = NULL
+	</select>
+	
+	<!-- 내 대출내역 조회 -->
+	<select id="selectRentalList" resultMap="rental">
+		SELECT RENTAL_CODE 
+		    ,R.ID
+		    ,R.BOOK_CODE
+		    ,TITLE
+		    , SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTAL_DATE
+		    , SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),9,2)||'일' AS LIMIT_DATE
+		    , SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RETURN_DATE
+		FROM RENTAL R, MEMBER M, BOOK B
+		WHERE R.ID = M.ID
+		AND R.BOOK_CODE = B.BOOK_CODE
+		AND M.ID = #{id}
+		ORDER BY RETURN_DATE DESC
+	</select>
+	
+	<!-- 예약 현황 -->
+
 </mapper>
 
 

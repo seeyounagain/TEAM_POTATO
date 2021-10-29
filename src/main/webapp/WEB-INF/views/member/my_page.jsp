@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -28,7 +27,7 @@
 					</a>&nbsp;
 						<c:forEach items="${menuList }" var="menu">
 							<c:if test="${menuVO.menuCode eq menu.menuCode }">
-								<a href="/${menu.menuUri }/${sideMenuList[0].sideMenuUri }?menuCode=${menuVO.menuCode }&sideMenuCode=${sideMenuList[0].sideMenuCode }">
+								<a href="/${menu.menuUri }/myPage?menuCode=${menuVO.menuCode }&sideMenuCode=myPage">
 									${menu.menuName } >
 								</a>&nbsp;
 							</c:if>
@@ -86,10 +85,10 @@
 				<h3>도서관련</h3>
 			</div>
 			<div class="col-12 mb-2">
-				<a>대출내역</a>
+				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">대출내역</a>
 			</div>
 			<div class="col-12">
-				<a>예약현황</a>
+				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">예약현황</a>
 			</div>
 		</div>
 	
@@ -102,10 +101,10 @@
 				<h3>회원관련</h3>
 			</div>
 			<div class="col-12 mb-2">
-				<a href="/myPage/${sideMenuList[0].sideMenuUri }?menuCode=${menuVO.menuCode }">내정보</a>
+				<a href="/myPage/myInfo?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_011">내정보</a>
 			</div>
 			<div class="col-12">
-				<a>문의내역</a>
+				<a href="/myPage/myQnaList?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_015">문의내역</a>
 			</div>
 		</div>
 		<!-- 회원관련끝 -->

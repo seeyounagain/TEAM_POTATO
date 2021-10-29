@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=60"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=100"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -29,7 +29,7 @@
 					</a>&nbsp;
 						<c:forEach items="${menuList }" var="menu">
 							<c:if test="${menuVO.menuCode eq menu.menuCode }">
-								<a href="/${menu.menuUri }/${sideMenuList[0].sideMenuUri }?menuCode=${menuVO.menuCode }&sideMenuCode=${sideMenuList[0].sideMenuCode }">
+								<a href="/${menu.menuUri }/myPage?menuCode=${menuVO.menuCode }&sideMenuCode=myPage">
 									${menu.menuName } >
 								</a>&nbsp;
 							</c:if>
@@ -44,8 +44,7 @@
 				<p>
 			</div>
 		</div>
-				<!-- 타이틀 끝 -->
-
+		<!-- 타이틀 끝 -->
 		<!-- 아이작스로 하위태크 지우기 위해 추가 -->
 		<div class="row">
 			<div class="col" id="ajaxStart">
@@ -82,7 +81,7 @@
 							</colgroup>
 								<tr>
 									<td class="table-secondary">아이디</td>
-									<td id="id1">${memberInfo.id }</td>
+									<td id="id">${memberInfo.id }</td>
 								</tr>
 								<tr>
 									<td class="table-secondary">휴대전화</td>
@@ -119,7 +118,6 @@
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">
 				<input type="hidden" id="existingPw" value="${myTells.pw }">
-				<div>${myTells.pw }</div>
 				<!-- 수정버튼 끝 -->
 			</div>
 		</div>
@@ -167,20 +165,23 @@
 
 <!-- 회원탈퇴 모달창 시작  -->
 <div class="modal" id="memberquitModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">비밀번호를 입력하세요</h5>
-      </div>
-      <div class="modal-body">
-        <input type="password" class="form-control" id="pw2" placeholder="Password" required>
-		<div class="col-12 mt-2" id="checkCapsLock2" style="color: red;; font-size: 14px;"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">비밀번호를 입력하세요</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating">
+						<input type="password" class="form-control" id="pw2" placeholder="Password" required>
+						<label for="floatingPassword">비밀번호 확인</label>
+						<div class="col-12 mt-2" id="checkCapsLock1" style="color: red;; font-size: 14px;"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>

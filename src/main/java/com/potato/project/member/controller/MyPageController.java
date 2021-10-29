@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.common.vo.SideMenuVO;
+import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.service.MyPageService;
 import com.potato.project.member.vo.MemberVO;
 
@@ -30,7 +31,7 @@ public class MyPageController {
 		return "member/my_page";
 
 	}
-
+	//내정보 시작
 	// 나의 정보 클릭시 오는 페이지--추가--봉
 	@GetMapping("/myInfo")
 	public String myInfo(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO) {
@@ -54,6 +55,7 @@ public class MyPageController {
 	//나의 정보수정
 	@PostMapping("/updateMyInfo")
 	public String updateMyInfo(MenuVO menuVO, MemberVO memberVO) {
+		//회원정보 업데이트하기
 		myPageService.updateMyInfo(memberVO);
 		return "redirect:/myPage/myInfo?menuCode="+menuVO.getMenuCode();
 	}
@@ -62,16 +64,36 @@ public class MyPageController {
 	@ResponseBody
 	@PostMapping("/updatePw")
 	public boolean updatePw(MemberVO memberVO) { //아이디 비밀번호
-		
-		
-		System.out.println(memberVO.getId());
+		//비밀번호 다른걸로 변경
 		return myPageService.updatePw(memberVO);
 	}
+	//회원탈퇴
 	@ResponseBody
 	@PostMapping("/checkMemberquit")
-	public boolean checkMemberquit(MemberVO memberVO) {
+	public boolean checkMemberquit(HttpSession session,MemberVO memberVO) {
+		//회원 로그아웃 시키고 메인메뉴로
+		session.removeAttribute("loginInfo");
 		
 		return myPageService.checkMemberquit(memberVO);
+	}
+	//내정보 끝
+	
+	//내문의내역 시작
+	//내 문의내역 조회하기
+	@GetMapping("/myQnaList")
+	public String goQna(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session) {
+		// 로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 받아와서 내문의내역 리스트 화면에 뿌림
+		model.addAttribute("qnaList",myPageService.myQnaList((MemberVO)session.getAttribute("loginInfo")));
+		return "member/my_qnaList";
+	}
+	//내 문의 끝
+	
+	//내 대출 예약 현황
+	@GetMapping("/myLibrary")
+	public String goMyLibrary(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session) {
+		model.addAttribute("rentalList",myPageService.selectRentalList((MemberVO)session.getAttribute("loginInfo")));
+		return "member/my_library";
+		
 	}
 
 }
