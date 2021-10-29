@@ -1,0 +1,191 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+table{
+	width: 100%;
+	font-size: 14px;
+}
+.imogiDiv:hover{
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="row justify-content-center text-center">
+<div class="col-12">
+	<!-- 이모티콘 구획 -->
+	
+
+			<div class="imogiDiv row justify-content-center align-middle" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode }'">
+			<div class="col-6 text-center mt-5">	
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+  				<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  				<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+			</svg>
+			</div>
+			<div class="col-8 text-center mt-3">	
+				<h3>도서비치신청</h3>
+			</div>
+			</div>
+	
+	
+	<!-- 도서비치신청 검색관련 -->
+	<div class="row justify-content-center text-center">
+	<form action="/service/bookRequestRegForm?menuCode=${menuVO.menuCode}" method="post" enctype="multipart/form-data">
+		<div class="row mx-auto justify-content-center">
+		<div class="col-8 ">
+
+<!-- 	검색 키워드 카테고리-자료유형 검색타겟 total ,title ,author ,publisher, cheonggu 생략시 전체                                    
+cheonggu (청구기호)          
+isbn    -->                                                                                  
+                                                                                         
+	
+	<!-- 검색관련/입력구획 -->
+	<div class="row mt-5 mb-3 justify-content-center">    
+		<div class="col-10">                                                                                
+    		<div class="input-group text-start">                                                                                                                                                  
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">검색키워드</span>                                                           
+				<input type="text" name="kwd" class="form-control" placeholder="검색할 항목을 입력해주세요" <c:if test="${not empty keyword }">value="${keyword }"</c:if>>
+				 
+	  		</div>                                                                                                    
+	    </div>                                                                                                   
+		<div class="col-5 mt-2">                                                                        			                                                                        
+    		<div class="input-group">                                                                       	 
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend3">검색목록</span>        
+					 <select class="form-select" name="srchTarget" aria-label="select example">
+     	 				<option value="total">전체</option>
+      					<option value="title">제목</option>
+      					<option value="author">저자</option>
+      					<option value="publisher">발행처</option>
+      					<option value="cheonggu">청구기호</option>
+    				</select>                  		
+    		</div>                                                                                          		
+    	</div>                                                                                             
+    	<div class="col-5 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend1">카테고리</span>        
+					<select class="form-select" name="category" aria-label="select example">
+     	 				<option value="도서">도서</option>
+      					<option value="고서/고문서">고서/고문서</option>
+      					<option value="잡지/학술지">저자</option>
+      					<option value="멀티미디어">멀티미디어</option>
+      					<option value="장애인자료">장애인자료</option>
+      					<option value="기타">기타</option>
+      					<option value="해외한국관련기록물">해외한국관련기록물</option>
+    				</select>                                 
+	  		</div>                                                                                         
+	    </div>                                                      
+		<div class="col-5 mt-2">                                                                        			 
+    		<div class="input-group">                                                                       	 
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend3">정렬</span>            
+				    <select class="form-select" name="sort" aria-label="select example">
+     	 				<option value="">정확도순</option>
+      					<option value="ititle">제목</option>
+      					<option value="iauthor">저자</option>
+      					<option value="ipublisher">발행처</option>
+      					<option value="ipub_year">발행년도</option>
+      					<option value="cheonggu">청구기호</option>
+    				</select>                        			 
+    		</div>                                                                                          			 
+    	</div>                                                                                             
+    	<div class="col-5 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend1">ISBN CODE</span>            
+				<input type="text" name="isbn" class="form-control" placeholder="선택사항">                                  
+	  		</div>                                                                                         
+	    </div>  
+		<div class="col-7 mt-2">                                                                                
+    		<div class="text-center">                                                           
+                <input class="btn btn-primary" type="submit" value="국립중앙도서관 연계검색"></input>                
+	  		</div>                                                                                         
+	    </div> 
+	    
+	    
+	    
+	                                                                                               
+	</div>
+
+	<div class="mb-3">
+  		<div class="col-">
+  			<div class="row justify-content-center">
+  				<div class="col-6 text-center">
+    				
+  				</div>
+  			</div>
+		</div>
+  	</div>
+  
+  
+  		</div>
+  		</div>
+	</form>
+	</div>
+	<div class="col-12">
+		<div class="row justify-content-center mb-3 mt-5">
+			<div class="col-11 text-center">
+				<div><h5>국립중앙 도서관기반 자료검색 결과</h5></div>
+				<c:if test="${not empty keyword }">
+				<div>"${keyword }" 검색결과</div>	
+				</c:if>			
+			</div>
+   		<div class="overflow-auto mt-5" style="height: 600px;">
+		<table class="table text-center">
+  		<thead>
+    		<tr class="text-center mt-5">
+     			<th scope="col">종키</th>	             
+     			<th scope="col">카테고리</th>        
+     			<th scope="col">메뉴명</th>         
+     			<th scope="col">매체구분</th>        
+     			<th scope="col">제목</th>        
+     			<th scope="col">저자	</th>        
+     			<th scope="col">발행년도</th>       
+     			<th scope="col">자료유형코드</th>		    
+     			<th scope="col">ISBN</th>		       
+     			<th scope="col">청구기호</th>	
+     			<th scope="col">KDC코드</th>
+     			<th scope="col">KDC분류명칭</th>	
+    		</tr> 
+  		</thead>
+ 		 <tbody>
+ 	 
+  		<c:choose>
+		<c:when test="${not empty apiSearchList }">
+		<c:forEach items="${apiSearchList }" var="a" varStatus="status">
+			<tr>
+				<td>${a.id }</td>		
+				<td>${a.typeName }</td>		
+				<td>${a.menuName }</td>		
+				<td>${a.mediaName }</td>		
+				<td>${a.titleInfo }</td>		
+				<td>${a.authorInfo }</td>		
+				<td>${a.pubYearInfo }</td>		
+				<td>${a.typeCode }</td>		
+				<td>${a.isbn }</td>		
+				<td>${a.callNo }</td>		
+				<td>${a.kdcCode1s }</td>		
+				<td>${a.kdcName1s }</td>			
+			</tr>	                                             		
+		</c:forEach>
+		</c:when>
+		</c:choose>
+
+ 		</tbody>
+		</table>
+		</div>
+		</div>
+	</div>
+</div>
+</div>
+	
+	
+	
+</body>
+</html>

@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,10 @@ import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
-import com.potato.project.service.api.ServiceApiRequestBook;
+import com.potato.project.service.api.apiSearchPlay;
 import com.potato.project.service.service.ServiceService;
+import com.potato.project.service.vo.ApiDataVO;
+import com.potato.project.service.vo.ApiSearchVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 
@@ -46,7 +50,7 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
-
+	//도서비치 현황
 	@RequestMapping("/bookRequest") // (value = "/bookRequest", produces="application/String;xml=UTF-8")
 	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -60,10 +64,24 @@ public class ServiceController {
 		return  "service/bookRequest";
 	}
 	
-	@GetMapping("/regRequest")
-	public String goRegRequest(Model model,MenuVO menuVO) {
+	//도서비치 검색 및 선택
+	@RequestMapping("/bookRequestRegForm")
+	public String goRegRequest(Model model,MenuVO menuVO,HttpSession session, ApiSearchVO asVO, apiSearchPlay asPlay) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+	
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
-		return  "service/bookRequest_Insert";
+		//검색 키워드가 공백이라면 프로그램은 실행되지 않는다.
+		if(asVO.getKwd() == null || asVO.getKwd().equals("")) {		
+		}else {
+			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
+			model.addAttribute("keyword", asVO.getKeyword());			
+		}
+		return  "service/bookRequestRegForm";
 	}
 	
 	

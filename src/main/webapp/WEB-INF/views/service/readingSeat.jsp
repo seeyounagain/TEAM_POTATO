@@ -45,8 +45,8 @@ background-color: white;
 <div class="text-end"><span class="bg-warning fs-6 ">대기중</span><span class="bg-info fs-6">사용중</span></div>
 <div class="row position-relative map mx-auto">
 <div class="row justify-content-center text-center">
-<c:choose>
 
+<c:choose>
 <c:when test="${not empty seatList }">
 <c:forEach items="${seatList }" var="seat" varStatus="status">
 		<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } miniSeatBox 
