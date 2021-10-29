@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=3" ></script> -->
+<script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=6" ></script>
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -42,7 +42,7 @@
 }
 </style>
 <script type="text/javascript">
-	function deleQna() {
+	/* function deleQna() {
 		var qnaCode = document.getElementById('qnaCode').value;
 		var menuCode = document.getElementById('menuCode').value;
 		
@@ -53,43 +53,11 @@
 		}else{
 			return;
 		}
-	}
+	} */
 	
-	function checkPw() {
-		var qnaCode = document.getElementById('qnaCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		var qnaPw = document.getElementById('qnaPw').value;
-		
-		if(	confirm("상담 / 문의 글을 삭제하시겠습니까?") == true){
-			
-			 var inputPw = prompt("상담 / 문의글 비밀 번호 확인");
-			 
-			 if(inputPw = qnaPw){
-				 
-				 location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
-				 
-			 }
-			
-			
-			/* location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode; */
-		
-		}else{
-			return;
-		}
-	}
 	
-	function deleAnswer() {
-		var qnaCode = document.getElementById('qnaCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		
-		if(	confirm("답변을 삭제하시겠습니까?" + menuCode) == true){
-
-			location.href = '/board/deleteAnswer?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
-		
-		}else{
-			return;
-		}
-	}
+	
+	
 	
 </script>
 </head>
@@ -116,7 +84,7 @@
    				</tr>
    				<tr>
    					<td  style="height: 200px;">문의 내용</td>
-   					<td>${qna.content}</td>
+   					<td>${qna.content} ${qna.qnaPw }</td>
    				</tr>
    			</table>
    		</div>
@@ -164,12 +132,12 @@
    		<div class="deleBtnDiv text-center">
 				<input type="hidden" value="${menuVO.menuCode}" id="menuCode">
 				<input type="hidden" value="${qnaVO.qnaCode}" name="qnaCode" id="qnaCode">
-				<input type="hidden" value="${qnaVO.qnaPw}" name="qnaPw" id="qnaPw">
+				<input type="hidden" value="${qna.qnaPw}" name="qnaPw" id="qnaPw">
 			<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
 				<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
 				<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="deleQna();">
 			</c:if>
- 			<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="checkPw();">
+ 			<input class="btn btn-primary" type="button" value="상담 / 문의 삭제1" onclick="checkPw();">
  			<input class="btn btn-primary btn-md" type="button" value="뒤로가기" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
    		</div>
 	</div>

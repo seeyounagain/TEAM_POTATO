@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.FileUploadUtil;
@@ -185,9 +186,10 @@ public class BoardController {
 		//redirect 방식은 데이터값을 가져가지 않기 때문에 다시 호출해주어야 함
 		return "redirect:/board/qnaDetail?qnaCode=" + qnaVO.getQnaCode() + "&menuCode=" + menuVO.getMenuCode();
 	}
+	
 	//문의, 답변 동시에 삭제
 	@GetMapping("/deleteQna")
-	public String deleteQna(MenuVO menuVO, QnaVO qnaVO) {
+	public String deleteQna(Model model, MenuVO menuVO, QnaVO qnaVO) {
 		
 		boardService.deleteQna(qnaVO);
 		
@@ -195,7 +197,7 @@ public class BoardController {
 	}
 	//답변만 삭제
 	@GetMapping("/deleteAnswer")
-	public String deleteAnswer(MenuVO menuVO, QnaVO qnaVO) {
+	public String deleteAnswer(Model model, MenuVO menuVO, QnaVO qnaVO) {
 		
 		boardService.deleteAnswer(qnaVO);
 		boardService.updateDeleteAcnt(qnaVO);

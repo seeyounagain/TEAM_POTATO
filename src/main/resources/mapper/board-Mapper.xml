@@ -179,6 +179,7 @@
 		     , NAME
 		     , CONTENT
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+			 , QNA_PW
 		FROM QNA
 		WHERE QNA_CODE = #{qnaCode} 
 	</select>

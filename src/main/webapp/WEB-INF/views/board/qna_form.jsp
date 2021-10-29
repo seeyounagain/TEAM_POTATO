@@ -68,7 +68,7 @@ input{
 							<td>문의 내용</td>
 							<td>
 								<div class="form-floating">
-								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px"></textarea>
+								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px" required></textarea>
 								  <label for="floatingTextarea2">답변은 해당 문의글에서 확인 가능합니다.</label>
 								</div>
 							</td>
