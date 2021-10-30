@@ -39,7 +39,7 @@
 			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'N' }">
 	 			<ul class="nav justify-content-end">
 				<li class="nav-item">
-					<a class="title" aria-current="page" href="/myPage/myInfo">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+					<a class="title" aria-current="page" href="/myPage/myInfo?menuCode=MENU_005">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">
@@ -52,7 +52,7 @@
 			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'Y' }">
 	 			<ul class="nav justify-content-end">
 				<li class="nav-item">
-					<a class="title" aria-current="page" href="/libManage/bookManage">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+					<a class="title" aria-current="page" href="/libManage/bookManage?menuCode=MENU_006">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">
