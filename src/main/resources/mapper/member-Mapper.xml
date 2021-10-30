@@ -19,6 +19,15 @@
 		<result column="RESERVE_CNT" 	property="reserveCnt"/>
 	</resultMap>
 	
+	<resultMap type="com.potato.project.common.vo.MessageVO" id="message">
+		<id column="MESSAGE_CODE" 			property="messageCode"/>
+		<result column="FROM_ID" 			property="fromId"/>
+		<result column="TO_ID" 				property="toId"/>
+		<result column="SEND_DATE" 			property="sendDate"/>
+		<result column="CONTENT" 			property="content"/>
+		<result column="IS_READ" 			property="isRead"/>
+	</resultMap>
+	
 	<!-- 회원등록 -->
 	<insert id="insertMember">
 		INSERT INTO MEMBER (
@@ -114,8 +123,46 @@
 		WHERE UPPER(ID) LIKE UPPER('%'||#{searchValue}||'%')
 		</if>
 	</select>
+	
+	<!-- 알림 보내기 -->
+	<insert id="insertMessage">
+		INSERT INTO MESSAGE (
+		    MESSAGE_CODE
+		    , TO_ID
+		    , CONTENT
+		) VALUES (
+		    (SELECT 'MESSAGE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MESSAGE_CODE,9,4))),0) + 1,4,0) FROM MESSAGE)
+		    , #{toId}
+		    , #{content}
+		)
+	</insert>
+	
+	<!-- 회원의 알림 목록 조회 -->
+	<select id="selectMemberMessage" resultMap="message">
+		SELECT
+		    MESSAGE_CODE
+		    , TO_ID
+		    , FROM_ID
+		    , CONTENT
+		    , SEND_DATE
+		    , IS_READ
+		FROM MESSAGE
+		WHERE TO_ID = #{id}
+	</select>
 
-
+	<!-- 알림 읽음으로 변경 -->
+	<update id="updateMessageRead">
+		UPDATE MESSAGE 
+		SET IS_READ = 'Y' 
+		WHERE MESSAGE_CODE = #{messageCode}
+	</update>
+	
+	<!-- 알림 삭제 -->
+	<delete id="deleteMessage">
+		DELETE MESSAGE
+		WEHRE MESSAGE_CODE = #{messageCode}
+	</delete>
+	
 </mapper>
 
 

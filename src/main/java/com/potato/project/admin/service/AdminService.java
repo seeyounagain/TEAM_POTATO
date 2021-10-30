@@ -3,6 +3,7 @@ package com.potato.project.admin.service;
 import java.util.List;
 
 import com.potato.project.common.vo.BookVO;
+import com.potato.project.common.vo.MessageVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.member.vo.MemberVO;
@@ -50,5 +51,8 @@ public interface AdminService {
 	
 	// 도서 정보 수정
 	int updateBookInfo(BookVO bookVO);
+	
+	// 회원에게 알람 전송
+	int sendMessage(MessageVO messageVO);
 	
 }

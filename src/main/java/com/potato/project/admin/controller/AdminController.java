@@ -24,6 +24,7 @@ import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.MessageVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.service.SearchService;
@@ -220,6 +221,15 @@ public class AdminController {
 	public List<ReserveVO> selectMemberReserveList(String id) {
 		
 		return adminSerivce.selectMemberReserveList(id);
+		
+	}
+	
+	// 회원에게 알람 전송 Ajax
+	@ResponseBody
+	@PostMapping("/sendMessageAjax")
+	public int sendMessageAjax(MessageVO messageVO) {
+		
+		return adminSerivce.sendMessage(messageVO);
 		
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.vo.BookVO;
+import com.potato.project.common.vo.MessageVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.member.vo.MemberVO;
@@ -73,9 +74,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int updateReturn(ReserveVO reserveVO, BookVO bookVO) {
 		
-		// 예약자 있을 경우 도서상태 대출대기중으로 변경, 도서 대출가능 기간 업데이트
+		// 예약자 있을 경우 도서상태 대출대기중으로 변경, 도서 대출가능 기간 업데이트, 알람 전송
 		if (bookVO.getStatus() == 5) {
 			sqlSession.update("searchMapper.updateReserveDate",bookVO);
+			
+			MessageVO messageVO = new MessageVO();
+			messageVO.setToId(bookVO.getReserveId());
+			messageVO.setContent("예약하신 도서의 반납이 완료되었습니다. 기간내에 대출해주세요. 자세한 사항은 '나의도서관' 페이지에서 확인 가능합니다.");
+			
+			sqlSession.insert("memberMapper.insertMessage",messageVO);
+			
 		}
 		sqlSession.update("searchMapper.updateBookStatus",bookVO);
 		
@@ -187,6 +195,14 @@ public class AdminServiceImpl implements AdminService{
 	public int updateBookInfo(BookVO bookVO) {
 		
 		return sqlSession.update("searchMapper.updateBookInfo",bookVO);
+		
+	}
+	
+	// 회원에게 알람 전송
+	@Override
+	public int sendMessage(MessageVO messageVO) {
+		
+		return sqlSession.insert("memberMapper.insertMessage",messageVO);
 		
 	}
 	

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=18" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=30" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;
@@ -37,16 +37,21 @@
 .leftC input[type=text]:focus{
 	background-image:none;
 }
+textarea {
+	resize: none;
+	height: 150px;
+	overflow: auto;
+}
 </style>
 </head>
 <body>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 회원정보 Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">회원정보</h5>
+        <h5 class="modal-title" id="infoModalLabel">회원정보</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 		<div class="modal-body">
@@ -76,7 +81,70 @@
     </div>
   </div>
 </div>
-<!-- modal 종료 -->
+<!-- 회원정보 modal 종료 -->
+
+
+<!-- 알림전송 Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="messageModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">받는 사람 : </label>
+            <input type="text" class="form-control" id="toId" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">내용 : </label>
+            <textarea class="form-control" id="content" ></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary sendMessage">보내기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="completeModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p>알림 전송이 완료되었습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="failModal" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="failModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p>알림 전송에 실패했습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 알림전송 modal 종료 -->
+
 
 <h2 class="text-first fw-bold">회원관리</h2>
 <hr>
@@ -92,10 +160,11 @@
 	<caption class="rightC">현재 대여 또는 예약중인 도서의 수 입니다. (반납 완료, 예약 종료 등은 제외)</caption>
 		
 	<colgroup>
+		<col width="5%">
+		<col width="15%">
+		<col width="20%">
+		<col width="20%">
 		<col width="10%">
-		<col width="20%">
-		<col width="20%">
-		<col width="20%">
 		<col width="10%">
 		<col width="10%">
 		<col width="10%">
@@ -110,6 +179,7 @@
 			<td>대여권수</td>
 			<td>예약권수</td>
 			<td>도서정보</td>
+			<td>알림</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -124,14 +194,17 @@
 					<td>${member.rentalCnt }</td>
 					<td>${member.reserveCnt }</td>
 					<td>
-					<button type="button" class="btn btn-primary modalBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${member.id }" >도서정보조회</button>
+					<button type="button" class="btn btn-primary infoBtn" data-bs-toggle="modal" data-bs-target="#infoModal" data-id="${member.id }" >도서정보조회</button>
+					</td>
+					<td>
+					<button type="button" class="btn btn-primary messageBtn" data-bs-toggle="modal" data-bs-target="#messageModal" data-id="${member.id }" >알림보내기</button>
 					</td>
 				</tr>
 			</c:forEach>
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td colspan="6">회원정보가 없습니다.</td>
+					<td colspan="7">회원정보가 없습니다.</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

@@ -2,7 +2,9 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 	
+	/*data-bs-target="#completeModal" data-bs-toggle="modal"*/
 	
+	// 아이디 검색 클릭 시 아이디 조회
 	$(document).on('click', '#goSearchBtn' , function() {
 		
 		var searchValue = $('#searchValue').val();
@@ -11,15 +13,61 @@
 		
 	});
 	
+	// 검색어 리셋
 	$(document).on('click', '#searchValue' , function() {
 		
 		$('#searchValue').val('');
 		
 	});
 	
+	// 알림보내기 버튼 클릭 시 아이디 지정
+	$(document).on('click', '.messageBtn' , function() {
+		
+		var toId = $(this).attr('data-id');
+		// toId 설정
+		$('#toId').val(toId);
+		
+	});
+	
+	// 알림보내기
+	$(document).on('click', '.sendMessage' , function() {
+		
+		$('#messageModal').modal('hide');
+		
+		var toId = $('#toId').val();
+		var content = $('#content').val();
+		
+		/* 알림보내기 Ajax 시작 */
+		$.ajax({
+			url: '/libManage/sendMessageAjax', // 요청경로
+			type: 'post', // post 메소드 방식
+			data: {'toId':toId,'content':content}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+			success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+			// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+			
+			if (result == 1) {
+				
+				$('#completeModal').modal('show');
+				
+			}
+			else {
+				
+				$('#failModal').modal('show');
+				
+			}
+			
+			},
+			error: function(){
+			// ajax 실행 실패 시 실행되는 구간
+			$('#failModal').modal('show');
+			}
+		});
+		/* 알림보내기 Ajax 종료 */			
+		
+	});
 	
 	// 도서정보조회 버튼 클릭 시 정보 조회
-	$(document).on('click', '.modalBtn' , function() {
+	$(document).on('click', '.infoBtn' , function() {
 		
 		var id = $(this).attr('data-id');
 		

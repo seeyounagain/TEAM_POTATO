@@ -55,6 +55,7 @@
 			<exclude-mapping path="/libManage/returnBookAjax"/>
 			<exclude-mapping path="/libManage/selectMemberRentalListAjax"/>
 			<exclude-mapping path="/libManage/selectMemberReserveListAjax"/>
+			<exclude-mapping path="/libManage/sendMessageAjax"/>
 			<exclude-mapping path="/libManage/regItem"/>
 			<exclude-mapping path="/search/isLoginAjax"/>
 			<exclude-mapping path="/service/chooseSeat"/>
