@@ -1,8 +1,9 @@
 package com.potato.project.content.vo;
 
 import com.potato.project.common.vo.AttachFileVO;
+import com.potato.project.common.vo.PageVO;
 
-public class NoticeVO {
+public class NoticeVO extends PageVO {
 
 	
 	// 공지사항 테이블 NOTICE

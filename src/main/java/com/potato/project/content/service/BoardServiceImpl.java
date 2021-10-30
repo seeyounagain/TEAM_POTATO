@@ -2,7 +2,6 @@ package com.potato.project.content.service;
 
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,9 @@ public class BoardServiceImpl  implements BoardService{
 	private SqlSessionTemplate sqlSession;
 	//공지사항 목록 조회
 	@Override
-	public List<NoticeVO> selectNoticeList() {
+	public List<NoticeVO> selectNoticeList(NoticeVO noticeVO) {
 		
-		return sqlSession.selectList("boardMapper.selectNoticeList");
+		return sqlSession.selectList("boardMapper.selectNoticeList", noticeVO);
 	}
 	
 	//공지사항 등록
@@ -135,6 +134,13 @@ public class BoardServiceImpl  implements BoardService{
 		
 		return sqlSession.update("boardMapper.updateDeleteAcnt", qnaVO);
 		
+	}
+	
+	//공지사항 총 개수
+	@Override
+	public int cntNotice(NoticeVO noticeVO) {
+
+		return sqlSession.selectOne("boardMapper.cntNotice", noticeVO);
 	}
 	
 	

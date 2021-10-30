@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.FileUploadUtil;
@@ -39,10 +38,15 @@ public class BoardController {
 	private BoardService boardService;
 	
 	//공지사항 페이지로 이동
-	@GetMapping("/notice")
-	public String goNotice(Model model, MenuVO menuVO, HttpSession session) {
+	@RequestMapping("/notice")
+	public String goNotice(Model model, MenuVO menuVO, NoticeVO noticeVO, HttpSession session) {
 		
-		model.addAttribute("list", boardService.selectNoticeList());
+		int totalCnt = boardService.cntNotice(noticeVO);
+		
+		noticeVO.setTotalCnt(totalCnt);
+		noticeVO.setPageInfo();
+		
+		model.addAttribute("list", boardService.selectNoticeList(noticeVO));
 
 		return  "board/notice_list";
 	}
@@ -66,9 +70,9 @@ public class BoardController {
 		
 		//파일이 첨부될 경로
 		//학원
-		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//집
-		String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//시윤
 		//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
@@ -129,11 +133,11 @@ public class BoardController {
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
 	//상담 문의 페이지로 이동
-	@GetMapping("/qna")
-	public String goQna(Model model, QnaVO qnaVO, MenuVO menuVO, HttpSession session) {
+	@RequestMapping("/qna")
+	public String goQna(Model model, QnaVO qnaVO, MenuVO menuVO) {
 
 		model.addAttribute("list", boardService.selectQnaList());
-		
+
 		return  "board/qna_list";
 	}
 	

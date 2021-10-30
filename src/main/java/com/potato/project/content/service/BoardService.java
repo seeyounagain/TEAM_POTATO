@@ -9,7 +9,10 @@ import com.potato.project.content.vo.QnaVO;
 public interface BoardService {
 
 	//공지사항 리스트
-	List<NoticeVO> selectNoticeList();
+	List<NoticeVO> selectNoticeList(NoticeVO noticeVO);
+	
+	//공지사항 총 개수
+	int cntNotice(NoticeVO noticeVO);
 	
 	//공지사항 입력
 	int insertNotice(NoticeVO noticeVO);

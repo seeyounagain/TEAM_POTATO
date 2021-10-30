@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv">
+   <div class="col-12 mainDiv">
    		<div class="titleDiv">
    			<h1 class="display-6 text-center">공지사항</h1>
    			<hr>
@@ -66,7 +66,7 @@
 	   			<input type="hidden" value="${menuVO.menuCode }" id=menuCode>
 	   			<input class="btn btn-primary btn-md" type="button" value="삭제" onclick="deleNotice();">
 	   		</c:if>
-	   			<input class="btn btn-primary btn-md" type="button" value="뒤로가기" onclick="location.href='/board/notice?menuCode=${menuVO.menuCode}';">
+	   			<input class="btn btn-primary btn-md" type="button" value="목록ㄴ" onclick="location.href='/board/notice?menuCode=${menuVO.menuCode}';">
    		</div>
    	</div>
 </div>

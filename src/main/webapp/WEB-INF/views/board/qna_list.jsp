@@ -39,7 +39,7 @@ a:hover{
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv">
+   <div class="col-12 mainDiv">
    		<div class="titleDiv">
    			<h1 class="display-6 text-center">상담 / 문의</h1>
    			<hr>
