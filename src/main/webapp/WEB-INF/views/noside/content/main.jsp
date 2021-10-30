@@ -63,7 +63,7 @@
 			<div class="col-2 d-grid align-self-center" style="padding-left: 3px;">
 				<c:forEach var="menu" items="${menuList }">
 					<c:forEach var="sideMenu" items="${menu.sideMenuList }">
-					<c:if test="${menu.menuName eq '자료찾기' and sideMenu.sideMenuName eq '도서검색' }">
+					<c:if test="${menu.menuName eq '자료찾기' and sideMenu.sideMenuName eq '통합검색' }">
 						<input type="button" value="검색" id="goSearchBtn" class="btn btn-light p-3" onclick="location.href='/search/bookSearch?menuCode=${menu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">
 					</c:if>
 					</c:forEach>

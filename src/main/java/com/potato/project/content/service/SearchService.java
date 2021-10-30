@@ -31,4 +31,10 @@ public interface SearchService {
 	// 책 코드 생성
 	String selectBookCode();
 	
+	// 통합검색어에 따른 도서 목록 조회 + 페이징
+	List<BookVO> selectSearchBookAndPaging(BookVO bookVO);
+	
+	// 통합검색 페이징 처리를 위한 도서 갯수 조회
+	int countBookSearch(BookVO bookVO);
+	
 }

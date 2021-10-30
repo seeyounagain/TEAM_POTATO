@@ -45,4 +45,5 @@ public interface AdminService {
 	// 검색어 결과에 따른 회원수 조회
 	int countMemberAndSearchId(MemberVO memberVO);
 	
+	
 }

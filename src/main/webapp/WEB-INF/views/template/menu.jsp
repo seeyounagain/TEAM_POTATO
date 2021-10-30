@@ -22,6 +22,12 @@
 .dropdown-item:active {
 	background-color: #0b70b9;
 }
+.page-item.active .page-link {
+    z-index: 3;
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
 </style>
 </head>
 <body>
