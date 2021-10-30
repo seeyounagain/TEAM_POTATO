@@ -6,13 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/search_form.js?ver=16" ></script>
+<script type="text/javascript" src="/resources/search/js/search_form.js?ver=17" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
-}
-.keyword {
-	width: 10%;
 }
 .bookTitle {
 	font-size: 22px;
@@ -26,26 +23,15 @@
 .titleA:hover {
 	color: black;
 }
-.searchB input{
-	background-image: url(/resources/img/search_g.png);
-	background-position: 10px center;
-	background-repeat: no-repeat;
-	background-size: 20px;
-	padding-left: 60px;
-}
-.searchB input:focus{
-	background-image:none;
-}
 .highlight {
 	color: white;
 	background-color: #0b70b9;
 	font-weight: bold;
 }
-.page-item.active .page-link {
-    z-index: 3;
-    background-color: #6c757d;
-    color: white;
-    border-color: #6c757d;
+.keyword {
+	text-align: center;
+    white-space: nowrap;
+    background-color: white;
 }
 </style>
 </head>
@@ -54,17 +40,20 @@
 <div class="row justify-content-center">
 	<div class="col-12">
 	<form action="/search/bookSearch" method="post">		
-		<h1 class="display-6 text-center">통합검색</h1>
+		<h2 class="text-first fw-bold">통합검색</h2>
 		<hr>
 		<div class="row justify-content-center">
 			<div class="col-8 p-3">
-				<div class="searchB">
-				<input type="text"  <c:if test="${not empty bookVO.searchValue }">value="${bookVO.searchValue} "</c:if>  class="form-control p-2" id="searchValue" name="searchValue" placeholder="       검색어를 입력해주세요.">
+				<div class="input-group searchB">
+					<span class="input-group-text keyword" id="inputGroup-sizing-default">
+						<img width="20px;" src="/resources/img/search_g.png">
+					</span>
+					<input type="text"  <c:if test="${not empty bookVO.searchValue }">value="${bookVO.searchValue}"</c:if> aria-describedby="inputGroup-sizing-default" class="form-control p-2" id="searchValue" name="searchValue" placeholder="검색어를 입력해주세요.">
 				</div>
 			</div>
 			<div class="col-2 d-grid p-3" style="padding-left: 3px;">
 				<input type="hidden" value="${menuVO.menuCode }" name="menuCode">
-				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary p-2">
+				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-primary">
 			</div>			
 		</div>
 	</form>

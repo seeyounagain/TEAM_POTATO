@@ -133,6 +133,14 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
+	// 도서 정보 수정
+	@Override
+	public int updateBookInfo(BookVO bookVO) {
+		
+		return sqlSession.update("searchMapper.updateBookInfo",bookVO);
+		
+	}
+	
 	
 	
 }

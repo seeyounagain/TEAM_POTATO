@@ -24,9 +24,9 @@
 }
 .page-item.active .page-link {
     z-index: 3;
-    background-color: #6c757d;
+    background-color: #0b70b9;
     color: white;
-    border-color: #6c757d;
+    border-color: #0b70b9;
 }
 </style>
 </head>

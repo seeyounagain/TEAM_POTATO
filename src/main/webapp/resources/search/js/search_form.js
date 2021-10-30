@@ -1,8 +1,11 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 	
-	var searchValue = $('#searchValue').val();
-
+	$(document).on('click', '#searchValue' , function() {
+		
+		$('#searchValue').val('');
+		
+	});
 		
 	});
 

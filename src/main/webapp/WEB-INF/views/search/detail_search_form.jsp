@@ -41,7 +41,7 @@
 
 <div class="row justify-content-center">
 	<div class="col-12">
-		<h1 class="display-6 text-center">상세검색</h1>
+		<h2 class="text-first fw-bold">상세검색</h2>
 		<hr>
 <form action="/search/bookDetailSearch" method="post">		
 		<div class="row justify-content-center">
@@ -57,27 +57,27 @@
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">제목</span>
-				  <input type="text" name="title" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
+				  <input type="text" <c:if test="${not empty bookVO.title }">value="${bookVO.title}"</c:if> name="title" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
-				  <input type="text" name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
+				  <input type="text" <c:if test="${not empty bookVO.writer }">value="${bookVO.writer}"</c:if> name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">역자</span>
-				  <input type="text" name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
+				  <input type="text" <c:if test="${not empty bookVO.translator }">value="${bookVO.writer}"</c:if> name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
-				  <input type="text" name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
+				  <input type="text" <c:if test="${not empty bookVO.publisher }">value="${bookVO.writer}"</c:if> name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
-				  <input type="text" name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
+				  <input type="text" <c:if test="${not empty bookVO.isbn }">value="${bookVO.writer}"</c:if> name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
-				  <input type="text" name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
+				  <input type="text" <c:if test="${not empty bookVO.searchBegin }">value="${bookVO.searchBegin}"</c:if> name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이후&nbsp;</span>
-				  <input type="text" name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
+				  <input type="text" <c:if test="${not empty bookVO.searchEnd }">value="${bookVO.searchEnd}"</c:if> name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이내&nbsp;</span>
 				</div>
 				<div class="input-group d-grid mb-3" style="padding-left: 3px;">

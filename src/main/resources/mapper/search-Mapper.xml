@@ -626,6 +626,28 @@
 	            </if>
 	</select>
 	
+	<!-- 책 정보 수정 -->
+	<update id="updateBookInfo">
+		UPDATE BOOK
+		SET 
+			ISBN = #{isbn}
+			, KDC = #{kdc}
+			, KDC_NUM = SUBSTR(#{kdc},1,1)
+			, WRITER = #{writer}
+			, TRANSLATOR = #{translator}
+			, TITLE = #{title}
+			, PAGE = #{page}
+			, BOOK_SIZE = #{bookSize}
+			, KEYWORD = #{keyword}
+			, PUBLISHER = #{publisher}
+			, PUB_DATE = #{pubDate}
+			, SUMMARY = #{summary}
+			, INTRO = #{intro}
+			, AREA = #{area}
+		WHERE BOOK_CODE = #{bookCode}
+	</update>
+	
+	
 </mapper>
 
 

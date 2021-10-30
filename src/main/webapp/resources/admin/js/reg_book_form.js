@@ -1,6 +1,9 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		
+		
+		// 등록할 도서 정보 체크 confirm
 		$(document).on('click', '#regBtn' , function() {
 
 			var isbn = $('#isbn').val();

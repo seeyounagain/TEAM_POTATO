@@ -27,15 +27,6 @@
 #goSearchBtn {
 	vertical-align: baseline;
 }
-.page-link {
-	color: black;
-}
-.page-item.active .page-link {
-    z-index: 3;
-	background-color: #6c757d;
-	color: white;
-    border-color: #6c757d;
-}
 .leftC input[type=text]{
 	background-image: url(/resources/img/search_g.png);
 	background-position: 10px center;
@@ -87,7 +78,7 @@
 </div>
 <!-- modal 종료 -->
 
-<h1 class="text-center">회원관리</h1>
+<h2 class="text-first fw-bold">회원관리</h2>
 <hr>
 
 <table id="bookT" class="table table-hover table-bordered caption-top text-center">

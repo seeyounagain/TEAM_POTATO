@@ -16,7 +16,7 @@
 </head>
 <body>
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
-	<h1 class="display-6 text-center">회원가입</h1>
+	<h2 class="display-6 text-center fw-bold">회원가입</h2>
 	<div class="row g-0 justify-content-center">
 		<div class="col-5">
 		

@@ -23,22 +23,13 @@
 .titleA:hover {
 	color: black;
 }
-.page-link {
-	color: black;
-}
-.page-item.active .page-link {
-    z-index: 3;
-	background-color: #6c757d;
-	color: white;
-    border-color: #6c757d;
-}
 </style>
 </head>
 <body>
 
 <div class="row justify-content-center">
-	<div class="col-8">
-		<h1 class="display-6 text-center">신착도서</h1>
+	<div class="col-12">
+		<h2 class="text-first fw-bold">신착도서</h2>
 		<hr>
 		<h5>도서관에 새로 들어온 책을 안내해드립니다.</h5>
 		<div class="row justify-content-center">

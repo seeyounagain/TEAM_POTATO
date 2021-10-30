@@ -8,9 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=74" ></script>
 <style type="text/css">
-.content {
-	background-color: white;
-}
 .bookTitle {
 	font-size: 22px;
 	font-weight: bold;
@@ -36,7 +33,7 @@
 </head>
 <body>
 
-<h1 class="text-center">도서관리</h1>
+<h2 class="text-first fw-bold">도서관리</h2>
 <hr>
 	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}'">신규도서등록</button>
 	<select name="status" class="form-select" id="statusSelect">
@@ -91,7 +88,7 @@
 				</c:if>
 		</td>
 		<td class="text-center">
-			<button type="button" class="btn btn-danger px-5" data-bookCode="${book.bookCode }">도서정보수정</button>
+			<button type="button" class="btn btn-danger px-5" data-bookCode="${book.bookCode }" onclick="location.href='/libManage/updateBookInfo?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}'">도서정보수정</button>
 		</td>
 	</c:forEach>
 	</tbody>

@@ -44,7 +44,7 @@ public class AdminController {
 	
 	// 도서관리 페이지 이동
 	@GetMapping("/bookManage")
-	public String bookManage(Model model,MenuVO menuVO,HttpSession session,BookVO bookVO) {
+	public String bookManage(Model model,MenuVO menuVO,BookVO bookVO) {
 		
 		// 도서 목록 전달
 		model.addAttribute("bookList",searchService.selectStatusBookList(bookVO));
@@ -55,7 +55,7 @@ public class AdminController {
 	
 	// 회원 관리 페이지 이동 + 페이징
 	@GetMapping("/memberManage")
-	public String memberManage(Model model,MenuVO menuVO,MemberVO memberVO,HttpSession session) {
+	public String memberManage(Model model,MenuVO menuVO,MemberVO memberVO) {
 		
 		int totalCnt = adminSerivce.countMemberAndSearchId(memberVO);
 		
@@ -80,7 +80,7 @@ public class AdminController {
 	
 	// 도서 등록 페이지
 	@GetMapping("/regBookForm")
-	public String regBookForm(Model model,MenuVO menuVO,HttpSession session) {
+	public String regBookForm(Model model,MenuVO menuVO) {
 
 		return "admin/reg_book_form";
 		
@@ -135,6 +135,39 @@ public class AdminController {
 		return "redirect:/libManage/regBookForm?menuCode=" + menuVO.getMenuCode();
 		
 	}
+	
+	// 도서 정보 수정페이지
+	@GetMapping("/updateBookInfo")
+	public String goUpdateBookInfo(Model model,MenuVO menuVO,BookVO bookVO) {
+		
+		model.addAttribute("bookVO",searchService.selectBookDetail(bookVO));
+		
+		return "admin/book_info_update_form";
+		
+	}	
+	
+	// 도서 정보 수정
+	@PostMapping("/updateBookInfo")
+	public String updateBookInfo(Model model,MenuVO menuVO,BookVO bookVO) {
+		
+		int result = adminSerivce.updateBookInfo(bookVO);
+		
+		model.addAttribute("bookCode",bookVO.getBookCode());
+		model.addAttribute("menuCode",menuVO.getMenuCode());
+		
+		if (result == 1) {
+			
+			return "admin/update_result";
+			
+		}
+		else {
+			
+			return "redirect:/libManage/updateBookInfo?menuCode=" + menuVO.getMenuCode() + "&bookCode=" + bookVO.getBookCode();
+			
+		}
+		
+		
+	}	
 	
 	// 도서 대출
 	@ResponseBody

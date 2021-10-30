@@ -23,7 +23,6 @@
 	width: 590px;
 	height: 350px;
 }
-
 .carousel-item > img {
 	top: 0;
 	left: 0;
@@ -37,15 +36,10 @@
 	text-decoration: underline 1px black;
 	color: black;
 }
-.searchBar input{
-	background-image: url(/resources/img/search_b.png);
-	background-position: 10px center;
-	background-repeat: no-repeat;
-	background-size: 30px;
-	padding-left: 60px;
-}
-.searchBar input:focus{
-	background-image:none;
+.keyword {
+	text-align: center;
+    white-space: nowrap;
+    background-color: white;
 }
 </style>
 </head>
@@ -53,23 +47,25 @@
 <div class="row justify-content-center">
 	<!-- 검색 -->
     <div class="col-10 g-5" id="col1">
+<form action="/search/bookSearch" method="post">
 	    <div class="row justify-content-center pt-5 mt-2">
     		<div class="col-8 text-center fs-1 mb-3">
     			<div style="color: white;"> 울산 도서관에 오신 것을 환영합니다.</div>
     		</div>
 		    <div class="col-6 align-self-center">
-				<div class="searchBar"><input type="text" class="form-control p-3" id="id" name="id" placeholder="       검색어를 입력해주세요."></div>
+				<div class="input-group searchB">
+					<span class="input-group-text keyword" id="inputGroup-sizing-default">
+						<img width="20px;" src="/resources/img/search_b.png">
+					</span>
+					<input type="text" class="form-control p-3" id="searchValue" name="searchValue" placeholder="검색어를 입력해주세요.">
+					<input type="hidden" value="MENU_002" name="menuCode">
+				</div>
 			</div>
 			<div class="col-2 d-grid align-self-center" style="padding-left: 3px;">
-				<c:forEach var="menu" items="${menuList }">
-					<c:forEach var="sideMenu" items="${menu.sideMenuList }">
-					<c:if test="${menu.menuName eq '자료찾기' and sideMenu.sideMenuName eq '통합검색' }">
-						<input type="button" value="검색" id="goSearchBtn" class="btn btn-light p-3" onclick="location.href='/search/bookSearch?menuCode=${menu.menuCode}&sideMenuCode=${sideMenu.sideMenuCode}'">
-					</c:if>
-					</c:forEach>
-				</c:forEach>
+				<input type="submit" value="검색" id="goSearchBtn" class="btn btn-light p-3">
 			</div>
 	    </div>
+</form>
     </div>
     
     <!-- 신착도서 목록 테이블 -->

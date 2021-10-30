@@ -8,21 +8,22 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=5" ></script>
 <style type="text/css">
-.content {
-	background-color: white;
-}
+textarea {
+    resize: none;
+  }
 </style>
 </head>
 <body>
 
 <form class="row g-0 mt-3 mb-5" action="/libManage/regBook?menuCode=${menuVO.menuCode }" method="post" enctype="multipart/form-data">
-	<h1 class="display-6 text-center">신규도서등록</h1>
+	<h2 class="text-first fw-bold">신규도서등록</h2>
 	<div class="row g-0 justify-content-center">
-		<div class="col-7">
+		<div class="col-12">
 		<hr>
 			<div class="col-12 mt-2">
 				<label for="isbn" class="form-label">ISBN</label>
 				<input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" required>
+				<div class="col-12 mt-2" id="isbnAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="name" class="form-label">표제</label>
@@ -66,7 +67,7 @@
 			</div>
 			<div class="col-12 mt-2">
 				<label for="intro" class="form-label">소개글</label>
-				<input type="text" class="form-control" id="intro" name="intro" placeholder="소개글" required>
+				<textarea class="form-control" placeholder="소개글" id="intro" name="intro" style="height: 200px"></textarea>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="area" class="form-label">자료위치</label>
