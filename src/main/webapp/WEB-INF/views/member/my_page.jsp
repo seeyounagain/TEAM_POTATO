@@ -14,7 +14,7 @@
 		<h2 class="text-first fw-bold">나의 도서관</h2>
 		<hr>
 	<!-- 제일 윗줄 -->
-		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
+<%-- 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">나의 도서관</h3>
 			</div>
@@ -43,7 +43,7 @@
 						</c:forEach>
 				<p>
 			</div>
-		</div>
+		</div> --%>
 		<!-- 타이틀 끝 -->
 		
 		

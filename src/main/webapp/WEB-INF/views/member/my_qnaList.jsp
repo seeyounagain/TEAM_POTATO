@@ -38,12 +38,12 @@ a:hover{
 </style>
 </head>
 <body>
-<div class="row justify-content-center">
-	<div class="col-12" style="background-color: white;">
-		<h2 class="text-first fw-bold">나의 도서관</h2>
-		<hr>
+<!-- <div class="row justify-content-center">
+	<div class="col-12" style="background-color: white;"> -->
+		<!-- <h2 class="text-first fw-bold">나의 도서관</h2>
+		<hr> -->
 	<!-- 제일 윗줄 -->
-		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
+<%-- 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">상담 / 문의 내역</h3>
 			</div>
@@ -163,15 +163,15 @@ a:hover{
 			</table>
 		</div>	
 	</div>		
-</div>
+</div> --%>
 
 
 <!-- ---------------------------------------------------------------민휘씨꺼--------------------------------------------------------------- -->
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv">
+   <div class="col-12 mainDiv">
    		<div class="titleDiv">
-   			<h1 class="display-6 text-center">상담 / 문의 내역</h1>
-   			<hr>
+   			<h2 class="text-first fw-bold">문의 내역</h2>
+			<hr>
    		</div>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">

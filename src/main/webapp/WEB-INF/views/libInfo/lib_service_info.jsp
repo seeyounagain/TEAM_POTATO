@@ -30,7 +30,7 @@ table td{
 	<!-- 제일 윗줄 -->
 		<h2 class="text-first fw-bold">이용 안내</h2>
 		<hr>
-		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
+<%-- 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">이용 안내</h3>
 			</div>
@@ -59,7 +59,7 @@ table td{
 					</c:forEach>
 				<p>
 			</div>
-		</div>
+		</div> --%>
 		
 		
 		<!-- 이용 시간 -->
@@ -140,16 +140,20 @@ table td{
 				<h5>대출 안내</h5>
 					<ul>
 						<li>
-							-대출 권수 : 1인 몇권이였지...?
+							-대출 권수 : 1인 3권
 						</li>
 						<li>
-							-대출 기간 : 이건 또 몇일이었냐;;?
+							-대출 기간 : 7일
 						</li>
 						<li>
 							-자료의 대출 및 반납 시에는 반드시 신분증을 제시하여야 합니다.
 						</li>
 						<li>
-							<a>※클릭시 대출 현황 조회 페이지로 이동합니다(생기면 넣던가 말던가)</a>
+							<c:if test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'N' }">
+								<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">※클릭시 대출 현황 조회 페이지로 이동합니다</a>
+							</c:if>
+								
+							
 						</li>
 					</ul>
 			</div>

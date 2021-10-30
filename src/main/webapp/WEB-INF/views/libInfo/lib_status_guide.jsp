@@ -21,7 +21,7 @@ table td{
 	<!-- 제일 윗줄 -->
 		<h2 class="text-first fw-bold">자료 현황</h2>
 		<hr>
-		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
+<%-- 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">자료 현황</h3>
 			</div>
@@ -50,7 +50,7 @@ table td{
 						</c:forEach>
 				<p>
 			</div>
-		</div>
+		</div> --%>
 	
 		<!-- 도서현황 -->
 		<div class="row justify-content-center mb-2">
