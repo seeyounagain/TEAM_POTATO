@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=5" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=8" ></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -48,10 +48,12 @@ textarea {
 			<div class="col-12 mt-2">
 				<label for="pubDate" class="form-label">발행년도</label>
 				<input type="text" class="form-control" id="pubDate" name="pubDate" placeholder="예) 20211021 " required>
+				<div class="col-12 mt-2" id="pubDateAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="page" class="form-label">페이지</label>
 				<input type="text" class="form-control" id="page" name="page" placeholder="숫자로 입력해주세요. " required>
+				<div class="col-12 mt-2" id="pageAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="bookSize" class="form-label">크기</label>

@@ -82,13 +82,19 @@ public class MemberController {
 		
 		MemberVO loginInfo = memberSerivce.selectMember(memberVO);
 		
-		String isDelete = loginInfo.getIsDelete();
-		
-		model.addAttribute("isDelete",isDelete);
-		
-		if (loginInfo != null && loginInfo.getIsDelete().equals("N")) {
-
-			session.setAttribute("loginInfo", loginInfo);
+		// 회원일 경우
+		if (loginInfo != null) {
+			
+			// 탈퇴한 회원이 아닐 경우
+			if (loginInfo.getIsDelete().equals("N")) {
+				
+				session.setAttribute("loginInfo", loginInfo);
+				
+			}
+			
+			String isDelete = loginInfo.getIsDelete();
+			
+			model.addAttribute("isDelete",isDelete);
 
 		}
 
