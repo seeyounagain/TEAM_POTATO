@@ -42,7 +42,8 @@
 		<result column="ID" 					property="id"/>
 		<result column="BOOK_CODE" 				property="bookCode"/>
 		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>
-		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>	
+		<result column="RENTABLE_END_DATE" 		property="rentableEndDate"/>
+		<association property="bookVO"  		resultMap="book"/>	
 	</resultMap>
 	
 	<!-- 문의상담 스틸 2029-봉-->
@@ -93,11 +94,16 @@
 		
 	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
 	<select id="memberBookSituation" resultMap="memberVO">
-		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
-    		, COUNT(RESERVE_CODE) AS RESERVE_CNT
-    		, COUNT(RETURN_DATE) AS RETURN_CNT
-		FROM RENTAL A, RESERVE B, MEMBER C
-		WHERE C.ID = #{id}
+		SELECT 
+			(SELECT COUNT(RENTAL_CODE) FROM RENTAL
+			WHERE RETURN_DATE IS NULL) AS RENTAL_CNT
+			,(SELECT COUNT (RESERVE_CODE) FROM RESERVE) AS RESERVE_CNT
+			,(SELECT COUNT(RENTAL_CODE) 
+			FROM RENTAL
+			WHERE RETURN_DATE IS NOT NULL) AS RETURN_CNT
+		FROM RENTAL
+		WHERE ID = 'java'
+		GROUP BY ID
 	</select>
 	
 	<!-- 내정보 -->
@@ -233,7 +239,21 @@
 	</select>
 	
 	<!-- 예약 현황 -->
-
+	<select id="selectReserveList" resultMap="reserve">
+		SELECT RESERVE_CODE
+		    , R.BOOK_CODE
+		    , TITLE
+		    , STATUS
+		    , SUBSTR(TO_CHAR(RENTABLE_START_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(RENTABLE_START_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(RENTABLE_START_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTABLE_START_DATE
+		    , SUBSTR(TO_CHAR(RENTABLE_END_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(RENTABLE_END_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(RENTABLE_END_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTABLE_END_DATE
+		FROM RESERVE R, BOOK B
+		WHERE R.BOOK_CODE = B.BOOK_CODE
+		AND R.ID = 'java'
+	</select>
 </mapper>
 
 

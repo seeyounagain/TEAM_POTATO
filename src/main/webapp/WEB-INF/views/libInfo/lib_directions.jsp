@@ -28,9 +28,11 @@ table td{
 </head>
 <body>
 <div class="row lib_drections justify-content-center">
-	<div class="col-10" style="background-color: white;">
-	
+	<div class="col-12" style="background-color: white;">
+			
 	<!-- 제일 윗줄 -->
+		<h2 class="text-first fw-bold">찾아오시는길</h2>
+		<hr>
 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">찾아오시는길</h3>

@@ -3,6 +3,7 @@ package com.potato.project.member.service;
 import java.util.List;
 
 import com.potato.project.common.vo.RentalVO;
+import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.vo.MemberVO;
 
@@ -39,7 +40,10 @@ public interface MyPageService {
 	
 	
 	//-------------------내 대출/예약현황 시작--------------------
+	//내대출 현황 조회
 	List<RentalVO> selectRentalList(MemberVO memberVO);
 	
+	//내예약 현황 조회
+	List<ReserveVO> selectReserveList(MemberVO memberVO);
 	
 }

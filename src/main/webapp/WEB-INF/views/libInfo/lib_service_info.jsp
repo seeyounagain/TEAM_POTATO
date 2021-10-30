@@ -25,9 +25,11 @@ table td{
 </c:forEach>
 </div>
 <div class="row lib_service_info justify-content-center">
-	<div class="col-10" style="background-color: white;">
+	<div class="col-122" style="background-color: white;">
 	
 	<!-- 제일 윗줄 -->
+		<h2 class="text-first fw-bold">이용 안내</h2>
+		<hr>
 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">이용 안내</h3>

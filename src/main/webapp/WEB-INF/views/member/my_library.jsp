@@ -9,7 +9,9 @@
 </head>
 <body>
 <div class="row justify-content-center">
-	<div class="col-10" style="background-color: white;">
+	<div class="col-12" style="background-color: white;">
+		<h2 class="text-first fw-bold">대출 / 예약 현황</h2>
+		<hr>
 	<!-- 제일 윗줄 -->
 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
@@ -49,7 +51,8 @@
 						<col width="10%">
 						<col width="30%">
 						<col width="20%">
-						<col width="40%">
+						<col width="20%">
+						<col width="20%">
 					</colgroup>
 					<thead>
 						<tr>
@@ -57,13 +60,14 @@
 							<th class="table-secondary">대출한책</th>
 							<th class="table-secondary">대출일</th>
 							<th class="table-secondary">반납일</th>
+							<th class="table-secondary">반납기한</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:choose>
 							<c:when test="${empty rentalList}">
 								<tr style="height: 100px;">
-									<td colspan="4">대출 기록이 없습니다.</td>
+									<td colspan="5">대출 기록이 없습니다.</td>
 								</tr>
 							</c:when>
 							
@@ -72,15 +76,21 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>
-											<a href="#&menuCode=${menuVO.menuCode}">${rental.bookVO.title }</a>	
+											<a href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
 										</td>
 										<td>${rental.rentalDate }</td>
 										<c:choose>
 											<c:when test="${rental.returnDate eq '년월일'}">
-												<td>대출중(${rental.limitDate }까지 반납해주세요)<td>
+												<td>대출중</td>
+												<td>
+													${rental.limitDate }
+												</td>
 											</c:when>
 											<c:otherwise>
 												<td>${rental.returnDate }</td>
+												<td>
+													반납완료
+												</td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
@@ -96,7 +106,8 @@
 		
 		<!-- 예약 현황 -->
 		<div class="row justify-content-center">
-			<div class="col-10 mb-4">
+			<div class="col-12 mb-4">
+				<div class="co-12">예약 현황</div>
 				<table class="table table-hover text-center mt-2" style="border-top: 2px solid #0b70b9;">
 					<colgroup>
 						<col width="10%">
@@ -108,12 +119,12 @@
 						<tr>
 							<th class="table-secondary">번호</th>
 							<th class="table-secondary">예약한책</th>
-							<th class="table-secondary">예약예정일</th>
-							<th class="table-secondary">책 상태</th>
+							<th class="table-secondary">도서상태</th>
+							<th class="table-secondary">대여가능일시</th>
 						</tr>
 					</thead>
 					<tbody>
-						<%-- <c:choose>
+						<c:choose>
 							<c:when test="${empty rentalList}">
 								<tr style="height: 100px;">
 									<td colspan="4">예약 중인 책이 없습니다</td>
@@ -121,18 +132,39 @@
 							</c:when>
 							
 							<c:otherwise>
-								<c:forEach items="${rentalList }" var="rental" varStatus="status">
+								<c:forEach items="${reserveList }" var="rental" varStatus="status">
 									<tr>
 										<td>${status.count }</td>
 										<td>
-											<a href="#&menuCode=${menuVO.menuCode}">${info.bookCode }</a>	
+											<a href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
 										</td>
-										<td>${rental.rentalDate }</td>
-										<td>${rental.limitDate }</td>
+										<c:if test="${rental.bookVO.status eq 1}">
+											<td>대출가능</td>
+										</c:if>
+										<c:if test="${rental.bookVO.status eq 2}">
+											<td>대출중</td>
+										</c:if>
+										<c:if test="${rental.bookVO.status eq 3}">
+											<td>연체중</td>
+										</c:if>
+										<c:if test="${rental.bookVO.status eq 4}">
+											<td>예약중</td>
+										</c:if>
+										<c:if test="${rental.bookVO.status eq 5}">
+											<td>대출대기중</td>
+										</c:if>
+										<c:choose>
+											<c:when test="${rental.rentableStartDate eq '년월일'}">
+												<td>대여일이 정해지지 않았습니다.</td>
+											</c:when>
+											<c:otherwise>
+												<td>${rental.rentableStartDate }~${rental.rentableEndDate }</td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 									</c:forEach>
 								</c:otherwise>
-						</c:choose> --%>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>

@@ -10,7 +10,9 @@
 <body>
 <!-- 나의도서관 member폴더 -> my_lib.jsp 추가 --봉 -->
 <div class="row justify-content-center">
-	<div class="col-10" style="background-color: white;">
+	<div class="col-12" style="background-color: white;">
+		<h2 class="text-first fw-bold">나의 도서관</h2>
+		<hr>
 	<!-- 제일 윗줄 -->
 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
@@ -61,16 +63,16 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th>대여중</th>
-							<th>예약중</th>
-							<th>반납</th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">대여중</a></th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">예약중</a></th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">반납</a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>${memberBookSituationCnt.rentalCnt }</td>
-							<td>${memberBookSituationCnt.reserveCnt }</td>
-							<td>${memberBookSituationCnt.returnCnt }</td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.rentalCnt }</a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.reserveCnt }</a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.returnCnt }</a></td>
 						</tr>
 					</tbody>
 				</table>

@@ -12,8 +12,10 @@
 </head>
 <body>
 <div class="row justify-content-center">
-	<div class="col-10" style="background-color: white;">
+	<div class="col-12" style="background-color: white;">
 	<!-- 제일 윗줄 -->
+		<h2 class="text-first fw-bold">내정보</h2>
+		<hr>
 		<div class="row mb-4" style="border-bottom: 2px solid #0b70b9 ;">
 			<div class="col-6 text-start">
 				<h3 style="font-weight: bold;">내정보</h3>

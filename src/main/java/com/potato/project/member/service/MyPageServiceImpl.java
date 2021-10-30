@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.potato.project.common.vo.RentalVO;
+import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.vo.MemberVO;
 
@@ -73,10 +74,16 @@ public class MyPageServiceImpl implements MyPageService {
 
 	
 	//---------------------------------------내 대출/예역 현황 시작-----------------------
+	//내 대출 현황 조회
 	@Override
 	public List<RentalVO> selectRentalList(MemberVO memberVO) {
 		
 		return sqlSession.selectList("myPageMapper.selectRentalList", memberVO);
+	}
+
+	@Override
+	public List<ReserveVO> selectReserveList(MemberVO memberVO) {
+		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
 	}
 	
 	

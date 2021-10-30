@@ -89,11 +89,14 @@ public class MyPageController {
 	//내 문의 끝
 	
 	//내 대출 예약 현황
+	//내 대출 내역,내 예약 현황 조회
 	@GetMapping("/myLibrary")
 	public String goMyLibrary(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session) {
 		model.addAttribute("rentalList",myPageService.selectRentalList((MemberVO)session.getAttribute("loginInfo")));
+		model.addAttribute("reserveList",myPageService.selectReserveList((MemberVO)session.getAttribute("loginInfo")));
 		return "member/my_library";
 		
 	}
+	
 
 }
