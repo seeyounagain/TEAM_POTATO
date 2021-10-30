@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=6" ></script>
+<script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=13" ></script>
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -41,29 +41,10 @@
 	height: 80%;
 }
 </style>
-<script type="text/javascript">
-	/* function deleQna() {
-		var qnaCode = document.getElementById('qnaCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		
-		if(	confirm("상담 / 문의 글을 삭제하시겠습니까?") == true){
-			
-			location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
-		
-		}else{
-			return;
-		}
-	} */
-	
-	
-	
-	
-	
-</script>
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv">
+   <div class="col-12 mainDiv">
    		<div class="titleDiv">
    			<h1 class="display-6 text-center">상담 / 문의</h1>
    			<hr>
@@ -133,12 +114,29 @@
 				<input type="hidden" value="${menuVO.menuCode}" id="menuCode">
 				<input type="hidden" value="${qnaVO.qnaCode}" name="qnaCode" id="qnaCode">
 				<input type="hidden" value="${qna.qnaPw}" name="qnaPw" id="qnaPw">
-			<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
-				<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
-				<input class="btn btn-primary" type="button" value="상담 / 문의 삭제" onclick="deleQna();">
-			</c:if>
- 			<input class="btn btn-primary" type="button" value="상담 / 문의 삭제1" onclick="checkPw();">
- 			<input class="btn btn-primary btn-md" type="button" value="뒤로가기" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
+				<!-- 관리자로 로그인 했을 때, 답변 삭제 / 게시글 삭제-->
+				<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
+					<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
+					<input class="btn btn-primary" type="button" value="게시글 삭제" onclick="deleQna();">
+				</c:if>
+				
+				<!-- 일반  회원으로 로그인 했을 때-->
+				<!-- 로그인 아이디와 게시글 아이디가 일치할 때 -> 1. 비번이 있을 때 / 2. 비번이 없을 때-->
+				<c:if test="${qna.id eq sessionScope.loginInfo.id}">
+					<c:choose>
+						<c:when test="${not empty qna.qnaPw }">
+							<input class="btn btn-primary" type="button" value="게시글 삭제" onclick="checkPw();">
+						</c:when>
+						<c:otherwise>
+							<input class="btn btn-primary" type="button" value="게시글 삭제" onclick="deleQna();">
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+				
+				<!-- 뒤로가기 = 회원, 비번 여부 상관없이 보여짐 -->	
+				<input class="btn btn-primary btn-md" type="button" value="목록" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
+				
+				
    		</div>
 	</div>
 </div>

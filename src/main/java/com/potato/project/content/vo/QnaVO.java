@@ -1,6 +1,7 @@
 package com.potato.project.content.vo;
 
-public class QnaVO extends QnaAnswerVO{
+
+public class QnaVO extends QnaAnswerVO {
 
 	// 문의/상담 테이블 QNA
 

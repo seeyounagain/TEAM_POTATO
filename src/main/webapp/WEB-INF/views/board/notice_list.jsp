@@ -21,18 +21,36 @@
 .table{
 	width: 100%;
 }
-a:hover{
+.tableA:hover{
 	color: black;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.form-select{
+	width: 100px;
+	margin-left: 20px;
 }
 </style>
 </head>
 <body>
 <div class="row justify-content-center">
-   <div class="col-8 mainDiv">
+   <div class="col-12 mainDiv">
    		<div class="titleDiv">
-   			<h1 class="display-6 text-center">공지사항</h1>
+   			<h2 class="text-first fw-bold">공지사항</h2>
    			<hr>
    		</div>
+			<form action="/board/notice?menuCode=${menuVO.menuCode }" method="post">
+						<div class="input-group" style="width: 100%;">
+						<select class="form-select" name ="searchKeyword" id="searchKeyword" style="width: 50px;">
+						  <option value="title">제목</option>
+						  <option value="content"  <c:if test="${noticeVO.searchKeyword eq 'content'}">
+							  	selected
+							  </c:if> >내용</option>
+						</select>
+						  <input class="form-control me-2" value="${noticeVO.searchValue }" name="searchValue" placeholder="검색어를 입력하세요" aria-label="Search">
+						  <input class="btn btn-primary" type="submit" value="검색">
+						</div>
+			</form>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
 						<thead>
@@ -54,7 +72,7 @@ a:hover{
 									<c:forEach items="${list }" var="info" varStatus="status">
 										<tr>
 											<td>${status.count }</td>
-											<td><a href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
+											<td><a class="tableA" href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
 											<td>${info.createDate }</td>
 											<td>${info.readCnt }</td>
 										</tr>
@@ -70,6 +88,32 @@ a:hover{
 					</c:if>
 			</div>
 		</div>
+		
+			<div class="col-12">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+					 <c:if test="${noticeVO.prev }">
+						<li class="page-item">
+						<a class="page-link" href="/board/notice?nowPage=${noticeVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						</a>
+						</li>
+					 </c:if> 
+						<c:forEach var="pageNum" begin="${noticeVO.startPage }" end="${noticeVO.endPage }">
+							<li class="page-item  <c:if test="${noticeVO.nowPage eq pageNum }">active</c:if>  ">
+							<a class="page-link" href="/board/notice?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+							</li>
+						</c:forEach>
+					<c:if test="${noticeVO.next }">
+						<li class="page-item">
+						<a class="page-link" href="/board/notice?nowPage=${noticeVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+					</c:if>
+					</ul>
+				</nav>
+			</div>
 </div>
 </body>
 </html>
