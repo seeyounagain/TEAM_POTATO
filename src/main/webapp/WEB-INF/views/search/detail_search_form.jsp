@@ -43,12 +43,13 @@
 	<div class="col-12">
 		<h1 class="display-6 text-center">상세검색</h1>
 		<hr>
-<form action="/search/goDetailSearch" method="post">		
+<form action="/search/bookDetailSearch" method="post">		
 		<div class="row justify-content-center">
 			<div id="searchBox">
 				<div class="input-group mt-1 mb-3">
-				  <select name="KDC_NUM" class="form-select" id="inputGroupSelect02">
-				    <option value="ALL">전체</option>
+				<span class="input-group-text keyword" id="inputGroup-sizing-default">분류</span>
+				  <select name="kdcNum" class="form-select" id="inputGroupSelect02">
+				    <option value="10">전체</option>
 				    <c:forEach var="cate" items="${cateList }">
 				    <option value="${cate.kdcNum }">${cate.kdcName }</option>
 				    </c:forEach>
@@ -56,72 +57,109 @@
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">제목</span>
-				  <input type="text" name="TITLE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
+				  <input type="text" name="title" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
-				  <input type="text" name="WRITER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
+				  <input type="text" name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">역자</span>
-				  <input type="text" name="TRANSLATOR" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
+				  <input type="text" name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
-				  <input type="text" name="PUBLISHER" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
+				  <input type="text" name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
-				  <input type="text" name="ISBN" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
+				  <input type="text" name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
-				  <input type="text" name="PUB_DATE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
+				  <input type="text" name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이후&nbsp;</span>
-				  <input type="text" name="PUB_DATE" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
+				  <input type="text" name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이내&nbsp;</span>
 				</div>
 				<div class="input-group d-grid mb-3" style="padding-left: 3px;">
+					<input type="hidden" value="${menuVO.menuCode }" name="menuCode">
 					<input type="submit" value="상세검색" id="goDetailSearchBtn" class="btn btn-primary">
 				</div>
 			</div>
 		</div>
 </form>
 		
-		<table class="table table-hover table-bordered caption-top text-center" style="height: 400px;">
-			<tr>
-				<td>검색어를 입력해주세요.</td>
-			</tr>
-		</table>
+	<div class="col-12">
+	<table class="table table-hover table-bordered caption-top">
 		
-	</div>
-</div>
-
-	
-<%-- 	<table class="table table-hover table-bordered caption-top">
-		<caption>도서 ${bookList.size() }건의 검색결과</caption>
-	<c:choose>
-		<c:when test="${not empty bookList }">
-		<c:forEach var="book" items="${bookList }" varStatus="status">
-		<tr>
-			<td><span>${status.count }.</span>
-				<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }?menuCode=${menuVO.menuCode}">${book.title }</a></div>
-				<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
-				<div class="mt-2"><c:if test="${book.status eq 0 }">대출 가능</c:if><c:if test="${book.status eq 1 }">대출중</c:if><c:if test="${book.status eq 2 }">예약중</c:if>
-				&nbsp;/&nbsp;${book.area }</div>
-			</td>
-			<td class="text-center">
-				<img style="width: 100px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
-			</td>
-		</tr>
-		</c:forEach>
-		</c:when>
-		<c:otherwise>
-		<tr>
-			<td>검색어를 입력해주세요.</td>
-		</tr>
-		</c:otherwise>
+		<c:if test="${not empty searchList }">
+		<caption>도서 ${searchList.size() }건의 검색결과</caption>
+		</c:if>
+		
+		<c:choose>
+			<c:when test="${not empty searchList }">
+				<c:forEach var="book" items="${searchList }" varStatus="status">
+				<tr>
+					<td class="searchBook"><span>${status.count }.</span>
+						<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}">${book.title }</a></div>
+						<div class="mt-2">${book.writer } / ${book.publisher } / ${book.pubDate }</div>
+						<div class="mt-2"><c:if test="${book.status eq 1 }">대출 가능</c:if><c:if test="${book.status eq 2 }">대출중</c:if><c:if test="${book.status eq 3 }">대출중 / 예약중</c:if>
+						<c:if test="${book.status eq 4 }">대출중 / 연체중</c:if><c:if test="${book.status eq 5 }">대출대기중 / 예약중 </c:if>&nbsp;/&nbsp;${book.area }</div>
+					</td>
+					<td class="text-center">
+						<img style="width: 100px;" src="/resources/bookImgUpload/${book.bookImgVO.attachedImgName }" alt="#">
+					</td>
+				</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr height="500px;">
+					<td colspan="2" class="text-center">
+						<c:if test="${not empty bookVO}">
+						해당되는 도서가 없습니다.
+						</c:if>
+						<c:if test="${empty bookVO}">
+						검색조건을 입력해주세요.
+						</c:if>
+					</td>
+				</tr>
+			</c:otherwise>
 		</c:choose>
-	</table> --%>
+			
+	</table>
+	</div>	
 
+<c:if test="${not empty searchList }">
+	
+	<div class="col-12">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+			 <c:if test="${bookVO.prev }">
+				<li class="page-item">
+				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				</a>
+				</li>
+			 </c:if> 
+				<c:forEach var="pageNum" begin="${bookVO.startPage }" end="${bookVO.endPage }">
+					<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  ">
+					<a class="page-link" href="/search/bookSearch?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+					</li>
+				</c:forEach>
+			<c:if test="${bookVO.next }">
+				<li class="page-item">
+				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
+			</c:if>
+			</ul>
+		</nav>
+	</div>	
+
+</c:if>
+
+</div>
+</div>
 
 </body>
 </html>

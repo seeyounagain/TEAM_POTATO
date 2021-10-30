@@ -497,6 +497,134 @@
 	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{summary}||'%')
 	            OR UPPER(INTRO) LIKE UPPER('%'||#{intro}||'%') 
 	</select>
+
+	<!-- 도서 상세 검색 + 페이징 -->
+	<select id="selectDetailSearchBookAndPaging" resultMap="book">
+	    SELECT
+	        ROW_NUM
+	            , ISBN
+			    , BOOK_CODE
+			    , KDC
+			    , KDC_NAME
+			    , WRITER
+			    , TRANSLATOR
+			    , TITLE
+			    , PAGE
+			    , BOOK_SIZE
+			    , KEYWORD
+			    , PUBLISHER
+			    , PUB_DATE
+			    , SUMMARY
+			    , INTRO
+			    , INPUT_DATE
+			    , AREA
+			    , STATUS
+			    , ATTACHED_IMG_NAME    
+	    FROM (
+	            SELECT
+	            ROWNUM AS ROW_NUM
+	            , ISBN
+			    , BOOK_CODE
+			    , KDC
+			    , KDC_NAME
+			    , WRITER
+			    , TRANSLATOR
+			    , TITLE
+			    , PAGE
+			    , BOOK_SIZE
+			    , KEYWORD
+			    , PUBLISHER
+			    , PUB_DATE
+			    , SUMMARY
+			    , INTRO
+			    , INPUT_DATE
+			    , AREA
+			    , STATUS
+			    , ATTACHED_IMG_NAME
+	        FROM (
+	            SELECT
+	                ROWNUM AS ROW_NUM
+	                , ISBN
+	                , B.BOOK_CODE
+	                , KDC
+	                , C.KDC_NAME
+	                , WRITER
+	                , TRANSLATOR
+	                , TITLE
+	                , PAGE
+	                , BOOK_SIZE
+	                , KEYWORD
+	                , PUBLISHER
+	                , PUB_DATE
+	                , SUMMARY
+	                , INTRO
+	                , INPUT_DATE
+	                , AREA
+	                , STATUS
+	                , ATTACHED_IMG_NAME
+	            FROM BOOK B, BOOK_CATE C, BOOK_IMG I
+	            WHERE B.KDC_NUM = C.KDC_NUM
+	            AND B.BOOK_CODE = I.BOOK_CODE
+	            <if test="kdcNum != 10">
+	            AND KDC_NUM = #{kdcNum}
+	            </if>
+	            <if test="title != null and !title.equals('')">
+	            AND UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
+	            </if>
+	            <if test="writer != null and !writer.equals('')">
+	            AND UPPER(WRITER) LIKE UPPER('%'||#{writer}||'%')
+	            </if>
+	            <if test="translator != null and !translator.equals('')">
+	            AND UPPER(TRANSLATOR) LIKE UPPER('%'||#{translator}||'%')
+	            </if>
+	            <if test="publisher != null and !publisher.equals('')">
+	            AND UPPER(PUBLISHER) LIKE UPPER('%'||#{publisher}||'%')
+	            </if>
+	            <if test="isbn != null and !isbn.equals('')">
+	            AND UPPER(ISBN) LIKE UPPER('%'||#{isbn}||'%')
+	            </if>
+	            <if test="searchBegin != null and !searchBegin.equals('')">
+	            AND TO_DATE(PUB_DATE,'YYYY') &gt;= TO_DATE(#{searchBegin},'YYYY')
+	            </if>
+	            <if test="searchEnd != null and !searchEnd.equals('')">
+	            AND TO_DATE(PUB_DATE,'YYYY') &lt;= TO_DATE(#{searchEnd},'YYYY')
+	            </if>
+	            ORDER BY INPUT_DATE DESC
+	            )
+	    )
+	    WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
+	</select>
+	
+	<!-- 페이징 처리를 위한 상세검색 결과에 해당하는 총 도서 수 조회 -->
+	<select id="countBookDetailSearch" resultType="int">
+		SELECT COUNT(BOOK_CODE)
+		FROM BOOK
+		WHERE 	LENGTH(BOOK_CODE) = 9
+				<if test="kdcNum != 10">
+	            AND KDC_NUM = #{kdcNum}
+	            </if>
+	            <if test="title != null and !title.equals('')">
+	            AND UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
+	            </if>
+	            <if test="writer != null and !writer.equals('')">
+	            AND UPPER(WRITER) LIKE UPPER('%'||#{writer}||'%')
+	            </if>
+	            <if test="translator != null and !translator.equals('')">
+	            AND UPPER(TRANSLATOR) LIKE UPPER('%'||#{translator}||'%')
+	            </if>
+	            <if test="publisher != null and !publisher.equals('')">
+	            AND UPPER(PUBLISHER) LIKE UPPER('%'||#{publisher}||'%')
+	            </if>
+	            <if test="isbn != null and !isbn.equals('')">
+	            AND UPPER(ISBN) LIKE UPPER('%'||#{isbn}||'%')
+	            </if>
+	            <if test="searchBegin != null and !searchBegin.equals('')">
+	            AND TO_DATE(PUB_DATE,'YYYY') &gt;= TO_DATE(#{searchBegin},'YYYY')
+	            </if>
+	            <if test="searchEnd != null and !searchEnd.equals('')">
+	            AND TO_DATE(PUB_DATE,'YYYY') &lt;= TO_DATE(#{searchEnd},'YYYY')
+	            </if>
+	</select>
 	
 </mapper>
 

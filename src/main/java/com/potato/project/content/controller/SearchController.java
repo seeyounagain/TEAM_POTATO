@@ -55,10 +55,25 @@ public class SearchController {
 	}
 	
 	// 상세검색 페이지로 이동
-	@RequestMapping("/bookDetailSearch")
+	@GetMapping("/bookDetailSearch")
 	public String bookDetailSearch(Model model,MenuVO menuVO,HttpSession session) {
 		
-		model.addAttribute("bookList",searchService.selectBookList());
+		model.addAttribute("cateList",searchService.selectCateList());
+		
+		return "search/detail_search_form";
+		
+	}
+	
+	// 상세검색
+	@PostMapping("/bookDetailSearch")
+	public String goDetailSearch(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
+		
+		int totalCnt = searchService.countBookDetailSearch(bookVO);
+		
+		bookVO.setTotalCnt(totalCnt);
+		bookVO.setPageInfo();
+		
+		model.addAttribute("searchList",searchService.selectDetailSearchBookAndPaging(bookVO));
 		
 		model.addAttribute("cateList",searchService.selectCateList());
 		

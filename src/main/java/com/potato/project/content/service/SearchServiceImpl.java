@@ -95,5 +95,21 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
+	// 상세검색 조건에 따른 도서 목록 조회 + 페이징
+	@Override
+	public List<BookVO> selectDetailSearchBookAndPaging(BookVO bookVO) {
+		
+		return sqlSession.selectList("searchMapper.selectDetailSearchBookAndPaging",bookVO);
+		
+	}
+	
+	// 상세검색 페이징 처리를 위한 도서 갯수 조회
+	@Override
+	public int countBookDetailSearch(BookVO bookVO) {
+		
+		return sqlSession.selectOne("searchMapper.countBookDetailSearch",bookVO);
+		
+	}
+	
 	
 }

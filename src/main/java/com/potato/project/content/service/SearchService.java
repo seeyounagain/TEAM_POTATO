@@ -37,4 +37,10 @@ public interface SearchService {
 	// 통합검색 페이징 처리를 위한 도서 갯수 조회
 	int countBookSearch(BookVO bookVO);
 	
+	// 상세검색 조건에 따른 도서 목록 조회 + 페이징
+	List<BookVO> selectDetailSearchBookAndPaging(BookVO bookVO);
+	
+	// 상세검색 페이징 처리를 위한 도서 갯수 조회
+	int countBookDetailSearch(BookVO bookVO);
+	
 }
