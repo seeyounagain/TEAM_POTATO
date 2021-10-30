@@ -18,7 +18,7 @@ table{
 </style>
 </head>
 <body>
-
+<h2 class="text-first fw-bold">도서비치신청 검색 및 신청</h2><hr>
 <div class="row justify-content-center text-center">
 <div class="col-12">
 	<!-- 이모티콘 구획 -->
@@ -31,8 +31,8 @@ table{
   				<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
 			</svg>
 			</div>
-			<div class="col-8 text-center mt-3">	
-				<h3>도서비치신청</h3>
+			<div class="col-8 text-center mt-2">	
+				<h3>희망 도서를 검색 후 신청 해주시길 바랍니다.</h3>
 			</div>
 			</div>
 	

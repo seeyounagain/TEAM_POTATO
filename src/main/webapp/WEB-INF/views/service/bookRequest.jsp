@@ -37,10 +37,10 @@ color: inherit;
 
 	
 	
+<h2 class="text-first fw-bold">도서비치신청</h2><hr>
 <div class="container">
 <input type="hidden" value="${menuCode }" class="menuCode">
-<div class="row justify-content-center text-center">
-
+<div class="row justify-content-center">
 
 	
 	<!-- 이모티콘 구획 -->
@@ -53,22 +53,20 @@ color: inherit;
 			</svg>
 			</div>
 			<div class="col-8 text-center mt-3 mb-3">	
-				도서비치신청 게시판입니다.
+				도서비치신청
 			</div>
 		</div>
-		<div class="">
-
+		<div class="text-center">
 			<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode}'">
-
 		</div>
 	</div>
 	
 	<!-- 스크롤 구획 -->
-<c:choose>
-<c:when test="${not empty requestBoardList }">
+	
 	<div class="row justify-content-center mb-3 mt-5">
-		<div class="col-11 text-center">
-			<div><h5>도서비치신청현황</h5></div>		
+		<div class="col-12 text-center">
+			<div><h4>도서비치신청현황</h4></div>
+				
 		</div>
     <div class="tableDiv overflow-auto searchRecordList" style="height: 600px;">
 	<table class="table text-center">
@@ -84,7 +82,9 @@ color: inherit;
     	</tr>
   	</thead>
  	 <tbody>
-
+			<c:if test="${empty requestBoardList }">
+			<tr><td colspan="7">도서비치신청 내역이 없습니다.</td></tr>
+			</c:if>	
 		<c:forEach items="${requestBoardList }" var="a" varStatus="status">
 		<tr>
 			
@@ -98,9 +98,6 @@ color: inherit;
 					
 		</tr>	                                             		
 		</c:forEach>
-</c:when>
-
-</c:choose>
 
  	</tbody>
 	</table>
