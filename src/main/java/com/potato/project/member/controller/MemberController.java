@@ -82,6 +82,9 @@ public class MemberController {
 		
 		MemberVO loginInfo = memberSerivce.selectMember(memberVO);
 		
+		// 연체도서 갯수 조회를 위한 int
+		int overCnt = 0;
+		
 		// 회원일 경우
 		if (loginInfo != null) {
 			
@@ -89,12 +92,12 @@ public class MemberController {
 			if (loginInfo.getIsDelete().equals("N")) {
 				
 				session.setAttribute("loginInfo", loginInfo);
+				// 연체도서 업데이트 및 갯수 조회
+				overCnt = adminService.selectRentalListAndOverRentalUpdate(memberVO);
 				
 			}
 			
-			String isDelete = loginInfo.getIsDelete();
-			
-			model.addAttribute("isDelete",isDelete);
+			model.addAttribute("overCnt",overCnt);
 
 		}
 

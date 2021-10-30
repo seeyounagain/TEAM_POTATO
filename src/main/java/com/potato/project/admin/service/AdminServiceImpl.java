@@ -1,5 +1,9 @@
 package com.potato.project.admin.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
@@ -123,6 +128,50 @@ public class AdminServiceImpl implements AdminService{
 		
 		return sqlSession.selectList("searchMapper.selectMemberReserveList",id);
 		
+	}
+	
+	// 회원이 대출 중인 도서 목록 조회 + 반납 기간 지난 도서 연체중으로 상태 변경
+	@Override
+	public int selectRentalListAndOverRentalUpdate(MemberVO memberVO) {
+		
+		// 회원이 대출 중인 도서 목록 조회
+		List<RentalVO> rentalList = sqlSession.selectList("searchMapper.selectMemberRentalList",memberVO);
+		
+		// 현재 날짜 구하기
+		String now = FileUploadUtil.getNowDate();
+		// 날짜 비교를 위한 포맷 지정
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		// alert 띄우기 위한 연체도서 cnt
+		int overCnt = 0;
+		
+		for (RentalVO vo : rentalList) {
+			
+			// 조회된 도서들의 반납기한과 현재 날짜 비교
+			try {
+				
+				// 같은 포맷으로 만들기
+				Date date1 = dateFormat.parse(now);
+				Date date2 = dateFormat.parse(vo.getLimitDate());
+				
+				// result가 true면 현재날짜 > 반납기한
+				boolean result = date1.after(date2);
+				
+				if (result) {
+					// 반납기한 지난 도서들 각각 상태 연체중으로 변경
+					BookVO bookVO = new BookVO();
+					bookVO.setBookCode(vo.getBookCode());
+					bookVO.setStatus(3);
+					sqlSession.update("searchMapper.updateBookStatus",bookVO);
+					overCnt++;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
+		return overCnt;
 	}
 	
 	// 검색어 결과에 따른 회원수 조회
