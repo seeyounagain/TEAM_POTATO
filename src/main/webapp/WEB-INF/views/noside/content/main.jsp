@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 #col1 {
 	height: 15rem;
@@ -41,7 +42,29 @@
     white-space: nowrap;
     background-color: white;
 }
+.modal{
+	width: 300px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
 </style>
+<script type="text/javascript">
+	//팝업 모달창
+	$(window).on('load',function(){
+	    $('#myModal').modal('show');
+	});
+	
+	 function close_pop() {
+         $('#myModal').modal('hide');
+    };
+
+</script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -131,5 +154,23 @@
     </div>
 </div>
 
+	<!-- 팝업 모달창 -->
+	<div class="modal" id="myModal" tabindex="-1" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">공지</h5>
+	            </div>
+	            <div class="modal-body">
+	                <p>공지내용</p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary" id = "modal-today-close">오늘만 닫기</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="close_pop();">닫기</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </body>
+
 </html>

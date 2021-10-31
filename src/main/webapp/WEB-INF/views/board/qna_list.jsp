@@ -21,8 +21,10 @@
 .table{
 	width: 100%;
 }
-a:hover{
+.tableA:hover{
 	color: black;
+	text-decoration: underline;
+	font-weight: bold;
 }
 .answerCnt{
 	padding-left: 10px;
@@ -34,6 +36,9 @@ a:hover{
 	font-size: 14px;
 	text-decoration: underline 1px gray;
 	vertical-align: baseline;
+}
+.pageDiv{
+	padding-top: 10px;
 }
 </style>
 </head>
@@ -68,7 +73,7 @@ a:hover{
 								<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 									<c:choose>
 										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' or empty info.qnaPw}">
-											<a href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+											<a class="tableA" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
 												<c:if test="${info.answerCnt != 0}">
 													<span class="m-2 complete">답변완료</span>
 												</c:if>
@@ -76,7 +81,7 @@ a:hover{
 										</c:when>
 										<c:otherwise>
 											<img src="/resources/img/icon_secret.png" width="13px;"> 
-											<a href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+											<a class="tableA" href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
 												<c:if test="${info.answerCnt != 0}">
 													<span class="m-2 complete">답변완료</span>
 												</c:if>
@@ -97,6 +102,34 @@ a:hover{
 					</div>                                                
 				</c:if>
 			</div>
+		
+			<div class="col-12 pageDiv">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+					 <c:if test="${qnaVO.prev }">
+						<li class="page-item">
+						<a class="page-link" href="/board/qna?nowPage=${qnaVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						</a>
+						</li>
+					 </c:if> 
+						<c:forEach var="pageNum" begin="${qnaVO.startPage }" end="${qnaVO.endPage }">
+							<li class="page-item  <c:if test="${qnaVO.nowPage eq pageNum }">active</c:if>  ">
+							<a class="page-link" href="/board/qna?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+							</li>
+						</c:forEach>
+					<c:if test="${noticeVO.next }">
+						<li class="page-item">
+						<a class="page-link" href="/board/qna?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+					</c:if>
+					</ul>
+				</nav>
+			</div>
+		
+		
 		</div>
 </body>
 </html>

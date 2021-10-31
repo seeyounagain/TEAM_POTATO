@@ -70,9 +70,9 @@ public class BoardController {
 		
 		//파일이 첨부될 경로
 		//학원
-		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//집
-		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//시윤
 		//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
@@ -135,6 +135,11 @@ public class BoardController {
 	//상담 문의 페이지로 이동
 	@RequestMapping("/qna")
 	public String goQna(Model model, QnaVO qnaVO, MenuVO menuVO) {
+
+		int totalCnt = boardService.cntQna();
+		
+		qnaVO.setTotalCnt(totalCnt);
+		qnaVO.setPageInfo();
 
 		model.addAttribute("list", boardService.selectQnaList());
 

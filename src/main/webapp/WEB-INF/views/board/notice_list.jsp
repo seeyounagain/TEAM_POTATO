@@ -30,6 +30,9 @@
 	width: 100px;
 	margin-left: 20px;
 }
+.pageDiv{
+	padding-top: 10px;
+}
 </style>
 </head>
 <body>
@@ -89,7 +92,7 @@
 			</div>
 		</div>
 		
-			<div class="col-12">
+			<div class="col-12 pageDiv">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 					 <c:if test="${noticeVO.prev }">

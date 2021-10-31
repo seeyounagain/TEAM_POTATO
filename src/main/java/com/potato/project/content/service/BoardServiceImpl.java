@@ -143,6 +143,13 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.selectOne("boardMapper.cntNotice", noticeVO);
 	}
 	
+	//문의상담 총 개수
+	@Override
+	public int cntQna() {
+		
+		return sqlSession.selectOne("boardMapper.cntQna");
+	}
+	
 	
 	
 	

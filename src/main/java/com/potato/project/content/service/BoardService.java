@@ -40,6 +40,8 @@ public interface BoardService {
 	//상담문의 리스트
 	List<QnaVO> selectQnaList();
 	
+	int cntQna();
+	
 	//답변 등록 개수 + 업데이트
 	int updateAcnt(QnaVO qnaVO);
 	
