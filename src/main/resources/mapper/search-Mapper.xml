@@ -505,6 +505,7 @@
 	            , ISBN
 			    , BOOK_CODE
 			    , KDC
+			    , KDC_NUM
 			    , KDC_NAME
 			    , WRITER
 			    , TRANSLATOR
@@ -526,6 +527,7 @@
 	            , ISBN
 			    , BOOK_CODE
 			    , KDC
+			    , KDC_NUM
 			    , KDC_NAME
 			    , WRITER
 			    , TRANSLATOR
@@ -547,6 +549,7 @@
 	                , ISBN
 	                , B.BOOK_CODE
 	                , KDC
+	                , B.KDC_NUM
 	                , C.KDC_NAME
 	                , WRITER
 	                , TRANSLATOR
@@ -566,7 +569,7 @@
 	            WHERE B.KDC_NUM = C.KDC_NUM
 	            AND B.BOOK_CODE = I.BOOK_CODE
 	            <if test="kdcNum != 10">
-	            AND KDC_NUM = #{kdcNum}
+	            AND B.KDC_NUM = #{kdcNum}
 	            </if>
 	            <if test="title != null and !title.equals('')">
 	            AND UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
