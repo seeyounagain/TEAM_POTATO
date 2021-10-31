@@ -211,7 +211,37 @@ a:hover{
 							</c:choose>
 						</tbody>
 					</table>
-				</div>							
+				</div>
+				<!-- 문의 테이블 끝 -->
+				
+				<!-- 페이징 처리 -->
+<%-- 		<div class="col-12">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<c:if test="${noticeVO.prev }">
+						<li class="page-item">
+							<a class="page-link" href="/board/notice?nowPage=${noticeVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					 </c:if> 
+						<c:forEach var="pageNum" begin="${noticeVO.startPage }" end="${noticeVO.endPage }">
+							<li class="page-item  <c:if test="${noticeVO.nowPage eq pageNum }">active</c:if>  ">
+							<a class="page-link" href="/board/notice?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+							</li>
+						</c:forEach>
+					<c:if test="${noticeVO.next }">
+						<li class="page-item">
+						<a class="page-link" href="/board/notice?nowPage=${noticeVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
+		</div> --%>
+			<!-- 페이징 끝 -->
+											
 	</div>
 </div>						
 </body>

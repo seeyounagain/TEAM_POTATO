@@ -83,6 +83,8 @@ public class MyPageController {
 	@GetMapping("/myQnaList")
 	public String goQna(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session) {
 		// 로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 받아와서 내문의내역 리스트 화면에 뿌림
+		/* int totalCnt */
+		
 		model.addAttribute("qnaList",myPageService.myQnaList((MemberVO)session.getAttribute("loginInfo")));
 		return "member/my_qnaList";
 	}

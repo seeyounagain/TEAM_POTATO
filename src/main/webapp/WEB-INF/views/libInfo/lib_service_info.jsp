@@ -150,7 +150,13 @@ table td{
 						</li>
 						<li>
 							<c:if test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'N' }">
-								<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">※클릭시 대출 현황 조회 페이지로 이동합니다</a>
+								<a href="/myPage/myLibrary?menuCode=${menuList[4].menuCode }">※클릭시 대출 현황 조회 페이지로 이동합니다</a>
+							</c:if>
+							<c:if test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'Y' }">
+								<a href="/libManage/bookManage?menuCode=${menuList[4].menuCode }">※클릭시 대출 현황 조회 페이지로 이동합니다</a>
+							</c:if>
+							<c:if test="${empty sessionScope.loginInfo }">
+								<a href="/member/memberLoginForm">※클릭시 대출 현황 조회 페이지로 이동합니다</a>
 							</c:if>
 								
 							
@@ -174,17 +180,12 @@ table td{
 						<li>
 							-예약유효기간 : 문자서비스 통보일로부터 3일(복붙 수정바람)
 						</li>
-						<li>
-							-예약 방법 : ????
-						</li>
-						<li>
-							<a>※클릭시 예약 현황 조회 페이지로 이동합니다(생기면 넣던가 말던가)</a>
-						</li>
 					</ul>
 			</div>
 		</div>
 		<!-- 예약 안내 끝 -->
-		
+		<div>${menuList[4].menuCode } 어드민</div>
+		<div>${menuList[4].menuCode } 나의도서관</div>
 	</div>		
 </div>
 </body>

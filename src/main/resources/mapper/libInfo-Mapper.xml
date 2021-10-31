@@ -62,7 +62,9 @@
 	<!-- 모든책 개수 구하기  최종 갱신일 -->
 	<!-- 도서관정보 자료현황 dataInfo에 사용함 -->
 	<select id="bookLastUpdate" resultType="String">
-		SELECT TO_CHAR(INPUT_DATE, 'YYYY.MM.DD')
+		SELECT SUBSTR(TO_CHAR(INPUT_DATE, 'YYYY-MM-DD'),0,4)||'년'
+  			||SUBSTR(TO_CHAR(INPUT_DATE, 'YYYY-MM-DD'),6,2)||'월'
+    		||SUBSTR(TO_CHAR(INPUT_DATE, 'YYYY-MM-DD'),9,2)||'일' AS BIRTH
 		FROM BOOK
 		WHERE BOOK_CODE = (SELECT MAX(BOOK_CODE) FROM BOOK)
 	</select>

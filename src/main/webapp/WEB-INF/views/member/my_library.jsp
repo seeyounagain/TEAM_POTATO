@@ -80,8 +80,20 @@
 										</td>
 										<td>${rental.rentalDate }</td>
 										<c:choose>
-											<c:when test="${rental.returnDate eq '년월일'}">
+											<c:when test="${rental.returnDate eq '년월일' and rental.bookVO.status == 2 }">
 												<td>대출중</td>
+												<td>
+													${rental.limitDate }
+												</td>
+											</c:when>
+											<c:when test="${rental.returnDate eq '년월일' and rental.bookVO.status == 4 }">
+												<td>대출중</td>
+												<td>
+													${rental.limitDate }
+												</td>
+											</c:when>
+											<c:when test="${rental.returnDate eq '년월일' and rental.bookVO.status == 3 }">
+												<td>연체중 </td>
 												<td>
 													${rental.limitDate }
 												</td>
@@ -125,7 +137,7 @@
 					</thead>
 					<tbody>
 						<c:choose>
-							<c:when test="${empty rentalList}">
+							<c:when test="${empty reserveList}">
 								<tr style="height: 100px;">
 									<td colspan="4">예약 중인 책이 없습니다</td>
 								</tr>
