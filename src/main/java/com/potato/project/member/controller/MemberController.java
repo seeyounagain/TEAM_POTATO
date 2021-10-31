@@ -123,7 +123,24 @@ public class MemberController {
 		return adminService.insertReserve(reserveVO, bookVO);
 		
 	}
-
+	
+	// 알림 상태 읽음 으로 변경
+	@ResponseBody
+	@PostMapping("/updateMessageIsReadAjax")
+	public int updateMessageIsReadAjax(String messageCode) {
+		
+		return memberSerivce.updateMessageIsRead(messageCode);
+		
+	}
+	
+	// 알림 삭제
+	@ResponseBody
+	@PostMapping("/deleteMessageAjax")
+	public int deleteMessageAjax(String messageCode) {
+		
+		return memberSerivce.deleteMessage(messageCode);
+		
+	}	
 	
 	
 	

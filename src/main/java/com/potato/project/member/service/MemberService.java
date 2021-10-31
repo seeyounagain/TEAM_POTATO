@@ -1,5 +1,8 @@
 package com.potato.project.member.service;
 
+import java.util.List;
+
+import com.potato.project.common.vo.MessageVO;
 import com.potato.project.member.vo.MemberVO;
 
 public interface MemberService {
@@ -13,7 +16,14 @@ public interface MemberService {
 	// 로그인
 	MemberVO selectMember(MemberVO memberVO);
 	
-
+	// 알림 목록 조회
+	List<MessageVO> selectMessageList(String id);
+	
+	// 알림 읽음으로 변경
+	int updateMessageIsRead(String messageCode);
+	
+	// 알림 삭제
+	int deleteMessage(String messageCode);
 	
 
 }

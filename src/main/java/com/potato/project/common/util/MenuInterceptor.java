@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.member.service.MemberService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.common.vo.MenuVO;
 
@@ -19,6 +20,9 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 	
 	@Resource(name="commonService")
 	private CommonService commonService;
+	
+	@Resource(name="memberService")
+	private MemberService memberService;
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -32,6 +36,13 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 			loginInfo = new MemberVO();
 
 		}
+		// 로그인 했으며, 회원일 경우 알림 목록 전달
+		else if (loginInfo != null && loginInfo.getIsAdmin().equals("N")) {
+			
+			modelAndView.addObject("messageList",memberService.selectMessageList(loginInfo.getId()));
+			
+		}
+		
 		// menuVO 받아오기
 		MenuVO menuVO = (MenuVO)(modelAndView.getModel().get("menuVO"));
 		

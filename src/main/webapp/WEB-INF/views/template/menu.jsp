@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=4"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=8"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -28,6 +28,17 @@
     color: white;
     border-color: #0b70b9;
 }
+.contentOver {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	 display: -webkit-box;
+  	-webkit-line-clamp: 1;
+  	-webkit-box-orient: vertical;
+}
+.contentOver:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -38,12 +49,19 @@
 		<c:choose>
 			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'N' }">
 	 			<ul class="nav justify-content-end">
+
 				<li class="nav-item">
 					<a class="title" aria-current="page" href="/myPage/myInfo?menuCode=MENU_005">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">
 				</li>
+				<li class="nav-item">
+					<a class="title" data-bs-toggle="modal" data-bs-target="#myMessageModal" >알림함</a>
+				</li>
+				<li class="nav-item">
+					<img class="line" src="/resources/img/top_line.jpg">
+				</li>				
 				<li class="nav-item">
 					<a class="title" aria-current="page" id="logout">로그아웃</a>
 				</li>
@@ -108,6 +126,145 @@
 		</ul>
 	</div>
 </div>
+
+
+<!-- 알림 목록 Modal -->
+<div class="modal fade" id="myMessageModal" tabindex="-1" aria-labelledby="myMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myMessageModalLabel" style="color: black;">알림함</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+		<div class="modal-body">
+		  <div class="container-fluid">
+		    <table class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
+		    	<thead>
+		    	<tr>
+		    		<th width="60%">내용</th>
+		    		<th width="20%">보낸이</th>
+		    		<th width="20%">보낸시간</th>
+		    	</tr>
+		    	</thead>
+		    	<tbody style="font-size: 16px;">
+		    <c:choose>
+		    	<c:when test="${not empty messageList }">
+		    	<c:forEach var="message" items="${messageList }">
+		    	<tr>
+		    		<td class="contentOver lh-lg detailMessage"  data-messageCode="${message.messageCode }" <c:if test="${message.isRead eq 'Y' }">style="color: gray;"</c:if> >${message.content }</td>
+		    		<td><c:if test="${message.fromId eq 'admin'}">관리자</c:if></td>
+		    		<td class="contentOver lh-lg" >${message.sendDate }</td>
+		    	</tr>
+		    	</c:forEach>
+		    	</c:when>
+		    	<c:otherwise>
+		    	<tr>
+		    		<td colspan="3">
+		    		알림이 없습니다.
+		    		</td>
+		    	</tr>
+		    	</c:otherwise>	
+		    </c:choose>
+		    	</tbody>
+		    </table>
+		  </div>
+		</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary px-5" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 알림목록 modal 종료 -->
+
+<!-- 알림 상세보기 modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+		<div class="modal-body">
+			<div class="container-fluid">
+			    <table class="table table-hover table-bordered text-first caption-top" style="width: 100%;">
+			    	<tr>
+			    		<td id="fromIdText" style="font-size: 17px;">보낸이</td>
+			    	</tr>
+			    	<tr>
+			    		<td id="sendDateText" style="font-size: 17px; color: gray;" >보낸시간</td>
+			    	</tr>
+			    	<tr>
+			    		<td id="contentText">내용</td>
+			    	</tr>
+			    </table>
+			</div>
+		</div>
+      <div class="modal-footer" style="display: block;">
+      	<div class="row">
+      		<div class="col-6 text-first">
+      			<button type="button" class="btn btn-primary px-4 messageListBtn">목록</button>
+      		</div>
+      		<div class="col-6 text-end">
+       			<button type="button" class="btn btn-danger px-4 messageDeleteBtn">삭제</button>
+        		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 알림 상세보기 modal 종료 -->
+
+<!-- 삭제 contirm modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림 삭제</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>알림을 삭제하시겠습니까?</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-6 text-first">
+      			<button type="button" class="btn btn-secondary px-4 deleteReturnBtn" >뒤로가기</button>
+      		</div>
+      		<div class="col-6 text-end">
+       			<button type="button" class="btn btn-danger px-4 lastDeleteBtn" >삭제</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 삭제 contirm modal 종료 -->
+
+<!-- 삭제 완료 modal -->
+<div class="modal fade" id="deleteCompleteModal" tabindex="-1" aria-labelledby="fdeleteCompleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCompleteModal" style="color: black;">알림 삭제</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p style="color: black;">알림이 삭제되었습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-4 deleteCompleteBtn" >확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 삭제 완료 modal 종료 -->
+
+
+
+
+
 
 </body>
 </html>

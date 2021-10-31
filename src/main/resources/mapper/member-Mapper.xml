@@ -149,7 +149,7 @@
 		FROM MESSAGE
 		WHERE TO_ID = #{id}
 	</select>
-
+	
 	<!-- 알림 읽음으로 변경 -->
 	<update id="updateMessageRead">
 		UPDATE MESSAGE 
