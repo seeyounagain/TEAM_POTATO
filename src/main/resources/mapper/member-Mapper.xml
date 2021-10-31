@@ -137,6 +137,14 @@
 		)
 	</insert>
 	
+	<!-- 회원의 읽지 않은 알림 갯수 조회 -->
+	<select id="countUnreadMessage" resultType="int">
+		SELECT COUNT(MESSAGE_CODE)
+		FROM MESSAGE
+		WHERE IS_READ = 'N'
+		AND TO_ID = #{id}
+	</select>
+	
 	<!-- 회원의 알림 목록 조회 -->
 	<select id="selectMemberMessage" resultMap="message">
 		SELECT
@@ -148,6 +156,7 @@
 		    , IS_READ
 		FROM MESSAGE
 		WHERE TO_ID = #{id}
+		ORDER BY SEND_DATE DESC
 	</select>
 	
 	<!-- 알림 읽음으로 변경 -->
@@ -160,7 +169,7 @@
 	<!-- 알림 삭제 -->
 	<delete id="deleteMessage">
 		DELETE MESSAGE
-		WEHRE MESSAGE_CODE = #{messageCode}
+		WHERE MESSAGE_CODE = #{messageCode}
 	</delete>
 	
 </mapper>

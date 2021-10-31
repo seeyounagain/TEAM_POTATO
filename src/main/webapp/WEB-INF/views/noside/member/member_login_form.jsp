@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=5" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=6" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -44,5 +44,27 @@
 		</div>
 	</div>
 </form>
+
+<!-- 아이디 & 비밀번호 미입력 alert Modal -->
+<div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: black;" id="loginAlertModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        아이디와 비밀번호를 입력해주세요.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 로그인 alert Modal 종료 -->
+
+
+
 </body>
 </html>

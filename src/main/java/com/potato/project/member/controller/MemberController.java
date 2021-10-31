@@ -1,5 +1,7 @@
 package com.potato.project.member.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
+import com.potato.project.common.vo.MessageVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.common.vo.SideMenuVO;
@@ -121,6 +124,15 @@ public class MemberController {
 	public int reserveBookAjax(ReserveVO reserveVO,BookVO bookVO) {
 		
 		return adminService.insertReserve(reserveVO, bookVO);
+		
+	}
+	
+	// 알림 목록 조회
+	@ResponseBody
+	@PostMapping("/selectMessageListAjax")
+	public List<MessageVO> selectMessageListAjax(String id) {
+		
+		return memberSerivce.selectMessageList(id);
 		
 	}
 	

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=8"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=21"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -39,6 +39,10 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+#messageMenu:after {
+    content: ' \2709';
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -51,13 +55,18 @@
 	 			<ul class="nav justify-content-end">
 
 				<li class="nav-item">
-					<a class="title" aria-current="page" href="/myPage/myInfo?menuCode=MENU_005">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+					<a class="title" aria-current="page" href="/myPage/myInfo?menuCode=MENU_005">환영합니다, <span style="text-decoration: underline 1px white; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">
 				</li>
 				<li class="nav-item">
-					<a class="title" data-bs-toggle="modal" data-bs-target="#myMessageModal" >알림함</a>
+					<a class="title" id="messageMenu" onclick="selectMessageList('${sessionScope.loginInfo.id}');" data-bs-toggle="modal" data-bs-target="#myMessageModal" >
+					<c:choose>
+						<c:when test="${unReadCnt eq 0 }">알림함</c:when>
+						<c:when test="${unReadCnt ne 0 }"><span style="text-decoration: underline 1px white; vertical-align: baseline;">${unReadCnt }</span>건의 새로운 알림</c:when>
+					</c:choose>
+					</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">
@@ -138,7 +147,7 @@
       </div>
 		<div class="modal-body">
 		  <div class="container-fluid">
-		    <table class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
+		    <table id="myMessageT" class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
 		    	<thead>
 		    	<tr>
 		    		<th width="60%">내용</th>
@@ -147,24 +156,11 @@
 		    	</tr>
 		    	</thead>
 		    	<tbody style="font-size: 16px;">
-		    <c:choose>
-		    	<c:when test="${not empty messageList }">
-		    	<c:forEach var="message" items="${messageList }">
-		    	<tr>
-		    		<td class="contentOver lh-lg detailMessage"  data-messageCode="${message.messageCode }" <c:if test="${message.isRead eq 'Y' }">style="color: gray;"</c:if> >${message.content }</td>
-		    		<td><c:if test="${message.fromId eq 'admin'}">관리자</c:if></td>
-		    		<td class="contentOver lh-lg" >${message.sendDate }</td>
-		    	</tr>
-		    	</c:forEach>
-		    	</c:when>
-		    	<c:otherwise>
 		    	<tr>
 		    		<td colspan="3">
 		    		알림이 없습니다.
 		    		</td>
 		    	</tr>
-		    	</c:otherwise>	
-		    </c:choose>
 		    	</tbody>
 		    </table>
 		  </div>
@@ -203,7 +199,7 @@
       <div class="modal-footer" style="display: block;">
       	<div class="row">
       		<div class="col-6 text-first">
-      			<button type="button" class="btn btn-primary px-4 messageListBtn">목록</button>
+      			<button type="button" onclick="selectMessageList('${sessionScope.loginInfo.id}');" class="btn btn-primary px-4 messageListBtn">목록</button>
       		</div>
       		<div class="col-6 text-end">
        			<button type="button" class="btn btn-danger px-4 messageDeleteBtn">삭제</button>
@@ -221,7 +217,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림 삭제</h5>
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="color: black;">
@@ -230,7 +226,7 @@
       <div class="modal-footer" style="display: block;">
 		<div class="row">
       		<div class="col-6 text-first">
-      			<button type="button" class="btn btn-secondary px-4 deleteReturnBtn" >뒤로가기</button>
+      			<button type="button" class="btn btn-secondary px-4 deleteReturnBtn" onclick="selectMessageList('${sessionScope.loginInfo.id}');" >뒤로가기</button>
       		</div>
       		<div class="col-6 text-end">
        			<button type="button" class="btn btn-danger px-4 lastDeleteBtn" >삭제</button>
@@ -247,14 +243,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteCompleteModal" style="color: black;">알림 삭제</h5>
+        <h5 class="modal-title" id="deleteCompleteModal" style="color: black;">알림</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 			<p style="color: black;">알림이 삭제되었습니다.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary px-4 deleteCompleteBtn" >확인</button>
+        <button type="button" class="btn btn-primary px-4 deleteCompleteBtn" onclick="selectMessageList('${sessionScope.loginInfo.id}');" >확인</button>
       </div>
     </div>
   </div>
@@ -262,7 +258,25 @@
 <!-- 삭제 완료 modal 종료 -->
 
 
-
+<!-- 로그아웃 modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalModal" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p style="color: black;">로그아웃 하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="logoutModalBtn" class="btn btn-primary px-4" >확인</button>
+        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 로그아웃 modal 종료 -->
 
 
 

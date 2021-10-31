@@ -16,6 +16,9 @@ public interface MemberService {
 	// 로그인
 	MemberVO selectMember(MemberVO memberVO);
 	
+	// 읽지 않은 알림 갯수 조회
+	int countUnreadMessage(String id);
+	
 	// 알림 목록 조회
 	List<MessageVO> selectMessageList(String id);
 	

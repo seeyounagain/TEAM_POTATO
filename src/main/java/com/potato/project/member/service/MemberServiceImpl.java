@@ -41,6 +41,14 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
+	// 읽지 않은 알림 갯수 조회
+	@Override
+	public int countUnreadMessage(String id) {
+
+		return sqlSession.selectOne("memberMapper.countUnreadMessage",id);
+		
+	}
+	
 	// 알림 목록 조회
 	@Override
 	public List<MessageVO> selectMessageList(String id) {

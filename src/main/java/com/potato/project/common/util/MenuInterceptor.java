@@ -39,7 +39,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 		// 로그인 했으며, 회원일 경우 알림 목록 전달
 		else if (loginInfo != null && loginInfo.getIsAdmin().equals("N")) {
 			
-			modelAndView.addObject("messageList",memberService.selectMessageList(loginInfo.getId()));
+			modelAndView.addObject("unReadCnt",memberService.countUnreadMessage(loginInfo.getId()));
 			
 		}
 		
