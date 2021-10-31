@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.util.FileUploadUtil;
+import com.potato.project.common.util.MessageApi;
 import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookImgVO;
 import com.potato.project.common.vo.BookVO;
@@ -230,6 +231,19 @@ public class AdminController {
 	public int sendMessageAjax(MessageVO messageVO) {
 		
 		return adminSerivce.sendMessage(messageVO);
+		
+	}
+	
+	// 인증번호 전송
+	@ResponseBody
+	@PostMapping("/sendSMSRandomNumberAjax")
+	public int sendSMSRandomNumberAjax(String toNumber) {
+		
+		int randomNumber = MessageApi.randomNumber();
+		
+		MessageApi.sendMessage(toNumber, randomNumber);
+		
+		return randomNumber;
 		
 	}
 	

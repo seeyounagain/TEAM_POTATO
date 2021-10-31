@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=23" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=46" ></script>
 <style type="text/css">
 .pointer:hover {
 	cursor: pointer;
@@ -66,10 +66,13 @@
 					</select>
 					</div>
 					<div class="col">
-						<input type="text" id="tell2" class="form-control" name="tells" required>
+						<input type="text" id="tell2" class="form-control tells" name="tells" required>
 					</div>
 					<div class="col">
-						<input type="text" id="tell3" class="form-control" name="tells" required>
+						<input type="text" id="tell3" class="form-control tells" name="tells" required>
+					</div>
+					<div class="col-2 d-grid" style="padding-left: 3px;">
+					<button type="button" class="btn btn-primary" id="smsBtn" >문자인증</button>
 					</div>
 					<div class="col-12 mt-2" id="tellCheck" style="color: red; font-size: 14px;"></div>
 				</div>

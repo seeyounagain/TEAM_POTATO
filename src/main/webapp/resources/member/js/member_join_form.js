@@ -153,6 +153,91 @@
 				return ;
 			}
 		});
+
+
+	var timer = null;
+	var isRunning = false;
+	
+	
+		//휴대번호 인증 클릭 시
+		$(document).on('click', '#smsBtn' , function() {
+			
+			var toNumber = $('#tell1').val() + $('#tell2').val() + $('#tell3').val();
+			
+			/* 문자 전송 Ajax 시작 */
+			$.ajax({
+				url: '/libManage/sendSMSRandomNumberAjax', // 요청경로
+				type: 'post', // post 메소드 방식
+				data: {'toNumber':toNumber}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+				success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+				// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+
+				$('#smsCheck').remove();
+				
+				var str = '';
+				
+				str += '<div class="col-12 mt-2" id="smsCheck" >';
+				str += '<div class="row">';
+				str += '<div class="col-8">';
+				str += '<input type="text" id="smsNum" class="form-control" name="smsNum" placeholder="문자로 받으신 인증번호를 입력해주세요." required>';
+				str += '</div>';
+				str += '<div class="col-2 mt-2" id="timeAlert" style="color: red; font-size: 18px; vertical-align: middle;"></div>';
+				str += '<div class="col-2 d-grid" style="padding-left: 3px;">';
+				str += '<button type="button" class="btn btn-primary " id="checkSmsBtn" data-randomNumber="' + result + '" >확인</button>';
+				str += '</div>';
+				str += '</div>';
+				str += '</div>';
+	
+				$('#smsBtn').parent().parent().parent().after(str);
+					
+				},
+				error: function(){
+				// ajax 실행 실패 시 실행되는 구간
+				alert('문자 전송 실패!');
+				}
+			});
+			/* 문자 전송 Ajax 종료 */
+			
+			$('#smsBtn').addClass('disabled');
+			
+			var leftSec = 180;
+    		// 남은 시간
+    		// 이미 타이머가 작동중이면 중지
+    		if (isRunning){
+    		clearInterval(timer);
+    		display.text("");
+    		startTimer(leftSec);
+    		}else{
+    		startTimer(leftSec);
+    		}
+			
+		});
+		
+		/* 인증번호 체크 */
+		$(document).on('click', '#checkSmsBtn' , function() {
+		
+			var randomNumber = $(this).attr('data-randomNumber');
+			var checkNum = $('#smsNum').val();
+			
+			if (randomNumber == checkNum) {
+				
+				$('#tellCheck').css('color', 'blue');
+				$('#tellCheck').text('인증이 완료되었습니다.');
+				 $('#timeAlert').text('');
+				$('.tells').attr('readonly','readonly');
+				$('#joinBtn').removeClass('disabled');
+				$('#checkSmsBtn').addClass('disabled');
+				$('#smsBtn').addClass('disabled');
+				
+			}
+			else {
+				
+				$('#tellCheck').css('color', 'red');
+				$('#tellCheck').text('인증번호를 확인해주세요.');
+				
+			}
+			
+		});		
 		
 		/* 회원가입 */
 		$(document).on('click', '#joinBtn' , function() {
@@ -244,7 +329,33 @@
 				}
 			});
 		
-	};
-		
+		};
+
+	startTimer = function (count) {
+            
+    		var minutes, seconds;
+            timer = setInterval(function () {
+            minutes = parseInt(count / 60, 10);
+            seconds = parseInt(count % 60, 10);
+     
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+     
+            $('#timeAlert').text(minutes + ":" + seconds);
+     
+            // 타이머 끝
+            if (--count < 0) {
+    	     clearInterval(timer);
+    	     $('#timeAlert').text("시간초과");
+    	     $('#checkSmsBtn').addClass('disabled');
+    	     $('#smsBtn').removeClass('disabled');
+    	     isRunning = false;
+            }
+        }, 1000);
+             isRunning = true;
+	}
+
+
+
 		
 	})(jQuery);
