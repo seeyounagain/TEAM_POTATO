@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=5"></script>
 <style type="text/css">
 
 table{
@@ -25,21 +26,21 @@ table{
 	
 
 			<div class="imogiDiv row justify-content-center align-middle" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode }'">
-			<div class="col-6 text-center mt-5">	
+			<div class="col-6 text-center">	
 			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
   				<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   				<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
 			</svg>
 			</div>
 			<div class="col-8 text-center mt-2">	
-				<h3>희망 도서를 검색 후 신청 해주시길 바랍니다.</h3>
+				<h3>희망 도서 검색</h3>
 			</div>
 			</div>
 	
 	
 	<!-- 도서비치신청 검색관련 -->
 	<div class="row justify-content-center text-center">
-	<form action="/service/bookRequestRegForm?menuCode=${menuVO.menuCode}" method="post" enctype="multipart/form-data">
+	<form action="/service/bookRequestRegForm?menuCode=${menuVO.menuCode}" method="post" id="searchAction" enctype="multipart/form-data">
 		<div class="row mx-auto justify-content-center">
 		<div class="col-8 ">
 
@@ -49,11 +50,11 @@ isbn    -->
                                                                                          
 	
 	<!-- 검색관련/입력구획 -->
-	<div class="row mt-5 mb-3 justify-content-center">    
+	<div class="row mb-3 justify-content-center">    
 		<div class="col-10">                                                                                
     		<div class="input-group text-start">                                                                                                                                                  
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">검색키워드</span>                                                           
-				<input type="text" name="kwd" class="form-control" placeholder="검색할 항목을 입력해주세요" <c:if test="${not empty keyword }">value="${keyword }"</c:if>>
+				<input type="text" name="kwd" id="kwdInput" class="form-control" placeholder="검색할 항목을 입력해주세요" <c:if test="${not empty keyword }">value="${keyword }"</c:if>>
 				 
 	  		</div>                                                                                                    
 	    </div>                                                                                                   
@@ -85,7 +86,7 @@ isbn    -->
 	    </div>                                                      
 		<div class="col-5 mt-2">                                                                        			 
     		<div class="input-group">                                                                       	 
-				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend3">정렬</span>            
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend3">정렬기준</span>            
 				    <select class="form-select" name="sort" aria-label="select example">
      	 				<option value="">정확도순</option>
       					<option value="ititle">제목</option>
@@ -98,13 +99,18 @@ isbn    -->
     	</div>                                                                                             
     	<div class="col-5 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
-				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend1">ISBN CODE</span>            
-				<input type="text" name="isbn" class="form-control" placeholder="선택사항">                                  
+				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend1">*ISBN CODE</span>            
+				<input type="text" name="isbn" id="isbnInput" class="form-control" placeholder="선택사항">                                  
 	  		</div>                                                                                         
 	    </div>  
-		<div class="col-7 mt-2">                                                                                
+	    <div class="col-10 mt-2">                                                                                
+    		<div class="text-center fs-15">                                                           
+                *ISBN 코드를 입력하시면 정확한 검색을 할 수 있습니다.
+	  		</div>                                                                                         
+	    </div> 
+		<div class="col-8 mt-2">                                                                                
     		<div class="text-center">                                                           
-                <input class="btn btn-primary" type="submit" value="국립중앙도서관 연계검색"></input>                
+                <input class="btn btn-primary" type="submit" id="submit" value="국립중앙도서관 연계검색" style="width: 100%;"></input>                
 	  		</div>                                                                                         
 	    </div> 
 	    
@@ -133,7 +139,7 @@ isbn    -->
 			<div class="col-11 text-center">
 				<div><h5>국립중앙 도서관기반 자료검색 결과</h5></div>
 				<c:if test="${not empty keyword }">
-				<div>"${keyword }" 검색결과</div>	
+				<div>검색어 -- "${keyword }" -- <br> (제목을 눌러 신청을 시작하세요.)</div>	
 				</c:if>			
 			</div>
    		<div class="overflow-auto mt-5" style="height: 600px;">

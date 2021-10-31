@@ -55,10 +55,8 @@ public class apiSearchPlay {
 	        bw.write("systemType="+ URLEncoder.encode("오프라인자료","UTF-8")
 	        		+ "&key=14422d834c6677f2968b3261ad1766e8fc102ed5fb25b93e29abd78489bc71e5"
 	        		+ "&apiType=json"
-	        		+ as.getKwd()
-	        		+ as.getCategory()
-	        		+ as.getSort()
-	        		+ as.getSrchTarget()
+	        		+ as.getSrchTarget() + as.getKwd() + as.getCategory() + as.getSort()
+	        		+ "&detailSearch=true&isbnOp=isbn"
 	        		+ as.getIsbn()
 	        		);
 	        

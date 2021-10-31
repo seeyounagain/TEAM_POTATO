@@ -76,10 +76,11 @@ public class ServiceController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		
 		//검색 키워드가 공백이라면 프로그램은 실행되지 않는다.
-		if(asVO.getKwd() == null || asVO.getKwd().equals("")) {		
+		if(asVO.getKeyword()=="") {
+			
 		}else {
 			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
-			model.addAttribute("keyword", asVO.getKeyword());			
+			model.addAttribute("keyword", asVO.getKeyword());		
 		}
 		return  "service/bookRequestRegForm";
 	}

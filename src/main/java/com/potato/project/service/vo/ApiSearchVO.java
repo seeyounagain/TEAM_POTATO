@@ -50,7 +50,7 @@ public class ApiSearchVO {
 		if(isbn == "" || isbn.equals("") || isbn == null ) {
 		this.isbn = "";	
 		}else {
-			this.isbn = "&isbn="+ URLEncoder.encode(isbn,"UTF-8");
+			this.isbn = "&isbnCode="+ isbn;
 		}
 	}
 	
