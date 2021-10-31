@@ -57,7 +57,7 @@ public class apiSearchPlay {
 	        		+ "&apiType=json"
 	        		+ as.getSrchTarget() + as.getKwd() + as.getCategory() + as.getSort()
 	        		+ "&detailSearch=true&isbnOp=isbn"
-	        		+ as.getIsbn()
+	        		+ as.getIsbnCode()
 	        		);
 	        
 	        bw.flush();
@@ -81,16 +81,21 @@ public class apiSearchPlay {
 	        	//추출된 jsonArray
 	        	JSONArray resultArr = (JSONArray)apiJson.get("result"); //리절트 키값
 
-	        	
-	        	for(int i = 0; i < resultArr.size();i++) {
-	        	JSONObject totalData = (JSONObject)resultArr.get(i);
-		        ApiDataVO adVO = new ApiDataVO(
-		        (String)totalData.get("titleInfo"),(String)totalData.get("typeName"),(String)totalData.get("authorInfo"),(String)totalData.get("menuName")
-		        ,(String)totalData.get("mediaName"),(String)totalData.get("pubYearInfo"),(String)totalData.get("id"),(String)totalData.get("typeCode")
-		        ,(String)totalData.get("isbn"),(String)totalData.get("callNo"),(String)totalData.get("kdcCode1s"), (String)totalData.get("kdcName1s")
-		        );
-		        adList.add(adVO);
+	        	if(resultArr != null) {
+	        		for(int i = 0; i < resultArr.size();i++) {
+	        			JSONObject totalData = (JSONObject)resultArr.get(i);
+	        			ApiDataVO adVO = new ApiDataVO(
+	        					(String)totalData.get("titleInfo"),(String)totalData.get("typeName"),(String)totalData.get("authorInfo"),(String)totalData.get("menuName")
+	        					,(String)totalData.get("mediaName"),(String)totalData.get("pubYearInfo"),(String)totalData.get("id"),(String)totalData.get("typeCode")
+	        					,(String)totalData.get("isbn"),(String)totalData.get("callNo"),(String)totalData.get("kdcCode1s"), (String)totalData.get("kdcName1s")
+	        					);
+	        			adList.add(adVO);
+	        		}	
 	        	}
+	        	else {
+	        		
+	        	}
+	        	
 	        }
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();

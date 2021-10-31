@@ -34,5 +34,7 @@ public interface ServiceService {
 	
 	MemberVO requestIdAndIsAdminCheck(MemberVO loginInfo);
 	
+	void regBookRequest(RequestBoardVO rbVO);
+	
 	
 }

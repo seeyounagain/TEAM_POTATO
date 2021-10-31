@@ -8,9 +8,31 @@ public class RequestBoardVO {
 		private String writer				; 									//    WRITER
 		private String isbn					;									//    ISBN 
 		private String pubDate				; 									//    PUB_DATE 
-		private String createDate			;
+		private String createDate			;									//	  CREATE_DATE
+ 		private String category             ;                                   //    CATEGORY 
+		private String kdcCode             ;                                   //    KDC_CODE 
+		private String kdcName             ;                                   //    KDC_NAME 
 		
 		
+		
+		public String getCategory() {
+			return category;
+		}
+		public void setCategory(String category) {
+			this.category = category;
+		}
+		public String getKdcCode() {
+			return kdcCode;
+		}
+		public void setKdcCode(String kdcCode) {
+			this.kdcCode = kdcCode;
+		}
+		public String getKdcName() {
+			return kdcName;
+		}
+		public void setKdcName(String kdcName) {
+			this.kdcName = kdcName;
+		}
 		public String getCreateDate() {
 			return createDate;
 		}

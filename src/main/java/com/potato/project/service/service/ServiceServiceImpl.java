@@ -76,6 +76,11 @@ public class ServiceServiceImpl implements ServiceService {
 	public MemberVO requestIdAndIsAdminCheck(MemberVO loginInfo) {
 		return sqlSession.selectOne("serviceMapper.requestIdAndIsAdminCheck",loginInfo);
 	}
+
+	@Override
+	public void regBookRequest(RequestBoardVO rbVO) {
+		sqlSession.insert("serviceMapper.regBookRequest", rbVO);
+	}
 	
 	
 	

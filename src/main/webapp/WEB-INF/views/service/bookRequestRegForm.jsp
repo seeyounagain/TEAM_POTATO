@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=5"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=6"></script>
 <style type="text/css">
 
 table{
@@ -16,15 +16,17 @@ table{
 .imogiDiv:hover{
 	cursor: pointer;
 }
+.dataTr > td:hover{
+	cursor: pointer;
+	color: blue;
+}
 </style>
 </head>
 <body>
 <h2 class="text-first fw-bold">도서비치신청 검색 및 신청</h2><hr>
-<div class="row justify-content-center text-center">
+<div class="row justify-content-center text-center scrollTop">
 <div class="col-12">
 	<!-- 이모티콘 구획 -->
-	
-
 			<div class="imogiDiv row justify-content-center align-middle" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode }'">
 			<div class="col-6 text-center">	
 			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
@@ -32,30 +34,27 @@ table{
   				<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
 			</svg>
 			</div>
-			<div class="col-8 text-center mt-2">	
-				<h3>희망 도서 검색</h3>
-			</div>
-			</div>
-	
-	
-	<!-- 도서비치신청 검색관련 -->
-	<div class="row justify-content-center text-center">
-	<form action="/service/bookRequestRegForm?menuCode=${menuVO.menuCode}" method="post" id="searchAction" enctype="multipart/form-data">
-		<div class="row mx-auto justify-content-center">
-		<div class="col-8 ">
+<!-- Ajax 시연구간 -->
 
-<!-- 	검색 키워드 카테고리-자료유형 검색타겟 total ,title ,author ,publisher, cheonggu 생략시 전체                                    
-cheonggu (청구기호)          
-isbn    -->                                                                                  
-                                                                                         
+			<div class="col-12 text-center mt-2">	
+				<span id="searchTitle1" style="display:inline;"><h3>희망도서검색</h3></span>
+				<span id="searchTitle2" style="display:none;"><h3>도서비치신청서</h3></span>
+			</div>
+			</div>
+			
+<!-- 도서비치신청 검색관련 -->
+<div class="row justify-content-center text-center">
 	
+	<div class="row mx-auto justify-content-center">
+
 	<!-- 검색관련/입력구획 -->
-	<div class="row mb-3 justify-content-center">    
+	<div class="col-8">
+	<form action="/service/bookRequestRegForm" method="post" id="searchAction" enctype="multipart/form-data"><input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode}"> 
+	<div class="row mb-3 justify-content-center" id="searchForm" style="display: flex;">    
 		<div class="col-10">                                                                                
     		<div class="input-group text-start">                                                                                                                                                  
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">검색키워드</span>                                                           
 				<input type="text" name="kwd" id="kwdInput" class="form-control" placeholder="검색할 항목을 입력해주세요" <c:if test="${not empty keyword }">value="${keyword }"</c:if>>
-				 
 	  		</div>                                                                                                    
 	    </div>                                                                                                   
 		<div class="col-5 mt-2">                                                                        			                                                                        
@@ -100,7 +99,7 @@ isbn    -->
     	<div class="col-5 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
 				<span class="input-group-text gap-2 col-5 btn-primary" id="inputGroupPrepend1">*ISBN CODE</span>            
-				<input type="text" name="isbn" id="isbnInput" class="form-control" placeholder="선택사항">                                  
+				<input type="text" name="isbnCode" id="isbnInput" class="form-control" placeholder="선택사항">                                  
 	  		</div>                                                                                         
 	    </div>  
 	    <div class="col-10 mt-2">                                                                                
@@ -113,34 +112,96 @@ isbn    -->
                 <input class="btn btn-primary" type="submit" id="submit" value="국립중앙도서관 연계검색" style="width: 100%;"></input>                
 	  		</div>                                                                                         
 	    </div> 
-	    
-	    
-	    
-	                                                                                               
 	</div>
-
-	<div class="mb-3">
-  		<div class="col-">
-  			<div class="row justify-content-center">
-  				<div class="col-6 text-center">
-    				
-  				</div>
-  			</div>
-		</div>
-  	</div>
-  
-  
-  		</div>
-  		</div>
 	</form>
 	</div>
+	
+	<!-- 등록관련구획 -->
+	<div class="col-8">
+	<form action="/service/regBookRequest" method="post"><input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode}"> 
+	<div class="row mb-3 justify-content-center" id="regForm" style="display: none;"> 
+		<div class="col-10">                                                                                
+    		<div class="input-group text-start">                                                                                                                                                  
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">책제목</span>                                                           
+				<input type="text" name="title" class="form-control bg-white" readonly>
+	  		</div>                                                                                                    
+	    </div>  									                                                                                                                                                                           
+    	<div class="col-10 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">저자</span>  
+				<input type="text" name="writer"  class="form-control bg-white" readonly>                                    
+	  		</div>                                                                                         
+	    </div>                                                                                                                                                  
+    	<div class="col-10 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">발행일</span>            
+				<input type="text" name="pubDate" class="form-control bg-white" readonly>                                  
+	  		</div>                                                                                         
+	    </div>  
+		<div class="col-10 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">카테고리</span>            
+				<input type="text" name="category" class="form-control bg-white" readonly>                                  
+	  		</div>                                                                                         
+	    </div>  
+		<div class="col-10 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">ISBN코드</span>            
+				<input type="text" name="isbn" class="form-control bg-white" readonly>                                  
+	  		</div>                                                                                         
+	    </div>  
+		<div class="col-10 mt-2 ms-0">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2  col-3 btn-primary" id="inputGroupPrepend1">KDC코드</span>            
+				<input type="text" name="kdcCode" class="form-control bg-white" readonly>                                  
+				<span class="input-group-text gap-2  col-3 btn-primary" id="inputGroupPrepend1">KDC분류명칭</span>            
+				<input type="text" name="kdcName" class="form-control bg-white" readonly>                                                                    
+	  		</div>                                                                                         
+	    </div>  
+	    <div class="col-10 mt-2">                                                                                
+    		<div class="input-group text-start">                                                           
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">신청인ID</span>            
+				<input type="text" name="id" value="${sessionScope.loginInfo.id }" class="form-control bg-white" readonly>                                  
+	  		</div>                                                                                         
+	    </div>
+	    <div class="col-8 mt-2">                                                                                
+    		<div class="text-center">                                                           
+                   해당 자료에대한 신청서자동작성이 완료되었습니다.
+	  		</div>                                                                                         
+	    </div>   
+	    <div class="col-8 mt-2">                                                                                
+    		<div class="text-center">                                                           
+                <input class="btn btn-primary" type="submit" value="신청" style="width: 100%;"></input>                
+	  		</div>                                                                                         
+	    </div> 
+	</div>	
+	</form>	
+	</div>
+
+	
+	
+	
+	
+  	</div>
+</div>
+
+	</div>
+	
 	<div class="col-12">
 		<div class="row justify-content-center mb-3 mt-5">
 			<div class="col-11 text-center">
 				<div><h5>국립중앙 도서관기반 자료검색 결과</h5></div>
 				<c:if test="${not empty keyword }">
-				<div>검색어 -- "${keyword }" -- <br> (제목을 눌러 신청을 시작하세요.)</div>	
-				</c:if>			
+				<div>검색어 -- "${keyword }" -- </div>
+				</c:if>	
+				
+				<c:if test="${not empty apiSearchList }">
+				<div> (원하는 책정보를 눌러 신청을 시작하세요.)</div>	
+				</c:if>
+				<c:if test="${empty apiSearchList}">
+				<div> (검색결과가 없습니다.)</div>	
+				</c:if>
+						
 			</div>
    		<div class="overflow-auto mt-5" style="height: 600px;">
 		<table class="table text-center">
@@ -165,7 +226,7 @@ isbn    -->
   		<c:choose>
 		<c:when test="${not empty apiSearchList }">
 		<c:forEach items="${apiSearchList }" var="a" varStatus="status">
-			<tr>
+			<tr class="dataTr">
 				<td>${a.id }</td>		
 				<td>${a.typeName }</td>		
 				<td>${a.menuName }</td>		
@@ -189,7 +250,8 @@ isbn    -->
 		</div>
 	</div>
 </div>
-</div>
+
+
 	
 	
 	

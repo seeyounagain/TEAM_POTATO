@@ -8,7 +8,7 @@ public class ApiSearchVO {
 	private String category 	; //카테고리-자료유형
 	private String srchTarget 	; //검색타겟 total ,title ,author ,publisher, cheonggu 생략시 전체
 	private String sort			; //정렬기준 정렬 ititle(제목),iauthor(저자),ipublisher(발행처)ipub_year (발행년도), cheonggu (청구기호)
-	private String isbn			; //isbn
+	private String isbnCode			; //isbn
 	
 	private String keyword 		;
 		
@@ -47,13 +47,23 @@ public class ApiSearchVO {
 		}
 	}
 	public void setIsbn(String isbn) throws UnsupportedEncodingException {
-		if(isbn == "" || isbn.equals("") || isbn == null ) {
-		this.isbn = "";	
+
+	}
+	public void setIsbnCode(String isbnCode) {
+		if(isbnCode == "" || isbnCode.equals("") || isbnCode == null ) {
+		this.isbnCode = "";	
 		}else {
-			this.isbn = "&isbnCode="+ isbn;
+		this.isbnCode = "&isbnCode="+ isbnCode;
 		}
+		
 	}
 	
+	
+	
+	public String getIsbnCode() {
+		return isbnCode;
+	}
+
 	public String getKwd() {
 		return kwd;
 	}
@@ -66,9 +76,7 @@ public class ApiSearchVO {
 	public String getSort() {
 		return sort;
 	}
-	public String getIsbn() {
-		return isbn;
-	}
+
 	
 
 	

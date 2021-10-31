@@ -34,6 +34,7 @@ import com.potato.project.service.vo.ApiDataVO;
 import com.potato.project.service.vo.ApiSearchVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
+import com.potato.project.service.vo.RequestBoardVO;
 
 // 천화 
 @Controller
@@ -64,26 +65,44 @@ public class ServiceController {
 		return  "service/bookRequest";
 	}
 	
-	//도서비치 검색 및 선택
+	//도서비치 신청서 MVC처리
+	@PostMapping("/regBookRequest")
+	public String regRequest(Model model,MenuVO menuVO,HttpSession session,RequestBoardVO rbVO) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		serviceService.regBookRequest(rbVO);
+		return "redirect:/service/bookRequest";
+	}
+	
+	
+	//도서비치 검색 및 선택, 신청
 	@RequestMapping("/bookRequestRegForm")
 	public String goRegRequest(Model model,MenuVO menuVO,HttpSession session, ApiSearchVO asVO, apiSearchPlay asPlay) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-	
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		
-		//검색 키워드가 공백이라면 프로그램은 실행되지 않는다.
-		if(asVO.getKeyword()=="") {
+		//검색 키워드가 공백이고 Isbn만 검색한다면 isbn코드 검색값을 출력한다.
+		if(asVO.getKeyword()=="" && asVO.getIsbnCode() != "") {
+			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
+			model.addAttribute("keyword", asVO.getIsbnCode());						
+		//검색 키워드와 isbn 둘 다 공백이라면 프로그램은 실행되지 않는다.	
+		}else if(asVO.getKeyword() == "" && asVO.getIsbnCode() == ""){
 			
-		}else {
+		}else {			
 			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
 			model.addAttribute("keyword", asVO.getKeyword());		
 		}
 		return  "service/bookRequestRegForm";
 	}
+	
 	
 	
 	
