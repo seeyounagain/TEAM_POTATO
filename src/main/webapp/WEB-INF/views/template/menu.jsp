@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=29"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=30"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -42,6 +42,23 @@
 #messageMenu:after {
     content: ' \2709';
     color: white;
+}
+.modal.modal-center {
+  text-align: center;
+}
+.modal{
+	width: 300px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+#myMessageT th {
+	background: none;
 }
 </style>
 </head>

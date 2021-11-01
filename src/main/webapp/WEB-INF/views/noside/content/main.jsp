@@ -100,8 +100,8 @@
     	<div class="col-5">
     		<div class="row">
     			<a class="titleA" href="/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002"><img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
-    			<span>${bookList[0].title }</span><br>
-    			<span>${bookList[0].writer }</span></a>
+    			<span style="margin-top: 5px;">${bookList[0].title }</span><br>
+    			<span style="margin-top: 5px;">${bookList[0].writer }</span></a>
     		</div>
     	</div>
     	<div class="col-7">

@@ -26,6 +26,8 @@
 		var toId = $(this).attr('data-id');
 		// toId 설정
 		$('#toId').val(toId);
+		// 내용 리셋
+		$('#content').val('');
 		
 	});
 	

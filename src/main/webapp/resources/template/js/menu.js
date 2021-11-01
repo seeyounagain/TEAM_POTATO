@@ -148,7 +148,7 @@
 			success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 			// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 				
-				if (result.Data.response.length != 0 ){
+				if (result != null ){
 
 					$('#myMessageT tbody').empty();
 					
