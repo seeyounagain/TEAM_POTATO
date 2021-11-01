@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=31" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=32" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;

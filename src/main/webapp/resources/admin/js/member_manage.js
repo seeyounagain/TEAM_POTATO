@@ -163,7 +163,18 @@
 									str2 += '<td>대출대기중</td>';
 								}
 								
+								if (element.rentableStartDate != null || element.rentableEndDate != null) {
+								
 								str2 += '<td colspan="2">' + element.rentableStartDate + '&nbsp;~&nbsp;' + element.rentableEndDate + '</td>';
+								
+								}
+								
+								else {
+								
+								str2 += '<td colspan="2">반납대기중</td>';
+								
+								}
+								
 						    		
 								str2 += '</tr>';
 						
