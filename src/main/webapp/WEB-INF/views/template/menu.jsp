@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=21"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=29"></script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -138,8 +138,8 @@
 
 
 <!-- 알림 목록 Modal -->
-<div class="modal fade" id="myMessageModal" tabindex="-1" aria-labelledby="myMessageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" style="width: 800px;" id="myMessageModal" tabindex="-1" aria-labelledby="myMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="myMessageModalLabel" style="color: black;">알림함</h5>
@@ -174,7 +174,7 @@
 <!-- 알림목록 modal 종료 -->
 
 <!-- 알림 상세보기 modal -->
-<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+<div class="modal fade" style="width: 800px;" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
