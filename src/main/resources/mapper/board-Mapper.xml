@@ -87,6 +87,13 @@
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
+	<select id="mainNoticeList" resultMap="notice">
+		SELECT N.NOTICE_CODE
+		     , A.ATTACHED_FILE_NAME
+		FROM NOTICE N, ATTACH_FILE A
+		WHERE N.NOTICE_CODE = A.NOTICE_CODE
+		AND A.ATTACHED_FILE_NAME IS NOT NULL
+	</select>
 	<!-- 공지사항 INSERT -->
 	<insert id="insertNotice">
 		INSERT INTO NOTICE(

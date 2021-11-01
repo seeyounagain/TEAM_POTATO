@@ -149,6 +149,13 @@ public class BoardServiceImpl  implements BoardService{
 		
 		return sqlSession.selectOne("boardMapper.cntQna");
 	}
+
+	//메인에 띄울 공지사항 리스트
+	@Override
+	public List<NoticeVO> mainNoticeList() {
+		
+		return sqlSession.selectList("boardMapper.mainNoticeList");
+	}
 	
 	
 	

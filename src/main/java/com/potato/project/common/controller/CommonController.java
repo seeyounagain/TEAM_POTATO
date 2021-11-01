@@ -34,7 +34,7 @@ public class CommonController {
 		model.addAttribute("bookList",searchService.selectBookList());
 		
 		//공지사항 목록
-		model.addAttribute("noticeList", boardService.selectNoticeList(noticeVO));
+		model.addAttribute("noticeList", boardService.mainNoticeList());
 		
 		return "noside/content/main";
 		

@@ -11,6 +11,9 @@ public interface BoardService {
 	//공지사항 리스트
 	List<NoticeVO> selectNoticeList(NoticeVO noticeVO);
 	
+	//메인에 띄울 공지사항 리스트
+	List<NoticeVO> mainNoticeList();
+	
 	//공지사항 총 개수
 	int cntNotice(NoticeVO noticeVO);
 	

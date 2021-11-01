@@ -59,7 +59,7 @@ input{
 							<td>내용</td>
 							<td>
 								<div class="form-floating">
-								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px"></textarea>
+								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px" required></textarea>
 								  <label for="floatingTextarea2">공지사항을 입력하세요.</label>
 								</div>
 							</td>

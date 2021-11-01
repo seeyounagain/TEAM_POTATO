@@ -65,16 +65,20 @@ public class BoardController {
 	@PostMapping("/insertNotice")
 	public String insertNotice(MenuVO menuVO,NoticeVO noticeVO, MultipartHttpServletRequest multi) {
 		
+		if(multi == null) {
+		
+			boardService.insertNotice(noticeVO);
+		}
 		//파일명 가져오기
 		MultipartFile inputName = multi.getFile("file");
 		
 		//파일이 첨부될 경로
 		//학원
-		//String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//집
 		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		//시윤
-		String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+		//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
 		
 		//파일 첨부에 필요한 공지사항 코드 생성
 		String noticeCode = boardService.selectNoticeCode();

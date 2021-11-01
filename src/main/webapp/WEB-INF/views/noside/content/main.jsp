@@ -123,6 +123,7 @@
     <!-- 공지사항 이미지 슬라이드 -->
     <div class="col-5 g-5" id="col3">
     	<div class="row justify-content-center">
+    		
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
