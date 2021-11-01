@@ -134,10 +134,10 @@ table{
 	    </div>                                                                                                                                                  
     	<div class="col-10 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
-				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">발행일</span>            
+				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">발행년도</span>            
 				<input type="text" name="pubDate" class="form-control bg-white" readonly>                                  
 	  		</div>                                                                                         
-	    </div>  
+	    </div>  												
 		<div class="col-10 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">카테고리</span>            

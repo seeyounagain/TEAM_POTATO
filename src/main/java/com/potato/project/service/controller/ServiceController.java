@@ -51,6 +51,17 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
+	@RequestMapping("/recommend")
+	public String recommendBook(Model model,MenuVO menuVO,HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		return "service/recommend";
+	}
+	
 	//도서비치 현황
 	@RequestMapping("/bookRequest") // (value = "/bookRequest", produces="application/String;xml=UTF-8")
 	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {

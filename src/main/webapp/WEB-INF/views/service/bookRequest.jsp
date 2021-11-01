@@ -6,30 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=4"></script>
+
 <style type="text/css">
-
-.container{
- background-color: white;
- margin: 0 auto;
-}
-
-.seat{
-background-color: black;
-height: 50px;
-vertical-align: middle;
-}
-
-
-.map{
-width: 80%;
-height: 200px;
-background-color: white;
-
-}
-.a:hover{
-color: inherit;	
-}
 
 </style>
 </head>
@@ -38,11 +16,8 @@ color: inherit;
 	
 	
 <h2 class="text-first fw-bold">도서비치신청</h2><hr>
-<div class="container">
 <input type="hidden" value="${menuCode }" class="menuCode">
 <div class="row justify-content-center">
-
-	
 	<!-- 이모티콘 구획 -->
 	<div class="col-12 container mb-5">
 		<div class="row justify-content-center align-middle">
@@ -65,46 +40,68 @@ color: inherit;
 	
 	<div class="row justify-content-center mb-3 mt-5">
 		<div class="col-12 text-center">
-			<div><h4>도서비치신청현황</h4></div>
-				
+			<div><h4>도서비치신청현황</h4></div>			
 		</div>
-    <div class="tableDiv overflow-auto searchRecordList" style="height: 600px;">
-	<table class="table text-center">
-  	<thead>
-    	<tr class="text-center mt-5">
-     		<th scope="col">No.</th>
-     		<th scope="col">ISBN코드</th>
-     		<th scope="col">책제목</th>
-     		<th scope="col">저자</th>
-     		<th scope="col">발행/간행일</th>
-     		<th scope="col">신청자ID</th>
-     		<th scope="col">신청일</th>
-    	</tr>
-  	</thead>
- 	 <tbody>
+		
 			<c:if test="${empty requestBoardList }">
-			<tr><td colspan="7">도서비치신청 내역이 없습니다.</td></tr>
+			<tr><td colspan="7">(도서비치신청 내역이 없습니다.)</td></tr>
 			</c:if>	
-		<c:forEach items="${requestBoardList }" var="a" varStatus="status">
-		<tr>
 			
-			<td class="seat mx-1">도서-${a.requestCode }</td>	
-			<td><a href="#">${a.isbn }</a></td>
+	<hr>	
+	<c:choose>
+	<c:when test="${not empty sessionScope.loginInfo }">		
+	<c:forEach items="${requestBoardList }" var="a" varStatus="status">
+		<div class="col-12 mt-3 mb-3">
+		<table class="table text-center border border-5 border-light">
+		<colgroup>
+			<col width="15%">
+			<col width="20%">
+			<col width="20%">
+			<col width="20%">
+			<col width="15%">
+			<col width="10%">
+		</colgroup>
+    	<tr class="text-center">
+     		<th>신청번호</th>
+     		<th>책제목</th>
+     		<th>저자</th>
+     		<th>신청자</th>
+     		<th>신청일</th>
+     		<td rowspan="4" class="border-bottom-0">신청취소</td>
+    	</tr>
+    	<tr>
+			<td>${a.requestCode }</td>	
 			<td><a href="#">${a.title }</a></td> 
 			<td><a href="#">${a.writer }</a></td>   		
-			<td><a href="#">${a.pubDate }</a></td> 	
-			<td><a href="#">${a.id }</a></td> 
 			<td><a href="#">${a.createDate }</a></td> 
-					
-		</tr>	                                             		
-		</c:forEach>
+			<td><a href="#">${a.id }</a></td> 
+		</tr>
+		<tr class="text-center">
+     		<th>발행년도</th>
+     		<th>ISBN코드</th>
+     		<th>카테고리</th>
+     		<th>KDC분류번호</th>
+     		<th>KDC분류명칭</th>
+    	</tr>
+		<tr>
+			<td><a href="#">${a.pubDate }</a></td> 	
+			<td><a href="#">${a.isbn }</a></td>
+			<td><a href="#">${a.category }</a></td>
+			<td><a href="#">${a.kdcCode }</a></td>
+			<td><a href="#">${a.kdcName }</a></td>	
+		</tr>
+	</table>	
+	</div><hr>                                             		
+	</c:forEach>
+	</c:when>
+	<c:otherwise>
+	
+	</c:otherwise>
+	</c:choose>
+	</div>
+	</div>
+	
 
- 	</tbody>
-	</table>
-	</div>
-	</div>
-</div>
-</div>
 
 	
 </body>

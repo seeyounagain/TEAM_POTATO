@@ -63,7 +63,7 @@
                                  FROM MEMBER 
                                  WHERE ID = #{id }
                                  AND IS_ADMIN = #{isAdmin } )
-					ORDER BY REQUEST_CODE			
+					ORDER BY REQUEST_CODE DESC			
 			</select>
 
 			<select id="selectReadingSeat" resultMap="seat">
