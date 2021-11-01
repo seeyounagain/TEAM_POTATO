@@ -42,7 +42,7 @@ input[type="button"] {
 		var qnaPw = document.getElementById('qnaPw').value;
 		var qnaCode = document.getElementById('qnaCode').value;
 		var menuCode = document.getElementById('menuCode').value;
-
+		
 		
 		if(inputPw != qnaPw){
 			alert('비밀번호를 확인하세요.');
