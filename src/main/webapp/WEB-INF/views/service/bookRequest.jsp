@@ -30,6 +30,15 @@
 			<div class="col-8 text-center mt-3 mb-3">	
 				도서비치신청
 			</div>
+			
+			
+			<div>
+			도서비치 안내그림 넣는공간
+			</div>
+			
+			
+			
+			
 		</div>
 		<div class="text-center">
 			<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode}'">
@@ -67,7 +76,7 @@
      		<th>저자</th>
      		<th>신청자</th>
      		<th>신청일</th>
-     		<td rowspan="4" class="border-bottom-0">신청취소</td>
+     		<th>진행상황</th>
     	</tr>
     	<tr>
 			<td>${a.requestCode }</td>	
@@ -75,6 +84,7 @@
 			<td><a href="#">${a.writer }</a></td>   		
 			<td><a href="#">${a.createDate }</a></td> 
 			<td><a href="#">${a.id }</a></td> 
+			<td class="border-bottom-0"> 접수중 </td>
 		</tr>
 		<tr class="text-center">
      		<th>발행년도</th>
@@ -82,6 +92,7 @@
      		<th>카테고리</th>
      		<th>KDC분류번호</th>
      		<th>KDC분류명칭</th>
+     		<td rowspan="2" class="border-bottom-0"><input type="button" class="btn btn-primary" value="신청취소"></td>
     	</tr>
 		<tr>
 			<td><a href="#">${a.pubDate }</a></td> 	
@@ -89,6 +100,7 @@
 			<td><a href="#">${a.category }</a></td>
 			<td><a href="#">${a.kdcCode }</a></td>
 			<td><a href="#">${a.kdcName }</a></td>	
+			
 		</tr>
 	</table>	
 	</div><hr>                                             		
