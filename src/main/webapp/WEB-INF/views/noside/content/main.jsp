@@ -56,46 +56,54 @@
 </style>
 <script type="text/javascript">
 	//팝업 모달창
-	$(window).on('load',function(){
-	    $('.popupModal').modal('show');
+	$(window).on('load',function(){  
+	    $('#myModal').modal('show');
 	});
 	
 	 function closePop() {
-         $('.popupModal').modal('hide');
-    };
+         $('#myModal').modal('hide');
+    }; 
 
-    //팝업창 쿠키
-	function setCookie(name, value, expiredays){
-        var today = new Date();
-        today.setDate(today.getDate() + expiredays);
-        document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+   /*  function setCookie(name, value, expiredays){
+    	var today = new Date();
+
+    	console.log(today.getDate())
+
+    	today.setDate(today.getDate() + expiredays); // 현재시간에 하루를 더함 
+
+    	document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+
     }
-
+    	
     function getCookie(name) {
-        var cookie = document.cookie;
-        if (document.cookie != "") {
-            var cookie_array = cookie.split("; ");
-            for ( var index in cookie_array) {
-                var cookie_name = cookie_array[index].split("=");
-                if (cookie_name[0] == "mycookie") {
-                    return cookie_name[1];
-                }
-            }
-        }
-        return;
+
+    	var cookie = document.cookie;
+    	
+    	if (document.cookie != "") {
+    		var cookie_array = cookie.split("; ");
+    		console.log(cookie_array)
+    		for ( var index in cookie_array) {
+    			var cookie_name = cookie_array[index].split("=");
+    			if (cookie_name[0] == "mycookie") {
+    				return cookie_name[1];
+    			}
+    		}
+    	}
+    	return;
     }
-    function closeToday() {
-        $("#myModal").modal("hide");
-        setCookie("mycookie", 'popupEnd', 1);
+  
+    $(".modal-today-close").click(function() {
+    	$("#myModal").modal("hide");
+    	setCookie("mycookie", 'popupEnd', 1);
     })
 
     var checkCookie = getCookie("mycookie");
-
+    	
     if(checkCookie == 'popupEnd') {
-        $("#myModal").modal("hide");
+    	$("#myModal").modal("hide");
     } else {
-        $('#myModal').modal("show");
-    }
+    	$('#myModal').modal("show");	
+    } */
 </script>
 </head>
 <body>
@@ -187,8 +195,8 @@
     </div>
 </div>
 
-	<!-- 팝업 모달창 -->
-	<div class="modal popupModal" id="myModal" tabindex="-1" role="dialog">
+<!-- 팝업 모달창 -->
+	<div class="modal" id="myModal" tabindex="-1" role="dialog">
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
