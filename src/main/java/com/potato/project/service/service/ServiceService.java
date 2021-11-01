@@ -36,5 +36,7 @@ public interface ServiceService {
 	
 	void regBookRequest(RequestBoardVO rbVO);
 	
+	int checkRequestCnt(MemberVO loginInfo);
+	
 	
 }

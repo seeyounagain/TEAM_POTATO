@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="/resources/service/js/bookRequest.js?ver=1"></script>
 <style type="text/css">
 
 </style>
@@ -16,7 +16,7 @@
 	
 	
 <h2 class="text-first fw-bold">도서비치신청</h2><hr>
-<input type="hidden" value="${menuCode }" class="menuCode">
+<input type="hidden" value="${menuVO.menuCode }" class="menuCode">
 <div class="row justify-content-center">
 	<!-- 이모티콘 구획 -->
 	<div class="col-12 container mb-5">
@@ -41,7 +41,8 @@
 			
 		</div>
 		<div class="text-center">
-			<input type="button" class="btn btn-primary" value="신청하기" onclick="location.href='/service/bookRequestRegForm?menuCode=${menuVO.menuCode}'">
+			<input type="button" class="btn btn-primary" value="신청하기" id="goRequest">
+			<input type="hidden" class="loginInfo" value="${sessionScope.loginInfo.id }">
 		</div>
 	</div>
 	
@@ -80,10 +81,10 @@
     	</tr>
     	<tr>
 			<td>${a.requestCode }</td>	
-			<td><a href="#">${a.title }</a></td> 
-			<td><a href="#">${a.writer }</a></td>   		
-			<td><a href="#">${a.createDate }</a></td> 
-			<td><a href="#">${a.id }</a></td> 
+			<td>${a.title }</td> 
+			<td>${a.writer }</td>   		
+			<td>${a.createDate }</td> 
+			<td>${a.id }</td> 
 			<td class="border-bottom-0"> 접수중 </td>
 		</tr>
 		<tr class="text-center">
@@ -95,11 +96,11 @@
      		<td rowspan="2" class="border-bottom-0"><input type="button" class="btn btn-primary" value="신청취소"></td>
     	</tr>
 		<tr>
-			<td><a href="#">${a.pubDate }</a></td> 	
-			<td><a href="#">${a.isbn }</a></td>
-			<td><a href="#">${a.category }</a></td>
-			<td><a href="#">${a.kdcCode }</a></td>
-			<td><a href="#">${a.kdcName }</a></td>	
+			<td>${a.pubDate }</td> 	
+			<td>${a.isbn }</td>
+			<td>${a.category }</td>
+			<td>${a.kdcCode }</td>
+			<td>${a.kdcName }</td>	
 			
 		</tr>
 	</table>	
@@ -113,6 +114,46 @@
 	</div>
 	</div>
 	
+
+
+
+<!-- goReg modal -->
+<div class="modal fade" id="goRegModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>도서비치신청을 시작합니다.</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      			<button type="button" class="btn btn-primary px-4" onclick="goRequestRegFormFunction('${menuVO.menuCode}')" >확인</button>
+      			<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">취소</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	

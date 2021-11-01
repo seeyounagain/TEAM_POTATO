@@ -24,6 +24,9 @@ table{
 </head>
 <body>
 <h2 class="text-first fw-bold">도서비치신청 검색 및 신청</h2><hr>
+
+<input type="hidden" value="${requestCnt }" id="requestCnt">
+
 <div class="row justify-content-center text-center scrollTop">
 <div class="col-12">
 	<!-- 이모티콘 구획 -->
@@ -54,7 +57,7 @@ table{
 		<div class="col-10">                                                                                
     		<div class="input-group text-start">                                                                                                                                                  
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">검색키워드</span>                                                           
-				<input type="text" name="kwd" id="kwdInput" class="form-control" placeholder="검색할 항목을 입력해주세요" <c:if test="${not empty keyword }">value="${keyword }"</c:if>>
+				<input type="text" name="kwd" id="kwdInput" class="form-control" placeholder="검색할 항목을 입력해주세요">
 	  		</div>                                                                                                    
 	    </div>                                                                                                   
 		<div class="col-5 mt-2">                                                                        			                                                                        
@@ -161,17 +164,22 @@ table{
 	    <div class="col-10 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">신청인ID</span>            
-				<input type="text" name="id" value="${sessionScope.loginInfo.id }" class="form-control bg-white" readonly>                                  
+				<input type="text" name="id" value="${sessionScope.loginInfo.id }" class="form-control bg-white" readonly> 
 	  		</div>                                                                                         
 	    </div>
-	    <div class="col-8 mt-2">                                                                                
+	    <div class="col-9 mt-2">                                                                                
     		<div class="text-center">                                                           
                    해당 자료에대한 신청서자동작성이 완료되었습니다.
 	  		</div>                                                                                         
 	    </div>   
-	    <div class="col-8 mt-2">                                                                                
+	    <div class="col-4 mt-2 me-0">                                                                                
     		<div class="text-center">                                                           
                 <input class="btn btn-primary" type="submit" value="신청" style="width: 100%;"></input>                
+	  		</div>                                                                                         
+	    </div> 
+	    <div class="col-4 mt-2 ms-0">                                                                                
+    		<div class="text-center">                                                           
+                <input class="btn btn-primary" type="button" id="cancel" value="취소" style="width: 100%;"></input>                
 	  		</div>                                                                                         
 	    </div> 
 	</div>	
@@ -190,17 +198,21 @@ table{
 	<div class="col-12">
 		<div class="row justify-content-center mb-3 mt-5">
 			<div class="col-11 text-center">
+				
+				<c:if test="${not empty keyword and not empty apiSearchList }">
 				<div><h5>국립중앙 도서관기반 자료검색 결과</h5></div>
-				<c:if test="${not empty keyword }">
 				<div>검색어 -- "${keyword }" -- </div>
 				</c:if>	
+				<c:if test="${not empty keyword and empty apiSearchList }">
+				<div><h5>국립중앙 도서관기반 자료검색 결과</h5></div>
+				<div>검색어 -- "${keyword }" -- </div>
+				<div> 검색결과가 없습니다. </div>	
+				</c:if>
 				
 				<c:if test="${not empty apiSearchList }">
 				<div> (원하는 책정보를 눌러 신청을 시작하세요.)</div>	
 				</c:if>
-				<c:if test="${empty apiSearchList}">
-				<div> (검색결과가 없습니다.)</div>	
-				</c:if>
+
 						
 			</div>
    		<div class="overflow-auto mt-5" style="height: 600px;">
@@ -252,8 +264,52 @@ table{
 </div>
 
 
-	
-	
+<!-- search modal -->
+<div class="modal fade" id="allNullModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>검색키워드와 ISBN코드의 값이 모두 없습니다.</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      			<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- goRegFormModal -->
+<div class="modal fade" id="goRegFormModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p id="regFormModalText"></p>
+			<p>해당도서의 신청서를 작성합니다.</p>
+			<p>이동하시겠습니까?</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      		<button type="button" class="btn btn-primary px-4" onclick="goRegFormFunction();" >확인</button>
+      		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
 	
 </body>
 </html>
