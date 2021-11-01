@@ -261,7 +261,6 @@
 	         		
 		         		str += '<tr>';
 						str += '<td>';
-						str += '<span>' + (index+1) + '.</span>';
 						str += '<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=' + element.bookCode + '&menuCode=MENU_006&sideMenuCode=SIDE_MENU_013">' + element.title + '</a></div>';
 		         		str += '<div class="mt-2">' + element.writer + ' / ' + element.publisher + ' / ' + element.pubDate + '</div>';
 		         		
