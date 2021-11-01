@@ -42,8 +42,8 @@
     white-space: nowrap;
     background-color: white;
 }
-.modal{
-	width: 300px;
+#myModal{
+	width: 500px;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -57,13 +57,45 @@
 <script type="text/javascript">
 	//팝업 모달창
 	$(window).on('load',function(){
-	    $('#myModal').modal('show');
+	    $('.popupModal').modal('show');
 	});
 	
-	 function close_pop() {
-         $('#myModal').modal('hide');
+	 function closePop() {
+         $('.popupModal').modal('hide');
     };
 
+    //팝업창 쿠키
+	function setCookie(name, value, expiredays){
+        var today = new Date();
+        today.setDate(today.getDate() + expiredays);
+        document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+    }
+
+    function getCookie(name) {
+        var cookie = document.cookie;
+        if (document.cookie != "") {
+            var cookie_array = cookie.split("; ");
+            for ( var index in cookie_array) {
+                var cookie_name = cookie_array[index].split("=");
+                if (cookie_name[0] == "mycookie") {
+                    return cookie_name[1];
+                }
+            }
+        }
+        return;
+    }
+    function closeToday() {
+        $("#myModal").modal("hide");
+        setCookie("mycookie", 'popupEnd', 1);
+    })
+
+    var checkCookie = getCookie("mycookie");
+
+    if(checkCookie == 'popupEnd') {
+        $("#myModal").modal("hide");
+    } else {
+        $('#myModal').modal("show");
+    }
 </script>
 </head>
 <body>
@@ -100,8 +132,8 @@
     	<div class="col-5">
     		<div class="row">
     			<a class="titleA" href="/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002"><img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
-    			<span style="margin-top: 5px;">${bookList[0].title }</span><br>
-    			<span style="margin-top: 5px;">${bookList[0].writer }</span></a>
+    			<span>${bookList[0].title }</span><br>
+    			<span>${bookList[0].writer }</span></a>
     		</div>
     	</div>
     	<div class="col-7">
@@ -156,7 +188,7 @@
 </div>
 
 	<!-- 팝업 모달창 -->
-	<div class="modal" id="myModal" tabindex="-1" role="dialog">
+	<div class="modal popupModal" id="myModal" tabindex="-1" role="dialog">
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
@@ -166,8 +198,8 @@
 	                <p>공지내용</p>
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-primary" id = "modal-today-close">오늘만 닫기</button>
-	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="close_pop();">닫기</button>
+	                <button type="button" class="btn btn-primary" id = "modal-today-close" onclick="closeToday();">오늘만 닫기</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="closePop();">닫기</button>
 	            </div>
 	        </div>
 	    </div>
