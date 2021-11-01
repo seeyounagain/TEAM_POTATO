@@ -20,7 +20,7 @@ public interface MemberService {
 	int countUnreadMessage(String id);
 	
 	// 알림 목록 조회
-	List<MessageVO> selectMessageList(String id);
+	List<MessageVO> selectMessageList(MessageVO messageVO);
 	
 	// 알림 읽음으로 변경
 	int updateMessageIsRead(String messageCode);

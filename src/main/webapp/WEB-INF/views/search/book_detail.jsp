@@ -29,9 +29,18 @@
 #backIcon:hover {
 	cursor: pointer;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
 
 <div class="row justify-content-center">
 	<div class="col-8 mt-3">

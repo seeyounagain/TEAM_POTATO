@@ -144,7 +144,7 @@
 		$.ajax({
 			url: '/member/selectMessageListAjax', // 요청경로
 			type: 'post', // post 메소드 방식
-			data: {'id':id}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+			data: {'toId':id}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 			success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 			// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 				

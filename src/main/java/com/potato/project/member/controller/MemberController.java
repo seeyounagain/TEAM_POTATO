@@ -139,9 +139,9 @@ public class MemberController {
 	// 알림 목록 조회
 	@ResponseBody
 	@PostMapping("/selectMessageListAjax")
-	public List<MessageVO> selectMessageListAjax(String id) {
+	public List<MessageVO> selectMessageListAjax(MessageVO messageVO) {
 		
-		return memberSerivce.selectMessageList(id);
+		return memberSerivce.selectMessageList(messageVO);
 		
 	}
 	

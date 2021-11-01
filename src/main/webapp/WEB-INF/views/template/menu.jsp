@@ -6,7 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=30"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=31"></script>
+<script>
+$(function() {
+	$(window).scroll(function() { 
+		if ($(this).scrollTop() > 200) { 
+			$('#topBtn').fadeIn(); } 
+		else { $('#topBtn').fadeOut(); }
+	}); 
+	$("#topBtn").click(function() { 
+   	$('html, body').animate({ scrollTop : 0  }, 300); 
+    return false; });
+});
+</script>
 <style type="text/css">
 .dropdown-toggle::after {
     display:none;
@@ -35,11 +47,10 @@
   	-webkit-line-clamp: 1;
   	-webkit-box-orient: vertical;
 }
-.contentOver:hover {
-	text-decoration: underline;
+#myMessageT tr:hover {
 	cursor: pointer;
 }
-#messageMenu:after {
+#messageMenu:before {
     content: ' \2709';
     color: white;
 }
@@ -62,6 +73,7 @@
 </style>
 </head>
 <body>
+
 <!-- 최상단 로그인 메뉴 -->
 <div class="row mt-3 mb-1 menu1" style="font-size: 16px;">
 		<div class="col">
@@ -95,7 +107,7 @@
 			<c:when test="${not empty sessionScope.loginInfo and sessionScope.loginInfo.isAdmin eq 'Y' }">
 	 			<ul class="nav justify-content-end">
 				<li class="nav-item">
-					<a class="title" aria-current="page" href="/libManage/bookManage?menuCode=MENU_006">환영합니다, <span style="text-decoration: underline 1px black; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
+					<a class="title" aria-current="page" href="/libManage/bookManage?menuCode=MENU_006">환영합니다, <span style="text-decoration: underline 1px white; vertical-align: baseline;">${loginInfo.name }</span>님 :)</a>
 				</li>
 				<li class="nav-item">
 					<img class="line" src="/resources/img/top_line.jpg">

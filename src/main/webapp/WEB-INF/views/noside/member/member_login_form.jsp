@@ -20,7 +20,7 @@
 </head>
 <body>
 <form action="/member/login" method="post">
-	<h2 class="display-6 text-center fw-bold">회원가입</h2>
+	<h2 class="display-6 text-center fw-bold mt-3">로그인</h2>
 	<hr>
 	<div class="row g-0 justify-content-center">
 		<div class="col-7">

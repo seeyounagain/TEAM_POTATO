@@ -155,7 +155,12 @@
 		    , SEND_DATE
 		    , IS_READ
 		FROM MESSAGE
-		WHERE TO_ID = #{id}
+		<if test="!toId.equals('admin')">
+		WHERE TO_ID = #{toId}
+		</if>
+		<if test="toId.equals('admin')">
+		WHERE FROM_ID = #{toId}
+		</if>
 		ORDER BY SEND_DATE DESC
 	</select>
 	

@@ -31,17 +31,9 @@ public class SearchController {
 	@Resource(name = "adminService")
 	private AdminService adminService;
 	
-	// 통합검색 페이지로 이동
-	@GetMapping("/bookSearch")
-	public String bookSearch(Model model,MenuVO menuVO,HttpSession session) {
-		
-		return "search/search_form";
-		
-	}
-	
 	// 통합검색
-	@PostMapping("/bookSearch")
-	public String goSearch(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
+	@RequestMapping("/bookSearch")
+	public String bookSearch(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
 		
 		int totalCnt = searchService.countBookSearch(bookVO);
 		
@@ -53,6 +45,7 @@ public class SearchController {
 		return "search/search_form";
 		
 	}
+
 	
 	// 상세검색 페이지로 이동
 	@GetMapping("/bookDetailSearch")

@@ -20,6 +20,21 @@
 		
 	});
 	
+	// 알림발신내역 버튼 클릭 시 modal show
+	$(document).on('click', '#adminMessageList' , function() {
+		
+		$('#adminMessageModal').modal('show');
+		
+	});
+	
+	// 알림 클릭 시 상세조회 modal show
+	$(document).on('click', '.messageDetail' , function() {
+		
+		$('#adminMessageModal').modal('hide');
+		$('#adminDetailModal').modal('show');
+		
+	});
+	
 	// 알림보내기 버튼 클릭 시 아이디 지정
 	$(document).on('click', '.messageBtn' , function() {
 		
@@ -219,7 +234,76 @@
 */
 	(function($){
 	
-	
+	// 관리자 알림 목록 조회 함수
+	selectAdminMessageList = function(id) {
+		
+		/* 알림 목록 조회 Ajax 시작 */
+		$.ajax({
+			url: '/member/selectMessageListAjax', // 요청경로
+			type: 'post', // post 메소드 방식
+			data: {'toId':'admin'}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+			success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+			// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+				
+				if (result != null ){
+
+					$('#adminMessageT tbody').empty();
+					
+					var str = '';
+					
+	         		// list,array each 사용해서 값 빼내기
+	         		$(result).each(function(index, element){
+
+						
+						str += '<tr class="messageDetail">';
+						str += '<td class="contentOver lh-lg detailMessage" data-messageCode="' + element.messageCode + '"';
+						if (element.isRead == 'Y') {
+						str += 'style="color: gray;"';						
+						}
+						str += ' >' + element.content + '</td>';
+						str += '<td>' + element.toId + '</td>';
+						str += '<td class="contentOver lh-lg" >' + element.sendDate + '</td>';
+						if (element.isRead == 'Y') {
+						str += '<td style="color: gray;" >읽음</td>';
+						}
+						else {
+						str += '<td style="color: gray;" >읽지않음</td>';
+						}
+						str += '</tr>';
+					
+					});	
+					
+					$('#adminMessageT tbody').prepend(str);
+				}
+				
+				else {
+					
+					$('#adminMessageT tbody').empty();
+					
+					var str = '';
+					
+					str += '<tr>';
+		    		str += '<td colspan="4">';
+		    		str += '알림이 없습니다.';
+		    		str += '</td>';
+		    		str += '</tr>';
+		    		
+		    		$('#adminMessageT tbody').prepend(str);
+				
+				}
+					
+									
+
+			},
+			error: function(){
+			// ajax 실행 실패 시 실행되는 구간
+			alert('알림 목록 조회 실패!');
+			}
+		});
+		/* 알림 목록 조회 Ajax 종료 */
+
+		
+	};	
 
 	})(jQuery);
 	

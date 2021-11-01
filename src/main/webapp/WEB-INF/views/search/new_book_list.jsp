@@ -23,9 +23,18 @@
 .titleA:hover {
 	color: black;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
 
 <div class="row justify-content-center">
 	<div class="col-12">
@@ -37,7 +46,7 @@
 			  <input type="date" <c:if test="${not empty bookVO.searchBegin }">value="${bookVO.searchBegin }"</c:if> id="searchBegin" name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default">
 			  <span style="align-self: center;">&nbsp;~&nbsp;이후&nbsp;</span>
 			  <input type="date" <c:if test="${not empty bookVO.searchEnd }">value="${bookVO.searchEnd }"</c:if> id="searchEnd" name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default">
-			  <span style="align-self: center;">&nbsp;~&nbsp;이내&nbsp;에 들어온 도서는 총 ${bookList.size() } 권입니다.</span>
+			  <span style="align-self: center;">&nbsp;~&nbsp;이내&nbsp;에 들어온 도서는 총 ${bookVO.totalCnt } 권입니다.</span>
 			  <input type="hidden" id="menuCode" value="${menuVO.menuCode}">
 			</div>		
 			<div class="col-12">

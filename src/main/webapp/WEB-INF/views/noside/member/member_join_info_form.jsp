@@ -10,7 +10,8 @@
 <script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=5" ></script>
 </head>
 <body>
-	<h1 class="display-6 text-center">회원가입</h1>
+	<h2 class="display-6 text-center fw-bold mt-3">회원가입</h2>
+	<hr>
 	<div class="row g-0 justify-content-center">
 		<div class="col-5">
 		<div class="col-12 border border-1 mb-5" style="background-color: #f7f6f3;">

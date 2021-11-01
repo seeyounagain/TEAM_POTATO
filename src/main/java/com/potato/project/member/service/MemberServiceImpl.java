@@ -51,9 +51,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 알림 목록 조회
 	@Override
-	public List<MessageVO> selectMessageList(String id) {
+	public List<MessageVO> selectMessageList(MessageVO messageVO) {
 		
-		return sqlSession.selectList("memberMapper.selectMemberMessage",id);
+		return sqlSession.selectList("memberMapper.selectMemberMessage",messageVO);
 		
 	}
 	

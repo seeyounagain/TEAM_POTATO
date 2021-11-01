@@ -33,9 +33,18 @@
     white-space: nowrap;
     background-color: white;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
 
 <div class="row justify-content-center">
 	<div class="col-12">
@@ -62,9 +71,9 @@
 	<div class="col-12">
 	<table class="table table-hover table-bordered caption-top">
 		
-		<c:if test="${not empty searchList }">
-		<caption>도서 ${searchList.size() }건의 검색결과</caption>
-		</c:if>
+		<caption>
+		<c:if test="${not empty bookVO.searchValue}">검색어 "${bookVO.searchValue}"에 대한</c:if>
+		도서 ${bookVO.totalCnt }건의 검색결과</caption>
 		
 		<c:choose>
 			<c:when test="${not empty searchList }">
@@ -106,19 +115,19 @@
 			<ul class="pagination justify-content-center">
 			 <c:if test="${bookVO.prev }">
 				<li class="page-item">
-				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}&searchValue=${bookVO.searchValue}" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
 			 </c:if> 
 				<c:forEach var="pageNum" begin="${bookVO.startPage }" end="${bookVO.endPage }">
 					<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  ">
-					<a class="page-link" href="/search/bookSearch?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+					<a class="page-link" href="/search/bookSearch?nowPage=${pageNum }&menuCode=${menuVO.menuCode}&searchValue=${bookVO.searchValue}">${pageNum }</a>
 					</li>
 				</c:forEach>
 			<c:if test="${bookVO.next }">
 				<li class="page-item">
-				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}&searchValue=${bookVO.searchValue}" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>

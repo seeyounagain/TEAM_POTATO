@@ -35,9 +35,18 @@
 .searchB input:focus{
 	background-image:none;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
 
 <div class="row justify-content-center">
 	<div class="col-12">
@@ -90,10 +99,11 @@
 		
 	<div class="col-12">
 	<table class="table table-hover table-bordered caption-top">
-		
-		<c:if test="${not empty searchList }">
-		<caption>도서 ${searchList.size() }건의 검색결과</caption>
-		</c:if>
+		<caption>도서 
+		<c:if test="${not empty bookVO.totalCnt }">${bookVO.totalCnt }</c:if>
+		<c:if test="${empty bookVO.totalCnt }">0</c:if>
+		건의 검색결과
+		</caption>
 		
 		<c:choose>
 			<c:when test="${not empty searchList }">

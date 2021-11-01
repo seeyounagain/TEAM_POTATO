@@ -324,7 +324,7 @@
 	<!-- ID로 대여&예약 도서 객수 조회 -->
 	<select id="selectIdAllCount" resultType="int">
 		SELECT (SELECT COUNT(ID) FROM RENTAL WHERE ID = #{id} AND RETURN_DATE IS NULL)
-		+ (SELECT COUNT(ID) FROM RESERVE WHERE ID = #{id}) AS COUNT_ID
+		+ (SELECT COUNT(ID) FROM RESERVE WHERE ID = #{id} AND RENTABLE_START_DATE IS NULL) AS COUNT_ID
 		FROM DUAL	
 	</select>
 	
@@ -489,13 +489,13 @@
 	<select id="countBookSearch" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
-		WHERE UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
-	            OR UPPER(WRITER) LIKE UPPER('%'||#{writer}||'%')
-	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{translator}||'%')
-	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{publisher}||'%')
-	            OR UPPER(KEYWORD) LIKE UPPER('%'||#{keyword}||'%')
-	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{summary}||'%')
-	            OR UPPER(INTRO) LIKE UPPER('%'||#{intro}||'%') 
+		WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
+	            OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') 
 	</select>
 
 	<!-- 도서 상세 검색 + 페이징 -->

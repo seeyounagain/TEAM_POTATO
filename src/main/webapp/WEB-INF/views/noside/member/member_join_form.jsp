@@ -12,12 +12,23 @@
 .pointer:hover {
 	cursor: pointer;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
+
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
 	<h2 class="display-6 text-center fw-bold">회원가입</h2>
-	<div class="row g-0 justify-content-center">
+	<hr>
+	<div class="row mt-3 g-0 justify-content-center">
 		<div class="col-5">
 		
 		<p class="text-end fs-6">*필수사항</p>	

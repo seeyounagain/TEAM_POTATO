@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=32" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=35" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;
@@ -27,14 +27,14 @@
 #goSearchBtn {
 	vertical-align: baseline;
 }
-.leftC input[type=text]{
+.topSearch input[type=text]{
 	background-image: url(/resources/img/search_g.png);
 	background-position: 10px center;
 	background-repeat: no-repeat;
 	background-size: 20px;
 	padding-left: 60px;
 }
-.leftC input[type=text]:focus{
+.topSearch input[type=text]:focus{
 	background-image:none;
 }
 textarea {
@@ -42,9 +42,91 @@ textarea {
 	height: 150px;
 	overflow: auto;
 }
+#adminMessageT tr:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
+
+<!-- 관리자 알림 목록 Modal -->
+<div class="modal fade" style="width: 900px;" id="adminMessageModal" tabindex="-1" aria-labelledby="adminMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adminMessageModalLabel" style="color: black;">알림함</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+		<div class="modal-body">
+		  <div class="container-fluid">
+		    <table id="adminMessageT" class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
+		    	<thead>
+		    	<tr>
+		    		<th width="45%">내용</th>
+		    		<th width="15%">받는이</th>
+		    		<th width="20%">보낸시간</th>
+		    		<th width="20%">읽음/읽지않음</th>
+		    	</tr>
+		    	</thead>
+		    	<tbody style="font-size: 16px;">
+		    	<tr>
+		    		<td colspan="4">
+		    		보낸 알림이 없습니다.
+		    		</td>
+		    	</tr>
+		    	</tbody>
+		    </table>
+		  </div>
+		</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary px-5" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 관리자 알림목록 modal 종료 -->
+
+<!-- 보낸 알림 상세보기 modal -->
+<div class="modal fade" style="width: 800px;" id="adminDetailModal" tabindex="-1" aria-labelledby="adminDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adminDetailModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+		<div class="modal-body">
+			<div class="container-fluid">
+			    <table class="table table-hover table-bordered text-first caption-top" style="width: 100%;">
+			    	<tr>
+			    		<td id="fromIdText" style="font-size: 17px;">받는이</td>
+			    	</tr>
+			    	<tr>
+			    		<td id="sendDateText" style="font-size: 17px; color: gray;" >읽음/읽지않음</td>
+			    	</tr>
+			    	<tr>
+			    		<td id="sendDateText" style="font-size: 17px; color: gray;" >보낸시간</td>
+			    	</tr>
+			    	<tr>
+			    		<td id="contentText">내용</td>
+			    	</tr>
+			    </table>
+			</div>
+		</div>
+      <div class="modal-footer" style="display: block;">
+      	<div class="row">
+      		<div class="col-6 text-first">
+      			<button type="button" onclick="selectAdminMessageList();" class="btn btn-primary px-4 messageListBtn">목록</button>
+      		</div>
+      		<div class="col-6 text-end">
+        		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 보낸 알림 상세보기 modal 종료 -->
+
 
 <!-- 회원정보 Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
@@ -149,16 +231,22 @@ textarea {
 <h2 class="text-first fw-bold">회원관리</h2>
 <hr>
 
+	<div class="row mb-3">
+		<div class="col-6 topSearch">
+			<input type="text" class="form-control p-2" id="searchValue" name="searchValue" placeholder="         회원 아이디를 입력해주세요." <c:if test="${not empty memberVO.searchValue }">value="${memberVO.searchValue}"</c:if> >
+			<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary px-5 py-2">
+		</div>
+		<div class="col-6 text-end">
+			<input type="button" onclick="selectAdminMessageList();" value="알림발신내역" id="adminMessageList" class="btn btn-warning px-4 py-2 text-end">
+		</div>
+	</div>
+
 <table id="bookT" class="table table-hover table-bordered caption-top text-center">
 	
-	
-	<caption class="leftC">
-	<input type="text" class="form-control p-2" id="searchValue" name="searchValue" placeholder="         회원 아이디를 입력해주세요." <c:if test="${not empty memberVO.searchValue }">value="${memberVO.searchValue}"</c:if> >
-	<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary px-5 py-2">
+	<caption class="rightC">
+	현재 대여 또는 예약중인 도서의 수 입니다. (반납 완료, 예약 종료 등은 제외)
 	</caption>
 	
-	<caption class="rightC">현재 대여 또는 예약중인 도서의 수 입니다. (반납 완료, 예약 종료 등은 제외)</caption>
-		
 	<colgroup>
 		<col width="5%">
 		<col width="15%">
@@ -197,7 +285,7 @@ textarea {
 					<button type="button" class="btn btn-primary infoBtn" data-bs-toggle="modal" data-bs-target="#infoModal" data-id="${member.id }" >도서정보조회</button>
 					</td>
 					<td>
-					<button type="button" class="btn btn-primary messageBtn" data-bs-toggle="modal" data-bs-target="#messageModal" data-id="${member.id }" >알림보내기</button>
+					<button type="button" class="btn btn-warning messageBtn" data-bs-toggle="modal" data-bs-target="#messageModal" data-id="${member.id }" >알림보내기</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -210,7 +298,7 @@ textarea {
 		</c:choose>
 	</tbody>
 </table>
-
+	
 	<div class="col-12">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
