@@ -182,6 +182,14 @@ public class AdminServiceImpl implements AdminService{
 		return overCnt;
 	}
 	
+	// 회원이 대출 중인 도서 중 예약하려는 도서 조회
+	@Override
+	public int isMemeberRental(RentalVO rentalVO) {
+		
+		return sqlSession.selectOne("searchMapper.selectIsMemeberRental",rentalVO);
+		
+	}
+	
 	// 검색어 결과에 따른 회원수 조회
 	@Override
 	public int countMemberAndSearchId(MemberVO memberVO) {
@@ -205,6 +213,7 @@ public class AdminServiceImpl implements AdminService{
 		return sqlSession.insert("memberMapper.insertMessage",messageVO);
 		
 	}
+	
 	
 	
 	

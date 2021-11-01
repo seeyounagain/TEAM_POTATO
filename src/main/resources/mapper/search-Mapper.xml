@@ -650,6 +650,15 @@
 		WHERE BOOK_CODE = #{bookCode}
 	</update>
 	
+	<!-- 회원이 대출중인 도서인지 여부 조회 -->
+	<select id="selectIsMemeberRental" resultType="int">
+        SELECT
+            COUNT(BOOK_CODE)
+        FROM RENTAL
+        WHERE BOOK_CODE = #{bookCode}
+        AND ID = #{id}
+        AND RETURN_DATE IS NULL	
+	</select>
 	
 </mapper>
 

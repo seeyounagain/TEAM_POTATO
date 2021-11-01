@@ -50,6 +50,7 @@
 			<exclude-mapping path="/member/updateMessageIsReadAjax"/>
 			<exclude-mapping path="/member/deleteMessageAjax"/>
 			<exclude-mapping path="/member/selectMessageListAjax"/>
+			<exclude-mapping path="/member/isMemeberRentalAjax"/>
 			<exclude-mapping path="/libManage/selectStatusBookListAjax"/>
 			<exclude-mapping path="/libManage/selectUserBookCntAjax"/>
 			<exclude-mapping path="/libManage/selectIsMemberAjax"/>

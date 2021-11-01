@@ -127,6 +127,15 @@ public class MemberController {
 		
 	}
 	
+	// 회원 대출 목록 중 일치하는 도서 조회 (대출중인 도서 예약 클릭 시)
+	@ResponseBody
+	@PostMapping("/isMemeberRentalAjax")
+	public int isMemeberRentalAjax(RentalVO rentalVO) {
+		
+		return adminService.isMemeberRental(rentalVO);
+		
+	}
+	
 	// 알림 목록 조회
 	@ResponseBody
 	@PostMapping("/selectMessageListAjax")

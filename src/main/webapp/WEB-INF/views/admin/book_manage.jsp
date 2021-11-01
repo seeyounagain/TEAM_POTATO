@@ -7,6 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=74" ></script>
+<script type="text/javascript">
+$(function() {
+	$(window).scroll(function() { 
+		if ($(this).scrollTop() > 150) { 
+			$('#topBtn').fadeIn(); } 
+		else { $('#topBtn').fadeOut(); }
+	}); 
+	$("#topBtn").click(function() { 
+   	$('html, body').animate({ scrollTop : 0  }, 150); 
+    return false; });
+});
+</script>
 <style type="text/css">
 .bookTitle {
 	font-size: 22px;
@@ -29,9 +41,18 @@
 	min-height: 400px;
 	overflow: scroll;
 }
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
+
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
 
 <h2 class="text-first fw-bold">도서관리</h2>
 <hr>

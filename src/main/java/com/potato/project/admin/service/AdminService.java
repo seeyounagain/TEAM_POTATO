@@ -46,6 +46,9 @@ public interface AdminService {
 	// 회원이 대출 중인 도서 목록 조회 + 반납 기간 지난 도서 연체중으로 상태 변경
 	int selectRentalListAndOverRentalUpdate(MemberVO memberVO);
 	
+	// 회원이 대출 중인 도서 중 예약하려는 도서 조회
+	int isMemeberRental(RentalVO rentalVO);
+	
 	// 검색어 결과에 따른 회원수 조회
 	int countMemberAndSearchId(MemberVO memberVO);
 	
