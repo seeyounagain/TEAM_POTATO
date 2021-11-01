@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>POTATO_LIBRARY</title>
-<script type="text/javascript" src="/resources/member/js/login_result.js?ver=9" ></script>
+<script type="text/javascript" src="/resources/member/js/login_result.js?ver=10" ></script>
 </head>
 <body>
 

@@ -5,10 +5,6 @@
 		var overCnt = $('#overCnt').val();
 		var name = $('#name').val();
 		
-		alert(isDelete);
-		alert(overCnt);
-		alert(name);
-		
 		/* 회원일 경우 */
 		if (name != '') {
 			
