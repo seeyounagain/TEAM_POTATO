@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+
 <style type="text/css">
 #col1 {
 	height: 15rem;
@@ -52,91 +53,31 @@
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+	display: none;
 }
 </style>
-<script type="text/javascript">
-	
-	//팝업 모달창 띄우기
- 	$(window).on('load',function(){  
-	    $('#myModal').modal('show');
-	});
-	
-	//쿠키생성(실제 생성은 아래의 사용자의 체크박스값을 보고 결정)
-	function setCookie(name, value, expires) {
-		
-		//현재 날짜
-		var date = new Date();
-		date.setDate(date.getDate() + expires);
-		
-		var myCookie ='';
-		myCookie += name + '=' + value + ';';
-		myCookie +='Expires='+ date.toUTCString();
-		
-		document.cookie = myCookie;
-	}
-	setCookie('popup', 'notice', 1);
-	
-	//쿠키 삭제
-	function deleCookie(name) {
-		var date = new Date();
-		
-		date.setDate(date.getDate() - 1);
-		
-		var setCookie = '';
-		
-		setCookie += name+ '=popup;';
-		setCookie += 'Expires=' + date.toUTCString();
-		
-		document.cookie = setCookie;
-	}
-	
-	//쿠키 확인
-	/* function checkCookie(name){
-		var cookies = document.cookie.split(';');
-		var visited = false; //방문 여부 확인
-		
-		for(var i in cookies){
-			if(cookies[i].indexOf(name) > -1){
-				visited = true; //방문한 적이 있음
-			}
-	
-			//재방문
-			if(visited){
-				$('#myModal').modal('hide');
-			}
-			//신규 방문
-			else{
-				$('#myModal').modal('show');
-			}
-		
-		}
-	}
-	checkCookie('popup');
-	 */
-	
-	
-	
-	function popClose(){
-		var chkBox = document. getElementById('#chkBox'); // 체크박스
-		
-		if(chkBox.checked){
-			//팝업을 하루동안 보지 않음 = > 쿠키 생성
-			//setCookie('popup', 'notice', 1);
-			 $('#myModal').modal('hide');
-		}
-		else{
-			//팝업을 계속 본다 = > 쿠키 삭제
-			$('#myModal').modal('hide');
-			deleCookie('popup');		
-		}
-		
-	};
-    
-
-    
-</script>
 </head>
 <body>
+
+<!-- 팝업 모달창 -->
+	<div class="modal" id="notice" tabindex="-1" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">공지</h5>
+	            </div>
+	            <div class="modal-body">
+	                <p>공지내용</p>
+	            </div>
+	            <div class="modal-footer">
+	                <input type="checkbox" id="chkBox">오늘만 닫기
+	                <button type="button" class="btn" id="popEnd" data-dismiss="modal" >닫기</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<script type="text/javascript" src="/resources/board/js/main_notice.js?ver=4" ></script>
+
 <div class="row justify-content-center">
 	<!-- 검색 -->
     <div class="col-10 g-5" id="col1">
@@ -225,23 +166,7 @@
     </div>
 </div>
 
-<!-- 팝업 모달창 -->
-	<div class="modal" id="myModal" tabindex="-1" role="dialog">
-	    <div class="modal-dialog" role="document">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h5 class="modal-title">공지</h5>
-	            </div>
-	            <div class="modal-body">
-	                <p>공지내용</p>
-	            </div>
-	            <div class="modal-footer">
-	                <input type="checkbox" id ="chkBox">오늘만 닫기
-	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="popClose();" >닫기</button>
-	            </div>
-	        </div>
-	    </div>
-	</div>
+
 </body>
 
 </html>
