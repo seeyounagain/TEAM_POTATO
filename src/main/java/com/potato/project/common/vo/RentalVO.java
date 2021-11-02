@@ -1,6 +1,6 @@
 package com.potato.project.common.vo;
 
-public class RentalVO {
+public class RentalVO extends PageVO{
 	
 	// 대여 정보 테이블 RENTAL
 		

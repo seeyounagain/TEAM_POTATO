@@ -220,19 +220,19 @@
 						<ul class="pagination justify-content-center">
 							<c:if test="${qnaVO.prev }">
 								<li class="page-item">
-									<a class="page-link" href="/board/qna?nowPage=${qnaVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+									<a class="page-link" href="/myPage/myQnaList?nowPage=${qnaVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
 							</c:if> 
 							<c:forEach var="pageNum" begin="${qnaVO.startPage }" end="${qnaVO.endPage }">
-								<li class="page-item  <c:if test="${qnaVO.nowPage eq pageNum }">active</c:if>  ">
-									<a class="page-link" href="/board/qna?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+								<li class="page-item  <c:if test="${qnaVO.nowPage eq pageNum }">active</c:if>">
+									<a class="page-link" href="/myPage/myQnaList?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
 								</li>
 							</c:forEach>
-							<c:if test="${noticeVO.next }">
+							<c:if test="${qnaVO.next }">
 								<li class="page-item">
-									<a class="page-link" href="/board/qna?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+									<a class="page-link" href="/myPage/myQnaList?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
 										<span aria-hidden="true">&raquo;</span>
 									</a>
 								</li>
@@ -241,7 +241,6 @@
 					</nav>
 				</div>
 			<!-- 페이징 끝 -->
-											
 	</div>
 </div>						
 </body>

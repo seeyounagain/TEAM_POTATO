@@ -116,6 +116,34 @@
 		<!-- 대출내역 테이블 끝 -->
 		
 		
+		<!-- 페이징 처리 -->
+		<div class="col-12 pageDiv">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<c:if test="${rentalVO.prev }">
+						<li class="page-item">
+							<a class="page-link" href="/myPage/myLibrary?nowPage=${rentalVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					</c:if> 
+					<c:forEach var="pageNum" begin="${rentalVO.startPage }" end="${rentalVO.endPage }">
+						<li class="page-item  <c:if test="${rentalVO.nowPage eq pageNum }">active</c:if>">
+							<a class="page-link" href="/myPage/myLibrary?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+						</li>
+					</c:forEach>
+					<c:if test="${rentalVO.next }">
+						<li class="page-item">
+							<a class="page-link" href="/myPage/myLibrary?nowPage=${rentalVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
+		</div>
+		<!-- 페이징 끝 -->
+		
 		<!-- 예약 현황 -->
 		<div class="row justify-content-center">
 			<div class="col-12 mb-4">

@@ -193,6 +193,22 @@ $(document).ready(function(){
 		  if (event.getModifierState("CapsLock")) {
 			    document.getElementById("checkCapsLock2").innerText 
 			      = "Caps Lock이 켜져 있습니다."
+			    		$(document).on('keyup', '#checkPw' , function() {
+			    			var newPw = $('#newPw').val();
+			    			var checkPw = $('#checkPw').val();
+			    			
+			    			if (newPw != checkPw) {
+			    				$('#pwCheck2').text('* 비밀번호를 확인해주세요.');
+			    				$('#changePwBtn2').addClass('disabled');
+			    				return ;
+			    			}
+			    			else {
+			    				$('#pwCheck2').text('');
+			    				$('#changePwBtn2').removeClass('disabled');
+			    				return ;				
+			    			}
+			    		});
+			    	  
 			  }else {
 			    document.getElementById("checkCapsLock2").innerText 
 			      = ""
@@ -230,6 +246,7 @@ $(document).ready(function(){
 		if (ajaxExistingPw != pw1) {
 			
 			alert('비밀번호를 다시 확인해 주세요.')
+			$('.modal input[type="password"]').val('');
 			return ;
 			
 		}
@@ -270,10 +287,10 @@ $(document).ready(function(){
 	
 	//회원탈퇴 모달창
 	$(document).on('click', '#checkMemberquitBtn' , function() {
-			
 			var id = $('#id').text();
 			var existingPw = $('#existingPw').val();
 			var pw2 = $('#pw2').val();
+			
 			if (existingPw != pw2) {
 				
 				alert('비밀번호를 다시 확인해 주세요.')

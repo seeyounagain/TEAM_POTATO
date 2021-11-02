@@ -72,9 +72,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 	//내 문의 갯수 구하기 페이징 위해
 	@Override
-	public int cntQna(MemberVO memberVO) {
-		
-		return sqlSession.selectOne("myPageMapper.cntQna", memberVO);
+	public int myQnaCnt(MemberVO memberVO) {
+		return sqlSession.selectOne("myPageMapper.myQnaCnt");
 	}
 	//---------------------------------------내 문의 끝----------------------------------
 
@@ -86,11 +85,19 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return sqlSession.selectList("myPageMapper.selectRentalList", memberVO);
 	}
-
+	
+	//내 대출 갯수 조회 페이징 위해
+	@Override
+	public int myRentalCnt(MemberVO memberVO) {
+		return sqlSession.selectOne("myPageMapper.myRentalCnt", memberVO);
+	}
+	
+	//내 예약 현황 조회
 	@Override
 	public List<ReserveVO> selectReserveList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
 	}
+
 
 
 	

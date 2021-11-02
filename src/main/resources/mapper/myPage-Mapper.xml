@@ -94,18 +94,20 @@
 		
 	<!-- 나의 도서관 대출 예약 반납 카운트용 추가 //1025 봉 -->
 	<select id="memberBookSituation" resultMap="memberVO">
-		SELECT 
-			(SELECT COUNT(RENTAL_CODE) FROM RENTAL
-			WHERE RETURN_DATE IS NULL)
-			- (SELECT COUNT(RENTAL_CODE) 
-			FROM RENTAL
-			WHERE RETURN_DATE IS NOT NULL) AS RENTAL_CNT
-			,(SELECT COUNT(RESERVE_CODE) FROM RESERVE) AS RESERVE_CNT
+		SELECT (SELECT COUNT(RENTAL_CODE) FROM RENTAL
+			WHERE RETURN_DATE IS NULL
+            AND ID = #{id }
+            ) AS RENTAL_CNT
+			,(SELECT COUNT(RESERVE_CODE) FROM RESERVE
+            WHERE ID = #{id }
+            ) AS RESERVE_CNT
 			,(SELECT COUNT(RENTAL_CODE) 
 			FROM RENTAL
-			WHERE RETURN_DATE IS NOT NULL) AS RETURN_CNT
+			WHERE RETURN_DATE IS NOT NULL
+            AND ID = #{id }
+            ) AS RETURN_CNT
 		FROM MEMBER
-		WHERE ID = #{id}
+		WHERE ID = #{id }
 	</select>
 	
 	<!-- 내정보 -->
@@ -198,6 +200,14 @@
         AND M.ID = #{id}
         ORDER BY QNA_CODE DESC
 	</select>
+
+	<!-- 상담문의 총 개수 -->
+	<!-- 페이징위해 -->
+	<select id="myQnaCnt" resultType="int">
+		SELECT COUNT(QNA_CODE)
+		FROM QNA
+		WHERE ID = #{id}
+	</select>
 	<!-- 문의 상담내역 끝 -->
 	
 	
@@ -213,9 +223,8 @@
 		FROM RENTAL R, MEMBER M, BOOK B
 		WHERE R.ID = M.ID
 		AND R.BOOK_CODE = B.BOOK_CODE
-		AND 
+		AND RETURN_DATE = NULL
 		AND M.ID = #{id}
-		RETURN_DATE = NULL
 	</select>
 	
 	<!-- 내 대출내역 조회 -->
@@ -239,6 +248,14 @@
 		AND R.BOOK_CODE = B.BOOK_CODE
 		AND M.ID = #{id}
 		ORDER BY RETURN_DATE DESC
+	</select>
+	
+	<!-- 대출내역 카운트 -->
+	<!-- 페이징 위해 -->
+	<select id="myRentalCnt" resultType="int">
+		SELECT COUNT(RENTAL_CODE)
+		FROM RENTAL
+		WHERE ID = #{id}
 	</select>
 	
 	<!-- 예약 현황 -->

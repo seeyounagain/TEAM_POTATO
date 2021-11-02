@@ -34,17 +34,20 @@ public interface MyPageService {
 	
 	
 	//-----------------내문의 내역 시작-----------------
-	//문의 조회
+	//내상담문의 조회
 	List<QnaVO> myQnaList(MemberVO memberVO);
 	
-	//내 상담 문의 총 갯수
-	int cntQna(MemberVO memberVO);
+	//내상담 문의 총 갯수
+	int myQnaCnt(MemberVO memberVO);
 	//-----------------내문의 내역 끝-----------------
 	
 	
 	//-------------------내 대출/예약현황 시작--------------------
 	//내대출 현황 조회
 	List<RentalVO> selectRentalList(MemberVO memberVO);
+	
+	//내대출 총 갯수
+	int myRentalCnt(MemberVO memberVO);
 	
 	//내예약 현황 조회
 	List<ReserveVO> selectReserveList(MemberVO memberVO);

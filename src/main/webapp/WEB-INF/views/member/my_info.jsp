@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=100"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=104"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -167,23 +167,23 @@
 
 <!-- 회원탈퇴 모달창 시작  -->
 <div class="modal" id="memberquitModal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">비밀번호를 입력하세요</h5>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">비밀번호를 입력하세요</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-floating">
+					<input type="password" class="form-control" id="pw2" placeholder="Password" required>
+					<label for="floatingPassword">비밀번호 확인</label>
+					<div class="col-12 mt-2" id="checkCapsLock1" style="color: red;; font-size: 14px;"></div>
 				</div>
-				<div class="modal-body">
-					<div class="form-floating">
-						<input type="password" class="form-control" id="pw2" placeholder="Password" required>
-						<label for="floatingPassword">비밀번호 확인</label>
-						<div class="col-12 mt-2" id="checkCapsLock1" style="color: red;; font-size: 14px;"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
 			</div>
 		</div>
 	</div>
+</div>
 
 </body>
