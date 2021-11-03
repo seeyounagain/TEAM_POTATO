@@ -38,7 +38,7 @@ $(function() {
 }
 #bookT {
 	max-height: 1000px;
-	min-height: 400px;
+	min-height: 200px;
 	overflow: scroll;
 }
 #topBtn{
