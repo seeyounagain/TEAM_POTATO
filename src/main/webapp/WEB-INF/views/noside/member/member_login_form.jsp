@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=11" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=12" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -17,6 +17,11 @@
 	cursor: pointer;
 }
 </style>
+<script type="text/javascript">
+    $(window).on('load',function(){
+    	$('#loginModal').modal({keyboard: false,backdrop: 'static'})
+    });
+</script>
 </head>
 <body>
 	<h2 class="display-6 text-center fw-bold mt-3">로그인</h2>
@@ -68,13 +73,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" style="color: black;" id="loginModalLabel">알림</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close loginModalClose" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="loginModalBody">
         
       </div>
       <div class="modal-footer">
-        <button type="button" id="loginModalClose" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-secondary loginModalClose" data-bs-dismiss="modal">확인</button>
       </div>
     </div>
   </div>

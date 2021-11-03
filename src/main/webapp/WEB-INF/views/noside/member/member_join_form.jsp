@@ -42,7 +42,7 @@
 				<div class="row">
 						<label for="id" class="form-label">아이디</label>
 					<div class="col">
-						<input type="text" class="form-control" id="id" name="id" placeholder="4자~12자리의 영문 소문자, 숫자 / @,#$등 특수문자는 제외" required>
+						<input type="text" class="form-control inCheck" id="id" name="id" placeholder="4자~12자리의 영문 소문자, 숫자 / @,#$등 특수문자는 제외" required>
 					</div>
 					<div class="col-2 d-grid checkId" style="padding-left: 3px;">
 					<button type="button" class="btn btn-primary" onclick="checkId();">중복확인</button>
@@ -52,24 +52,24 @@
 			</div>
 			<div class="col-12 mt-2">
 				<label for="pw" class="form-label">비밀번호</label>
-				<input type="password" class="form-control" id="pw" name="pw" placeholder="영문 대문자, 소문자, 숫자를 사용하여 8자 이상, 20자 이하로 설정하십시오." required>
+				<input type="password" class="form-control inCheck" id="pw" name="pw" placeholder="영문 대문자, 소문자, 숫자를 사용하여 8자 이상, 20자 이하로 설정하십시오." required>
 				<div class="col-12 mt-2" id="pwAlert" style="color: red; font-size: 14px;"></div>			
 			</div>
 			<div class="col-12 mt-2">
 				<label for="pw" class="form-label">비밀번호 확인</label>
-				<input type="password" class="form-control" id="checkPw" placeholder="비밀번호를 다시 한번 입력해주세요." required>
+				<input type="password" class="form-control inCheck" id="checkPw" placeholder="비밀번호를 다시 한번 입력해주세요." required>
 				<div class="col-12 mt-2" id="pwCheck" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="birth" class="form-label">생년월일</label>
-				<input type="date" class="form-control" id="birth" name="birth" required>
+				<input type="date" class="form-control inCheck" id="birth" name="birth" required>
 				<div class="col-12 mt-2" id="birthAlert" style="color: green; font-size: 14px;">만 14세 이상인 경우에만 가입이 가능합니다.</div>
 			</div>
 			<div class="col-12 mt-2">
 				<div class="row">
 				<label for="tell" class="form-label">연락처</label>
 					<div class="col">
-					<select class="form-select" name="tells" id="tell1">
+					<select class="form-select inCheck" name="tells" id="tell1">
 						<option value="010">010</option>
 						<option value="011">011</option>
 						<option value="016">016</option>
@@ -77,10 +77,10 @@
 					</select>
 					</div>
 					<div class="col">
-						<input type="text" id="tell2" class="form-control tells" name="tells" required>
+						<input type="text" id="tell2" class="form-control tells inCheck" name="tells" required>
 					</div>
 					<div class="col">
-						<input type="text" id="tell3" class="form-control tells" name="tells" required>
+						<input type="text" id="tell3" class="form-control tells inCheck" name="tells" required>
 					</div>
 					<div class="col-2 d-grid" style="padding-left: 3px;">
 					<button type="button" class="btn btn-primary" id="smsBtn" >문자인증</button>
@@ -92,14 +92,14 @@
 				<div class="row">
 					<label for="addr" class="form-label">주소</label>
 					<div class="col">
-					<input type="text" class="post form-control pointer" name="addrs" id="postcode" onclick="openPostcode()" placeholder="우편번호" readonly required>
+					<input type="text" class="post form-control pointer inCheck" name="addrs" id="postcode" onclick="openPostcode()" placeholder="우편번호" readonly required>
 					</div>
 					<div class="col-2 d-grid" style="padding-left: 3px;">
 					<input type="button" class="post pointer btn btn-primary" onclick="openPostcode()" value="우편번호찾기">
 					</div>
 					<div class="col-12">
-					<input type="text" style="margin-top: 5px;" onclick="openPostcode()" class="post form-control pointer" name="addrs" id="address" placeholder="주소" readonly required>
-					<input type="text" style="margin-top: 5px;" class="post form-control" name="addrs" id="detailAddress" placeholder="상세주소">
+					<input type="text" style="margin-top: 5px;" onclick="openPostcode()" class="post form-control pointer inCheck" name="addrs" id="address" placeholder="주소" readonly required>
+					<input type="text" style="margin-top: 5px;" class="post form-control inCheck" name="addrs" id="detailAddress" placeholder="상세주소">
 					</div>
 				</div>
 			</div>

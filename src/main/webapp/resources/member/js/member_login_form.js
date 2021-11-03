@@ -24,11 +24,6 @@
 		        success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 		        	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 		     		
-		     		alert(result.isDelete);
-		     		alert(result.overCnt);
-		     		alert(result.id);
-		     		alert(result.name);
-		     		
 					// 로그인 되었으며, 탈퇴한 회원이 아닐 경우 경우
 					if (result.isDelete == 'N') {
 						
@@ -36,14 +31,14 @@
 						if (result.overCnt == 0) {
 							
 							$('#loginModalBody').text(result.name + '님 환영합니다 :)');
-							$('#loginModalClose').attr('onclick','location.href="/common/main"');
+							$('.loginModalClose').attr('onclick','location.href="/common/main"');
 							
 						}
 						// 없는 회원
 						else {
 							
 							$('#loginModalBody').text(result.name + '님, 연체중인 도서가 있습니다. 반납기한을 확인해주세요.');
-							$('#loginModalClose').attr('onclick','location.href="/myPage/myPage?menuCode=MENU_005"');
+							$('.loginModalClose').attr('onclick','location.href="/myPage/myPage?menuCode=MENU_005"');
 							
 						}
 			
