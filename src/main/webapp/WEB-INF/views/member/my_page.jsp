@@ -53,15 +53,20 @@
 			</div>
 		</div>
 		<!-- 대여현황 테이블 -->
-		<div class="row justify-content-center text-center mb-4">	
+		<div class="row justify-content-center text-center mb-4 mt-4">	
 			<div class="col-8">
-				<table class="table">
+				<table class="table table-borderless">
 					<colgroup>
 						<col width="33.3%">
 						<col width="33.3%">
 						<col width="33.3%">
 					</colgroup>
 					<thead>
+						<tr>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/대출.png"></a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/예약.png"></a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/반납.png"></a></td>
+						</tr>
 						<tr>
 							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">대여중</a></th>
 							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">예약중</a></th>

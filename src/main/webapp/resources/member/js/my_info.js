@@ -64,8 +64,10 @@ $(document).ready(function(){
 					str += '<td><button type="button" id="changePwBtn" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#changePwModal">비밀번호 변경</button>';
 					str += '</tr>';
 					str += '<tr>';
+					
+					var tellTell = result.tell.split('-');
 					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>연락처</td>';
-					str += '<td><div class="row"><div class="col"><select class="form-select" name="tells" id="tell1" value="'+ result.tell1 +'"><option value="010">010</option><option value="011">011</option><option value="016">016</option><option value="018">018</option></select></div><div class="col"><input type="text" id="tell2" class="form-control" name="tells" value="'+ result.tell2 +'" required></div><div class="col"><input type="text" id="tell3" class="form-control" name="tells" value="'+ result.tell3 +'" required></div><div class="col-12 mt-2" id="tellCheck" style="color: red; font-size: 14px;"></div><div></td>';     
+					str += '<td><div class="row"><div class="col"><select class="form-select" name="tells" id="tell1" value="'+ tellTell[0] +'"><option value="010">010</option><option value="011">011</option><option value="016">016</option><option value="018">018</option></select></div><div class="col"><input type="text" id="tell2" class="form-control" name="tells" value="'+ tellTell[1] +'" required></div><div class="col"><input type="text" id="tell3" class="form-control" name="tells" value="'+ tellTell[2] +'" required></div><div class="col-12 mt-2" id="tellCheck" style="color: red; font-size: 14px;"></div><div></td>';     
 					str += '</tr>';
 					str += '<tr>';
 					str += '<td class="table-secondary"><span style="color: #ff5058">*</span>주소</td>';
@@ -76,13 +78,51 @@ $(document).ready(function(){
 					str += '</tr>';
 					str += '<tr>';
 					str += '<td class="table-secondary">관심카테고리</td>';
-					str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="취미/실용"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="경제/경영"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="자기계발"><label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
-					str += '</tr>'
-	
+					
+					if(result.favorite != null){
+						var checkedCheck1 = '';
+						var checkedCheck2 = '';
+						var checkedCheck3 = '';
+						var checkedCheck4 = '';
+						var checkedCheck5 = '';
+						var checkedCheck6 = '';
+						var checkedCheck7 = '';
+						
+						var favoriteArr = result.favorite.split(',');
+						
+						for(var i = 0; i < favoriteArr.length; i++){
+							if(favoriteArr[i] == '소설'){
+								checkedCheck1 = 'checked';
+							}
+							if(favoriteArr[i] == '시/에세이'){
+								checkedCheck2 = 'checked';
+							}
+							if(favoriteArr[i] == '요리/건강'){
+								checkedCheck3 = 'checked';
+							}
+							if(favoriteArr[i] == '취미/실용'){
+								checkedCheck4 = 'checked';
+							}
+							if(favoriteArr[i] == '경제/경영'){
+								checkedCheck5 = 'checked';
+							}
+							if(favoriteArr[i] == '자기계발'){
+								checkedCheck6 = 'checked';
+							}
+							if(favoriteArr[i] == '역사/문화'){
+								checkedCheck7 = 'checked';
+							}
+							
+						}
+						str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"'+ checkedCheck1 +'><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"'+ checkedCheck2 +'><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"'+ checkedCheck3 +'><label class="form-check-label" for="inlineCheckbox1">요리/건강</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="취미/실용"'+ checkedCheck4 +'><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="경제/경영"'+ checkedCheck5 +'><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="자기계발"'+ checkedCheck6 +'><label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"'+ checkedCheck7 +'><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
+					}
+					else{
+						str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="취미/실용"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="경제/경영"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="자기계발"><label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
+					}
+					str += '</tr>';
 					str += '</table>';
 					str += '</div>';
 					str += '</div>';
-				
 					str += '<input type="hidden" id="ajaxId" name="id" value="'+ result.id +'">';
 					str += '<input type="hidden" id="ajaxExistingPw" value="'+ result.pw +'">';
 					str += '<input type="hidden" id="menuCode" name="menuCode" value="'+ menuCode +'">';

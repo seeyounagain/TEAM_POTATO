@@ -49,8 +49,9 @@ public class MyPageController {
 	@ResponseBody
 	@RequestMapping("/myInfoAjax")
 	public MemberVO myInfoAjax(MemberVO memberVO) {
-		//전화번호 주소 따로따로 뽑아서 보냄
-		return myPageService.selectTell(myPageService.selectTellCnt(memberVO));
+		memberVO = myPageService.selectTell(myPageService.selectTellCnt(memberVO));
+		
+		return memberVO;
 	}
 	
 	//나의 정보수정
