@@ -1,10 +1,5 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
-	
-	$('html,body').animate({
-		scrollTop:150
-	},100);
-
 
 	$('#searchAction').submit(function(){
 		var kwd = $('#kwdInput').val();
@@ -12,11 +7,8 @@ $(document).ready(function(){
 		if(kwd == '' && isbn == ''){
 		$('#allNullModal').modal('show');
 		return false;
-		}else{
-		$('html,body').animate({
-		scrollTop:500
-		},500);
 		}
+		
 		
 	});	
 	
