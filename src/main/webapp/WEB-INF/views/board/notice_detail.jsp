@@ -46,7 +46,7 @@
 	   					<td>${notice.readCnt }</td>
 	   				</tr>
 	   				<tr>
-	   					<td colspan="6">${notice.content }</td>
+	   					<td colspan="6" height="500px;">${notice.content }</td>
 	   				</tr>
 	   				<c:if test="${not empty notice.attachFileVO.attachedFileName }" >
 					<tr>

@@ -53,9 +53,9 @@ public class BoardServiceImpl  implements BoardService{
 	
 	//문의상담 목록 조회
 	 @Override
-	 public List<QnaVO> selectQnaList() {
+	 public List<QnaVO> selectQnaList(QnaVO qnaVO) {
 		
-		 return  sqlSession.selectList("boardMapper.selectQnaList");
+		 return  sqlSession.selectList("boardMapper.selectQnaList", qnaVO);
 	}
 	
 	 //상담문의 입력

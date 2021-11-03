@@ -65,50 +65,55 @@ public class BoardController {
 	@PostMapping("/insertNotice")
 	public String insertNotice(MenuVO menuVO,NoticeVO noticeVO, MultipartHttpServletRequest multi) {
 		
-		if(multi == null) {
-		
-			boardService.insertNotice(noticeVO);
-		}
 		//파일명 가져오기
 		MultipartFile inputName = multi.getFile("file");
 		
-		//파일이 첨부될 경로
-		//학원
-		String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
-		//집
-		//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
-		//시윤
-		//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
-		
-		//파일 첨부에 필요한 공지사항 코드 생성
-		String noticeCode = boardService.selectNoticeCode();
-		//파일 첨부에 필요한 파일 코드의 숫자를 조회
-		int nextFileCodeNum = boardService.nextFileCodeNum();
-		
-		try {
-			//업로드될 파일명 설정
-			String uploadFileName = FileUploadUtil.getNowDateTime() + "_" + inputName.getOriginalFilename();
-			inputName.transferTo(new File(uploadPath + uploadFileName));
-			
-			String fileCode = "FILE_" + String.format("%03d", nextFileCodeNum++);
-			
-			noticeVO.setAttachFileVO(new AttachFileVO(fileCode, inputName.getOriginalFilename(), uploadFileName, noticeCode));
-			noticeVO.setNoticeCode(noticeCode);
-			
-		}catch(IllegalStateException e) {
-			//업로드 예외 발생 시
-			e.printStackTrace();
-
-		}catch(IOException e) {
-			//파일 입출력 예외 발생 시
-			e.printStackTrace();
-		}
-		
 		//공지사항 등록
 		boardService.insertNotice(noticeVO);
-		//첨부파일 등록
-		boardService.insertNoticeFile(noticeVO);
 		
+		
+		if(!inputName.getOriginalFilename().equals("")) {
+			//파일이 있으면
+		
+			
+			//파일이 첨부될 경로
+			//학원
+			String uploadPath = "D:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+			//집
+			//String uploadPath = "C:\\git\\ShinMinHwi\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+			//시윤
+			//String uploadPath = "D:\\myGit\\TEAM_POTATO\\src\\main\\webapp\\resources\\noticeFileUpload\\";
+			
+			//파일 첨부에 필요한 공지사항 코드 생성
+			String noticeCode = boardService.selectNoticeCode();
+			//파일 첨부에 필요한 파일 코드의 숫자를 조회
+			int nextFileCodeNum = boardService.nextFileCodeNum();
+			
+			
+			try {
+				//업로드될 파일명 설정
+				String uploadFileName = FileUploadUtil.getNowDateTime() + "_" + inputName.getOriginalFilename();
+				inputName.transferTo(new File(uploadPath + uploadFileName));
+				
+				String fileCode = "FILE_" + String.format("%03d", nextFileCodeNum++);
+				
+				noticeVO.setAttachFileVO(new AttachFileVO(fileCode, inputName.getOriginalFilename(), uploadFileName, noticeCode));
+				noticeVO.setNoticeCode(noticeCode);
+				
+			}catch(IllegalStateException e) {
+				//업로드 예외 발생 시
+				e.printStackTrace();
+	
+			}catch(IOException e) {
+				//파일 입출력 예외 발생 시
+				e.printStackTrace();
+			}
+			
+			//첨부파일 등록
+			boardService.insertNoticeFile(noticeVO);
+			
+		}
+
 		
 		//공지사항 목록으로 이동
 		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
@@ -145,7 +150,7 @@ public class BoardController {
 		qnaVO.setTotalCnt(totalCnt);
 		qnaVO.setPageInfo();
 
-		model.addAttribute("list", boardService.selectQnaList());
+		model.addAttribute("list", boardService.selectQnaList(qnaVO));
 
 		return  "board/qna_list";
 	}
@@ -171,7 +176,7 @@ public class BoardController {
 	}
 	
 	//상담문의 비밀번호 확인
-	@GetMapping("/qnaPassword")
+	@PostMapping("/qnaPassword")
 	public String qnaPassword(QnaVO qnaVO, MenuVO menuVO, HttpSession session) {
 
 		return "board/qna_password";

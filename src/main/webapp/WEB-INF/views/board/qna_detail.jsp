@@ -41,8 +41,57 @@
 	height: 80%;
 }
 </style>
+<script type="text/javascript">
+	//비밀번호가 있는 상담글 삭제 시, 비밀번호 확인
+	function checkPw() {
+		$('#myModal').modal('show');
+		
+		var qnaCode = document.getElementById('qnaCode').value;
+		var menuCode = document.getElementById('menuCode').value;
+		var qnaPw = document.getElementById('qnaPw').value;
+		//var inputPw = document.getElementById('inputPw').value;
+		
+		if(	confirm("상담 / 문의 글을 삭제하시겠습니까?") == true){
+			
+			 var inputPw = prompt("상담 / 문의글 비밀 번호 확인");
+			 
+			 if(inputPw == qnaPw){
+				
+				alert("게시글이 삭제되었습니다."); 
+			 	location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
+				 
+			 }
+			 else{
+			 	alert("비밀번호가 일치하지 않습니다.");
+			 	
+			 }			
+		
+		}else{
+			return;
+			
+		}
+	}
+</script>
 </head>
 <body>
+<!-- 비번 확인 모달창 -->
+	<div class="modal" id="notice" tabindex="-1" role="dialog">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">게시글 비밀번호 확인</h5>
+	            </div>
+	            <div class="modal-body">
+	            	<input type="password" name="qnaPw">
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn" id="" data-dismiss="modal" >확인</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	
 <div class="row justify-content-center">
    <div class="col-12 mainDiv">
    		<div class="titleDiv">
@@ -119,7 +168,6 @@
 					<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
 					<input class="btn btn-primary" type="button" value="게시글 삭제" onclick="deleQna();">
 				</c:if>
-				
 				<!-- 일반  회원으로 로그인 했을 때-->
 				<!-- 로그인 아이디와 게시글 아이디가 일치할 때 -> 1. 비번이 있을 때 / 2. 비번이 없을 때-->
 				<c:if test="${qna.id eq sessionScope.loginInfo.id}">

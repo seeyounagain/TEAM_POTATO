@@ -55,7 +55,6 @@
 			 , NAME
 			 , CREATE_DATE
 			 , READ_CNT
-			 , ATTACHED_FILE_NAME
 		FROM 
 		(
 			SELECT ROWNUM AS ROW_NUM
@@ -65,34 +64,37 @@
 				 , NAME
 				 , CREATE_DATE
 				 , READ_CNT
-				 , ATTACHED_FILE_NAME
 			FROM
 			(
 				SELECT ROWNUM AS ROW_NUM
-					 , N.NOTICE_CODE
+					 , NOTICE_CODE
 					 , TITLE
 					 , ID
 					 , NAME
 					 , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 					 , READ_CNT
-					 , A.ATTACHED_FILE_NAME
-			 FROM NOTICE N, ATTACH_FILE A
-			 WHERE N.NOTICE_CODE = A.NOTICE_CODE
+			 FROM NOTICE
 			<if test="searchValue != null and !searchValue.equals('')">
-				AND UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%'
+				WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%'
 			</if> 
-			 ORDER BY N.NOTICE_CODE DESC
+			 ORDER BY NOTICE_CODE DESC
 			 )
 		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
+	<!-- 메인에 뜨는 이미지 있는 공지사항 -->
 	<select id="mainNoticeList" resultMap="notice">
 		SELECT N.NOTICE_CODE
 		     , A.ATTACHED_FILE_NAME
 		FROM NOTICE N, ATTACH_FILE A
 		WHERE N.NOTICE_CODE = A.NOTICE_CODE
 		AND A.ATTACHED_FILE_NAME IS NOT NULL
+	</select>
+	
+	<!-- 메인 팝업에 뜨는 이미지 없는 공지사항 -->
+	<select id="">
+	
 	</select>
 	<!-- 공지사항 INSERT -->
 	<insert id="insertNotice">
@@ -124,7 +126,7 @@
 	
 	<!-- 공지사항 파일 첨부를 위한 공지사항 코드 생성  -->
 	<select id="selectNoticeCode" resultType="String">
-		SELECT 'NOTICE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_CODE, 8, 3))), 0) + 1, 3, '0') 
+		SELECT 'NOTICE_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(NOTICE_CODE, 8, 3))), 0), 3, '0') 
 		FROM NOTICE
 	</select>
 	
@@ -151,17 +153,16 @@
 	
 	<!-- 공지사항 상세보기 -->
 	<select id="selectNotice" resultMap="notice">
-		SELECT N.NOTICE_CODE
+		SELECT NOTICE_CODE
 			 , TITLE
 			 , ID
 			 , NAME
 			 , CONTENT
 			 , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 			 , READ_CNT
-			 , ATTACHED_FILE_NAME
-		FROM NOTICE N, ATTACH_FILE A
-		WHERE N.NOTICE_CODE = A.NOTICE_CODE
-		AND N.NOTICE_CODE = #{noticeCode}
+			 , (SELECT ATTACHED_FILE_NAME FROM ATTACH_FILE WHERE NOTICE_CODE = #{noticeCode}) AS ATTACHED_FILE_NAME
+		FROM NOTICE
+		WHERE NOTICE_CODE = #{noticeCode}
 	</select>
 	
 	<!-- 조회수 증가 -->
@@ -185,7 +186,7 @@
 	
 	<!-- 문의상담 리스트 조회 -->
 	<select id="selectQnaList" resultMap="qna">
-	<!-- 	SELECT ROW_NUM 
+	 	SELECT ROW_NUM 
 		     , QNA_CODE 
 		     , TITLE
 		     , ID
@@ -205,19 +206,19 @@
 		     , ANSWER_CNT
 		FROM
 		(
-		         -->SELECT ROWNUM AS ROW_NUM 
+		         SELECT ROWNUM AS ROW_NUM 
 		             , QNA_CODE 
 				     , TITLE
 				     , ID
-				     , NAME
+				     , CONCAT(SUBSTR(NAME,1,1),'**') AS NAME
 				     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 				     , QNA_PW
 				     , ANSWER_CNT
 				FROM QNA
 		        ORDER BY QNA_CODE DESC
-		     <!--    )
+		 	)    
 		)
-		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum} -->
+		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
 	<!-- 상담문의 총 개수 -->

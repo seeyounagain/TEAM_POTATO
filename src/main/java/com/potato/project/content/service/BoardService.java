@@ -41,7 +41,7 @@ public interface BoardService {
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
 	//상담문의 리스트
-	List<QnaVO> selectQnaList();
+	List<QnaVO> selectQnaList(QnaVO qnaVO);
 	
 	int cntQna();
 	

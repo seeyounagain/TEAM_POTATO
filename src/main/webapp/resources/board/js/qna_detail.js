@@ -31,30 +31,4 @@
 		}
 	}
 	
-	//비밀번호가 있는 상담글 삭제 시, 비밀번호 확인
-	function checkPw() {
-		var qnaCode = document.getElementById('qnaCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		var qnaPw = document.getElementById('qnaPw').value;
-		//var inputPw = document.getElementById('inputPw').value;
-		
-		if(	confirm("상담 / 문의 글을 삭제하시겠습니까?") == true){
-			
-			 var inputPw = prompt("상담 / 문의글 비밀 번호 확인");
-			 
-			 if(inputPw == qnaPw){
-				
-				alert("게시글이 삭제되었습니다."); 
-			 	location.href = '/board/deleteQna?qnaCode=' + qnaCode + '&menuCode=' + menuCode;
-				 
-			 }
-			 else{
-			 	alert("비밀번호가 일치하지 않습니다.");
-			 	
-			 }			
-		
-		}else{
-			return;
-			
-		}
-	}
+	

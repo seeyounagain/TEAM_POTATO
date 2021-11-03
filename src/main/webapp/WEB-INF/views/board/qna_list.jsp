@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/board/js/qna_list.js?ver=1" ></script>
+
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -21,7 +23,7 @@
 .table{
 	width: 100%;
 }
-.tableA:hover{
+.tableAtag:hover{
 	color: black;
 	text-decoration: underline;
 	font-weight: bold;
@@ -50,6 +52,7 @@
    			<hr>
    		</div>
 			<div class="tableDiv">
+					
 					<table class="table table-striped text-center">
 						<thead>
 							<tr>
@@ -73,21 +76,27 @@
 								<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 									<c:choose>
 										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' or empty info.qnaPw}">
-											<a class="tableA" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+											<input type="hidden" value="${info.qnaCode}" name="qnaCode">
+											<input type="hidden" value="${menuVO.menuCode}" name="qnaCode">
+											<a class="tableAtag" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>
 												<c:if test="${info.answerCnt != 0}">
 													<span class="m-2 complete">답변완료</span>
 												</c:if>
-											</a>	
 										</c:when>
 										<c:otherwise>
-											<img src="/resources/img/icon_secret.png" width="13px;"> 
-											<a class="tableA" href="/board/qnaPassword?qnaPw=${info.qnaPw }&qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+											<form action="/board/qnaPassword" method="post">
+												<input type="hidden"  name="qnaCode" value="${info.qnaCode}">
+												<input type="hidden"  name="qnaPw" value="${info.qnaPw }">
+												<input type="hidden"  name="menuCode" value="${menuVO.menuCode}">
+												<img src="/resources/img/icon_secret.png" width="13px;"> 
+												<a class="tableAtag" href="#">${info.title }
 												<c:if test="${info.answerCnt != 0}">
 													<span class="m-2 complete">답변완료</span>
 												</c:if>
-											</a>	
+												</a>
+											</form>
 										</c:otherwise>
-									</c:choose>	
+									</c:choose>		
 								</td>
 								<td>${info.name }</td>
 								<td>${info.createDate }</td>
@@ -118,7 +127,7 @@
 							<a class="page-link" href="/board/qna?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
 							</li>
 						</c:forEach>
-					<c:if test="${noticeVO.next }">
+					<c:if test="${qnaVO.next }">
 						<li class="page-item">
 						<a class="page-link" href="/board/qna?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
