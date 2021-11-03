@@ -118,6 +118,14 @@ public class ServiceController {
 		return  "service/bookRequestRegForm";
 	}
 	
+	//도서비치 신청 삭제
+	@RequestMapping("/deleteBookRequest")
+	public String deleteBookRequest(Model model,MenuVO menuVO,RequestBoardVO rbVO) {
+		serviceService.deleteBookRequest(rbVO);
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		return "redirect:/service/bookRequest";
+	}
+	
 	
 	
 	
@@ -144,30 +152,7 @@ public class ServiceController {
 		
 		return  "service/readingSeat";
 	}
-	
-	@ResponseBody
-	@PostMapping("/chooseSeat")
-	public ReadingSeatVO chooseSeat(Model model, String seatCode) {
-	return serviceService.chooseSeat(seatCode);
-	}
-	
-	@ResponseBody
-	@PostMapping("/seatIdCheck")
-	public String seatIdCheck(Model model, String id) {
-	return serviceService.seatIdCheck(id);
-	}
-	
-	@ResponseBody
-	@PostMapping("/seatMemberIdCheck")
-	public String seatMemberIdCheck(Model model, String id) {
-	return serviceService.seatMemberIdCheck(id);
-	}
-	
-	@ResponseBody
-	@PostMapping("/searchRecord")
-	public List<ReadingRecordVO> searchRecord(Model model,ReadingRecordVO recordVO) {
-	return serviceService.searchRecord(recordVO);
-	}
+
 	
 	@PostMapping("/seatUpdate")
 	public String seatUpdate(Model model,MenuVO menuVO,HttpSession session,ReadingSeatVO seatVO) {
@@ -193,6 +178,42 @@ public class ServiceController {
 		
 		return  "service/readingSeat";
 	}
+	
+	
+	
+	//AJAX 구간
+	@ResponseBody
+	@PostMapping("/chooseSeat")
+	public ReadingSeatVO chooseSeat(Model model, String seatCode) {
+	return serviceService.chooseSeat(seatCode);
+	}
+	
+	@ResponseBody
+	@PostMapping("/seatIdCheck")
+	public String seatIdCheck(Model model, String id) {
+	return serviceService.seatIdCheck(id);
+	}
+	
+	@ResponseBody
+	@PostMapping("/seatMemberIdCheck")
+	public String seatMemberIdCheck(Model model, String id) {
+	return serviceService.seatMemberIdCheck(id);
+	}
+	
+	@ResponseBody
+	@PostMapping("/searchRecord")
+	public List<ReadingRecordVO> searchRecord(Model model,ReadingRecordVO recordVO) {
+	return serviceService.searchRecord(recordVO);
+	}
+	
+	@ResponseBody
+	@PostMapping("/checkISBN")
+	public String checkISBN(Model model, String isbn) {
+	return serviceService.checkISBN(isbn);
+	}
+	
+	
+	
 	
 
 }

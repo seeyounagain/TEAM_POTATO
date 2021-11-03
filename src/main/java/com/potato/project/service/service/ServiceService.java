@@ -38,5 +38,8 @@ public interface ServiceService {
 	
 	int checkRequestCnt(MemberVO loginInfo);
 	
+	String checkISBN(String isbn);
+	
+	void deleteBookRequest(RequestBoardVO rbVO);
 	
 }

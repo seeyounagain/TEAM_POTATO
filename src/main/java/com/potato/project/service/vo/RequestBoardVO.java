@@ -1,7 +1,7 @@
 package com.potato.project.service.vo;
 
 public class RequestBoardVO {
-	
+				       
 		private String requestCode			;									//    REQUEST_CODE
 		private String id					;									//    ID 
 		private String title				;									//    TITLE 
@@ -10,8 +10,8 @@ public class RequestBoardVO {
 		private String pubDate				; 									//    PUB_DATE 
 		private String createDate			;									//	  CREATE_DATE
  		private String category             ;                                   //    CATEGORY 
-		private String kdcCode             ;                                   //    KDC_CODE 
-		private String kdcName             ;                                   //    KDC_NAME 
+		private String kdcCode              ;                                   //    KDC_CODE 
+		private String kdcName              ;                                   //    KDC_NAME 
 		
 		
 		

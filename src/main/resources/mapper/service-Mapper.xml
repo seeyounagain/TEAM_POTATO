@@ -42,6 +42,15 @@
 			<result column="CREATE_DATE"	property="createDate"/>                                                                                                                                                                  
 			</resultMap>
 			
+			<delete id="deleteBookRequest">
+			DELETE REQUEST_BOARD
+			WHERE REQUEST_CODE = #{requestCode }
+			</delete>
+			
+			<select id="checkISBN" resultType="String">
+			SELECT ISBN FROM REQUEST_BOARD WHERE ISBN = #{isbn}		
+			</select>
+			
 			<select id="checkRequestCnt" resultType="int">
 			SELECT COUNT(REQUEST_CODE) AS REQUEST_CNT FROM REQUEST_BOARD WHERE ID = #{id }
 			</select>

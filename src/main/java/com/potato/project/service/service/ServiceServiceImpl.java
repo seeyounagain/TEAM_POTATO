@@ -86,6 +86,17 @@ public class ServiceServiceImpl implements ServiceService {
 	public int checkRequestCnt(MemberVO loginInfo) {
 		return sqlSession.selectOne("serviceMapper.checkRequestCnt", loginInfo);
 	}
+
+	@Override
+	public String checkISBN(String isbn) {
+		return sqlSession.selectOne("serviceMapper.checkISBN",isbn);
+
+	}
+
+	@Override
+	public void deleteBookRequest(RequestBoardVO rbVO) {
+		sqlSession.delete("serviceMapper.deleteBookRequest" , rbVO);
+	}
 	
 	
 	

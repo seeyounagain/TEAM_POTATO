@@ -1,19 +1,30 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
-	requestCnt
 	
+	$('html,body').animate({
+		scrollTop:150
+	},100);
+
 
 	$('#searchAction').submit(function(){
-		
 		var kwd = $('#kwdInput').val();
 		var isbn = $('#isbnInput').val();
-		
 		if(kwd == '' && isbn == ''){
 		$('#allNullModal').modal('show');
-		
 		return false;
+		}else{
+		$('html,body').animate({
+		scrollTop:500
+		},500);
 		}
+		
+	});	
+	
+	
+	$(document).on('click','#regBookSubmit1',function(){
+		$('#clearRequestModal').modal('show');
 	});
+		
 	
 	$(document).on('click','#cancel',function(){
 			result = confirm('취소하시겠습니까?');
@@ -55,21 +66,46 @@ $(document).ready(function(){
 (function($){
 
 	goRegFormFunction = function(){
-			$('#goRegFormModal').modal('hide');
-			
-			//디브 - 플렉스,논
-			$('#regForm').css('display','flex');
-			$('#searchForm').css('display','none');
-			//타이틀- 인라인,논
-			$('#searchTitle1').css('display','none');
-			$('#searchTitle2').css('display','inline');
-			
-			$('html,body').animate({
-				scrollTop:150
-			},100);
-	}
-	
-	
+		$('#goRegFormModal').modal('hide');
+		//디브 - 플렉스,논
+		$('#regForm').css('display','flex');
+		$('#searchForm').css('display','none');
+		//타이틀- 인라인,논
+		$('#searchTitle1').css('display','none');
+		$('#searchTitle2').css('display','inline');
+		
+		$('html,body').animate({
+			scrollTop:150
+		},100);
+
+		var isbn = $('input[name=isbn]').val();
+		$.ajax({
+			url: '/service/checkISBN', //요청경로
+			type: 'post',
+			data:{'isbn':isbn}, //필요한 데이터
+			success: function(result) {
+				
+				//isbn이 DB에 있다면
+				if (result){
+					$('#checkISBN').modal('show');
+					$('#regBookSubmit1').css('display','none');
+					$('#regBookSubmit2').css('display','inline');
+				}else{ //없다면
+					$('#regBookSubmit1').css('display','inline');
+					$('#regBookSubmit2').css('display','none');
+				}	
+			},
+			error: function(){
+				//ajax 실행 실패 시 실행되는 구간
+				alert('실패');
+			}
+		})	
+		
+		}
+		
+		clearRequestModal = function(){
+		$('#regBookRequestAction').submit();			
+		}
 	
    
 })(jQuery);

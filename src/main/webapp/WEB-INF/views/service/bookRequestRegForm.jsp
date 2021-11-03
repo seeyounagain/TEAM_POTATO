@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=6"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=3"></script>
 <style type="text/css">
 
 table{
@@ -121,7 +121,7 @@ table{
 	
 	<!-- 등록관련구획 -->
 	<div class="col-8">
-	<form action="/service/regBookRequest" method="post"><input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode}"> 
+	<form action="/service/regBookRequest" method="post" id="regBookRequestAction"><input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode}"> 
 	<div class="row mb-3 justify-content-center" id="regForm" style="display: none;"> 
 		<div class="col-10">                                                                                
     		<div class="input-group text-start">                                                                                                                                                  
@@ -150,7 +150,7 @@ table{
 		<div class="col-10 mt-2">                                                                                
     		<div class="input-group text-start">                                                           
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">ISBN코드</span>            
-				<input type="text" name="isbn" class="form-control bg-white" readonly>                                  
+				<input type="text" name="isbn" class="form-control bg-white" id="isbnFormData" readonly >                                  
 	  		</div>                                                                                         
 	    </div>  
 		<div class="col-10 mt-2 ms-0">                                                                                
@@ -173,8 +173,9 @@ table{
 	  		</div>                                                                                         
 	    </div>   
 	    <div class="col-4 mt-2 me-0">                                                                                
-    		<div class="text-center">                                                           
-                <input class="btn btn-primary" type="submit" value="신청" style="width: 100%;"></input>                
+    		<div class="text-center">                  <!-- 버튼식으로 만들어서 ISBN 중복확인 -->                                         
+                <input class="btn btn-primary" type="button" id= "regBookSubmit1" value="신청" style="width: 100%; display: inline"></input>                
+                <input class="btn btn-primary" type="button" id= "regBookSubmit2" value="신청불가 : 기 신청 도서" style="width: 100%; display: none" disabled></input>                
 	  		</div>                                                                                         
 	    </div> 
 	    <div class="col-4 mt-2 ms-0">                                                                                
@@ -310,6 +311,56 @@ table{
     </div>
   </div>
 </div>
-	
+
+<!-- clearRequestModal -->
+<div class="modal fade" id="clearRequestModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>해당 신청서의 정보로 도서비치신청을 진행합니다.</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      		<button type="button" class="btn btn-primary px-4" onclick="clearRequestModal();" >확인</button>
+      		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>	
+
+<!-- checkISBN -->
+<div class="modal fade" id="checkISBN" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkISBN" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>이미 신청된 도서입니다.</p>
+			<p>기등록된 ISBN코드를 발견했습니다.</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>	
+
+
+
+
+
 </body>
 </html>

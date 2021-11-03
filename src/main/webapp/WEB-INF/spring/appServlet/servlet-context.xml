@@ -67,6 +67,7 @@
 			<exclude-mapping path="/service/seatIdCheck"/>
 			<exclude-mapping path="/service/seatMemberIdCheck"/>
 			<exclude-mapping path="/service/searchRecord"/>
+			<exclude-mapping path="/service/checkISBN"/>
 			<!-- ajax 컨트롤러는 무조건 인터셉터에서 제외시켜줘야 함! -->
 			<exclude-mapping path="/myPage/myInfoAjax"/>
 			<exclude-mapping path="/myPage/updatePw"/>

@@ -1,6 +1,9 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
 	
+		$('html,body').animate({
+			scrollTop:150
+		},100);
 	
 	$(document).on('click','#goRequest',function(){
 		var menuCode = $('.menuCode').val();
@@ -16,13 +19,27 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	$(document).on('click','#deleteRequest',function(){
+		var requestCode = $(this).parent().parent().prev().children().eq(0).text();
+		
+		$('#requestCodeP').text(requestCode);
+		$('#deleteBookRequestConfirm').modal('show');	
+		
+		
+	});
 
 });	
 
 //함수 선언 영역
 (function($){
 	goRequestRegFormFunction = function(menuCode){
-		location.href='/service/bookRequestRegForm?menuCode='+menuCode
+		location.href='/service/bookRequestRegForm?menuCode='+menuCode;
+	}
+	
+	deleteBookRequest = function(menuCode){
+		var requestCode = $('#requestCodeP').text();
+		location.href='/service/deleteBookRequest?menuCode='+menuCode+'&&requestCode='+requestCode;
 	}
    
 })(jQuery);
