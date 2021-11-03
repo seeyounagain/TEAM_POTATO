@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=75" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=91" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -56,7 +56,24 @@ $(function() {
 
 <h2 class="text-first fw-bold">도서관리</h2>
 <hr>
-	<button type="button" class="btn btn-primary mb-3" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}'">신규도서등록</button>
+	<div class="row mb-3">
+		<div class="col-6">
+			<button type="button" class="btn btn-primary px-4" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}'">신규도서등록</button>
+		</div>		
+	    <div class="col-5 align-self-center">
+			<div class="input-group searchB">
+				<span class="input-group-text keyword" id="inputGroup-sizing-default">
+					<img width="20px;" src="/resources/img/search_g.png">
+				</span>
+				<input type="text" class="form-control p-2" id="searchValue" name="searchValue" placeholder="검색어를 입력해주세요.">
+			</div>
+		</div>
+		<div class="col-1 d-grid align-self-center" style="padding-left: 3px;">
+			<input type="button" value="검색" id="goSearchBtn" class="btn btn-primary p-2">
+		</div>
+	</div>
+	
+	<div class="col-12">
 	<select name="status" class="form-select" id="statusSelect">
 		<option value="0">전체</option>
 		<option value="1">대출가능</option>
@@ -65,8 +82,11 @@ $(function() {
 		<option value="4">예약중</option>
 		<option value="5">대출대기중</option>
 	</select>
+	</div>
 	
 <table id="bookT" class="table table-hover table-bordered caption-top">
+
+	<caption id="bookTcap">도서 ${bookList.size() }건</caption>
 
 	<colgroup>
 		<col width="60%">

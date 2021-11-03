@@ -234,6 +234,15 @@
 		<if test="status != 0">
 		AND STATUS = #{status}
 		</if>
+		<if test="searchValue != null and !searchValue.equals('')">
+	    AND ( UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
+	    OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') )
+	    </if>		
 		ORDER BY DECODE(STATUS,3,1,2,2,4,3,5,4,1,5) ASC, INPUT_DATE DESC
 	</select>	
 	
