@@ -143,7 +143,6 @@
 			if(tell1J.test($('#tell1').val()) && tell2J.test($('#tell2').val()) && tell3J.test($('#tell3').val())){
 				
 				$('#tellCheck').text('');
-				$('#joinBtn').removeClass('disabled');
 				return ;
 			}
 			else{
@@ -256,7 +255,63 @@
 			
 			else {
 				
-				$('form').submit();
+				if ($('#name').val() == null || $('#name').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#name').focus();
+					return ;
+				}
+				if ($('#id').val() == null || $('#id').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#id').focus();
+					return ;
+				}
+				if ($('#pw').val() == null || $('#pw').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#pw').focus();
+					return ;
+				}
+				if ($('#checkPw').val() == null || $('#checkPw').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#checkPw').focus();
+					return ;
+				}
+				if ($('#birth').val() == null || $('#birth').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#birth').focus();
+					return ;
+				}
+				if ($('#tell2').val() == null || $('#tell2').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#tell2').focus();
+					return ;
+				}
+				if ($('#tell3').val() == null || $('#tell3').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#tell3').focus();
+					return ;
+				}
+				if ($('#postcode').val() == null || $('#postcode').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#postcode').focus();
+					return ;
+				}
+				if ($('#address').val() == null || $('#address').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#address').focus();
+					return ;
+				}
+				if ($('#smsNum').val() == null || $('#smsNum').val() == '') {
+					$('#joinBtn').addClass('disabled');
+					$('#smsNum').focus();
+					return ;
+				}
+				
+				else {
+				
+					$('#joinBtn').removeClass('disabled');
+					$('form').submit();
+					
+				}
 				
 			}
 			
