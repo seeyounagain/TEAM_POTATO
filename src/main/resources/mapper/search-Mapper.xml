@@ -234,7 +234,7 @@
 		<if test="status != 0">
 		AND STATUS = #{status}
 		</if>
-		ORDER BY INPUT_DATE DESC
+		ORDER BY DECODE(STATUS,3,1,2,2,4,3,5,4,1,5) ASC, INPUT_DATE DESC
 	</select>	
 	
 	<!-- 상품 이미지 코드 숫자 생성 -->
@@ -383,6 +383,7 @@
             , TITLE
             , WRITER
             , STATUS
+            , RENTAL_CODE
             , TO_CHAR(RENTAL_DATE,'YYYY-MM-DD') AS RENTAL_DATE            
             , TO_CHAR(LIMIT_DATE,'YYYY-MM-DD') AS LIMIT_DATE
         FROM BOOK B, RENTAL R
@@ -398,6 +399,7 @@
             , TITLE
             , WRITER
             , STATUS
+            , RESERVE_CODE
             , TO_CHAR(RENTABLE_START_DATE,'YYYY-MM-DD') AS RENTABLE_START_DATE
             , TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') AS RENTABLE_END_DATE
         FROM BOOK B, RESERVE R
@@ -659,6 +661,24 @@
         AND ID = #{id}
         AND RETURN_DATE IS NULL	
 	</select>
+	
+	<!-- 회원이 예약하고 있는 도서 중 대출대기중인 도서 조회 -->
+	<select id="selectMemberReserveStatusIsWait" resultMap="reserve">
+        SELECT
+            RESERVE_CODE
+            , TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') AS RENTABLE_END_DATE
+            , BOOK_CODE
+        FROM RESERVE
+        WHERE RENTABLE_END_DATE IS NOT NULL
+        AND ID = #{id}	
+	</select>
+	
+	<!-- 대출 가능 기간이 지난 예약정보 삭제 -->
+	<delete id="deleteReserveDateIsOver">
+	DELETE RESERVE
+	WHERE RESERVE_CODE = #{reserveCode}
+	</delete>
+	
 	
 </mapper>
 

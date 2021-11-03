@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=35" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=43" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;
@@ -98,16 +98,16 @@ textarea {
 			<div class="container-fluid">
 			    <table class="table table-hover table-bordered text-first caption-top" style="width: 100%;">
 			    	<tr>
-			    		<td id="fromIdText" style="font-size: 17px;">받는이</td>
+			    		<td id="adminToIdText" style="font-size: 17px;">받는이</td>
 			    	</tr>
 			    	<tr>
-			    		<td id="sendDateText" style="font-size: 17px; color: gray;" >읽음/읽지않음</td>
+			    		<td id="adminIsReadText" style="font-size: 17px; color: gray;" >읽음/읽지않음</td>
 			    	</tr>
 			    	<tr>
-			    		<td id="sendDateText" style="font-size: 17px; color: gray;" >보낸시간</td>
+			    		<td id="adminSendDateText" style="font-size: 17px; color: gray;" >보낸시간</td>
 			    	</tr>
 			    	<tr>
-			    		<td id="contentText">내용</td>
+			    		<td id="adminContentText">내용</td>
 			    	</tr>
 			    </table>
 			</div>
@@ -115,7 +115,7 @@ textarea {
       <div class="modal-footer" style="display: block;">
       	<div class="row">
       		<div class="col-6 text-first">
-      			<button type="button" onclick="selectAdminMessageList();" class="btn btn-primary px-4 messageListBtn">목록</button>
+      			<button type="button" onclick="selectAdminMessageList();" class="btn btn-primary px-4 adminMessageListBtn">목록</button>
       		</div>
       		<div class="col-6 text-end">
         		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>

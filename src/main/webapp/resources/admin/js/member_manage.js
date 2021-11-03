@@ -28,11 +28,31 @@
 	});
 	
 	// 알림 클릭 시 상세조회 modal show
-	$(document).on('click', '.messageDetail' , function() {
+	$(document).on('click', '.adminMessageDetail' , function() {
+		
+			var content = $(this).children().eq(0).text();
+			var toId = $(this).children().eq(1).text();
+			var sendDate = $(this).children().eq(2).text();
+			var isRead = $(this).children().eq(3).text();
+
+			$('#adminToIdText').text(toId);
+			$('#adminSendDateText').text(sendDate);
+			$('#adminContentText').text(content);
+			$('#adminIsReadText').text(isRead);
 		
 		$('#adminMessageModal').modal('hide');
 		$('#adminDetailModal').modal('show');
 		
+	});
+
+	/* 목록 버튼 클릭 시 목록 조회 modal toggle */
+	$(document).on('click', '.adminMessageListBtn' , function() {
+			
+			
+		$('#adminDetailModal').modal('hide');
+		$('#adminMessageModal').modal('show');
+			
+			
 	});
 	
 	// 알림보내기 버튼 클릭 시 아이디 지정
@@ -255,8 +275,8 @@
 	         		$(result).each(function(index, element){
 
 						
-						str += '<tr class="messageDetail">';
-						str += '<td class="contentOver lh-lg detailMessage" data-messageCode="' + element.messageCode + '"';
+						str += '<tr class="adminMessageDetail">';
+						str += '<td class="contentOver lh-lg adminDetailMessage" data-messageCode="' + element.messageCode + '"';
 						if (element.isRead == 'Y') {
 						str += 'style="color: gray;"';						
 						}

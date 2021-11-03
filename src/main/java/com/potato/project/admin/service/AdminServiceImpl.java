@@ -138,7 +138,8 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	
-	// 회원이 대출 중인 도서 목록 조회 + 반납 기간 지난 도서 연체중으로 상태 변경
+	// 회원이 대출 중인 도서 목록 조회 + 반납 기간 지난 도서 연체중으로 상태 변경 + 알림 전송
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int selectRentalListAndOverRentalUpdate(MemberVO memberVO) {
 		
@@ -170,6 +171,11 @@ public class AdminServiceImpl implements AdminService{
 					bookVO.setBookCode(vo.getBookCode());
 					bookVO.setStatus(3);
 					sqlSession.update("searchMapper.updateBookStatus",bookVO);
+					// 알림 전송
+					MessageVO messageVO = new MessageVO();
+					messageVO.setToId(memberVO.getId());
+					messageVO.setContent("대출 중이신 도서가 연체중입니다. 도서를 반납해주세요. 자세한 사항은 '나의도서관' 페이지에서 확인 가능합니다.");
+					sqlSession.insert("memberMapper.insertMessage",messageVO);
 					overCnt++;
 				}
 				
@@ -180,6 +186,60 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 		return overCnt;
+	}
+
+	
+	// 회원의 예약 정보 중 대출가능인 도서 조회 + 기간이 지난 도서 정보 삭제 + 알림 전송
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int selectReserveStatusIsWaitAndDeleteReserveDateIsOver(MemberVO memberVO) {
+		
+		List<ReserveVO> reserveList = sqlSession.selectList("searchMapper.selectMemberReserveStatusIsWait",memberVO);
+
+		// 현재 날짜 구하기
+		String now = FileUploadUtil.getNowDate();
+		// 날짜 비교를 위한 포맷 지정
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		// alert 띄우기 위한 기한 지난 도서 cnt
+		int overCnt = 0;
+		
+		// 대출가능 기한이 지난 도서가 있다면
+		for (ReserveVO vo : reserveList) {
+			
+			// 조회된 도서들의 반납기한과 현재 날짜 비교
+			try {
+				
+				// 같은 포맷으로 만들기
+				Date date1 = dateFormat.parse(now);
+				Date date2 = dateFormat.parse(vo.getRentableEndDate());
+				
+				// result가 true면 현재날짜 > 대출기한
+				boolean result = date1.after(date2);
+				
+				if (result) {
+					// 대출기한 지난 도서들 예약 정보 삭제
+					sqlSession.delete("searchMapper.deleteReserveDateIsOver",vo.getReserveCode());
+					// 알림 전송
+					MessageVO messageVO = new MessageVO();
+					messageVO.setToId(memberVO.getId());
+					messageVO.setContent("예약하신 도서의 대출가능 기간이 초과되어 예약이 취소되었습니다. 자세한 사항은 '나의도서관' 페이지에서 확인 가능합니다.");
+					sqlSession.insert("memberMapper.insertMessage",messageVO);
+					// 도서 상태 변경
+					BookVO bookVO = new BookVO();
+					bookVO.setBookCode(vo.getBookCode());
+					bookVO.setStatus(1);
+					sqlSession.update("searchMapper.updateBookStatus",bookVO);
+					overCnt++;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		}
+		
+		return overCnt;
+		
 	}
 	
 	// 회원이 대출 중인 도서 중 예약하려는 도서 조회
@@ -213,6 +273,7 @@ public class AdminServiceImpl implements AdminService{
 		return sqlSession.insert("memberMapper.insertMessage",messageVO);
 		
 	}
+
 	
 	
 	

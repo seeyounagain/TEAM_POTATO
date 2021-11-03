@@ -95,8 +95,10 @@ public class MemberController {
 			if (loginInfo.getIsDelete().equals("N")) {
 				
 				session.setAttribute("loginInfo", loginInfo);
-				// 연체도서 업데이트 및 갯수 조회
+				// 연체도서 업데이트 및 갯수 조회, 알림 전송
 				overCnt = adminService.selectRentalListAndOverRentalUpdate(memberVO);
+				// 예약도서 중 대출가능 기간 초과 도서 예약 정보 삭제, 알림 전송
+				adminService.selectReserveStatusIsWaitAndDeleteReserveDateIsOver(memberVO);
 				
 			}
 			
