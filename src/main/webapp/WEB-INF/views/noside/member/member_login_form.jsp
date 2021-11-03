@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=6" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=11" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -19,7 +19,6 @@
 </style>
 </head>
 <body>
-<form action="/member/login" method="post">
 	<h2 class="display-6 text-center fw-bold mt-3">로그인</h2>
 	<hr>
 	<div class="row g-0 justify-content-center">
@@ -43,7 +42,6 @@
 			</div>
 		</div>
 	</div>
-</form>
 
 <!-- 아이디 & 비밀번호 미입력 alert Modal -->
 <div class="modal fade" id="loginAlertModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -58,6 +56,25 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 아이디 & 비밀번호 미입력 alert Modal 종료 -->
+
+<!-- 로그인 alert Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: black;" id="loginModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="loginModalBody">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="loginModalClose" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
       </div>
     </div>
   </div>

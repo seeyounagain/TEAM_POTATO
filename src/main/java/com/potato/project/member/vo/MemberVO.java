@@ -17,6 +17,8 @@ public class MemberVO extends PageVO {
 	private String gender 	;		//  GENDER      -- 성별
 	private String favorite ;		//  FAVORITE    -- 관심카테고리
 	
+	private int overCnt;
+	
 	private String[] tells;
 	private String[] addrs;
 	
@@ -157,6 +159,12 @@ public class MemberVO extends PageVO {
 	}
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+	public int getOverCnt() {
+		return overCnt;
+	}
+	public void setOverCnt(int overCnt) {
+		this.overCnt = overCnt;
 	}
 	
 }

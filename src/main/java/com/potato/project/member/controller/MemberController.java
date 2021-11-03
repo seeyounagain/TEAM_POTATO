@@ -80,8 +80,9 @@ public class MemberController {
 	}
 	
 	// 로그인
+	@ResponseBody
 	@PostMapping("/login")
-	public String join(MemberVO memberVO, HttpSession session, Model model) {
+	public MemberVO loginAjax(MemberVO memberVO, HttpSession session, Model model) {
 		
 		MemberVO loginInfo = memberSerivce.selectMember(memberVO);
 		
@@ -102,11 +103,11 @@ public class MemberController {
 				
 			}
 			
-			model.addAttribute("overCnt",overCnt);
+		loginInfo.setOverCnt(overCnt);
 
 		}
 
-		return "noside/member/login_result";
+		return loginInfo;
 		
 	}
 	

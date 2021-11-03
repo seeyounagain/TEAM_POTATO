@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=43" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=66" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;
@@ -182,6 +182,8 @@ textarea {
           <div class="mb-3">
             <label for="message-text" class="col-form-label">내용 : </label>
             <textarea class="form-control" id="content" ></textarea>
+          	<div class="col-12 mt-2" id="byteCheck" style="font-size: 14px;"></div>
+          	<div class="col-12 mt-2" id="byteAlert" style="font-size: 14px;"></div>
           </div>
       </div>
       <div class="modal-footer">

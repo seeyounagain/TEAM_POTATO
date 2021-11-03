@@ -45,7 +45,7 @@
 		
 	});
 
-	/* 목록 버튼 클릭 시 목록 조회 modal toggle */
+	// 목록 버튼 클릭 시 목록 조회 modal toggle
 	$(document).on('click', '.adminMessageListBtn' , function() {
 			
 			
@@ -54,6 +54,49 @@
 			
 			
 	});
+	
+	// 알림 내용 byte 체크
+	$(document).on('keyup', '#content' , function() {
+		
+		var maxByte = 3000; //최대 3000바이트
+		var text_val = $(this).val(); //입력한 문자
+		var text_len = text_val.length; //입력한 문자수
+		var maxStr = 0; //문자열 길이
+		    
+		var totalByte = 0;
+		for(var i = 0; i < text_len; i++){
+			var each_char = text_val.charAt(i);
+			var uni_char = escape(each_char) //유니코드 형식으로 변환
+				if(uni_char.length > 4){
+					// 한글 : 2Byte
+					totalByte += 2;
+					maxStr += 1;
+				}else{
+			        // 영문,숫자,특수문자 : 1Byte
+		            totalByte += 1;
+		            maxStr += 1;
+		        }
+
+		    $('#byteCheck').text(totalByte + ' / 3000Byte ');
+		    $('#byteCheck').css('color', 'blue');
+		    
+			    if(totalByte >= maxByte){
+			    	 $('#byteAlert').text('최대 3000Byte까지 입력가능합니다. ');
+			    	 $('#byteAlert').css('color', 'red');
+			    	 $('#byteCheck').css('color', 'red');
+					cutStr = text_val.substr(0,maxStr); //문자열 자르기
+					$(this).val(cutStr);
+					return ;
+				}else{
+			        $('#byteCheck').css('color', 'blue');
+			        $('#byteAlert').text('');
+				}
+
+		    }
+
+		    
+		
+	});	
 	
 	// 알림보내기 버튼 클릭 시 아이디 지정
 	$(document).on('click', '.messageBtn' , function() {
