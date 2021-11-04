@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.bookA:hover {
+	text-decoration: underline 2px black;
+	cursor: pointer;
+	color: black;
+}
+.bookATag:hover {
+	color: black;
+}
+.memberA:hover {
+	text-decoration: underline 2px black;
+	cursor: pointer;
+	color: black;
+}
+.memberATag:hover {
+	color: black;
+}
+
+</style>
 </head>
 <body>
 <!-- 나의도서관 member폴더 -> my_lib.jsp 추가 --봉 -->
@@ -63,21 +82,21 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/대출.png"></a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/예약.png"></a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/반납.png"></a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/대출.png"></a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/예약.png"></a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/반납.png"></a></td>
 						</tr>
 						<tr>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대여중</a></th>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약중</a></th>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">반납</a></th>
+							<th><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대여중</a></th>
+							<th><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약중</a></th>
+							<th><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">반납</a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.rentalCnt }</a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.reserveCnt }</a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.returnCnt }</a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.rentalCnt }</a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.reserveCnt }</a></td>
+							<td><a class="bookA" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.returnCnt }</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -91,14 +110,14 @@
 			<div class="col-3 mb-2" style="border-bottom: 1px solid  #e2e3e5;">
 				<h3>도서관련</h3>
 			</div>
-			<div class="col-12 mb-2">
-				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대출내역</a>
+			<div class="bookA col-12 mb-2">
+				<a class="bookATag" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대출내역</a>
 			</div>
-			<div class="col-12 mb-2">
-				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약현황</a>
+			<div class="bookA col-12 mb-2">
+				<a class="bookATag" href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약현황</a>
 			</div>
-			<div class="col-12">
-				<a href="/myPage/bookRequestStatus?menuCode=${menuVO.menuCode }">도서비치신청현황</a>
+			<div class="bookA col-12">
+				<a class="bookATag" href="/myPage/bookRequestStatus?menuCode=${menuVO.menuCode }">도서비치신청현황</a>
 			</div>
 		</div>
 		<!-- 도서관련끝 -->
@@ -110,11 +129,11 @@
 			<div class="col-3 mb-2" style="border-bottom: 1px solid  #e2e3e5;">
 				<h3>회원관련</h3>
 			</div>
-			<div class="col-12 mb-2">
-				<a href="/myPage/myInfo?menuCode=${menuVO.menuCode }">내정보</a>
+			<div class="memberA col-12 mb-2">
+				<a class="memberATag" href="/myPage/myInfo?menuCode=${menuVO.menuCode }">내정보</a>
 			</div>
-			<div class="col-12">
-				<a href="/myPage/myQnaList?menuCode=${menuVO.menuCode }">문의내역</a>
+			<div class="memberA col-12">
+				<a class="memberATag" href="/myPage/myQnaList?menuCode=${menuVO.menuCode }">문의내역</a>
 			</div>
 		</div>
 		<!-- 회원관련끝 -->
