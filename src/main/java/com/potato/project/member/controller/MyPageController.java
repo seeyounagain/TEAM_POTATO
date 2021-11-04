@@ -23,6 +23,19 @@ public class MyPageController {
 	@Resource(name = "myPageService")
 	private MyPageService myPageService;
 
+	// 나의 도서비치신청현황 가는 페이지
+
+	@GetMapping("/bookRequestStatus")
+	public String bookRequestStatus(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO,MemberVO memberVO) {
+		// 로그인정보 MemberVO에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
+		model.addAttribute("memberBookSituationCnt",myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
+
+		return "service/bookRequestStatus";
+
+	}
+	
+	
+	
 	// 나의 도서관 클릭시 오는 페이지--추가--봉
 	@GetMapping("/myPage")
 	public String myLib(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO,MemberVO memberVO) {

@@ -44,6 +44,23 @@ public class AdminController {
 	@Resource(name = "commonService")
 	private CommonService commonService;
 	
+	// 도서비치 관리 페이지 이동
+	@GetMapping("/bookRequestManage")
+	public String bookRequestManage(Model model,MenuVO menuVO,HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		return  "service/bookRequestManage";
+	}
+		
+	
+	
+	
+	
 	// 도서관리 페이지 이동
 	@GetMapping("/bookManage")
 	public String bookManage(Model model,MenuVO menuVO,BookVO bookVO) {
