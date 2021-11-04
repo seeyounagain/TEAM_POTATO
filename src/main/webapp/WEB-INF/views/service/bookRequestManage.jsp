@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-도서비치관리페이지
 
+<h2 class="text-first fw-bold">도서비치관리</h2>
+<hr>
 <a href="/service/bookRequest?menuCode=MENU_003&sideMenuCode=SIDE_MENU_006">ddd</a>
 
 </body>

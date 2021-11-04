@@ -62,7 +62,7 @@ public class ServiceController {
 		return "service/recommend";
 	}
 	
-	//도서비치 현황
+	//도서비치 안내페이지
 	@RequestMapping("/bookRequest") // (value = "/bookRequest", produces="application/String;xml=UTF-8")
 	public String bookRequest(Model model,MenuVO menuVO,HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");

@@ -16,20 +16,30 @@ import com.potato.project.common.vo.SideMenuVO;
 import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.service.MyPageService;
 import com.potato.project.member.vo.MemberVO;
+import com.potato.project.service.service.ServiceService;
 
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
 	@Resource(name = "myPageService")
 	private MyPageService myPageService;
-
+	
+	@Resource(name = "serviceService")
+	private ServiceService serviceService;
+	
 	// 나의 도서비치신청현황 가는 페이지
 
+	
 	@GetMapping("/bookRequestStatus")
 	public String bookRequestStatus(Model model, MenuVO menuVO, HttpSession session, SideMenuVO sideMenuVO,MemberVO memberVO) {
 		// 로그인정보 MemberVO에 담아서 맵퍼로 보내고 결과값 다시 받아와서 화면에 뿌림
-		model.addAttribute("memberBookSituationCnt",myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
 
+		model.addAttribute("requestBoardList", serviceService.requestBoardList(serviceService.requestIdAndIsAdminCheck(loginInfo)));
+		model.addAttribute("requestCnt",serviceService.checkRequestCnt(loginInfo));
 		return "service/bookRequestStatus";
 
 	}

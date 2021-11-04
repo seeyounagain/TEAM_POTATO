@@ -4,6 +4,19 @@ $(document).ready(function(){
 		$('html,body').animate({
 			scrollTop:150
 		},100);
+		
+	$(document).on('click','#goRequestStatus',function(){
+        var loginInfo = $('.loginInfo').val();
+		if(loginInfo){
+		location.href='/myPage/bookRequestStatus?menuCode=MENU_005';		
+				
+		}else{
+			var login = confirm('홈페이지에 확인된 ID 정보가 없습니다. \n로그인화면으로 이동하시겠습니까?');
+			if(login){
+				location.href='/member/memberLoginForm';				
+			}
+		}
+	});	
 	
 	$(document).on('click','#goRequest',function(){
 		var menuCode = $('.menuCode').val();
