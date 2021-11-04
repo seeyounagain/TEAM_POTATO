@@ -56,7 +56,7 @@
 <p class="mx-3 mb-0 text-center">		
 		<input type="hidden" class="loginInfo" value="${sessionScope.loginInfo.id }">
 		<input type="button" class="btn btn-primary  btn-lg" value="신청하기" id="goRequest">
-		<input type="button" class="btn btn-primary  btn-lg" value="신청현황" id="goRequest">
+		<input type="button" class="btn btn-primary  btn-lg" value="신청현황" id="goRequestStatus">
 </p> 
 </div>
 <div class="col-11 miniTitle">
