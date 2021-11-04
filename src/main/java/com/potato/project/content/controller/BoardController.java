@@ -73,7 +73,7 @@ public class BoardController {
 		
 		
 		if(!inputName.getOriginalFilename().equals("")) {
-			//파일이 있으면
+			//파일이 있으면...
 		
 			
 			//파일이 첨부될 경로
@@ -115,8 +115,8 @@ public class BoardController {
 		}
 
 		
-		//공지사항 목록으로 이동
-		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
+		//공지사항 alert으로 이동
+		return "board/notice_result?menuCode=" + menuVO.getMenuCode();
 	}
 	
 	//공지사항 상세보기
