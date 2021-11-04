@@ -119,6 +119,7 @@ $(document).ready(function(){
 					else{
 						str += '<td><div class="col-12"><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="소설"><label class="form-check-label" for="inlineCheckbox1">소설</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="시/에세이"><label class="form-check-label" for="inlineCheckbox1">시/에세이</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="요리/건강"><label class="form-check-label" for="inlineCheckbox1">요리/건강</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="취미/실용"><label class="form-check-label" for="inlineCheckbox1">취미/실용</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="경제/경영"><label class="form-check-label" for="inlineCheckbox1">경제/경영</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="자기계발"><label class="form-check-label" for="inlineCheckbox1">자기계발</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="favorite" value="역사/문화"><label class="form-check-label" for="inlineCheckbox1">역사/문화</label></div></div></td>';                   
 					}
+					
 					str += '</tr>';
 					str += '</table>';
 					str += '</div>';
@@ -131,10 +132,10 @@ $(document).ready(function(){
 					str += '<button type="submit" class="btn btn-primary" id="updateBtn">수정하기</button>';
 					str += '</div>';
 					str += '<div class="col-2 d-grid">';
-					str += '<a href="/myPage/myPage?menuCode='+ menuCode +'"><button type="button" class="btn btn-secondary">취소</button></a>';
+					str += '<button type="button" class="btn btn-secondary" onclick="javascript:history.back();">취소</button>';
 					str += '</div>';
 					str += '</form>';
-		        	
+					
 					$('#ajaxStart').append(str);
 		        	
 		        },
