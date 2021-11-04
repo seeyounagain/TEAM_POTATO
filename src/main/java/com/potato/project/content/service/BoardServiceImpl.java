@@ -90,7 +90,7 @@ public class BoardServiceImpl  implements BoardService{
 	@Override 
 	public NoticeVO mainPopupNotice() {
 	 
-		return sqlSession.selectOne("boardService.mainPopupNotice"); 
+		return sqlSession.selectOne("boardMapper.mainPopupNotice"); 
 	}
 	 
 	

@@ -64,19 +64,33 @@
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	                <h5 class="modal-title">공지</h5>
+	                <h5 class="modal-title" style="font-weight: bold;">도담도서관 공지사항</h5>
 	            </div>
 	            <div class="modal-body">
-					<div id="noticeContent"></div>
+					<table class="table">
+						<tr style="border-bottom-color: white;">
+							<td id="title" style="font-size: 20px; font-weight: bold;"></td>
+						</tr>
+						<tr style="border-bottom-color: white;">
+							<td id="content" style="height: 100px;"></td>
+						</tr>
+					</table>
+					
 	            </div>
-	            <div class="modal-footer">
-	                <input type="checkbox" id="chkBox">오늘만 닫기
-	                <button type="button" class="btn" id="popEnd" data-dismiss="modal" >닫기</button>
+	            <div class="modal-footer" style="display: block;">
+					<div class="row">
+			      		<div class="col-9 text-first">
+			      			<input type="checkbox" id="chkBox">오늘 하루 다시 이 창을 열지 않음
+			      		</div>
+			      		<div class="col-3 text-end">
+			       			<button type="button" class="btn btn-primary" id="popEnd" data-dismiss="modal" >닫기</button>
+			      		</div>
+			      	</div>	            
 	            </div>
 	        </div>
 	    </div>
 	</div>
- <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=8" ></script>
+ <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=10" ></script>
 
 
 <div class="row justify-content-center">
@@ -85,7 +99,7 @@
 <form action="/search/bookSearch" method="post">
 	    <div class="row justify-content-center pt-5 mt-2">
     		<div class="col-8 text-center fs-1 mb-3">
-    			<div style="color: white;"> 울산 도서관에 오신 것을 환영합니다.</div>
+    			<div style="color: white;"> 도담 도서관에 오신 것을 환영합니다.</div>
     		</div>
 		    <div class="col-6 align-self-center">
 				<div class="input-group searchB">

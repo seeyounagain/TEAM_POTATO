@@ -9,7 +9,7 @@ if(checkCookie == 'popUp=Potato') {
 $(window).on('load',function(){ 
 	$('#notice').modal('show');
 	
-	var noticeCode = document.getElementById("noticeCode");
+	var noticeCode = $('#noticeCode').val();
 	
 	$.ajax({
 		url: '/common/popupAjax', //요청경로
@@ -17,7 +17,8 @@ $(window).on('load',function(){
 		data:{'noticeCode': noticeCode},
 		success: function(result){ 
 			
-			$('#noticeContent').text(result.content);
+			$('#title').text(result.title);
+			$('#content').text(result.content);
 			
 		},
 		error: function(){
