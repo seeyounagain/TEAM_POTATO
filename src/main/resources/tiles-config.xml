@@ -5,7 +5,7 @@
 	
 	<!-- 사이드 메뉴가 있는 기본 template -->
 	<definition name="baseLayout" template="/WEB-INF/views/template/base_template.jsp">
-		<put-attribute name="title" value="POTATO_LIBRARY"/>
+		<put-attribute name="title" value="고담 도서관에 오신 것을 환영합니다."/>
 		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
 		<put-attribute name="side" value="/WEB-INF/views/template/side.jsp"/>
 		<put-attribute name="body" value=""/>
@@ -13,7 +13,7 @@
 	
 	<!--사이드 메뉴가 없는 메뉴 클릭 시 template -->
 	<definition name="noSideLayout" template="/WEB-INF/views/template/no_side_template.jsp">
-		<put-attribute name="title" value="POTATO_LIBRARY"/>
+		<put-attribute name="title" value="고담 도서관에 오신 것을 환영합니다."/>
 		<put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp"/>
 		<put-attribute name="body" value=""/>
 	</definition>
