@@ -97,6 +97,16 @@ public class ServiceServiceImpl implements ServiceService {
 	public void deleteBookRequest(RequestBoardVO rbVO) {
 		sqlSession.delete("serviceMapper.deleteBookRequest" , rbVO);
 	}
+
+	@Override
+	public List<RequestBoardVO> requestBoardListAdmin() {
+		return sqlSession.selectList("serviceMapper.requestBoardListAdmin");
+	}
+
+	@Override
+	public int ajaxRegRequest(RequestBoardVO rbVO) {
+		return sqlSession.insert("serviceMapper.ajaxRegRequest", rbVO);
+	}
 	
 	
 	

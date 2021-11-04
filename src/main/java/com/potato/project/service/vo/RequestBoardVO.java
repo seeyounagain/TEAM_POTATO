@@ -12,9 +12,15 @@ public class RequestBoardVO {
  		private String category             ;                                   //    CATEGORY 
 		private String kdcCode              ;                                   //    KDC_CODE 
 		private String kdcName              ;                                   //    KDC_NAME 
+		private String requestStatus		;									//	  REQUEST_STATUS
 		
 		
-		
+		public String getRequestStatus() {
+			return requestStatus;
+		}
+		public void setRequestStatus(String requestStatus) {
+			this.requestStatus = requestStatus;
+		}
 		public String getCategory() {
 			return category;
 		}

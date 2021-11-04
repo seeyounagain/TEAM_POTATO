@@ -30,6 +30,7 @@ import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
+import com.potato.project.service.service.ServiceService;
 
 @Controller
 @RequestMapping("/libManage")
@@ -44,7 +45,10 @@ public class AdminController {
 	@Resource(name = "commonService")
 	private CommonService commonService;
 	
+	@Resource(name = "serviceService")
+	private ServiceService serviceService;
 	// 도서비치 관리 페이지 이동
+	
 	@GetMapping("/bookRequestManage")
 	public String bookRequestManage(Model model,MenuVO menuVO,HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -53,6 +57,8 @@ public class AdminController {
 		}
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		// 모든리스트를 뿌리는 리스트
+		model.addAttribute("requestList", serviceService.requestBoardListAdmin());
 		
 		return  "service/bookRequestManage";
 	}

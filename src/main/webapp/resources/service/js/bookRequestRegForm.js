@@ -1,5 +1,9 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
+		
+		$('html,body').animate({
+			scrollTop:200
+		},100);
 
 	$('#searchAction').submit(function(){
 		var kwd = $('#kwdInput').val();
@@ -19,15 +23,12 @@ $(document).ready(function(){
 		
 	
 	$(document).on('click','#cancel',function(){
-			result = confirm('취소하시겠습니까?');
-			if(result){
-			//디브 - 플렉스,논
 			$('#regForm').css('display','none');
 			$('#searchForm').css('display','flex');
 			//타이틀- 인라인,논
 			$('#searchTitle1').css('display','inline');
 			$('#searchTitle2').css('display','none');
-			} 	
+			
 	});
 	
 	$(document).on('click','.dataTr',function(){
@@ -69,10 +70,11 @@ $(document).ready(function(){
 		$('#searchTitle2').css('display','inline');
 		
 		$('html,body').animate({
-			scrollTop:150
+			scrollTop:210
 		},100);
 
 		var isbn = $('input[name=isbn]').val();
+		
 		$.ajax({
 			url: '/service/checkISBN', //요청경로
 			type: 'post',
@@ -97,8 +99,81 @@ $(document).ready(function(){
 		
 		}
 		
-		clearRequestModal = function(){
-		$('#regBookRequestAction').submit();			
+		clearRequestModalAndGoStatus = function(menuCode){
+			$('#clearRequestModal').modal('hide');
+			
+			//서브밋
+			var title  =	$('input[name=title]').val();                 	
+			var writer =	$('input[name=writer]').val();               	
+			var pubDate =	$('input[name=pubDate]').val();             				
+			var category =	$('input[name=category]').val();           	
+			var isbn =		$('input[name=isbn]').val();                   				
+			var kdcCode =	$('input[name=kdcCode]').val();             				
+			var kdcName =	$('input[name=kdcName]').val(); 
+			var id =		$('input[name=id]').val(); 
+			//ajax 사용
+			$.ajax({
+		        url: '/service/ajaxRegRequest', //요청경로
+		        type: 'post',
+		        data:{'title':title,'writer':writer,'pubDate':pubDate
+		        		,'category':category,'isbn':isbn,'kdcCode':kdcCode
+		        		,'kdcName':kdcName,'id':id}, //필요한 데이터
+		        success: function(result) {
+		        	if(result){
+		        	location.href='/myPage/bookRequestStatus?menuCode='+menuCode;		
+					}else{
+					
+					}
+		        },
+		        error: function(){
+		        	//ajax 실행 실패 시 실행되는 구간
+		        	alert('실패');
+		        }
+		  });
+			
+			
+		}
+		
+		
+		clearRequestModalAndHold = function(menuCode){
+			$('#clearRequestModal').modal('hide');
+			
+			//서브밋
+			var title  =	$('input[name=title]').val();                 	
+			var writer =	$('input[name=writer]').val();               	
+			var pubDate =	$('input[name=pubDate]').val();             				
+			var category =	$('input[name=category]').val();           	
+			var isbn =		$('input[name=isbn]').val();                   				
+			var kdcCode =	$('input[name=kdcCode]').val();             				
+			var kdcName =	$('input[name=kdcName]').val(); 
+			var id =		$('input[name=id]').val(); 
+			//ajax 사용
+			$.ajax({
+		        url: '/service/ajaxRegRequest', //요청경로
+		        type: 'post',
+		        data:{'title':title,'writer':writer,'pubDate':pubDate
+		        		,'category':category,'isbn':isbn,'kdcCode':kdcCode
+		        		,'kdcName':kdcName,'id':id}, //필요한 데이터
+		        success: function(result) {
+		        	if(result){
+		        	location.href='/service/bookRequestRegForm?menuCode='+menuCode;			
+					}else{
+					
+					}
+		        },
+		        error: function(){
+		        	//ajax 실행 실패 시 실행되는 구간
+		        	alert('실패');
+		        }
+		  });
+				
+					
+					
+					
+			
+			
+			
+		//location.href='/service/bookRequestRegForm?menuCode='+menuCode;			
 		}
 	
    

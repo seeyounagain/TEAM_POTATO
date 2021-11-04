@@ -42,4 +42,8 @@ public interface ServiceService {
 	
 	void deleteBookRequest(RequestBoardVO rbVO);
 	
+	List<RequestBoardVO> requestBoardListAdmin();
+	
+	int ajaxRegRequest(RequestBoardVO rbVO);
+	
 }

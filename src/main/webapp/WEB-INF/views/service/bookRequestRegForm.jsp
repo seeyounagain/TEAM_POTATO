@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=3"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=7"></script>
 <style type="text/css">
 
 table{
 	width: 100%;
-	font-size: 13px;
+	font-size: 14px;
 }
 .dataTr > td:hover{
 	cursor: pointer;
@@ -175,8 +175,8 @@ table{
 	    </div>   
 	    <div class="col-4 mt-2 me-0">                                                                                
     		<div class="text-center">                  <!-- 버튼식으로 만들어서 ISBN 중복확인 -->                                         
-                <input class="btn btn-primary" type="button" id= "regBookSubmit1" value="신청" style="width: 100%; display: inline"></input>                
-                <input class="btn btn-primary" type="button" id= "regBookSubmit2" value="신청불가 : 기 신청 도서" style="width: 100%; display: none" disabled></input>                
+                <input class="btn btn-primary" type="button" id= "regBookSubmit1" value="신청<c:if test="${requestCnt == 5}">불가 : 신청 횟수 초과</c:if>" <c:if test="${requestCnt == 5}">disabled</c:if> style="width: 100%; display: inline">               
+                <input class="btn btn-primary" type="button" id= "regBookSubmit2" value="신청불가 : 기 신청 도서" style="width: 100%; display: none" disabled></input>             
 	  		</div>                                                                                         
 	    </div> 
 	    <div class="col-4 mt-2 ms-0">                                                                                
@@ -184,6 +184,9 @@ table{
                 <input class="btn btn-primary" type="button" id="cancel" value="취소" style="width: 100%;"></input>                
 	  		</div>                                                                                         
 	    </div> 
+	    <div class="text-center mt-3">
+	  		<h6>현재 신청중인 도서 : ${requestCnt } / 5 </h6>
+	  	</div>  
 	</div>	
 	</form>	
 	</div>
@@ -217,8 +220,8 @@ table{
 
 						
 			</div>
-   		<div class="overflow-auto mt-5" style="height: 600px; width: 100%;">
-		<table class="table text-center fs-10" style="width: 1100px;">
+   		<div class="overflow-auto mt-5 justify-content-center" style="height: 600px; width: 100%;">
+		<table class="table fs-10 text-center" style="width: 1100px; margin: 0 auto;">
 
   		<thead>
 
@@ -331,13 +334,14 @@ table{
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="color: black;">
-			<p>해당 신청서의 정보로 도서비치신청을 진행합니다.</p>
+			<p>해당 신청서의 정보로 도서비치신청을 완료합니다.</p>
+			<p></p>
       </div>
       <div class="modal-footer" style="display: block;">
 		<div class="row">
       		<div class="col-12 text-end">
-      		<button type="button" class="btn btn-primary px-4" onclick="clearRequestModal();" >확인</button>
-      		<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		<button type="button" class="btn btn-primary px-4" onclick="clearRequestModalAndHold('${menuVO.menuCode}');" >계속검색</button>
+      		<button type="button" class="btn btn-primary px-4" onclick="clearRequestModalAndGoStatus('${menuVO.menuCode}');" >신청현황</button>
       		</div>
       	</div>
       </div>

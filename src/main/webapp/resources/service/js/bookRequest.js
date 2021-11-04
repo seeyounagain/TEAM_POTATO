@@ -1,9 +1,6 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
 	
-		$('html,body').animate({
-			scrollTop:150
-		},100);
 		
 	$(document).on('click','#goRequestStatus',function(){
         var loginInfo = $('.loginInfo').val();

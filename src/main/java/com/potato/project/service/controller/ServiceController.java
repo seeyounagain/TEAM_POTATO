@@ -212,7 +212,11 @@ public class ServiceController {
 	return serviceService.checkISBN(isbn);
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/ajaxRegRequest")
+	public int ajaxRegRequest(Model model, RequestBoardVO rbVO) {
+	return serviceService.ajaxRegRequest(rbVO);
+	}
 	
 	
 
