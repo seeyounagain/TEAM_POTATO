@@ -9,13 +9,16 @@ if(checkCookie == 'popUp=Potato') {
 $(window).on('load',function(){ 
 	$('#notice').modal('show');
 	
+	var noticeCode = document.getElementById("noticeCode");
+	
 	$.ajax({
 		url: '/common/popupAjax', //요청경로
 		type: 'post',
 		data:{'noticeCode': noticeCode},
-		success: function(result){
-			var str = '';
-			str += '<div>' + element.content + '</div>';
+		success: function(result){ 
+			
+			$('#noticeContent').text(result.content);
+			
 		},
 		error: function(){
 		// ajax 실행 실패 시 실행되는 구간

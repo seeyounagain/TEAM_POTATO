@@ -58,16 +58,16 @@
 </style>
 </head>
 <body>
-
+<input type="hidden" value="${noticeVO.noticeCode}" id="noticeCode">
 <!-- 팝업 모달창 -->
-	<div class="modal" id="notice" tabindex="-1" role="dialog">
+	<div class="modal" id="notice" tabindex="-1" role="dialog" >
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h5 class="modal-title">공지</h5>
 	            </div>
 	            <div class="modal-body">
-	                <p>공지사항</p>
+					<div id="noticeContent"></div>
 	            </div>
 	            <div class="modal-footer">
 	                <input type="checkbox" id="chkBox">오늘만 닫기
@@ -76,7 +76,7 @@
 	        </div>
 	    </div>
 	</div>
- <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=6" ></script>
+ <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=8" ></script>
 
 
 <div class="row justify-content-center">

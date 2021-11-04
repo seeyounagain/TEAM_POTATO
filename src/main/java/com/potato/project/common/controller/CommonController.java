@@ -47,7 +47,7 @@ public class CommonController {
 	
 	@ResponseBody
 	@PostMapping("/popupAjax")
-	public NoticeVO selectPopupNotice() {
+	public NoticeVO selectPopupNotice(NoticeVO noticeVO) {
 		// 메인 팝업 공지사항
 	
 		return boardService.mainPopupNotice();
