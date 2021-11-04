@@ -72,7 +72,7 @@ input{
 						</tr>
 					</table>
 					<div class="btnDiv text-center">
-						<input class="btn btn-primary" type="submit" value="등록">
+						<input class="btn btn-primary" type="submit" value="등록" id="submitBtn">
 					</div>
 				</form>
 				</div>
