@@ -31,24 +31,26 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click','.dataTr',function(){
-		var title		= $(this).children().eq(4).text();
-		var writer		= $(this).children().eq(5).text();
-		var isbn		= $(this).children().eq(8).text();
-		var pubDate		= $(this).children().eq(6).text();
-		var category    = $(this).children().eq(1).text();
-		var kdcCode     = $(this).children().eq(10).text();
-		var kdcName     = $(this).children().eq(11).text();
-		$('input[name=title]').val(title);
-		$('input[name=writer]').val(writer);
-		$('input[name=isbn]').val(isbn);
-		$('input[name=pubDate]').val(pubDate);
-		$('input[name=category]').val(category);
-		$('input[name=kdcCode]').val(kdcCode);
-		$('input[name=kdcName]').val(kdcName);
-		$('#regFormModalText').text(title);		
-		
-		$('#goRegFormModal').modal('show');
-		
+		var category    = $(this).children().eq(1).text();    
+		var title		= $(this).children().eq(4).text();    
+		var writer		= $(this).children().eq(5).text();    
+		var pubDate		= $(this).children().eq(6).text();    
+		var isbn		= $(this).children().eq(7).text();    
+		var kdcCode     = $(this).children().eq(8).text();    
+		var kdcName     = $(this).children().eq(9).text();  
+		  
+		$('input[name=category]').val(category);           	
+		$('input[name=title]').val(title);                 	
+		$('input[name=writer]').val(writer);               	
+		$('input[name=isbn]').val(isbn);                   				
+		$('input[name=pubDate]').val(pubDate);             				
+		$('input[name=kdcCode]').val(kdcCode);             				
+		$('input[name=kdcName]').val(kdcName);  
+		           				
+		$('#regFormModalText').text(title);		           				
+		                                                   				
+		$('#goRegFormModal').modal('show');                				
+		                                                   				
 	
     });
 	//이벤트 처리	

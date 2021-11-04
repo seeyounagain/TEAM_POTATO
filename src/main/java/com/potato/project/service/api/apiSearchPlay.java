@@ -88,10 +88,16 @@ public class apiSearchPlay {
 	        				
 	        			}else {
 		        		ApiDataVO adVO = new ApiDataVO(
-		        			(String)totalData.get("titleInfo"),(String)totalData.get("typeName"),(String)totalData.get("authorInfo"),(String)totalData.get("menuName")
-		        			,(String)totalData.get("mediaName"),(String)totalData.get("pubYearInfo"),(String)totalData.get("id"),(String)totalData.get("typeCode")
-		        			,(String)totalData.get("isbn"),(String)totalData.get("callNo"),(String)totalData.get("kdcCode1s"), (String)totalData.get("kdcName1s")
-		        			);
+		        			(String)totalData.get("titleInfo")       
+		        			,(String)totalData.get("typeName")       
+		        			,(String)totalData.get("authorInfo")     
+		        			,(String)totalData.get("menuName")       
+		        			,(String)totalData.get("mediaName")      
+		        			,(String)totalData.get("pubYearInfo")    
+		        			,(String)totalData.get("isbn")           
+		        			,(String)totalData.get("kdcCode1s")      
+		        			,(String)totalData.get("kdcName1s")      
+		        			);                                       
 		        		adList.add(adVO);
 	        			}
 

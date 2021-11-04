@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=2"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=3"></script>
 <style type="text/css">
 
 table{
 	width: 100%;
-	font-size: 14px;
+	font-size: 13px;
 }
 .dataTr > td:hover{
 	cursor: pointer;
@@ -110,8 +110,12 @@ table{
 		<div class="col-8 mt-2">                                                                                
     		<div class="text-center">                                                           
                 <input class="btn btn-primary" type="submit" id="submit" value="국립중앙도서관 연계검색" style="width: 100%;"></input>                
+	  		</div>
+	  		<div class="text-center mt-3">
+	  		<h6>현재 신청중인 도서 : ${requestCnt } / 5 </h6>
 	  		</div>                                                                                         
 	    </div> 
+	    
 	</div>
 	</form>
 	</div>
@@ -213,40 +217,49 @@ table{
 
 						
 			</div>
-   		<div class="overflow-auto mt-5" style="height: 600px;">
-		<table class="table text-center">
+   		<div class="overflow-auto mt-5" style="height: 600px; width: 100%;">
+		<table class="table text-center fs-10" style="width: 1100px;">
+
   		<thead>
-    		<tr class="text-center mt-5">
-     			<th scope="col">종키</th>	             
-     			<th scope="col">카테고리</th>        
-     			<th scope="col">메뉴명</th>         
-     			<th scope="col">매체구분</th>        
-     			<th scope="col">제목</th>        
-     			<th scope="col">저자	</th>        
-     			<th scope="col">발행년도</th>       
-     			<th scope="col">자료유형코드</th>		    
-     			<th scope="col">ISBN</th>		       
-     			<th scope="col">청구기호</th>	
-     			<th scope="col">KDC코드</th>
-     			<th scope="col">KDC분류명칭</th>	
+
+    		<tr class="text-center mt-5">           
+     			<th>No.</th>        
+     			<th>타입</th>        
+     			<th>메뉴명</th>         
+     			<th>매체구분</th>        
+     			<th>제목</th>        
+     			<th>저자	</th>        
+     			<th>발행년도</th>       	    
+     			<th>ISBN</th>		       
+     			<th>KDC코드</th>
+     			<th>KDC명칭</th>	
     		</tr> 
   		</thead>
  		 <tbody>
- 	 
+ 	 	  <colgroup>
+			<col width="5%">
+			<col width="5%">
+			<col width="6%">
+			<col width="6%">
+			<col width="*">
+			<col width="15%">
+			<col width="6%">
+			<col width="7%">
+			<col width="7%">
+			<col width="7%">
+		</colgroup>
   		<c:choose>
 		<c:when test="${not empty apiSearchList }">
 		<c:forEach items="${apiSearchList }" var="a" varStatus="status">
 			<tr class="dataTr">
-				<td>${a.id }</td>		
+				<td>${status.index+1}</td>		
 				<td>${a.typeName }</td>		
 				<td>${a.menuName }</td>		
 				<td>${a.mediaName }</td>		
 				<td>${a.titleInfo }</td>		
 				<td>${a.authorInfo }</td>		
 				<td>${a.pubYearInfo }</td>		
-				<td>${a.typeCode }</td>		
-				<td>${a.isbn }</td>		
-				<td>${a.callNo }</td>		
+				<td>${a.isbn }</td>			
 				<td>${a.kdcCode1s }</td>		
 				<td>${a.kdcName1s }</td>			
 			</tr>	                                             		

@@ -37,7 +37,7 @@
 		<div class="col-12 text-center mb-3">
 			<div>
 				<h4>도서비치신청현황</h4><br>
-				<h5>신청중 도서 : </h5>
+				<h5>신청중 도서 : ${requestCnt } / 5 </h5>
 			</div>			
 		</div>
 <!-- 도서비치 신청 이동 a태그 구획 -->	
