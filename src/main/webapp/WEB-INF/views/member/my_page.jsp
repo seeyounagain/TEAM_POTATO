@@ -92,14 +92,17 @@
 				<h3>도서관련</h3>
 			</div>
 			<div class="col-12 mb-2">
-				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">대출내역</a>
+				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대출내역</a>
+			</div>
+			<div class="col-12 mb-2">
+				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약현황</a>
 			</div>
 			<div class="col-12">
-				<a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">예약현황</a>
+				<a href="/myPage/bookRequestStatus?menuCode=${menuVO.menuCode }">도서비치신청현황</a>
 			</div>
 		</div>
-	
 		<!-- 도서관련끝 -->
+		
 		
 		
 		<!-- 회원관련 -->
