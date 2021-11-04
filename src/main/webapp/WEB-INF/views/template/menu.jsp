@@ -139,7 +139,7 @@ $(function() {
 <!-- 메뉴 -->
 <div class="row mb-2 menu2">
 	<div class="col-12 text-center mb-3">
-		<img class="logo" width="200px" src="/resources/img/logo5.png" onclick="location.href='/common/main'">
+		<img class="logo" width="300px" src="/resources/img/lib_logo_w.png" onclick="location.href='/common/main'">
 	</div>
 	<div class="col-12 pb-2">
 		<ul class="nav justify-content-center">
