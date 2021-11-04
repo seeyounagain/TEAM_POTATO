@@ -122,6 +122,7 @@
 		<!-- 회원 정보 조회//1025 봉 -->
 	<select id="selectMemberInfo" resultMap="memberVO">
 		SELECT ID
+			, PW
 			, NAME
 			, ADDR
 			, TELL
@@ -135,19 +136,11 @@
 	</select>
 	
 	<!-- 전화번호&주소 빼옴 -->
-	<select id="selectTell" resultMap="memberVO">
+	<select id="selectMemberInfo2" resultMap="memberVO">
 		SELECT ID
 			, PW
 			, NAME
-			, SUBSTR(TELL,0,3) AS TELL1
-			<if test="tellCnt == 12">
-    		, SUBSTR(TELL,5,3) AS TELL2
-    		, SUBSTR(TELL,9,4) AS TELL3
-			</if>
-			<if test="tellCnt == 13">
-    		, SUBSTR(TELL,5,4) AS TELL2
-    		, SUBSTR(TELL,10,4) AS TELL3
-			</if>
+			, TELL
 			, SUBSTR(ADDR,0,5) AS POST_CODE
 			, SUBSTR(ADDR,7) AS ADDR
 			, SUBSTR(TO_CHAR(BIRTH, 'YYYY-MM-DD'),0,4)||'년'
@@ -175,6 +168,14 @@
 		SET PW = #{pw}
 		WHERE ID = #{id}
 	</update>
+	
+	<!-- 회원탈퇴시 빌린책 있는지 여부 확인 -->
+	<select id="checkRENTALBook" resultType="int">
+		SELECT COUNT(RENTAL_CODE) AS RENTAL_CNT
+		FROM RENTAL
+		WHERE RETURN_DATE IS NULL
+		AND ID = #{id}
+	</select>
 	
 	<!-- 회원 탈퇴 -->
 	<update id="checkMemberquit">

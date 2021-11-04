@@ -63,7 +63,6 @@ public class MyPageController {
 		//전하번호 따로 뺴기위해 조회함
 		model.addAttribute("memberInfo", myPageService.selectMemberInfo((MemberVO)session.getAttribute("loginInfo")));
 		//전화번호 빼고 또 다시 담고 보냄
-		model.addAttribute("myTells", myPageService.selectTell(myPageService.selectTellCnt((MemberVO)session.getAttribute("loginInfo"))));
 		return "member/my_info";
 
 	}
@@ -72,7 +71,7 @@ public class MyPageController {
 	@ResponseBody
 	@RequestMapping("/myInfoAjax")
 	public MemberVO myInfoAjax(MemberVO memberVO) {
-		memberVO = myPageService.selectTell(myPageService.selectTellCnt(memberVO));
+		memberVO = myPageService.selectMemberInfo2(memberVO);
 		
 		return memberVO;
 	}
@@ -98,8 +97,11 @@ public class MyPageController {
 	public boolean checkMemberquit(HttpSession session,MemberVO memberVO) {
 		//회원 로그아웃 시키고 메인메뉴로
 		session.removeAttribute("loginInfo");
-		
-		return myPageService.checkMemberquit(memberVO);
+		if(myPageService.checkRENTALBook(memberVO)) {
+			
+			return myPageService.checkMemberquit(memberVO);
+		}
+		return false;
 	}
 	//내정보 끝
 	

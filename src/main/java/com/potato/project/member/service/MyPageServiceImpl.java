@@ -30,16 +30,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return sqlSession.selectOne("myPageMapper.selectMemberInfo", memberVO);
 	}
 	
-	//전화번호 길이 구하기
+	//회원 정보 조회 하는데 주소 두개로 뺌
 	@Override
-	public MemberVO selectTellCnt(MemberVO myPageVO) {
-		return sqlSession.selectOne("myPageMapper.selectTellCnt", myPageVO);
-	}
-	
-	//전화번호 다시 하나씩 뺴오기
-	@Override
-	public MemberVO selectTell(MemberVO memberVO) {
-		return sqlSession.selectOne("myPageMapper.selectTell", memberVO);
+	public MemberVO selectMemberInfo2(MemberVO memberVO) {
+		return sqlSession.selectOne("myPageMapper.selectMemberInfo2", memberVO);
 	}
 	
 	//회원정보 수정
@@ -48,12 +42,22 @@ public class MyPageServiceImpl implements MyPageService {
 		sqlSession.update("myPageMapper.updateMyInfo", memberVO);
 		
 	}
+	
 	//비밀번호변경시 기존비밀번호 확인
 	@Override
 	public boolean updatePw(MemberVO memberVO) {
 		int result = sqlSession.update("myPageMapper.updatePw",memberVO);
 		return result == 0 ? true : false ;
 	}
+	
+	//회원탈퇴시 빌린책 있는지 여부 확인
+	@Override
+	public boolean checkRENTALBook(MemberVO memberVO) {
+		int result = sqlSession.selectOne("myPageMapper.checkRENTALBook",memberVO);
+		
+		return result == 0 ? true : false;
+	}
+	
 
 	//회원탈퇴시 비밀번호 확인
 	@Override
@@ -97,6 +101,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<ReserveVO> selectReserveList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
 	}
+
 
 
 

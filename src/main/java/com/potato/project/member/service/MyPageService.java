@@ -16,17 +16,17 @@ public interface MyPageService {
 	//내정보 조회
 	MemberVO selectMemberInfo(MemberVO memberVO);
 	
-	//전화번호 길이 조회
-	MemberVO selectTellCnt(MemberVO memberVO);
-	
-	//전화번호 다시 하나씩 뺴오기
-	MemberVO selectTell(MemberVO memberVO);
+	//내정보에서  주소 분리해서 빼오기
+	MemberVO selectMemberInfo2(MemberVO memberVO);
 	
 	//회원정보수정
 	void updateMyInfo(MemberVO memberVO);
 	
 	//회원 비밀번호 수정
 	boolean updatePw(MemberVO memberVO);
+	
+	//회원 탈퇴시 빌린책 있는지 여부
+	boolean checkRENTALBook(MemberVO memberVO);
 	
 	//회원 탈퇴
 	boolean checkMemberquit(MemberVO memberVO);

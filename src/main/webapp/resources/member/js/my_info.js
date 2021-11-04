@@ -350,13 +350,16 @@ $(document).ready(function(){
 						type: 'post',
 						data:{'id':id}, //필요한 데이터/        
 						success: function(result) {
-							alert('탈퇴하였습니다');
-							location.href = '/common/main';
+							if(result){
+								alert('탈퇴하였습니다');
+								location.href = '/common/main';
+								
+							}
+							alert('대출중인 책이 있습니다.반납후 진행가능합니다');
 							
 						},
 						error: function(){
 							//ajax 실행 실패 시 실행되는 구간
-							alert('실패');
 						}
 						
 					})		

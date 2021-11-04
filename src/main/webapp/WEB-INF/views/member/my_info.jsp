@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=114"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=115"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -119,7 +119,7 @@
 					</div>
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">
-				<input type="hidden" id="existingPw" value="${myTells.pw }">
+				<input type="hidden" id="existingPw" value="${memberInfo.pw }">
 				<!-- 수정버튼 끝 -->
 			</div>
 		</div>

@@ -63,21 +63,21 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/대출.png"></a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/예약.png"></a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012"><img width="120px;" src="/resources/img/반납.png"></a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/대출.png"></a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/예약.png"></a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }"><img width="120px;" src="/resources/img/반납.png"></a></td>
 						</tr>
 						<tr>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">대여중</a></th>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">예약중</a></th>
-							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">반납</a></th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">대여중</a></th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">예약중</a></th>
+							<th><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">반납</a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.rentalCnt }</a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.reserveCnt }</a></td>
-							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_012">${memberBookSituationCnt.returnCnt }</a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.rentalCnt }</a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.reserveCnt }</a></td>
+							<td><a href="/myPage/myLibrary?menuCode=${menuVO.menuCode }">${memberBookSituationCnt.returnCnt }</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -111,10 +111,10 @@
 				<h3>회원관련</h3>
 			</div>
 			<div class="col-12 mb-2">
-				<a href="/myPage/myInfo?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_011">내정보</a>
+				<a href="/myPage/myInfo?menuCode=${menuVO.menuCode }">내정보</a>
 			</div>
 			<div class="col-12">
-				<a href="/myPage/myQnaList?menuCode=${menuVO.menuCode }&sideMenuCode=SIDE_MENU_015">문의내역</a>
+				<a href="/myPage/myQnaList?menuCode=${menuVO.menuCode }">문의내역</a>
 			</div>
 		</div>
 		<!-- 회원관련끝 -->

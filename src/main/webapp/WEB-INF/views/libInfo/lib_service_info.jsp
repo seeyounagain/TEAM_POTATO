@@ -60,6 +60,41 @@ table td{
 				<p>
 			</div>
 		</div> --%>
+		<!-- 자료현황 -->
+		<!-- 도서현황 -->
+		<div class="row justify-content-center mb-2 mt-4">
+			<div class="col-6 text-start">
+				<h5>도서현황</h5>
+			</div>
+			<div class="col-6 text-end">
+				${bookLastUpdate }기준(단위 : 권) <!-- 새로운책 입력하면 갱신됩니당 -->
+			</div>
+		</div>
+		<!-- 도서현황 테이블 -->
+		<div class="row justify-content-center mb-4">
+			<div class="col text-center">
+				<table class="table" style="border-top: #0b70b9;">
+					<thead class="table-secondary">
+			 			<tr>
+							<c:forEach items="${bookCateList }" var="bookCate">
+								<th>${bookCate.kdcName}</th>
+							</c:forEach>
+							<th>합계</th>	
+						</tr>
+					</thead>
+					<tbody>	
+						<tr>
+							<c:forEach items="${bookCateList }" var="bookCate">
+								<td>${bookCate.kdcCnt }</td>
+							</c:forEach>
+							<td>${totalBookCnt }</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
 		
 		
 		<!-- 이용 시간 -->

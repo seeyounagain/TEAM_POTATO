@@ -51,6 +51,14 @@ public class LibInfoController {
 	//도서관정보 이용안내
 	@GetMapping("/serviceInfo")
 	public String serviceInfo(Model model,MenuVO menuVO,HttpSession session,SideMenuVO sideMenuVO) {
+		//모든책 개수 구하기 최종 갱신일 던지기
+		model.addAttribute("bookLastUpdate", libInfoService.bookLastUpdate());
+		
+		//책의 종류와 책의 개수던져줌
+		model.addAttribute("bookCateList", libInfoService.bookCnt());
+		//책의 총 개수 던져줌
+		model.addAttribute("totalBookCnt", libInfoService.totalBookCnt());
+		
 		
 		return "libInfo/lib_service_info";
 	}
