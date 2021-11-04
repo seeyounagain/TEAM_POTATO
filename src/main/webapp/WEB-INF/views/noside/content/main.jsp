@@ -64,10 +64,10 @@
 	    <div class="modal-dialog" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	                <h5 class="modal-title">공지사항</h5>
+	                <h5 class="modal-title">공지</h5>
 	            </div>
 	            <div class="modal-body">
-	                <p>공지내용</p>
+	                <p>공지사항</p>
 	            </div>
 	            <div class="modal-footer">
 	                <input type="checkbox" id="chkBox">오늘만 닫기
@@ -76,7 +76,8 @@
 	        </div>
 	    </div>
 	</div>
-<script type="text/javascript" src="/resources/board/js/main_notice.js?ver=4" ></script>
+ <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=6" ></script>
+
 
 <div class="row justify-content-center">
 	<!-- 검색 -->

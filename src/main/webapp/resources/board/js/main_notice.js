@@ -6,8 +6,24 @@ if(checkCookie == 'popUp=Potato') {
 };
 
 //팝업 모달창 띄우기
- $(window).on('load',function(){ 
+$(window).on('load',function(){ 
 	$('#notice').modal('show');
+	
+	$.ajax({
+		url: '/common/popupAjax', //요청경로
+		type: 'post',
+		data:{'noticeCode': noticeCode},
+		success: function(result){
+			var str = '';
+			str += '<div>' + element.content + '</div>';
+		},
+		error: function(){
+		// ajax 실행 실패 시 실행되는 구간
+		alert('실패');
+		}
+		
+	});
+	
 });
 
 //닫기를 클릭하면

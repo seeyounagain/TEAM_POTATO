@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
 import com.potato.project.common.vo.MenuVO;
@@ -29,6 +31,8 @@ public class CommonController {
 	
 	@GetMapping("/main")
 	public String test(Model model, HttpSession session, MenuVO menuVO, NoticeVO noticeVO) {
+	
+		
 		
 		// 신착도서목록
 		model.addAttribute("bookList",searchService.selectBookList());
@@ -36,8 +40,18 @@ public class CommonController {
 		//공지사항 목록
 		model.addAttribute("noticeList", boardService.mainNoticeList());
 		
+		
 		return "noside/content/main";
 		
 	}
+	
+	@ResponseBody
+	@PostMapping("/popupAjax")
+	public NoticeVO selectPopupNotice() {
+		// 메인 팝업 공지사항
+	
+		return boardService.mainPopupNotice();
+	}
+	
 	
 }

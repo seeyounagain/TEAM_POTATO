@@ -93,9 +93,14 @@
 	</select>
 	
 	<!-- 메인 팝업에 뜨는 이미지 없는 공지사항 -->
-	<select id="">
-	
+	<select id="mainPopupNotice" resultMap="notice">
+		SELECT NOTICE_CODE 
+			 , TITLE 
+			 , CONTENT
+		FROM (SELECT *FROM NOTICE ORDER BY NOTICE_CODE DESC)
+		WHERE ROWNUM= 1
 	</select>
+	
 	<!-- 공지사항 INSERT -->
 	<insert id="insertNotice">
 		INSERT INTO NOTICE(

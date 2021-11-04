@@ -51,6 +51,54 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.insert("boardMapper.insertNoticeFile", noticeVO);
 	}
 	
+	//공지사항 상세보기
+	@Override
+	public NoticeVO selectNotice(NoticeVO noticeVO) {
+
+		return sqlSession.selectOne("boardMapper.selectNotice", noticeVO);
+	}
+
+	//공지사항 삭제
+	@Override
+	public int deleteNotice(NoticeVO noticeVO) {
+		
+		return sqlSession.delete("boardMapper.deleteNotice", noticeVO);
+	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCnt(NoticeVO noticeVO) {
+	
+		return sqlSession.update("boardMapper.updateReadCnt", noticeVO);
+	}
+
+	//공지사항 총 개수
+	@Override
+	public int cntNotice(NoticeVO noticeVO) {
+
+		return sqlSession.selectOne("boardMapper.cntNotice", noticeVO);
+	}
+	
+	//메인에 띄울 공지사항 리스트
+	@Override
+	public List<NoticeVO> mainNoticeList() {
+		
+		return sqlSession.selectList("boardMapper.mainNoticeList");
+	}
+
+	//메인 팝업 공지사항
+	@Override 
+	public NoticeVO mainPopupNotice() {
+	 
+		return sqlSession.selectOne("boardService.mainPopupNotice"); 
+	}
+	 
+	
+	
+	//----------------------------------상담문의 부분 ------------------------\\
+	
+	
+	
 	//문의상담 목록 조회
 	 @Override
 	 public List<QnaVO> selectQnaList(QnaVO qnaVO) {
@@ -85,20 +133,6 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.selectList("boardMapper.selectAnsewerList", qnaAnswerVO);
 	}
 	
-	//공지사항 상세보기
-	@Override
-	public NoticeVO selectNotice(NoticeVO noticeVO) {
-
-		return sqlSession.selectOne("boardMapper.selectNotice", noticeVO);
-	}
-
-	//공지사항 삭제
-	@Override
-	public int deleteNotice(NoticeVO noticeVO) {
-		
-		return sqlSession.delete("boardMapper.deleteNotice", noticeVO);
-	}
-
 	//문의, 답변 동시 삭제
 	@Override
 	public int deleteQna(QnaVO qnaVO) {
@@ -113,14 +147,6 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.delete("boardMapper.deleteAnswer", qnaVO);
 	}
 	
-	
-	//공지사항 조회수 증가
-	@Override
-	public int updateReadCnt(NoticeVO noticeVO) {
-	
-		return sqlSession.update("boardMapper.updateReadCnt", noticeVO);
-	}
-
 	//답변 등록 개수 + 업데이트
 	@Override
 	public int updateAcnt(QnaVO qnaVO) {
@@ -136,13 +162,6 @@ public class BoardServiceImpl  implements BoardService{
 		
 	}
 	
-	//공지사항 총 개수
-	@Override
-	public int cntNotice(NoticeVO noticeVO) {
-
-		return sqlSession.selectOne("boardMapper.cntNotice", noticeVO);
-	}
-	
 	//문의상담 총 개수
 	@Override
 	public int cntQna() {
@@ -150,12 +169,7 @@ public class BoardServiceImpl  implements BoardService{
 		return sqlSession.selectOne("boardMapper.cntQna");
 	}
 
-	//메인에 띄울 공지사항 리스트
-	@Override
-	public List<NoticeVO> mainNoticeList() {
-		
-		return sqlSession.selectList("boardMapper.mainNoticeList");
-	}
+
 	
 	
 	
