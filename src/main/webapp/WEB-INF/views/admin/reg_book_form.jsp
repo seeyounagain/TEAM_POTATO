@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=19" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=20" ></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -47,7 +47,7 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="pubDate" class="form-label">발행년도</label>
-				<input type="text" class="form-control" id="pubDate" name="pubDate" placeholder="예) 20211021 " required>
+				<input type="text" class="form-control" id="pubDate" name="pubDate" placeholder="예) 2021 " required>
 				<div class="col-12 mt-2" id="pubDateAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
@@ -78,7 +78,8 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="file" class="form-label">표지이미지</label>
-				<input type="file" name="file" class="form-control" id="inputGroupFile01 file" required>		
+				<input type="file" name="file" class="form-control" id="inputGroupFile01 file">
+				<div class="mt-2">* 이미지를 등록하지 않을 시, 기본 이미지로 보여집니다.</div>		
 			</div>
 			<div class="d-grid mt-3">
 				<button type="submit" id="regBtn" class="btn btn-primary">등록</button>

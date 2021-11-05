@@ -161,11 +161,6 @@
 					$('#area').focus();
 					return ;
 				}
-				if (file == null || file == '') {
-					$('#regBtn').addClass('disabled');
-					$('#file').focus();
-					return ;
-				}
 				
 				else {
 				
