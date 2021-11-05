@@ -31,6 +31,10 @@
 		<result column="STATUS" 		property="status"/>
 		<result column="RENTAL_ID" 		property="rentalId"/>
 		<result column="RESERVE_ID" 	property="reserveId"/>
+		<result column="RENTAL_DATE" 	property="rentalDate"/>
+		<result column="LIMIT_DATE" 	property="limitDate"/>
+		<result column="RENTABLE_START_DATE" 	property="rentableStartDate"/>
+		<result column="RENTABLE_END_DATE" 	property="rentableEndDate"/>
 		<association property="bookImgVO" resultMap="bookImg"/>
 	</resultMap>
 	
@@ -229,6 +233,10 @@
 		    , STATUS
 		    , (SELECT ID FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RESERVE_ID
 		    , (SELECT ID FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS RENTAL_ID
+            , (SELECT TO_CHAR(RENTAL_DATE,'YYYY-MM-DD') FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS RENTAL_DATE
+            , (SELECT TO_CHAR(LIMIT_DATE,'YYYY-MM-DD') FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS LIMIT_DATE
+            , (SELECT TO_CHAR(RENTABLE_START_DATE,'YYYY-MM-DD') FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RENTABLE_START_DATE
+            , (SELECT TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RENTABLE_END_DATE		
 		FROM BOOK B, BOOK_CATE C
 		WHERE B.KDC_NUM = C.KDC_NUM
 		<if test="status != 0">

@@ -28,6 +28,13 @@ public class BookVO extends PageVO{
 	
 	private String rentalId	; 		// 대여자 ID
 	private String reserveId	; 	// 예약자 ID
+
+	private String  rentalDate	;
+	private String  returnDate	;
+	private String  limitDate	;
+	
+	private String rentableStartDate	;
+	private String rentableEndDate		;
 	
 	public String getIsbn() {
 		return isbn;
@@ -155,6 +162,37 @@ public class BookVO extends PageVO{
 	public void setReserveId(String reserveId) {
 		this.reserveId = reserveId;
 	}
+	public String getRentalDate() {
+		return rentalDate;
+	}
+	public void setRentalDate(String rentalDate) {
+		this.rentalDate = rentalDate;
+	}
+	public String getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+	public String getLimitDate() {
+		return limitDate;
+	}
+	public void setLimitDate(String limitDate) {
+		this.limitDate = limitDate;
+	}
+	public String getRentableStartDate() {
+		return rentableStartDate;
+	}
+	public void setRentableStartDate(String rentableStartDate) {
+		this.rentableStartDate = rentableStartDate;
+	}
+	public String getRentableEndDate() {
+		return rentableEndDate;
+	}
+	public void setRentableEndDate(String rentableEndDate) {
+		this.rentableEndDate = rentableEndDate;
+	}
+	
 	
 	
 }

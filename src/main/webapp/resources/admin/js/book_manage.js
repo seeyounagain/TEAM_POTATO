@@ -264,6 +264,8 @@
 	    	var status = $('#statusSelect').val();
 	    	var searchValue = $('#searchValue').val();
 	    	
+	    	
+	    	
 	    	// 페이지 이동 없이 쿼리 실행 Ajax
 			$.ajax({
 		        url: '/libManage/selectStatusBookListAjax', // 요청경로
@@ -304,19 +306,20 @@
 						str += '<div class="mt-2">대출 가능';
 					}
 	         		else if (element.status == 2) {
-						str += '<div class="mt-2">대출중';
+						str += '<div class="mt-2">대출중&nbsp;<span class="mb-2" style="color: blue;">(&nbsp;' + element.rentalDate + '&nbsp;~&nbsp;' + element.limitDate + '&nbsp;)&nbsp;</span>';
 					}
 	         		else if (element.status == 3) {
-						str += '<div class="mt-2">연체중';
+						str += '<div class="mt-2">연체중&nbsp;<span class="mb-2" style="color: red;">(&nbsp;' + element.rentalDate + '&nbsp;~&nbsp;' + element.limitDate + '&nbsp;)&nbsp;</span>';
 					}
 	         		else if (element.status == 4) {
-						str += '<div class="mt-2">예약중';
+						str += '<div class="mt-2">예약중&nbsp;<span class="mb-2" style="color: blue;">(&nbsp;' + element.rentalDate + '&nbsp;~&nbsp;' + element.limitDate + '&nbsp;)&nbsp;</span>';
 					}
 	         		else if (element.status == 5) {
-						str += '<div class="mt-2">대출대기중';
+						str += '<div class="mt-2">대출대기중&nbsp;<span class="mb-2" style="color: blue;">(&nbsp;' + element.rentableStartDate + '&nbsp;~&nbsp;' + element.rentableEndDate + '&nbsp;)&nbsp;</span>';
 					}
 	         		
-	         		str += '&nbsp;/&nbsp;' + element.area + '</div>'
+	         		str += '</div>'
+	         		str += '<div class="mt-2">' + element.area + '</div>'
 	         		str += '</td>';
 	         		str += '<td class="text-center">';
 	         		
