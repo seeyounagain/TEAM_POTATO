@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=8" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=19" ></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -57,7 +57,8 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="bookSize" class="form-label">크기</label>
-				<input type="text" class="form-control" id="bookSize" name="bookSize" placeholder="예) 가로*세로 또는 가로 (cm 제외) " required>
+				<input type="text" class="form-control" id="bookSize" name="bookSize" placeholder="가로 크기를 숫자로 입력해주세요. (cm 제외) " required>
+				<div class="col-12 mt-2" id="sizeAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="keyword" class="form-label">주제</label>
@@ -77,7 +78,7 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="file" class="form-label">표지이미지</label>
-				<input type="file" name="file" class="form-control" id="inputGroupFile01 file" required>
+				<input type="file" name="file" class="form-control" id="inputGroupFile01 file" required>		
 			</div>
 			<div class="d-grid mt-3">
 				<button type="submit" id="regBtn" class="btn btn-primary">등록</button>
