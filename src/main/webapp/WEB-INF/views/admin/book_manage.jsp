@@ -141,5 +141,24 @@ $(function() {
 	</tbody>
 </table>
 
+<!-- modal 시작 -->
+<div class="modal fade" id="bookManageAlertModal" tabindex="-1" aria-labelledby="bookManageAlertModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookManageAlertModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bookManageAlertText">
+			<p>알림 전송에 실패했습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal 종료 -->
+
 </body>
 </html>

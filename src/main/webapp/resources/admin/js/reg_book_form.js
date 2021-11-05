@@ -150,7 +150,7 @@
 					$('#regBtn').addClass('disabled');
 					$('#keyword').focus();
 					return ;
-				}
+				} 
 				if (summary == null || summary == '') {
 					$('#regBtn').addClass('disabled');
 					$('#summary').focus();

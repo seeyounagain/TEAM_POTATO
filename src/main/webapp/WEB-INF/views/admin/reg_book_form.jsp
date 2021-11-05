@@ -52,17 +52,17 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="page" class="form-label">페이지</label>
-				<input type="text" class="form-control" id="page" name="page" placeholder="숫자로 입력해주세요. " required>
+				<input type="text" class="form-control" id="page" name="page" placeholder="숫자로 입력해주세요. ">
 				<div class="col-12 mt-2" id="pageAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="bookSize" class="form-label">크기</label>
-				<input type="text" class="form-control" id="bookSize" name="bookSize" placeholder="가로 크기를 숫자로 입력해주세요. (cm 제외) " required>
+				<input type="text" class="form-control" id="bookSize" name="bookSize" placeholder="가로 크기를 숫자로 입력해주세요. (cm 제외) ">
 				<div class="col-12 mt-2" id="sizeAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="keyword" class="form-label">주제</label>
-				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="예) 연애소설, 판타지 " required>
+				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="예) 연애소설, 판타지 ">
 			</div>
 			<div class="col-12 mt-2">
 				<label for="summary" class="form-label">한줄소개</label>

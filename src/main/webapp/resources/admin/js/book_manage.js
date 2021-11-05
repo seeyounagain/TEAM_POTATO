@@ -84,6 +84,9 @@
 			var bookCode = $(this).parent().parent().prev().children().last().children().attr('data-bookCode');
 			
 			if (id == '') {
+				
+				$('.modal-body').modal('show');
+				$('#bookManageAlertModal').modal('show');
 				alert('대여자의 아이디를 입력해주세요.');
 				return ;
 			}
