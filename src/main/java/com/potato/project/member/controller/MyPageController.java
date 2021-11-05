@@ -108,39 +108,57 @@ public class MyPageController {
 	//내문의내역 시작
 	//내 문의내역 조회하기
 	@GetMapping("/myQnaList")
-	public String goQna(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session,QnaVO qnaVO) {
+	public String goQna(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session, MemberVO memberVO) {
+		String id = ((MemberVO)session.getAttribute("loginInfo")).getId();
+		memberVO.setId(id);
+	
 		//페이징 위한 내문의 총 갯수
-		int totalCnt = myPageService.myQnaCnt((MemberVO)session.getAttribute("loginInfo"));
+		int totalCnt = myPageService.myQnaCnt(memberVO);
 		
 		//페이징 위해
-		qnaVO.setTotalCnt(totalCnt);
+		memberVO.setTotalCnt(totalCnt);
 		//메소드 호출 시 페이징 처리의 모든 정보 셋팅
-		qnaVO.setPageInfo();
+		memberVO.setPageInfo();
 		
 		//로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 받아와서 내문의내역 리스트 화면에 뿌림
-		model.addAttribute("qnaList",myPageService.myQnaList((MemberVO)session.getAttribute("loginInfo")));
+		model.addAttribute("qnaList",myPageService.myQnaList(memberVO));
 		return "member/my_qnaList";
 	}
+	
+	//내 문의 상세보기
+	@GetMapping("/myQnaDetail")
+	public String goMyQnaDetail(Model model,MenuVO menuVO, HttpSession session, QnaVO qnaVO) {
+		
+		model.addAttribute(qnaVO);
+		
+		
+		return "member/my_qna_detail";
+		
+	}
+	
 	//내 문의 끝
 	
 	//내 대출 예약 현황
 	//내 대출 내역,내 예약 현황 조회
 	@GetMapping("/myLibrary")
-	public String goMyLibrary(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session,RentalVO rentalVO) {
+	public String goMyLibrary(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session, MemberVO memberVO) {
+		String id = ((MemberVO)session.getAttribute("loginInfo")).getId();
+		memberVO.setId(id);
 		//페이징 위한 내대출 총 갯수
-		int totalCnt = myPageService.myRentalCnt((MemberVO)session.getAttribute("loginInfo"));
+		int totalCnt = myPageService.myRentalCnt(memberVO);
 		
 		//페이징 위해
-		rentalVO.setTotalCnt(totalCnt);
+		memberVO.setTotalCnt(totalCnt);
 		//메소드 호출 시 페이징 처리의 모든 정보 셋팅
-		rentalVO.setPageInfo();
+		memberVO.setPageInfo();
 		
 		//로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 받아와서 내대출내역 예약내역 리스트 화면에 뿌림
-		model.addAttribute("rentalList",myPageService.selectRentalList((MemberVO)session.getAttribute("loginInfo")));
-		model.addAttribute("reserveList",myPageService.selectReserveList((MemberVO)session.getAttribute("loginInfo")));
+		model.addAttribute("rentalList",myPageService.selectRentalList(memberVO));
+		model.addAttribute("reserveList",myPageService.selectReserveList(memberVO));
 		return "member/my_library";
 		
 	}
+
 	
 
 }

@@ -39,6 +39,9 @@ public interface MyPageService {
 	
 	//내상담 문의 총 갯수
 	int myQnaCnt(MemberVO memberVO);
+	
+	//내 상담문의 상세조회
+	QnaVO selectMyQna(QnaVO qnaVO);
 	//-----------------내문의 내역 끝-----------------
 	
 	

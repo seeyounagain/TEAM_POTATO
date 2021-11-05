@@ -23,6 +23,8 @@
 }
 .titleA:hover{
 	color: black;
+	text-decoration: underline;
+	font-weight: bold;
 }
 .answerCnt{
 	padding-left: 10px;
@@ -197,7 +199,7 @@
 											<td>${status.count }</td>
 											<td>
 											<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
-												<a class="titleA" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+												<a class="titleA" href="/myPage/myQnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}&id=${info.id}">${info.title }
 													<c:if test="${info.answerCnt != 0}">
 														<span class="m-2 complete">답변완료</span>
 													</c:if>
@@ -218,21 +220,21 @@
 				<div class="col-12 pageDiv">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
-							<c:if test="${qnaVO.prev }">
+							<c:if test="${memberVO.prev }">
 								<li class="page-item">
-									<a class="page-link" href="/myPage/myQnaList?nowPage=${qnaVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+									<a class="page-link" href="/myPage/myQnaList?nowPage=${memberVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
 							</c:if> 
-							<c:forEach var="pageNum" begin="${qnaVO.startPage }" end="${qnaVO.endPage }">
-								<li class="page-item  <c:if test="${qnaVO.nowPage eq pageNum }">active</c:if>">
+							<c:forEach var="pageNum" begin="${memberVO.startPage }" end="${memberVO.endPage }">
+								<li class="page-item  <c:if test="${memberVO.nowPage eq pageNum }">active</c:if>">
 									<a class="page-link" href="/myPage/myQnaList?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
 								</li>
 							</c:forEach>
-							<c:if test="${qnaVO.next }">
+							<c:if test="${memberVO.next }">
 								<li class="page-item">
-									<a class="page-link" href="/myPage/myQnaList?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+									<a class="page-link" href="/myPage/myQnaList?nowPage=${memberVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
 										<span aria-hidden="true">&raquo;</span>
 									</a>
 								</li>

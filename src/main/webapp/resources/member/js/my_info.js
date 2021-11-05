@@ -132,7 +132,7 @@ $(document).ready(function(){
 					str += '<button type="submit" class="btn btn-primary" id="updateBtn">수정하기</button>';
 					str += '</div>';
 					str += '<div class="col-2 d-grid">';
-					str += '<button type="button" class="btn btn-secondary" onclick="javascript:history.back();">취소</button>';
+					str += '<button type="button" class="btn btn-secondary" onclick="location.href=\'/myPage/myInfo?menuCode='+ menuCode +'\'">취소</button>';
 					str += '</div>';
 					str += '</form>';
 					

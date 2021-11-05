@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=122"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=124"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -115,7 +115,10 @@
 				<!-- 수정버튼 -->
 				<div class="row  justify-content-center">
 					<div class="col-2 d-grid">
-						<button type="button" id="changeBtn" class="btn btn-primary">수정하기</button>
+						<button type="button" id="changeBtn" class="btn btn-primary">수정</button>
+					</div>
+					<div class="col-2 d-grid">
+						<button type="button" class="btn btn-secondary" onclick="location.href='/myPage/myPage?menuCode=${menuVO.menuCode }'">뒤로가기</button>
 					</div>
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">

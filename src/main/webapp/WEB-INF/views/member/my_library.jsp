@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#backIcon:hover {
+	cursor: pointer;
+
+}
+.aTag:hover {
+	text-decoration: underline 2px black;
+	cursor: pointer;
+	color: black;
+	
+}
+</style>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -44,8 +56,11 @@
 		
 		<!-- 대출내역 테이블 시작 -->
 		<div class="row justify-content-center">
+				<div class="col-6 text-start" style="padding-top: 10px;">대출 현황</div>
+				<div class="col-6 text-end">
+					<img id="backIcon" src="/resources/img/back_off.png" onclick="javascript:history.back();" width="30px;" title="뒤로가기">
+				</div>
 			<div class="col-12 mb-4">
-				<div class="co-12">대출 현황</div>
 				<table class="table table-hover text-center mt-2" style="border-top: 2px solid #0b70b9;">
 					<colgroup>
 						<col width="10%">
@@ -76,7 +91,7 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>
-											<a href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
+											<a class="aTag" href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
 										</td>
 										<td>${rental.rentalDate }</td>
 										<c:choose>
@@ -120,21 +135,21 @@
 		<div class="col-12 pageDiv">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<c:if test="${rentalVO.prev }">
+					<c:if test="${memberVO.prev }">
 						<li class="page-item">
-							<a class="page-link" href="/myPage/myLibrary?nowPage=${rentalVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+							<a class="page-link" href="/myPage/myLibrary?nowPage=${memberVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 							</a>
 						</li>
 					</c:if> 
-					<c:forEach var="pageNum" begin="${rentalVO.startPage }" end="${rentalVO.endPage }">
-						<li class="page-item  <c:if test="${rentalVO.nowPage eq pageNum }">active</c:if>">
+					<c:forEach var="pageNum" begin="${memberVO.startPage }" end="${memberVO.endPage }">
+						<li class="page-item  <c:if test="${memberVO.nowPage eq pageNum }">active</c:if>">
 							<a class="page-link" href="/myPage/myLibrary?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
 						</li>
 					</c:forEach>
 					<c:if test="${rentalVO.next }">
 						<li class="page-item">
-							<a class="page-link" href="/myPage/myLibrary?nowPage=${rentalVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+							<a class="page-link" href="/myPage/myLibrary?nowPage=${memberVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>
@@ -176,7 +191,7 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>
-											<a href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
+											<a class="aTag" href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
 										</td>
 										<c:if test="${rental.bookVO.status eq 1}">
 											<td>대출가능</td>

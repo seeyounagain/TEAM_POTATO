@@ -189,17 +189,33 @@
 	<!-- 내 문의 상담 내역 -->
 	<!-- 내 문의상담 리스트 조회 -->
 	<select id="selectMyQnaList" resultMap="qna">
-		SELECT QNA_CODE 
+		SELECT ROW_NUM 
+		     , QNA_CODE 
 		     , TITLE
-		     , Q.ID
-		     , Q.NAME
-		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
-		     , QNA_PW
+		     , ID
+		     , NAME
+		     , CREATE_DATE
 		     , ANSWER_CNT
-		FROM QNA Q, MEMBER M
-		WHERE Q.ID = M.ID
-        AND M.ID = #{id}
-        ORDER BY QNA_CODE DESC
+		FROM (SELECT ROWNUM AS ROW_NUM 
+		         , QNA_CODE 
+		         , TITLE
+		         , ID
+		         , NAME
+		         , CREATE_DATE
+		         , ANSWER_CNT
+			 FROM (SELECT ROWNUM AS ROW_NUM 
+		                 , QNA_CODE 
+		                 , TITLE
+		                 , ID
+		                 , NAME
+		                 , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		                 , ANSWER_CNT
+		           FROM QNA
+		           WHERE ID = #{id}
+		           ORDER BY QNA_CODE DESC
+				   )    
+				)
+				WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 
 	<!-- 상담문의 총 개수 -->
@@ -209,6 +225,19 @@
 		FROM QNA
 		WHERE ID = #{id}
 	</select>
+	
+	<!-- 내 상담문의 상세보기 -->
+	<select id="selectMyQna" resultMap="qna">
+		SELECT QNA_CODE 
+			, TITLE
+			, ID
+			, NAME
+			, CREATE_DATE
+			, ANSWER_CNT
+		FROM QNA
+		WHERE ID = #{id}
+	</select>
+	
 	<!-- 문의 상담내역 끝 -->
 	
 	
@@ -230,25 +259,47 @@
 	
 	<!-- 내 대출내역 조회 -->
 	<select id="selectRentalList" resultMap="rental">
-		SELECT RENTAL_CODE 
-		    ,R.ID
-		    ,R.BOOK_CODE
+		SELECT ROW_NUM 
+		    ,RENTAL_CODE 
+		    ,ID
+		    ,BOOK_CODE
 		    ,TITLE
 		    ,STATUS
-		    , SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),0,4)||'년'
-  			||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),6,2)||'월'
-    		||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTAL_DATE
-		    , SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),0,4)||'년'
-  			||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),6,2)||'월'
-    		||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),9,2)||'일' AS LIMIT_DATE
-		    , SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),0,4)||'년'
-  			||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),6,2)||'월'
-    		||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RETURN_DATE
-		FROM RENTAL R, MEMBER M, BOOK B
-		WHERE R.ID = M.ID
-		AND R.BOOK_CODE = B.BOOK_CODE
-		AND M.ID = #{id}
-		ORDER BY RETURN_DATE DESC
+		    , RENTAL_DATE
+		    , LIMIT_DATE
+		    , RETURN_DATE
+		FROM (SELECT ROWNUM AS ROW_NUM 
+		        ,RENTAL_CODE 
+		        ,ID
+		        ,BOOK_CODE
+		        ,TITLE
+		        ,STATUS
+		        , RENTAL_DATE
+		        , LIMIT_DATE
+		        , RETURN_DATE
+		     FROM (SELECT ROWNUM AS ROW_NUM
+					,RENTAL_CODE 
+					,R.ID
+					,R.BOOK_CODE
+					,TITLE
+					,STATUS
+					, SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),0,4)||'년'
+					||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),6,2)||'월'
+					||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTAL_DATE
+					, SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),0,4)||'년'
+					||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),6,2)||'월'
+					||SUBSTR(TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD'),9,2)||'일' AS LIMIT_DATE
+					, SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),0,4)||'년'
+					||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),6,2)||'월'
+					||SUBSTR(TO_CHAR(RETURN_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RETURN_DATE
+		          FROM RENTAL R, MEMBER M, BOOK B
+		          WHERE R.ID = M.ID
+		          AND R.BOOK_CODE = B.BOOK_CODE
+		          AND M.ID = 'java'
+		          ORDER BY RETURN_DATE DESC, RENTAL_DATE DESC
+		          )
+		    )
+		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
 	</select>
 	
 	<!-- 대출내역 카운트 -->

@@ -77,7 +77,7 @@ public class MyPageServiceImpl implements MyPageService {
 	//내 문의 갯수 구하기 페이징 위해
 	@Override
 	public int myQnaCnt(MemberVO memberVO) {
-		return sqlSession.selectOne("myPageMapper.myQnaCnt");
+		return sqlSession.selectOne("myPageMapper.myQnaCnt", memberVO);
 	}
 	//---------------------------------------내 문의 끝----------------------------------
 
@@ -100,6 +100,12 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public List<ReserveVO> selectReserveList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
+	}
+
+	@Override
+	public QnaVO selectMyQna(QnaVO qnaVO) {
+		
+		return sqlSession.selectOne("myPageMapper.selectQna", qnaVO);
 	}
 
 
