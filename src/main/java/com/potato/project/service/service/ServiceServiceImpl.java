@@ -107,7 +107,16 @@ public class ServiceServiceImpl implements ServiceService {
 	public int ajaxRegRequest(RequestBoardVO rbVO) {
 		return sqlSession.insert("serviceMapper.ajaxRegRequest", rbVO);
 	}
-	
+
+	@Override
+	public String checkISBNboolean(String isbn) {
+		return sqlSession.selectOne("serviceMapper.checkISBN",isbn);
+	}
+
+	@Override
+	public int ajaxRequestStatusChange(RequestBoardVO rbVO) {
+		return sqlSession.update("serviceMapper.ajaxRequestStatusChange", rbVO);
+	}
 	
 	
 }

@@ -39,11 +39,16 @@ public interface ServiceService {
 	int checkRequestCnt(MemberVO loginInfo);
 	
 	String checkISBN(String isbn);
+
+	String checkISBNboolean(String isbn);
 	
 	void deleteBookRequest(RequestBoardVO rbVO);
 	
 	List<RequestBoardVO> requestBoardListAdmin();
 	
 	int ajaxRegRequest(RequestBoardVO rbVO);
+	
+	int ajaxRequestStatusChange(RequestBoardVO rbVO);
+	
 	
 }

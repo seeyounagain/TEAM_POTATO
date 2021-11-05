@@ -17,6 +17,11 @@ table{
 	cursor: pointer;
 	color: blue;
 }
+.dataTr2 {
+	color: blue;
+}
+
+
 </style>
 </head>
 <body>
@@ -220,6 +225,21 @@ table{
 
 						
 			</div>
+	<!-- 도서비치 신청 이동 a태그 구획 -->	
+	<div class="row justify-content-end"> 	
+		<div class="col-11 text-end mb-1">
+		<svg style="vertical-align: middle" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+		<a href="/myPage/bookRequestStatus?menuCode=MENU_005" >도서비치 현황 페이지 이동</a>
+		</div>
+	</div>
+	<!-- 도서비치 신청 이동 a태그 구획 -->	
+	<div class="row justify-content-end"> 	
+		<div class="col-11 text-end mb-1">
+		<svg style="vertical-align: middle" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+		<a href="/service/bookRequest?menuCode=MENU_003&sideMenuCode=SIDE_MENU_006" >도서비치신청 안내 페이지 이동</a>
+		</div>
+	</div>
+			
    		<div class="overflow-auto mt-5 justify-content-center" style="height: 600px; width: 100%;">
 		<table class="table fs-10 text-center" style="width: 1100px; margin: 0 auto;">
 
@@ -254,6 +274,7 @@ table{
   		<c:choose>
 		<c:when test="${not empty apiSearchList }">
 		<c:forEach items="${apiSearchList }" var="a" varStatus="status">
+		
 			<tr class="dataTr">
 				<td>${status.index+1}</td>		
 				<td>${a.typeName }</td>		
@@ -265,7 +286,8 @@ table{
 				<td>${a.isbn }</td>			
 				<td>${a.kdcCode1s }</td>		
 				<td>${a.kdcName1s }</td>			
-			</tr>	                                             		
+			</tr>
+				                                             		
 		</c:forEach>
 		</c:when>
 		</c:choose>

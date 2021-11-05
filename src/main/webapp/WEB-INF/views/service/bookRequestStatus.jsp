@@ -52,10 +52,16 @@ a:hover{
 	<div class="row justify-content-end"> 	
 		<div class="col-11 text-end mb-1">
 		<svg style="vertical-align: middle" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
-		<a href="/service/bookRequest?menuCode=MENU_003&sideMenuCode=SIDE_MENU_006" >도서비치신청 페이지 이동</a>
+		<a href="/service/bookRequest?menuCode=MENU_003&sideMenuCode=SIDE_MENU_006" >도서비치신청 안내 페이지 이동</a>
 		</div>
 	</div>
-		
+<!-- 도서비치 신청 이동 a태그 구획 -->	
+	<div class="row justify-content-end"> 	
+		<div class="col-11 text-end mb-1">
+		<svg style="vertical-align: middle" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+		<a href="/service/bookRequestRegForm?menuCode=MENU_003" >도서비치신청 검색 페이지 이동</a>
+		</div>
+	</div>	
 		
 		
 			<c:if test="${empty requestBoardList }">
@@ -90,7 +96,13 @@ a:hover{
 			<td>${a.writer }</td>   		
 			<td>${a.createDate }</td> 
 			<td>${a.id }</td> 
-			<td class="border-bottom-0"> 접수중 </td>
+			<td class="border-bottom-0"> 
+			<c:if test="${a.requestStatus == 0 }">접수중</c:if>
+			<c:if test="${a.requestStatus == 1 }">접수완료</c:if>
+			<c:if test="${a.requestStatus == 2 }">진행중</c:if>
+			<c:if test="${a.requestStatus == 3 }">완료</c:if>
+			<c:if test="${a.requestStatus == 4 }">비치불가</c:if>
+			</td>
 		</tr>
 		<tr class="text-center">
      		<th>발행년도</th>
@@ -98,15 +110,19 @@ a:hover{
      		<th>카테고리</th>
      		<th>KDC분류번호</th>
      		<th>KDC분류명칭</th>
-     		<td rowspan="2" class="border-bottom-0"><input type="button" class="btn btn-primary" value="신청취소" id="deleteRequest"></td>
+     		<td rowspan="2" style="font-weight: bold;">
+     		<input type="button" class="btn btn-primary" value=
+     		<c:if test="${a.requestStatus == 0}">"신청취소"</c:if>
+     		<c:if test="${a.requestStatus != 0}">"진행중" disabled </c:if> 		
+     		 id="deleteRequest" >
+     		</td>
     	</tr>
-		<tr>
+		<tr>						
 			<td>${a.pubDate }</td> 	
 			<td>${a.isbn }</td>
 			<td>${a.category }</td>
 			<td>${a.kdcCode }</td>
 			<td>${a.kdcName }</td>	
-			
 		</tr>
 	</table>	
 	</div><hr>                                             		

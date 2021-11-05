@@ -13,13 +13,20 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.potato.project.service.service.ServiceService;
+import com.potato.project.service.service.ServiceServiceImpl;
 import com.potato.project.service.vo.ApiDataVO;
 import com.potato.project.service.vo.ApiSearchVO;
+import com.potato.project.service.vo.RequestBoardVO;
 
 public class apiSearchPlay {
 
@@ -28,7 +35,6 @@ public class apiSearchPlay {
 	 * @throws UnsupportedEncodingException
 	 * @throws ParseException
 	 */
-
 	//api를 as라는 검색어 변수들을 받아와 사용하는곳 메소드임
 	public List<ApiDataVO> apiSearch(ApiSearchVO as) {
 		
@@ -42,6 +48,9 @@ public class apiSearchPlay {
 		
 		//아래에서 가공된 자료들을 리턴시킴
 		List<ApiDataVO> adList = new ArrayList<>();
+		
+		//checkISBN을 실행시키기 위한 VO
+		RequestBoardVO rbVO = new RequestBoardVO();
 		
 	    try {
 	    	URL url = new URL(strUrl);		 //URL 설정
@@ -97,7 +106,8 @@ public class apiSearchPlay {
 		        			,(String)totalData.get("isbn")           
 		        			,(String)totalData.get("kdcCode1s")      
 		        			,(String)totalData.get("kdcName1s")      
-		        			);                                       
+		        				);  
+		        		        		
 		        		adList.add(adVO);
 	        			}
 

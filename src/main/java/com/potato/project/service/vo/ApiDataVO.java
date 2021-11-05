@@ -11,9 +11,7 @@ public class ApiDataVO {
 	private String isbn				; //ISBN
 	private String kdcCode1s		; //동양서분류기호 대분류 코드
 	private String kdcName1s		; //동양서분류기호 대분류 명칭
-	
-	
-	
+
 	public ApiDataVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -26,7 +24,8 @@ public class ApiDataVO {
 					, String pubYearInfo
 					, String isbn
 					, String kdcCode1s
-					, String kdcName1s) {
+					, String kdcName1s
+						) {
 		super();
 		this.titleInfo = titleInfo;
 		this.typeName = typeName;

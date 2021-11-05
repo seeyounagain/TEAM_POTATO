@@ -43,6 +43,12 @@
 			<result column="REQUEST_STATUS"	property="requestStatus"/>                                                                                                                                                                  
 			</resultMap>
 			
+			<update id="ajaxRequestStatusChange">
+			UPDATE REQUEST_BOARD
+			SET REQUEST_STATUS = #{requestStatus }
+			WHERE REQUEST_CODE = #{requestCode }
+			</update>
+		
 			<insert id="ajaxRegRequest">
 			INSERT INTO REQUEST_BOARD(
 			REQUEST_CODE, ID, TITLE, WRITER, ISBN, PUB_DATE, CATEGORY, KDC_CODE, KDC_NAME
@@ -58,7 +64,7 @@
 			</delete>
 			
 			<select id="checkISBN" resultType="String">
-			SELECT ISBN FROM REQUEST_BOARD WHERE ISBN = #{isbn}		
+			SELECT ISBN FROM REQUEST_BOARD WHERE ISBN = #{isbn }		
 			</select>
 			
 			<select id="checkRequestCnt" resultType="int">

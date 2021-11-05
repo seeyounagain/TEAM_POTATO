@@ -2,24 +2,16 @@ package com.potato.project.service.controller;
 
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +22,7 @@ import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.api.apiSearchPlay;
 import com.potato.project.service.service.ServiceService;
-import com.potato.project.service.vo.ApiDataVO;
+
 import com.potato.project.service.vo.ApiSearchVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
@@ -76,7 +68,7 @@ public class ServiceController {
 		return  "service/bookRequest";
 	}
 	
-	//도서비치 신청서 MVC처리
+	//도서비치 신청서 완료처리
 	@PostMapping("/regBookRequest")
 	public String regRequest(Model model,MenuVO menuVO,HttpSession session,RequestBoardVO rbVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -87,6 +79,7 @@ public class ServiceController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		serviceService.regBookRequest(rbVO);
+		
 		return "redirect:/service/bookRequest";
 	}
 	
@@ -104,6 +97,7 @@ public class ServiceController {
 		//도서비치신청 개수
 		model.addAttribute("requestCnt",serviceService.checkRequestCnt(loginInfo));
 		
+		
 		//검색 키워드가 공백이고 Isbn만 검색한다면 isbn코드 검색값을 출력한다.
 		if(asVO.getKeyword()=="" && asVO.getIsbnCode() != "") {
 			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
@@ -111,10 +105,13 @@ public class ServiceController {
 		//검색 키워드와 isbn 둘 다 공백이라면 프로그램은 실행되지 않는다.	
 		}else if(asVO.getKeyword() == "" && asVO.getIsbnCode() == ""){
 			
-		}else {			
+		}else {		
 			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));
 			model.addAttribute("keyword", asVO.getKeyword());		
 		}
+			
+		
+		
 		return  "service/bookRequestRegForm";
 	}
 	
@@ -218,6 +215,13 @@ public class ServiceController {
 	return serviceService.ajaxRegRequest(rbVO);
 	}
 	
+	@ResponseBody
+	@PostMapping("/ajaxRequestStatusChange")
+	public List<RequestBoardVO> ajaxRequestStatusChange(Model model, RequestBoardVO rbVO) {
+	serviceService.ajaxRequestStatusChange(rbVO);
+	return serviceService.requestBoardListAdmin();
+	}
+		
 	
 
 }

@@ -69,6 +69,7 @@
 			<exclude-mapping path="/service/searchRecord"/>
 			<exclude-mapping path="/service/checkISBN"/>
 			<exclude-mapping path="/service/ajaxRegRequest"/>
+			<exclude-mapping path="/service/ajaxRequestStatusChange"/>
 			<exclude-mapping path="/common/popupAjax"/>
 			<exclude-mapping path="/myPage/myInfoAjax"/>
 			<exclude-mapping path="/myPage/updatePw"/>

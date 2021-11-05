@@ -25,7 +25,7 @@ table{
 			<tr><td colspan="7">(요청된 내역이 없습니다.)</td></tr>
 		</c:if>	
 			
-		<div class="col-12 mt-3 mb-3">
+		<div class="requestTableDiv col-12 mt-3 mb-3">
 		<table class="table text-center">		
 		<thead>
     	<tr class="text-center">
@@ -60,9 +60,10 @@ table{
 			<td>${a.writer }</td>   		
 			<td>${a.isbn }</td>
 			<td>${a.createDate }</td> 
+
 			<td>${a.id }</td> 
-			<td><c:if test="${a.requestStatus == 0 }">신규신청</c:if><c:if test="${a.requestStatus == 1 }">접수완료</c:if><c:if test="${a.requestStatus == 2 }">진행중</c:if><c:if test="${a.requestStatus == 3 }">비치완료</c:if></td>		
-			<td><select class="form-select" name="requestStatus" id="status"><option value="">상태변경</option><option value="1">접수완료</option><option value="2">진행중</option><option value="3">완료</option></select></td>	
+			<td><c:if test="${a.requestStatus == 0 }">신규신청</c:if><c:if test="${a.requestStatus == 1 }">접수완료</c:if><c:if test="${a.requestStatus == 2 }">진행중</c:if><c:if test="${a.requestStatus == 3 }">완료</c:if><c:if test="${a.requestStatus == 4 }">비치불가</c:if></td>		
+			<td><select class="form-select" name="requestStatus" id="status"><option value="">상태변경</option><option value="1">접수완료</option><option value="2">진행중</option><option value="3">완료</option><option value="4">비치불가</option></select></td>	
 			<td><input type="button" value="확인" class="btn btn-primary disabled requestStatusChange" ></td>
 		</tr>   
 		
@@ -78,6 +79,80 @@ table{
 		</table>	
 		</div>    
 	</div>
+	
+	
+<!-- 알림전송 Modal -->
+<div class="modal fade" id="messageModal1" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="messageModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">받는 사람 : </label>
+            <input type="text" class="form-control" id="toId" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">내용 : </label>
+            <textarea class="form-control" id="content" ></textarea>
+          	<div class="col-12 mt-2" id="byteCheck" style="font-size: 14px;"></div>
+          	<div class="col-12 mt-2" id="byteAlert" style="font-size: 14px;"></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary sendMessage">보내기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="completeModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p>알림 전송이 완료되었습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="failModal" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="failModalLabel">알림 보내기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			<p>알림 전송에 실패했습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 알림전송 modal 종료 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </body>
