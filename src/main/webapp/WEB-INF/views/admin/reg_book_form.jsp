@@ -6,20 +6,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=20" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=33" ></script>
 <style type="text/css">
 textarea {
     resize: none;
   }
+ #backIcon:hover {
+	cursor: pointer;
+}
+#topBtn{
+	position: fixed;
+	right: 25px; 
+	bottom: 25px;
+	display: none;
+	z-index: 9;
+}
 </style>
 </head>
 <body>
 
-<form class="row g-0 mt-3 mb-5" action="/libManage/regBook?menuCode=${menuVO.menuCode }" method="post" enctype="multipart/form-data">
+<a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
+
+<form class="row g-0 mb-5" action="/libManage/regBook?menuCode=${menuVO.menuCode }" method="post" enctype="multipart/form-data" id="regBookForm">
+	<div class="col-6">
 	<h2 class="text-first fw-bold">신규도서등록</h2>
+	</div>
+		<div class="col-sm-6 text-end">
+			<img id="backIcon" src="/resources/img/back_off.png" onclick="javascript:history.back();" width="30px;" title="뒤로가기">
+		</div>
 	<div class="row g-0 justify-content-center">
+		
 		<div class="col-12">
 		<hr>
+			<div class="mt-4 text-end" style="color: red; font-size: 16px;">* 필수사항</div>
+			<hr style="background-color: gray; height: 1px;">
+			
 			<div class="col-12 mt-2">
 				<label for="isbn" class="form-label">ISBN</label>
 				<input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" required>
@@ -51,8 +72,23 @@ textarea {
 				<div class="col-12 mt-2" id="pubDateAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
+				<label for="summary" class="form-label">한줄소개</label>
+				<input type="text" class="form-control" id="summary" name="summary" placeholder="한줄소개" required>
+			</div>
+			<div class="col-12 mt-2">
+				<label for="intro" class="form-label">소개글</label>
+				<textarea class="form-control" placeholder="소개글" id="intro" name="intro" style="height: 200px"></textarea>
+			</div>
+			<div class="col-12 mt-2">
+				<label for="area" class="form-label">자료위치</label>
+				<input type="text" class="form-control" id="area" name="area" placeholder="자료위치" required>
+			</div>
+			
+			<div class="mt-4 text-end" style="color: gray; font-size: 16px;">선택사항</div>
+			<hr style="background-color: gray; height: 1px;">
+			<div class="col-12 mt-2">
 				<label for="page" class="form-label">페이지</label>
-				<input type="text" class="form-control" id="page" name="page" placeholder="숫자로 입력해주세요. ">
+				<input type="text" class="form-control" id="page" name="page" placeholder="숫자로 입력해주세요.">
 				<div class="col-12 mt-2" id="pageAlert" style="color: red; font-size: 14px;"></div>
 			</div>
 			<div class="col-12 mt-2">
@@ -65,28 +101,57 @@ textarea {
 				<input type="text" class="form-control" id="keyword" name="keyword" placeholder="예) 연애소설, 판타지 ">
 			</div>
 			<div class="col-12 mt-2">
-				<label for="summary" class="form-label">한줄소개</label>
-				<input type="text" class="form-control" id="summary" name="summary" placeholder="한줄소개" required>
-			</div>
-			<div class="col-12 mt-2">
-				<label for="intro" class="form-label">소개글</label>
-				<textarea class="form-control" placeholder="소개글" id="intro" name="intro" style="height: 200px"></textarea>
-			</div>
-			<div class="col-12 mt-2">
-				<label for="area" class="form-label">자료위치</label>
-				<input type="text" class="form-control" id="area" name="area" placeholder="자료위치" required>
-			</div>
-			<div class="col-12 mt-2">
 				<label for="file" class="form-label">표지이미지</label>
 				<input type="file" name="file" class="form-control" id="inputGroupFile01 file">
 				<div class="mt-2">* 이미지를 등록하지 않을 시, 기본 이미지로 보여집니다.</div>		
 			</div>
 			<div class="d-grid mt-3">
-				<button type="submit" id="regBtn" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-primary" onclick="regBookSubmit();">등록</button>
 			</div>
 		</div>
 	</div>
 
 </form>
+
+
+<!-- 도서등록 modal 시작 -->
+<div class="modal fade" id="regBookConfirmModal" tabindex="-1" aria-labelledby="regBookConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regBookConfirmModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="regBookConfirmText">
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" onclick="regBook();">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 도서등록 modal 종료 -->
+
+<!-- 도서등록완료 modal 시작 -->
+<div class="modal fade" id="regBookCompleteModal" tabindex="-1" aria-labelledby="regBookCompleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regBookCompleteModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		도서 등록이 완료되었습니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="regBookFin();">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 도서등록완료 modal 종료 -->
+
 </body>
 </html>

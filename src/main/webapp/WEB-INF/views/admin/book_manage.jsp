@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=97" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=103" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -150,7 +150,7 @@ $(function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="bookManageAlertText">
-			<p>알림 전송에 실패했습니다.</p>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

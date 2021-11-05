@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=9" ></script>
+<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=20" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -106,5 +106,25 @@
 	    </div>
     </div>
 </div>
+
+<!-- book detail modal 시작 -->
+<div class="modal fade" id="bookDetailAlertModal" tabindex="-1" aria-labelledby="bookDetailAlertModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookDetailAlertModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bookDetailAlertText">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bookDetailModalBtn" >닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- book detail modal 종료 -->
+
 </body>
 </html>

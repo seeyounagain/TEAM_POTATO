@@ -74,9 +74,15 @@
 		    , WRITER
 		    , TRANSLATOR
 		    , TITLE
+		    <if test="page != null and !page.equals('')">
 		    , PAGE
+		    </if>
+		    <if test="bookSize != null and !bookSize.equals('')">
 		    , BOOK_SIZE
+		    </if>
+		    <if test="keyword != null and !keyword.equals('')">
 		    , KEYWORD
+		    </if>
 		    , PUBLISHER
 		    , PUB_DATE
 		    , SUMMARY
@@ -90,9 +96,15 @@
 		    , #{writer}
 		    , #{translator}
 		    , #{title}
+		   	<if test="page != null and !page.equals('')">
 		    , #{page}
+		    </if>
+		    <if test="bookSize != null and !bookSize.equals('')">
 		    , #{bookSize}
+		    </if>
+		    <if test="keyword != null and !keyword.equals('')">
 		    , #{keyword}
+		    </if>
 		    , #{publisher}
 		    , #{pubDate}
 		    , #{summary}

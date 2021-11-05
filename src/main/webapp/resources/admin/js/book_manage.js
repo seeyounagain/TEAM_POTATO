@@ -85,8 +85,6 @@
 			
 			if (id == '') {
 				
-				$('.modal-body').modal('show');
-				$('#bookManageAlertModal').modal('show');
 				alert('대여자의 아이디를 입력해주세요.');
 				return ;
 			}
@@ -381,4 +379,3 @@
 	  };	
 	
 })(jQuery);
-

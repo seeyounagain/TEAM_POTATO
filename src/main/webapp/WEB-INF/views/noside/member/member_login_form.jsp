@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=12" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=14" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
