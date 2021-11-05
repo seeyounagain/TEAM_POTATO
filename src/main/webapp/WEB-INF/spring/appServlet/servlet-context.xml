@@ -70,10 +70,11 @@
 			<exclude-mapping path="/service/checkISBN"/>
 			<exclude-mapping path="/service/ajaxRegRequest"/>
 			<exclude-mapping path="/common/popupAjax"/>
-			<!-- ajax 컨트롤러는 무조건 인터셉터에서 제외시켜줘야 함! -->
+			<exclude-mapping path="insertNoticeAjax"/>
 			<exclude-mapping path="/myPage/myInfoAjax"/>
 			<exclude-mapping path="/myPage/updatePw"/>
 			<exclude-mapping path="/myPage/checkMemberquit"/>
+			<!-- ajax 컨트롤러는 무조건 인터셉터에서 제외시켜줘야 함! -->
 			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
 	<!-- 로그인 인터셉터 주석 풀어서 path 추가 + 기존 코드 삭제시 실행 -->
