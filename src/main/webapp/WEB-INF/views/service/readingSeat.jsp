@@ -15,8 +15,13 @@
 }
 
 .seat{
-background-color: black;
-height: 50px;
+height: 100px;
+width: 100px;
+vertical-align: middle;
+}
+.seatNone{
+height: 100px;
+width: 100px;
 vertical-align: middle;
 }
 
@@ -29,6 +34,12 @@ background-color: white;
 }
 .miniSeatBox:hover{
 	cursor: pointer;
+}
+
+.image-seat {
+    width:100%;
+    height:80%;
+    display: block;
 }
 
 </style>
@@ -46,16 +57,75 @@ background-color: white;
 	<div class="col-10 text-end mt-3 mb-3"><span class="bg-warning fs-5">대기중</span><span class="bg-info fs-5">사용중</span></div>
 	
 		<div class="row justify-content-center text-center mb-5">
+		
+		</div>
+			<div class="row justify-content-center text-center mb-5">
+		
+				<div class="col-1 miniSeatBox seatForm seat">
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
+					<input type="hidden" value="${seatList.get(0).seatCode }">
+					<span class="align-middle" id="seatForm">${index+ 1 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<c:if test="${seatList.get(0).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(0).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
+					</span>
+				</div>
+				<div class="col-1 miniSeatBox seatForm seat">
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
+					<input type="hidden" value="${seatList.get(1).seatCode }">
+					<span class="align-middle" id="seatForm">
+					${index+2 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<c:if test="${seatList.get(1).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(1).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
+					</span>
+				</div>
+				<div class="col-1 seatNone">
+					<img class="image-seat" src="/resources/img/seat빈공간.png">
+				</div>
+				<div class="col-1 miniSeatBox seatForm seat">
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
+					<input type="hidden" value="${seatList.get(2).seatCode }">
+					<span class="align-middle" id="seatForm">
+					${index+3 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<c:if test="${seatList.get(2).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(2).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
+					</span>
+				</div>
+				<div class="col-1 miniSeatBox seatForm seat">
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
+					<input type="hidden" value="${seatList.get(3).seatCode }">
+					<span class="align-middle" id="seatForm">
+					${index+4 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<c:if test="${seatList.get(3).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(3).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
+					</span>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</div>
+			<div class="row justify-content-center text-center mb-5">
 				<c:choose>
 				<c:when test="${not empty seatList }">
 				<c:forEach items="${seatList }" var="seat" varStatus="status">
-				<div class="col-2 seat mx-1 mt-1 ${seat.seatCode } miniSeatBox 
-					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if> 
-					<c:if test="${seat.seatStatus == 0 }">bg-warning</c:if>
-					<c:if test="${seat.seatStatus == 1 }">bg-info</c:if> " >
+				<div class="col-1 seat mx-1 mt-3 mb-5 ${seat.seatCode } miniSeatBox 
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">seatForm</c:if>" >
 					<input type="hidden" value="${seat.seatCode }">
-					<span class="align-middle" id="seatForm">열람- ${status.index +1 }
-						<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<span class="align-middle" id="seatForm">
+						${status.index +1 }. 
+					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
+					<c:if test="${seat.seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seat.seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
+					
 					</span>
 				</div>
 				</c:forEach>
@@ -64,6 +134,7 @@ background-color: white;
 						좌석정보를 확인할 수 없습니다.
 					</c:otherwise>
 				</c:choose>
+			</div>
 		</div>
 	
 	
