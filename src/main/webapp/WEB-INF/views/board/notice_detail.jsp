@@ -6,20 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function deleNotice(noticeCode) {
-		var noticeCode = document.getElementById('noticeCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		
-		if(	confirm("공지사항을 삭제하시겠습니까?") == true){
-			
-			location.href = '/board/deleteNotice?noticeCode=' + noticeCode + '&menuCode=' + menuCode;
-		
-		}else{
-			return;
-		}
-	}
-</script>
+<script type="text/javascript" src="/resources/board/js/notice_detail.js?ver=5"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -70,5 +57,23 @@
    		</div>
    	</div>
 </div>
+
+<!-- 알림 모달 -->
+		<div class="modal fade" id="noticeCompleteModal" tabindex="-1" aria-labelledby="noticeCompleteModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" style="color: black;" id="noticeCompleteModalLabel">알림</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="deleModalContent">
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary deleModalClose" data-bs-dismiss="modal" onclick="confirmDele(menuCode,noticeCode);">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 </body>
 </html>
