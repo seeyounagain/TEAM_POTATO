@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -71,10 +72,9 @@ public class BoardController {
 		//공지사항 등록
 		boardService.insertNotice(noticeVO);
 		
-		
 		if(!inputName.getOriginalFilename().equals("")) {
 			//파일이 있으면...
-		
+			
 			
 			//파일이 첨부될 경로
 			//학원
@@ -113,10 +113,8 @@ public class BoardController {
 			boardService.insertNoticeFile(noticeVO);
 			
 		}
-
 		
-		//공지사항 alert으로 이동
-		return "board/notice_result?menuCode=" + menuVO.getMenuCode();
+		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
 	}
 	
 	//공지사항 상세보기

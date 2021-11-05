@@ -20,7 +20,7 @@ public interface BoardService {
 	//공지사항 총 개수
 	int cntNotice(NoticeVO noticeVO);
 	
-	//공지사항 입력
+	//공지사항 등록
 	int insertNotice(NoticeVO noticeVO);
 	
 	//공지사항 파일 첨부
