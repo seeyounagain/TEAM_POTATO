@@ -69,15 +69,21 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	//-------------------------------------내문의 시작----------------------------------
-	//내 문의내역 조회
+	//내 상담문의내역 조회
 	@Override
 	public List<QnaVO> myQnaList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectMyQnaList", memberVO);
 	}
-	//내 문의 갯수 구하기 페이징 위해
+	//내 상담문의 갯수 구하기 페이징 위해
 	@Override
 	public int myQnaCnt(MemberVO memberVO) {
 		return sqlSession.selectOne("myPageMapper.myQnaCnt", memberVO);
+	}
+	//내 상담문의 삭제
+	@Override
+	public boolean deleteMyQna(QnaVO qnaVO) {
+		int result = sqlSession.delete("boardMapper.deleteQna", qnaVO);
+		return result == 0 ? false : true ;
 	}
 	//---------------------------------------내 문의 끝----------------------------------
 
@@ -102,11 +108,7 @@ public class MyPageServiceImpl implements MyPageService {
 		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
 	}
 
-	@Override
-	public QnaVO selectMyQna(QnaVO qnaVO) {
-		
-		return sqlSession.selectOne("myPageMapper.selectQna", qnaVO);
-	}
+
 
 
 

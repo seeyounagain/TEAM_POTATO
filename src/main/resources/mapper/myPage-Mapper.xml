@@ -208,7 +208,9 @@
 		                 , TITLE
 		                 , ID
 		                 , NAME
-		                 , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		                 , SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),0,4)||'년'
+						||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),6,2)||'월'
+						||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),9,2)||'일' AS CREATE_DATE
 		                 , ANSWER_CNT
 		           FROM QNA
 		           WHERE ID = #{id}
@@ -222,18 +224,6 @@
 	<!-- 페이징위해 -->
 	<select id="myQnaCnt" resultType="int">
 		SELECT COUNT(QNA_CODE)
-		FROM QNA
-		WHERE ID = #{id}
-	</select>
-	
-	<!-- 내 상담문의 상세보기 -->
-	<select id="selectMyQna" resultMap="qna">
-		SELECT QNA_CODE 
-			, TITLE
-			, ID
-			, NAME
-			, CREATE_DATE
-			, ANSWER_CNT
 		FROM QNA
 		WHERE ID = #{id}
 	</select>

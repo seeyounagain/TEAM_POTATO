@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=124"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=136"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -183,10 +183,30 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
+				<button type="button" class="btn btn-primary" id="checkMemberquitBtn" data-bs-toggle="modal"data-bs-target="#myInfoAlertModal">확인</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- 알림모달 시작 -->
+<div class="modal fade" id="myInfoAlertModal" tabindex="-1" aria-labelledby="bookDetailAlertModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="bookDetailAlertModalLabel">알림</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body" id="myInfoAlertText">
+      			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary myInfoAlertModalBtn1" >확인</button>
+				<button type="button" class="btn btn-secondary myInfoAlertModalBtn2" data-bs-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- book detail modal 종료 -->
 
 </body>

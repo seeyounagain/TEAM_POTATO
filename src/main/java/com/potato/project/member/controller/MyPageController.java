@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.SideMenuVO;
+import com.potato.project.content.service.BoardService;
+import com.potato.project.content.vo.QnaAnswerVO;
 import com.potato.project.content.vo.QnaVO;
 import com.potato.project.member.service.MyPageService;
 import com.potato.project.member.vo.MemberVO;
@@ -26,6 +28,9 @@ public class MyPageController {
 	
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
+	
+	@Resource(name = "boardService")
+	private BoardService boardService;
 	
 	// 나의 도서비치신청현황 가는 페이지
 
@@ -127,13 +132,23 @@ public class MyPageController {
 	
 	//내 문의 상세보기
 	@GetMapping("/myQnaDetail")
-	public String goMyQnaDetail(Model model,MenuVO menuVO, HttpSession session, QnaVO qnaVO) {
+	public String goMyQnaDetail(Model model,MenuVO menuVO, HttpSession session, QnaVO qnaVO, QnaAnswerVO qnaAnswerVO) {
+		//qnaCode 받아서 qnaVO에 담고 그걸로 셀렉트해서 화면에 뿌림
+		model.addAttribute("qna", boardService.selectQna(qnaVO));
 		
-		model.addAttribute(qnaVO);
+		//qnaCode 받아서 qnaVO에 담고 그걸로 셀렉트해서 화면에 뿌림
+		model.addAttribute("answer", boardService.selectAnsewerList(qnaAnswerVO));
 		
 		
 		return "member/my_qna_detail";
 		
+	}
+	//내 문의 삭제
+	@ResponseBody
+	@PostMapping("/deleteMyQna")
+	public boolean deleteMyQna(QnaVO qnaVO) {
+		
+		return myPageService.deleteMyQna(qnaVO);
 	}
 	
 	//내 문의 끝

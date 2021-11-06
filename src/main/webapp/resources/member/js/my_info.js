@@ -325,6 +325,7 @@ $(document).ready(function(){
 		}
 		
 	});
+	var myInfoAlertModal = document.getElementById('myInfoAlertModal')
 	
 	//회원탈퇴 모달창
 	$(document).on('click', '#checkMemberquitBtn' , function() {
@@ -333,10 +334,12 @@ $(document).ready(function(){
 			var pw2 = $('#pw2').val();
 			
 			if (existingPw != pw2) {
-				
-				alert('비밀번호를 다시 확인해 주세요.')
-				return ;
-				
+				$(".myInfoAlertModalBtn1").hide();
+				$('#myInfoAlertText').text('비밀번호를 다시 확인해 주세요.');
+				$('.myInfoAlertModalBtn').attr('data-bs-dismiss','modal');
+				myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+					$('#memberquitModal').modal('show');
+				})
 			}
 			
 			else {
@@ -352,8 +355,14 @@ $(document).ready(function(){
 						data:{'id':id}, //필요한 데이터/        
 						success: function(result) {
 							if(result){
+								
+								$(".myInfoAlertModalBtn1").hide();
+								$('#myInfoAlertText').text('탈퇴하였습니다');
+								$('.myInfoAlertModalBtn').attr('data-bs-dismiss','modal');
+								myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+									location.href = '/common/main';
+								})
 								alert('탈퇴하였습니다');
-								location.href = '/common/main';
 								
 							}
 							alert('대출중인 책이 있습니다.반납후 진행가능합니다');

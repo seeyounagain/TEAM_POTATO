@@ -198,7 +198,6 @@
 										<tr>
 											<td>${status.count }</td>
 											<td>
-											<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
 												<a class="titleA" href="/myPage/myQnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}&id=${info.id}">${info.title }
 													<c:if test="${info.answerCnt != 0}">
 														<span class="m-2 complete">답변완료</span>
@@ -243,6 +242,10 @@
 					</nav>
 				</div>
 			<!-- 페이징 끝 -->
+			<div class="col-12 text-center">
+				<button type="button" class="btn btn-secondary" onclick="location.href='/myPage/myPage?menuCode=${menuVO.menuCode }'">뒤로가기</button>
+			</div>
+			
 	</div>
 </div>						
 </body>
