@@ -74,6 +74,7 @@
 			<exclude-mapping path="/myPage/myInfoAjax"/>
 			<exclude-mapping path="/myPage/updatePw"/>
 			<exclude-mapping path="/myPage/checkMemberquit"/>
+			<exclude-mapping path="/myPage/deleteMyQna"/>
 			<!-- ajax 컨트롤러는 무조건 인터셉터에서 제외시켜줘야 함! -->
 			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
