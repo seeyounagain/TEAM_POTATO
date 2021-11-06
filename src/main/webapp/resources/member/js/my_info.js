@@ -325,64 +325,103 @@ $(document).ready(function(){
 		}
 		
 	});
+	
+	
+	//회원탈퇴 모달창 열리면
+	$("#memberquitModal").on("shown.bs.modal", function () { 
+		
+		$("#memberquitPw").focus(); 
+	
+	});
+	
 	var myInfoAlertModal = document.getElementById('myInfoAlertModal')
 	
 	//회원탈퇴 모달창
 	$(document).on('click', '#checkMemberquitBtn' , function() {
 			var id = $('#id').text();
 			var existingPw = $('#existingPw').val();
-			var pw2 = $('#pw2').val();
+			var memberquitPw = $('#memberquitPw').val();
 			
-			if (existingPw != pw2) {
-				$(".myInfoAlertModalBtn1").hide();
-				$('#myInfoAlertText').text('비밀번호를 다시 확인해 주세요.');
-				$('.myInfoAlertModalBtn').attr('data-bs-dismiss','modal');
-				myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
-					$('#memberquitModal').modal('show');
-				})
-			}
-			
-			else {
-				
-				var result = confirm("정말 탈퇴하시겠습니까?");
-				
-				$('#memberquitModal').modal("hide");
-				if (result) {
-					
-					$.ajax({
-						url: '/myPage/checkMemberquit', //요청경로
-						type: 'post',
-						data:{'id':id}, //필요한 데이터/        
-						success: function(result) {
-							if(result){
-								
-								$(".myInfoAlertModalBtn1").hide();
-								$('#myInfoAlertText').text('탈퇴하였습니다');
-								$('.myInfoAlertModalBtn').attr('data-bs-dismiss','modal');
-								myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
-									location.href = '/common/main';
-								})
-								alert('탈퇴하였습니다');
-								
-							}
-							alert('대출중인 책이 있습니다.반납후 진행가능합니다');
+			$.ajax({
+				 url: '/myPage/checkMemberquitPw', //요청경로
+				type: 'post',
+				async: false, //다중 Ajax 실행 시 success 실행 후에도 다음 Ajax 실행 ,비동기 푸는건가?
+			 	data:{'existingPw':existingPw,'memberquitPw':memberquitPw}, //필요한 데이터/        
+			 success: function(result) {
+			        	//ajax 실행 성공 시 실행되는 구간
+						if (result) {
+							$("#myInfoAlertModal").modal('show');
+							$(".myInfoAlertModalBtn1").show();
+							$('#myInfoAlertText').text('정말 탈퇴하시겠습니까?.');
+							$('.myInfoAlertModalBtn2').text('취소');
+							myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+								$("#memberquitModal").modal('hide');
+							})
 							
-						},
-						error: function(){
-							//ajax 실행 실패 시 실행되는 구간
-						}
+							//확인 클릭시
+							$(document).on('click', '.myInfoAlertModalBtn1', function() {
+								$.ajax({
+									url: '/myPage/checkMemberquit', //요청경로
+									type: 'post',
+									async: false, //다중 Ajax 실행 시 success 실행 후에도 다음 Ajax 실행 ,비동기 푸는건가?
+									data:{'id':id}, //필요한 데이터/        
+									success: function(result) {
+										if(result){
+											$(".myInfoAlertModalBtn1").hide();
+											$('#myInfoAlertText').text('탈퇴하였습니다');
+											//두번째 모달창 닫으면
+											myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+												location.href = '/common/main';
+											})
+											
+										}
+										else{
+											$(".myInfoAlertModalBtn1").hide();
+											$('#myInfoAlertText').text('대출중인 책이 있습니다.반납후 진행가능합니다');
+											//두번째 모달창 닫으면
+											myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+												$("#memberquitModal").modal('hide');
+											})
+										}
+										
+									},
+									error: function(){
+										//ajax 실행 실패 시 실행되는 구간
+									}
+									
+								});							
+							});
 						
-					})		
+						}
+						else {
+							$("#myInfoAlertModal").modal('show');
+							$(".myInfoAlertModalBtn1").hide();
+							$('#myInfoAlertText').text('비밀번호를 다시 확인해 주세요.');
+							$('.myInfoAlertModalBtn2').text('닫기');
+							$('.modal input[type="password"]').val('');
+							
+							//두번째 모달창을 닫으면
+							myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
+								$("#memberquitModal").modal('show');
+								$("#memberquitPw").focus()
+							})
+						 	
+						}
+		    	
+		    },
+		    error: function(){
+		    	//ajax 실행 실패 시 실행되는 구간
+		    	alert('새 비밀번호를 입력하세요');
+		    }
 					
-				}
-				
-			}
 			
+		})	
 	});
-	
-	//회원탈퇴창 모달 닫으면
+
 	var changePwModal = document.getElementById('memberquitModal');
 	//var loginModal = $('#loginModal');위에거가 이거랑 같은거임
+	
+	//회원탈퇴창 모달 닫으면
 	changePwModal.addEventListener('hidden.bs.modal', function (event) {
 	 	 // do something...
 		$('#checkCapsLock1').text('');

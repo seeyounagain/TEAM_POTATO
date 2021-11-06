@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=14" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=20" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -23,7 +23,7 @@
     });
 </script>
 </head>
-<body>
+<body id="goLogin">
 	<h2 class="display-6 text-center fw-bold mt-3">로그인</h2>
 	<hr>
 	<div class="row g-0 justify-content-center">
@@ -42,7 +42,7 @@
 					<a id="goJoin" href="/member/memberJoinInfo">회원가입</a>
 				</div>
 				<div class="col-6 d-grid mt-3">
-					<button type="submit" id="loginBtn" class="btn btn-primary" >로그인</button>
+					<button type="submit" id="loginBtn" class="btn btn-primary" onclick="login();">로그인</button>
 				</div>
 			</div>
 		</div>

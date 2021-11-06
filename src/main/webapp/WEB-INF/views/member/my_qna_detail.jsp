@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/my_qna_detail.js?ver=25"></script>
+<script type="text/javascript" src="/resources/member/js/my_qna_detail.js?ver=26"></script>
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -106,7 +106,7 @@
 </div>
 
 <!-- 모달창 -->
-<div class="modal fade" id="myQnaDeleteCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="myQnaDeleteCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -125,7 +125,7 @@
 </div>
 
 <!-- 모달창확인후 모달창-->
-<div class="modal fade" id="aa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">

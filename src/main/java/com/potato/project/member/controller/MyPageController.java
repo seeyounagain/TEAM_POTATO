@@ -96,13 +96,27 @@ public class MyPageController {
 		//비밀번호 다른걸로 변경
 		return myPageService.updatePw(memberVO);
 	}
+
+	//회원탈퇴 비밀번호 확인
+	@ResponseBody
+	@PostMapping("/checkMemberquitPw")
+	public boolean checkMemberquitPw(String existingPw, String memberquitPw) {
+		
+		if(existingPw.equals(memberquitPw)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	//회원탈퇴
 	@ResponseBody
 	@PostMapping("/checkMemberquit")
 	public boolean checkMemberquit(HttpSession session,MemberVO memberVO) {
-		//회원 로그아웃 시키고 메인메뉴로
-		session.removeAttribute("loginInfo");
 		if(myPageService.checkRENTALBook(memberVO)) {
+			//회원 로그아웃 시키고 메인메뉴로
+			session.removeAttribute("loginInfo");
 			
 			return myPageService.checkMemberquit(memberVO);
 		}

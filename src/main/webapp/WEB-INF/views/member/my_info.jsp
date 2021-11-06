@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=136"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=28"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -104,7 +104,7 @@
 								<tr>
 									<td class="table-secondary">회원탈퇴</td>
 									<td>
-										<button type="button" id="memberquitBtn" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#memberquitModal">탈퇴하기</button>
+										<button type="button" id="memberquitBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memberquitModal">탈퇴하기</button>
 									</td>
 								</tr>
 						</table>
@@ -177,13 +177,13 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-floating">
-					<input type="password" class="form-control" id="pw2" placeholder="Password" required>
+					<input type="password" class="form-control" id="memberquitPw" placeholder="Password">
 					<label for="floatingPassword">비밀번호 확인</label>
 					<div class="col-12 mt-2" id="checkCapsLock1" style="color: red;; font-size: 14px;"></div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="checkMemberquitBtn" data-bs-toggle="modal"data-bs-target="#myInfoAlertModal">확인</button>
+				<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
 			</div>
 		</div>
 	</div>
@@ -201,7 +201,7 @@
       			
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary myInfoAlertModalBtn1" >확인</button>
+				<button type="button" class="btn btn-primary myInfoAlertModalBtn1">확인</button>
 				<button type="button" class="btn btn-secondary myInfoAlertModalBtn2" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>

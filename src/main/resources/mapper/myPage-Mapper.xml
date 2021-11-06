@@ -119,7 +119,7 @@
 		WHERE ID = #{id}
 	</select>
 	
-		<!-- 회원 정보 조회//1025 봉 -->
+	<!-- 회원 정보 조회//1025 봉 -->
 	<select id="selectMemberInfo" resultMap="memberVO">
 		SELECT ID
 			, PW
