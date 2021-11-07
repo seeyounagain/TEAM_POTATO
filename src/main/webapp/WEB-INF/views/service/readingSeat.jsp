@@ -168,12 +168,15 @@ background-color: white;
 			<div>(전체기록 조회)</div>		
 		
 		</div>
-		<div class="col-10 text-end me-0 px-0">
-			<input type="text" name="searchId" id="searchId" placeholder="아이디를 검색하세요.">
+		<div class="col-8">
+			<input type="date" name="recordStartDate" > ~ <input type="date" name="recordEndDate" >
 		</div>
-		<div class="col-2 text-start ml-0 ps-1">
-			<input type="button" value="검색" class="searchRecord">
-			<input type="button" value="초기화" class="searchRecordReset" style="margin-left : 3px;">
+		<div class="col-4 ml-0 ps-1">
+			<div class="input-group text-start">                                                           
+				<input type="text" name="searchId" id="searchId" class="form-control" placeholder="아이디를 입력하세요.">                                  
+				<input type="button" value="검색" class="searchRecord input-group-text gap-2 col-2 btn-primary">
+				<input type="button" value="초기화" class="searchRecordReset input-group-text gap-2 btn-primary" style="margin-left : 3px;">
+	  		</div>  
 		</div>
     </div>
     <div class="tableDiv overflow-auto searchRecordList" style="height: 600px;">

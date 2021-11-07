@@ -9,6 +9,8 @@
 			<result column="ID" 				property="id" 			/>
 			<result column="SEAT_IN_DATE" 		property="seatInDate"	/>
 			<result column="SEAT_OUT_DATE" 		property="seatOutDate"	/>
+			<result column="RECORD_START_DATE"	property="recordStartDate"	/>
+			<result column="RECORD_END_DATE"	property="recordEndDate"	/>
 			</resultMap>
 			
 			<resultMap type="com.potato.project.service.vo.ReadingSeatVO" id="seat">
@@ -42,6 +44,8 @@
 			<result column="CREATE_DATE"	property="createDate"/>                                                                                                                                                                  
 			<result column="REQUEST_STATUS"	property="requestStatus"/>                                                                                                                                                                  
 			</resultMap>
+			
+			
 			
 			<update id="ajaxRequestStatusChange">
 			UPDATE REQUEST_BOARD
@@ -173,12 +177,19 @@
 			, SEAT_IN_DATE
 			, SEAT_OUT_DATE 
 			FROM READING_RECORD
+			WHERE RECORD_CORD = RECORD_CODE
+			<if test="recordStartDate != null and !recordStartDate.equals('') and !recordEndDate.equals('')">
+				AND	SEAT_IN_DATE &gt;= TO_DATE(#{recordStartDate },'YYYY-MM-DD')
+				AND SEAT_IN_DATE &lt;= TO_DATE(#{recordEndDate },'YYYY-MM-DD')
+			</if>
 			<if test="id != null and !id.equals('')">
-			WHERE ID = #{id }			
+			AND ID = #{id }			
 			</if>
 			ORDER BY SEAT_OUT_DATE DESC
             ,SEAT_IN_DATE DESC
-			</select>		
+			</select>	
+			
+				
 </mapper>
 
 

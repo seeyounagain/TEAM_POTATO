@@ -60,11 +60,13 @@ $(document).ready(function(){
 	//시트기록 검색ajax
 	$(document).on('click','.searchRecord',function(){
 		var searchId = $('#searchId').val();
-
+		var	recordStartDate = $('input[name=recordStartDate]').val();
+		var	recordEndDate	= $('input[name=recordStartDate]').val();	
+			
 				$.ajax({
 	            url: '/service/searchRecord', //요청경로
 	            type: 'post',
-	            data:{'id':searchId}, //필요한 데이터
+	            data:{'id':searchId,'recordEndDate':recordEndDate,'recordStartDate':recordStartDate}, //필요한 데이터
 	            success: function(recordList) {
 				
 

@@ -49,6 +49,6 @@ public interface ServiceService {
 	int ajaxRegRequest(RequestBoardVO rbVO);
 	
 	int ajaxRequestStatusChange(RequestBoardVO rbVO);
-	
+
 	
 }
