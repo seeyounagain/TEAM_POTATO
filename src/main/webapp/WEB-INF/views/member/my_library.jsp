@@ -166,8 +166,8 @@
 				<table class="table table-hover text-center mt-2" style="border-top: 2px solid #0b70b9;">
 					<colgroup>
 						<col width="10%">
-						<col width="60%">
-						<col width="10%">
+						<col width="50%">
+						<col width="20%">
 						<col width="20%">
 					</colgroup>
 					<thead>

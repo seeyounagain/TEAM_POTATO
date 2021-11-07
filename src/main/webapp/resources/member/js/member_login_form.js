@@ -7,6 +7,34 @@
 				login(); 
 			}
 		});
+		//엔터키 눌러서 모달창 닫기
+		$('#goLogin').keydown(function(e){
+			if(e.keyCode == 13){
+				$('#loginAlertModal').modal('hide');
+				$('#loginModal').modal('hide');
+			}
+		});
+		
+		//모달창 닫으면 인풋태그 내용 지우고 포커스주기
+		var loginAlertModal = document.getElementById('loginAlertModal');
+		
+		loginAlertModal.addEventListener('hidden.bs.modal', function (event) {
+			$('#id').val('');
+			$('#pw').val('');
+			
+			$('#id').focus();
+ 		})
+ 		
+ 		//모달창 닫으면 인풋태그 내용 지우고 포커스주기
+ 		var loginModal = document.getElementById('loginModal');
+		
+		loginModal.addEventListener('hidden.bs.modal', function (event) {
+			$('#id').val('');
+			$('#pw').val('');
+			
+			$('#id').focus();
+		})
+		
 		
 		$(document).on('click', '#loginBtn' , function() {
 		
@@ -38,12 +66,6 @@
 						if (result.overCnt == 0) {
 							
 							$('#loginModalBody').text(result.name + '님 환영합니다 :)');
-							//엔터키 눌러서 이동
-							$('#loginModal').keydown(function(e){
-								if(e.keyCode == 13){
-									location.href='/common/main'
-								}
-							});
 							$('.loginModalClose').attr('onclick','location.href="/common/main"');
 							
 						}
@@ -82,7 +104,6 @@
 			$('#loginModal').modal('show');
 			
 		});
-		
 		
 	});
 

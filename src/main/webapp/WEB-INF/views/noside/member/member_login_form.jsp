@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=20" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=4" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -31,7 +31,7 @@
 			<div class="row justify-content-center">
 				<div class="col-7 pt-1">
 					<label for="id" class="form-label">아이디</label>
-					<input type="text" class="form-control" id="id" name="id" required>
+					<input type="text" class="form-control" id="id" name="id" autofocus required>
 				</div>	
 				<div class="col-7 pt-1">
 					<label for="pw" class="form-label">비밀번호</label>
