@@ -139,13 +139,6 @@ public class BoardServiceImpl  implements BoardService{
 
 		return sqlSession.delete("boardMapper.deleteQna", qnaVO);
 	}
-
-	//답변만 삭제
-	@Override
-	public int deleteAnswer(QnaVO qnaVO) {
-
-		return sqlSession.delete("boardMapper.deleteAnswer", qnaVO);
-	}
 	
 	//답변 등록 개수 + 업데이트
 	@Override
@@ -167,6 +160,13 @@ public class BoardServiceImpl  implements BoardService{
 	public int cntQna() {
 		
 		return sqlSession.selectOne("boardMapper.cntQna");
+	}
+
+	//답변 하나만 삭제
+	@Override
+	public int deleteAnswer(QnaVO qnaVO) {
+
+		return sqlSession.delete("boardMapper.deleteAnswer", qnaVO);
 	}
 
 

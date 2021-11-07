@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=10" ></script>
+<script type="text/javascript" src="/resources/board/js/qna_detail.js?ver=13" ></script>
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -75,9 +75,18 @@
    				<c:forEach items="${answer }" var="info">
    					<div class="answerTableDiv">
 			   			<table class="table answerTable">
+			   				<colgroup>
+			   					<col width="10%">
+			   					<col width="60%">
+			   					<col width="30%">
+			   				</colgroup>
 			   				<tr>
 			   					<td height="100px;">작성자: ${info.name }</td>
-			   					<td align="right">답변일: ${info.createDate }</td>
+			   					<td>답변일: ${info.createDate }</td>
+			   					<td align="right">
+			   					<input type="hidden" value="${info.qnaCode }" name="qnaCode" id="qnaCode">
+			   					<input class="btn btn-primary btn-sm" type="button" value="답변 삭제" onclick="deleAnswer();">
+			   					</td>
 			   				</tr>
 			   				<tr>
 			   					<td colspan="2" height="200px;" style="padding: 15px;">${info.content }</td>   				
@@ -89,7 +98,7 @@
    		
    
    		
-   		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
+   		<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' and qna.answerCnt eq 0}">
    			<div class="tableDiv">
 	   			<form action="/board/insertAnswer?menuCode=${menuVO.menuCode }" method="post">
 	   			<input type="hidden" value="${sessionScope.loginInfo.id}" name="id">
@@ -117,7 +126,7 @@
 				<input type="hidden" value="${qna.qnaPw}" name="qnaPw" id="qnaPw">
 				<!-- 관리자로 로그인 했을 때, 답변 삭제 / 게시글 삭제-->
 				<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}">
-					<input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();">
+					<!-- <input class="btn btn-primary" type="button" value="답변 삭제" onclick="deleAnswer();"> -->
 					<input class="btn btn-primary" type="button" value="게시글 삭제" onclick="deleQna();">
 				</c:if>
 				<!-- 일반  회원으로 로그인 했을 때-->

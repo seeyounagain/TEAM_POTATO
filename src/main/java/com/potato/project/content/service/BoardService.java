@@ -69,8 +69,7 @@ public interface BoardService {
 	//문의글, 답변 동시 삭제
 	int deleteQna(QnaVO qnaVO);
 	
-	//답변만 삭제
+	//답변 하나 삭제
 	int deleteAnswer(QnaVO qnaVO);
-	
 	
 }

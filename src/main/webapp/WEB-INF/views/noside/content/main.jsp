@@ -77,11 +77,11 @@
 	            </div>
 	            <div class="modal-footer" style="display: block;">
 					<div class="row">
-			      		<div class="col-9 text-first">
-			      			<input type="checkbox" id="chkBox">오늘 하루 다시 이 창을 열지 않음
+			      		<div class="col-9 text-start p-0">
+			      			<label for="chkBox"><input type="checkbox" id="chkBox">오늘 하루 다시 이 창을 열지 않음</label>
 			      		</div>
-			      		<div class="col-3 text-end">
-			       			<button type="button" class="btn btn-primary" id="popEnd" data-dismiss="modal" >닫기</button>
+			      		<div class="col-3 text-end p-0">
+			       			<button type="button" class="btn btn-primary btn-sm" id="popEnd" data-dismiss="modal" >닫기</button>
 			      		</div>
 			      	</div>	            
 	            </div>

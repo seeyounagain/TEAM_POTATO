@@ -32,6 +32,8 @@ input{
 	width: 100%;
 }
 </style>
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> -->
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 <body>
 
@@ -55,14 +57,28 @@ input{
 						</tr>
 						<tr>
 							<td>등록일</td>
-							<td><input type="hidden" value="${nowDate }" name="createDate" id="createDate">${nowDate }</td>
+							<td><input type="hidden" value="${nowDate }" name="createDate" id="createDate">${nowDate }
+								
+							</td>
 						</tr>
 						<tr>
 							<td>내용</td>
 							<td>
 								<div class="form-floating">
-								  <textarea class="form-control" id="content" name="content" style="height: 100px" required></textarea>
-								  <label for="floatingTextarea2">공지사항을 입력하세요.</label>
+								
+								  <textarea class="ckeditor" id="content" name="content" style="height: 100px"  required></textarea>
+								   <script>
+								    // 3. CKEditor5를 생성할 textarea 지정
+								    ClassicEditor
+							        .create( document.querySelector( '#content' ), {
+							            // 제거 하고싶은 플러그인 (배열)
+							             removePlugins: [ 'ImageUpload' ]
+							        } )
+							        .catch( error => {
+							            console.error( error );
+							        } );
+								    </script>
+								
 								</div>
 							</td>
 						</tr>

@@ -1,5 +1,6 @@
 package com.potato.project.content.vo;
 
+
 public class QnaAnswerVO {
 	private String answerCode	;
 	private String content		;

@@ -32,7 +32,7 @@
 		<result column="CONTENT" 	 property="content"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="QNA_PW" 	 property="qnaPw"/>
-		<result column="ANSWER_CNT" 	property="answerCnt"/>
+		<result column="ANSWER_CNT"  property="answerCnt"/>
 	</resultMap>
 	
 	<!-- 문의 답변 -->
@@ -262,6 +262,7 @@
 		     , CONTENT
 		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
 			 , QNA_PW
+			 , ANSWER_CNT
 		FROM QNA
 		WHERE QNA_CODE = #{qnaCode} 
 	</select>
@@ -318,12 +319,13 @@
 		WHERE QNA_CODE = #{qnaCode}
 	</delete>
 	
-	<!-- 답변만 삭제 -->
-	<delete id="deleteAnswer">
+	<!-- 답변 전체 삭제 -->
+    <delete id="deleteAnswer">
 		DELETE 
 		FROM (SELECT A.ANSWER_CODE
 		      FROM QNA Q, QNA_ANSWER A
 		      WHERE Q.QNA_CODE = A.QNA_CODE
 		      AND A.QNA_CODE = #{qnaCode})
 	</delete>
+	
 </mapper>
