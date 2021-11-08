@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=18" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=20" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -129,8 +129,8 @@
 			<input type="text" class="form-control" id="findPwId" name="findPwId" autofocus required>
 			<label for="birth" class="form-label mt-3">생년월일</label>
 			<input type="date" class="form-control" id="findPwBirth" name="findPwBirth" required>
-      		<label for="tell" class="form-label">연락처</label>
-	       		<div class="row mt-2">
+      		<label for="tell" class="form-label mt-3">연락처</label>
+	       		<div class="row">
 				<div class="col">
 				<select class="form-select inCheck" name="tells" id="tell1">
 					<option value="010">010</option>
@@ -146,7 +146,7 @@
 					<input type="text" id="tell3" class="form-control tells inCheck" name="tells" required>
 				</div>
 			</div>
-			<div class="col-12 mt-3 text-center" id="findPwCheck">sdsd</div>     
+			<div class="col-12 mt-3 text-center" id="findPwCheck"></div>     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="findPwBtn">확인</button>

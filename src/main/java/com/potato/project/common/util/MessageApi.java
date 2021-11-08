@@ -24,7 +24,7 @@ public class MessageApi {
 		// api secret
 		String apiSecret = "UFLEV2K4DA9EVNBGMBA4XZMPTAYAUYFU";
 		// 발신번호
-		String fromNumber = "01058244199";
+		String fromNumber = "########";
 
 		Message coolsms = new Message(apiKey, apiSecret);
 
@@ -50,7 +50,7 @@ public class MessageApi {
 		// api secret
 		String apiSecret = "UFLEV2K4DA9EVNBGMBA4XZMPTAYAUYFU";
 		// 발신번호
-		String fromNumber = "01058244199";
+		String fromNumber = "########";
 		
 		Message coolsms = new Message(apiKey, apiSecret);
 		

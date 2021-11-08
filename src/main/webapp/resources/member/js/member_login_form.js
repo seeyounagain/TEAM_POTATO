@@ -194,6 +194,8 @@
 		// 아이디찾기 버튼 클릭 시
 		findId = function(){
 			
+			$('#findIdname').val('');
+			$('#findIdbirth').val('');
 			$('#findIdModal').modal('show');
 			
 			$(document).on('click', '#findIdBtn' , function() {
@@ -251,6 +253,10 @@
 		// 비밀번호 찾기 버튼 클릭 시
 		findPw = function(){
 			
+			$('#findPwId').val('');
+			$('#findPwBirth').val('');
+			$('#tell2').val('');
+			$('#tell3').val('');
 			$('#findPwModal').modal('show');
 			
 			$(document).on('click', '#findPwBtn' , function() {
