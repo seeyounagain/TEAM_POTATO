@@ -60,7 +60,7 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="translator" class="form-label">옮긴이</label>
-				<input type="text" class="form-control" id="translator" name="translator" placeholder="역자">
+				<input type="text" class="form-control" id="translator" name="translator" placeholder="역자 / 없을 경우 생략">
 			</div>
 			<div class="col-12 mt-2">
 				<label for="publisher" class="form-label">발행자</label>

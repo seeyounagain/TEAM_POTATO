@@ -84,6 +84,7 @@
 					
 					$('#idAlert').css('color', 'blue');
 					$('#idAlert').text('아이디 중복확인을 해주세요.');
+					$('#joinBtn').removeClass('disabled');
 					
 				}
 			
@@ -143,6 +144,7 @@
 			if(tell1J.test($('#tell1').val()) && tell2J.test($('#tell2').val()) && tell3J.test($('#tell3').val())){
 				
 				$('#tellCheck').text('');
+				$('#joinBtn').removeClass('disabled');
 				return ;
 			}
 			else{

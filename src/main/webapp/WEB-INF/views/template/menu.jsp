@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=31"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=32"></script>
 <script>
 $(function() {
 	$(window).scroll(function() { 
@@ -305,7 +305,6 @@ $(function() {
   </div>
 </div>
 <!-- 로그아웃 modal 종료 -->
-
 
 
 </body>

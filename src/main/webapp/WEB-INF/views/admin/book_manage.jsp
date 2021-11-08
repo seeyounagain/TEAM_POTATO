@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=103" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=107" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -135,7 +135,7 @@ $(function() {
 				</c:if>
 		</td>
 		<td class="text-center">
-			<button type="button" class="btn btn-danger px-5" data-bookCode="${book.bookCode }" onclick="location.href='/libManage/updateBookInfo?bookCode=${book.bookCode }&menuCode=${menuVO.menuCode}'">도서정보수정</button>
+			<button type="button" class="btn btn-danger px-5" data-bookCode="${book.bookCode }" onclick="updateBookInfo('${book.bookCode }','${menuVO.menuCode }');">도서정보수정</button>
 		</td>
 	</c:forEach>
 	</tbody>

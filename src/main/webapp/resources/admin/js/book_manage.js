@@ -346,7 +346,7 @@
 	         		str += '</td>';
 	         		
 	         		str += '<td class="text-center">';
-	         		str += '<button type="button" class="btn btn-danger px-5" data-bookCode="' + element.bookCode + '">도서정보수정</button>';
+	         		str += '<button type="button" class="btn btn-danger px-5" data-bookCode="' + element.bookCode + '" onclick="updateBookInfo(\''+ element.bookCode+'\',\'MENU_006\');" >도서정보수정</button>';
 					str += '</td>';
 					
 	         		str += '</tr>';
@@ -378,4 +378,10 @@
 		
 	  };	
 	
+	  updateBookInfo = function(bookCode,menuCode) {
+		
+		  location.href= '/libManage/updateBookInfo?bookCode=' + bookCode + '&menuCode=' + menuCode;
+		  
+	}
+	  
 })(jQuery);
