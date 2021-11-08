@@ -40,6 +40,9 @@
 	width: 80%;
 	height: 80%;
 }
+.form-control{
+	resize: none;
+}
 </style>
 </head>
 <body>
@@ -85,7 +88,7 @@
 			   					<td>답변일: ${info.createDate }</td>
 			   					<td align="right">
 			   					<input type="hidden" value="${info.qnaCode }" name="qnaCode" id="qnaCode">
-			   					<input class="btn btn-primary btn-sm" type="button" value="답변 삭제" onclick="deleAnswer();">
+			   					<input class="btn btn-secondary btn-sm" type="button" value="답변 삭제" onclick="deleAnswer();">
 			   					</td>
 			   				</tr>
 			   				<tr>

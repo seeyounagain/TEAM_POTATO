@@ -36,24 +36,7 @@ input[type="button"] {
 	padding-left: 0px;
 }
 </style>
-<script type="text/javascript">
-	function checkPw() {
-		var inputPw = document.getElementById('inputPw').value;
-		var qnaPw = document.getElementById('qnaPw').value;
-		var qnaCode = document.getElementById('qnaCode').value;
-		var menuCode = document.getElementById('menuCode').value;
-		
-		
-		if(inputPw != qnaPw){
-			alert('비밀번호를 확인하세요.');
-			document.getElementById('inputPw').value = '';
-			document.getElementById('inputPw').focus();
-			return;
-		}
-		
-		location.href = '/board/qnaDetail?qnaCode=' + qnaCode +'&menuCode=' + menuCode;
-	}
-</script>
+<script type="text/javascript" src="/resources/board/js/qna_password.js?ver=1"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -79,6 +62,22 @@ input[type="button"] {
    		</div>
 	</div>
 </div>
-	
+<!-- 알림 모달 -->
+		<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="noticeCompleteModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" style="color: black;" id="noticeCompleteModalLabel">알림</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="deleModalContent">
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary deleModalClose" data-bs-dismiss="modal" >확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 </body>
 </html>

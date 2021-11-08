@@ -25,11 +25,10 @@
     z-index: -1;
 }
 #col2 {
-	height: 23rem;
+	height: 450px;
 }
 #col3 {
-	height: 23rem;
-	background-color: #0b70b9;
+	height: 450px;
 }
 .titleA {
 	color: black;
@@ -71,7 +70,10 @@
     object-fit:cover;
     top: 0;
     left: 0;
-    height: 280px;
+    height: 340px;
+}
+.noticeImg img{
+	 height: 340px;
 }
 .card {
     transition: transform 0.2s ease;
@@ -205,14 +207,6 @@
 		</div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true" style="color: gray;"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true" style="color: gray;"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
  
  </div>   
@@ -221,38 +215,35 @@
 
 
     <!-- 공지사항 이미지 슬라이드 -->
-    <div class="col-5 g-5" id="col3">
-    	<div class="row justify-content-center">
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-				  <div class="carousel-inner">
-				    <div class="carousel-item active">
-				      <a href="/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004">
+   <div class="col-5 g-5" id="col2">
+    <h3 class="text-first mt-1" >공지사항</h3>
+ <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+				  <div class="carousel-inner noticeImg">
+				    <div class="carousel-item active" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004'">
+				  
 				     	<img  height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[0].attachFileVO.attachedFileName }" class="d-block" alt="#">
-				      </a>
+				     
 				    </div>
-				    <div class="carousel-item">
+				    <div class="carousel-item noticeImg">
 				    	<a href="/board/noticeDetail?noticeCode=${noticeList[1].noticeCode }&menuCode=MENU_004">
 				      		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[1].attachFileVO.attachedFileName }" class="d-block" alt="#">
 				    	</a>
 				    </div>
-				    <div class="carousel-item">
+				    <div class="carousel-item noticeImg">
 				    	<a href="/board/noticeDetail?noticeCode=${noticeList[2].noticeCode }&menuCode=MENU_004">
 				    		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[2].attachFileVO.attachedFileName }" class="d-block" alt="#">
 				    	</a>
 				    </div>
 				  </div>
-				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Previous</span>
-				  </button>
-				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Next</span>
-				  </button>
+				 
 				</div>
     	</div>
     </div>
-</div>
 
 
 </body>
