@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=28"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=39"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -184,6 +184,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="checkMemberquitBtn">확인</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>
 	</div>

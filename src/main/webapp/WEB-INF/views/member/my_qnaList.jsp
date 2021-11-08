@@ -198,6 +198,9 @@
 										<tr>
 											<td>${status.count }</td>
 											<td>
+												<c:if test="${not empty info.qnaPw}">
+													<img src="/resources/img/icon_secret.png" width="13px;"> 
+												</c:if>
 												<a class="titleA" href="/myPage/myQnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}&id=${info.id}">${info.title }
 													<c:if test="${info.answerCnt != 0}">
 														<span class="m-2 complete">답변완료</span>

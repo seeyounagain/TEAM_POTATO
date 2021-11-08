@@ -195,6 +195,7 @@
 		     , ID
 		     , NAME
 		     , CREATE_DATE
+		     , QNA_PW
 		     , ANSWER_CNT
 		FROM (SELECT ROWNUM AS ROW_NUM 
 		         , QNA_CODE 
@@ -202,6 +203,7 @@
 		         , ID
 		         , NAME
 		         , CREATE_DATE
+		         , QNA_PW
 		         , ANSWER_CNT
 			 FROM (SELECT ROWNUM AS ROW_NUM 
 		                 , QNA_CODE 
@@ -209,8 +211,9 @@
 		                 , ID
 		                 , NAME
 		                 , SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),0,4)||'년'
-						||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),6,2)||'월'
-						||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),9,2)||'일' AS CREATE_DATE
+						 ||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),6,2)||'월'
+						 ||SUBSTR(TO_CHAR(CREATE_DATE, 'YYYY-MM-DD'),9,2)||'일' AS CREATE_DATE
+						 , QNA_PW
 		                 , ANSWER_CNT
 		           FROM QNA
 		           WHERE ID = #{id}

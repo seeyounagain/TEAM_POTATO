@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.potato.project.common.util.LoginInterceptor;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.common.vo.RentalVO;
 import com.potato.project.common.vo.SideMenuVO;
@@ -92,9 +93,12 @@ public class MyPageController {
 	//비밀번호 수정하기
 	@ResponseBody
 	@PostMapping("/updatePw")
-	public boolean updatePw(MemberVO memberVO) { //아이디 비밀번호
+	public boolean updatePw(MemberVO memberVO, HttpSession session, String pw) { //아이디 비밀번호
+		boolean result = myPageService.updatePw(memberVO);
+		memberVO.setPw(pw);
+		
 		//비밀번호 다른걸로 변경
-		return myPageService.updatePw(memberVO);
+		return result;
 	}
 
 	//회원탈퇴 비밀번호 확인

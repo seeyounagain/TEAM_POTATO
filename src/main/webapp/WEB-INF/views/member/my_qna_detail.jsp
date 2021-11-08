@@ -106,7 +106,7 @@
 </div>
 
 <!-- 모달창 -->
-<div class="modal" id="myQnaDeleteCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myQnaDeleteCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -136,7 +136,7 @@
         		삭제됐당
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 			</div>
 		</div>
 	</div>
