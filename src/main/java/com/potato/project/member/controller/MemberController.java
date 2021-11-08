@@ -166,6 +166,24 @@ public class MemberController {
 		
 	}	
 	
+	// 아이디 찾기
+	@ResponseBody
+	@PostMapping("/findIdAjax")
+	public String findIdAjax(MemberVO memberVO) {
+		
+		return memberSerivce.findIdAjax(memberVO);
+		
+	}
+	
+	// 비밀번호 찾기
+	@ResponseBody
+	@PostMapping("/findPwAjax")
+	public String findPwAjax(MemberVO memberVO) {
+		
+		return memberSerivce.findPwAjax(memberVO);
+		
+	}
+	
 	
 	
 }

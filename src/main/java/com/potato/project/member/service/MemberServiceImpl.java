@@ -72,6 +72,22 @@ public class MemberServiceImpl implements MemberService{
 		return sqlSession.delete("memberMapper.deleteMessage",messageCode);
 		
 	}
+	
+	// 아이디 찾기
+	@Override
+	public String findIdAjax(MemberVO memberVO) {
+		
+		return sqlSession.selectOne("memberMapper.findIdFromNameAndBirth",memberVO);
+		
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public String findPwAjax(MemberVO memberVO) {
+		
+		return sqlSession.selectOne("memberMapper.findPwFromIdAndTellAndBirth",memberVO);
+		
+	}
 
 	
 }

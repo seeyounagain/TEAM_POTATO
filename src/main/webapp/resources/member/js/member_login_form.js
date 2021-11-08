@@ -105,6 +105,7 @@
 			
 		});
 		
+		
 	});
 
 /* 함수선언 영역
@@ -114,6 +115,7 @@
 
 */
 	(function($){
+		
 		login = function(){
 			
 			var pw = $('#pw').val();
@@ -186,7 +188,130 @@
 			}
 			
 			$('#loginModal').modal('show');
+			
 		};
 		
+		// 아이디찾기 버튼 클릭 시
+		findId = function(){
+			
+			$('#findIdModal').modal('show');
+			
+			$(document).on('click', '#findIdBtn' , function() {
+			
+				var findIdname = $('#findIdname').val();
+				var findIdbirth = $('#findIdbirth').val();
+				
+				/* 아이디 찾기 Ajax 시작 */
+				$.ajax({
+					url: '/member/findIdAjax', // 요청경로
+					type: 'post', // post 메소드 방식
+					data: {'name':findIdname,'birth':findIdbirth}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+					success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+					// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+						
+						if (result == null || result == '') {
+							
+							$('#findIdCheck').css('color', 'red');
+							$('#findIdCheck').text('이름과 생년월일에 해당하는 회원정보가 없습니다.');
+							
+						}
+						
+						else {
+							
+								var originStr = result; 
+								var maskingStr;
+								var strLength;
+
+								strLength = originStr.length; 
+								if(strLength < 4){ 
+									maskingStr = originStr.replace(/(?<=.{2})./gi, "*"); 
+								}
+								else {
+									maskingStr = originStr.replace(/(?<=.{3})./gi, "*"); 
+								} 
+								
+							
+							$('#findIdCheck').css('color', 'black');
+							$('#findIdCheck').text('회원님의 아이디는 [' + maskingStr + '] 입니다.');
+							
+						}
+						
+					},
+					error: function(){
+					// ajax 실행 실패 시 실행되는 구간
+					alert('아이디 찾기 실패!');
+					}
+				});
+				/* 아이디 찾기 Ajax 종료 */
+				
+			});
+			
+		};
 		
-	})(jQuery);
+		// 비밀번호 찾기 버튼 클릭 시
+		findPw = function(){
+			
+			$('#findPwModal').modal('show');
+			
+			$(document).on('click', '#findPwBtn' , function() {
+			
+			var tell = $('#tell1').val() + '-' + $('#tell2').val() + '-' + $('#tell3').val();
+			var findPwId = $('#findPwId').val();
+			var findPwBirth = $('#findPwBirth').val();
+
+			/* 비밀번호 찾기 Ajax 시작 */
+			$.ajax({
+				url: '/member/findPwAjax', // 요청경로
+				type: 'post', // post 메소드 방식
+				async : false,
+				data: {'tell':tell,'birth':findPwBirth,'id':findPwId}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+				success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+				// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+					
+					if (result == null || result == '') {
+						
+						$('#findPwCheck').css('color', 'red');
+						$('#findPwCheck').text('아이디와 생년월일, 연락처에 해당하는 회원정보가 없습니다.');
+						
+					}
+					
+					else {
+						
+						var toNumber = $('#tell1').val() + $('#tell2').val() + $('#tell3').val();
+						
+						/* 문자 전송 Ajax 시작 */
+						$.ajax({
+							url: '/libManage/sendSMSMemberPwAjax', // 요청경로
+							type: 'post', // post 메소드 방식
+							data: {'toNumber':toNumber,'pw':result}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+							success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+							// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+
+								$('#findPwCheck').css('color', 'black');
+								$('#findPwCheck').text('회원님의 연락처로 비밀번호를 전송했습니다.');
+								
+							},
+							error: function(){
+							// ajax 실행 실패 시 실행되는 구간
+							alert('문자 전송 실패!');
+							}
+						});
+						/* 문자 전송 Ajax 종료 */
+						
+						
+					}
+					
+				},
+				error: function(){
+				// ajax 실행 실패 시 실행되는 구간
+				alert('비밀번호 찾기 실패!');
+				}
+			});
+			/* 비밀번호 찾기 Ajax 종료 */
+			
+			
+			});
+			
+		};
+		
+})(jQuery);

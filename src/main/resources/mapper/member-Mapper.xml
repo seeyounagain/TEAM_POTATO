@@ -177,6 +177,23 @@
 		WHERE MESSAGE_CODE = #{messageCode}
 	</delete>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findIdFromNameAndBirth" resultType="String">
+		SELECT ID
+		FROM MEMBER
+		WHERE NAME = #{name}
+		AND BIRTH = #{birth}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwFromIdAndTellAndBirth" resultType="String">
+		SELECT PW
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND TELL = #{tell}
+		AND BIRTH = #{birth}
+	</select>
+		
 </mapper>
 
 

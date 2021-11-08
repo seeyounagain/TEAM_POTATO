@@ -291,5 +291,16 @@ public class AdminController {
 		
 	}
 	
+	// 회원에게 비밀번호 전송
+	@ResponseBody
+	@PostMapping("/sendSMSMemberPwAjax")	
+	public String sendSMSMemberPwAjax(String toNumber,String pw) {
+		
+		MessageApi.sendPwMessage(toNumber, pw);
+		
+		return pw;
+		
+	}
+	
 	
 }

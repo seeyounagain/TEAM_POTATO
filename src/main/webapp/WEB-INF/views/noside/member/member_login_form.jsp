@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=4" ></script>
+<script type="text/javascript" src="/resources/member/js/member_login_form.js?ver=18" ></script>
 <style type="text/css">
 #goJoin {
 	text-decoration: underline 1px gray;
@@ -40,6 +40,10 @@
 				<div class="col-7 mt-2 pt-1 text-center">
 					<span>회원이 아니십니까?</span>
 					<a id="goJoin" href="/member/memberJoinInfo">회원가입</a>
+				</div>
+				<div class="col-7 mt-2 pt-1 text-center">
+					<a id="goJoin" onclick="findId();">아이디찾기</a>
+					<a id="goJoin" onclick="findPw();">비밀번호찾기</a>
 				</div>
 				<div class="col-6 d-grid mt-3">
 					<button type="submit" id="loginBtn" class="btn btn-primary" onclick="login();">로그인</button>
@@ -86,7 +90,72 @@
 </div>
 <!-- 로그인 alert Modal 종료 -->
 
+<!-- 아이디찾기01 modal 시작 -->
+<div class="modal fade" id="findIdModal" tabindex="-1" aria-labelledby="findIdModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="findIdModalLabel">아이디 찾기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="findIdModalText">
+      		<p>회원정보에 등록한 이름과 생년월일을 입력해주세요.</p>
+      		<label for="name" class="form-label mt-3">이름</label>
+			<input type="text" class="form-control" id="findIdname" name="findIdname" autofocus required>
+			<label for="birth" class="form-label mt-3">생년월일</label>
+			<input type="date" class="form-control" id="findIdbirth" name="findIdbirth" required>
+			<div class="col-12 mt-3 text-center" id="findIdCheck"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="findIdBtn">확인</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>s
+</div>
+<!-- 아이디찾기01 modal 종료 -->
 
+<!-- 비밀번호찾기01 modal 시작 -->
+<div class="modal fade" id="findPwModal" tabindex="-1" aria-labelledby="findPwModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="findPwModalLabel">비밀번호 찾기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="findPwModalText">
+      		<p>회원정보에 등록한 아이디와 생년월일, 연락처를 입력해주세요.</p>
+      		<label for="id" class="form-label mt-3">아이디</label>
+			<input type="text" class="form-control" id="findPwId" name="findPwId" autofocus required>
+			<label for="birth" class="form-label mt-3">생년월일</label>
+			<input type="date" class="form-control" id="findPwBirth" name="findPwBirth" required>
+      		<label for="tell" class="form-label">연락처</label>
+	       		<div class="row mt-2">
+				<div class="col">
+				<select class="form-select inCheck" name="tells" id="tell1">
+					<option value="010">010</option>
+					<option value="011">011</option>
+					<option value="016">016</option>
+					<option value="018">018</option>
+				</select>
+				</div>
+				<div class="col">
+					<input type="text" id="tell2" class="form-control tells inCheck" name="tells" required>
+				</div>
+				<div class="col">
+					<input type="text" id="tell3" class="form-control tells inCheck" name="tells" required>
+				</div>
+			</div>
+			<div class="col-12 mt-3 text-center" id="findPwCheck">sdsd</div>     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="findPwBtn">확인</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 비밀번호찾기01 modal 종료 -->
 
 </body>
 </html>

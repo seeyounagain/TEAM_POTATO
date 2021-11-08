@@ -28,5 +28,10 @@ public interface MemberService {
 	// 알림 삭제
 	int deleteMessage(String messageCode);
 	
+	// 아이디 찾기
+	String findIdAjax(MemberVO memberVO);
+	
+	// 비밀번호 찾기
+	String findPwAjax(MemberVO memberVO);
 
 }
