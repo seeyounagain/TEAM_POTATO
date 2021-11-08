@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/admin/js/book_info_update_form.js?ver=4" ></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -16,7 +17,7 @@ textarea {
 
 <h2 class="text-first fw-bold">도서정보수정</h2>
 <hr>
-<form class="row g-0 mt-3 mb-5" action="/libManage/updateBookInfo?menuCode=${menuVO.menuCode }&bookCode=${bookVO.bookCode}" method="post" >
+<form class="row g-0 mt-3 mb-5" action="/libManage/updateBookInfo?menuCode=${menuVO.menuCode }&bookCode=${bookVO.bookCode}" method="post" id="updateBook">
 	<div class="row g-0 justify-content-center">
 		<div class="col-12">
 			<div class="col-12 mt-2">
@@ -76,11 +77,32 @@ textarea {
 				<img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookVO.bookImgVO.attachedImgName }">
 			</div>
 			<div class="d-grid mt-3">
-				<button type="submit" id="regBtn" class="btn btn-primary">수정</button>
+				<button type="button" id="regBtn" class="btn btn-primary">수정</button>
 			</div>
 		</div>
 	</div>
 
 </form>
+
+<!-- 정보 수정 confirm modal 시작 -->
+<div class="modal fade" id="bookInfoUpdateModal" tabindex="-1" aria-labelledby="bookInfoUpdateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookInfoUpdateModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bookInfoUpdateText">
+      	도서 정보를 수정하시겠습니까?
+      </div>
+      <div class="modal-footer">
+		 <button type="button" class="btn btn-primary bookInfoUpdateBtn">수정</button>     
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 정보 수정 confirm modal 종료 -->
+
 </body>
 </html>

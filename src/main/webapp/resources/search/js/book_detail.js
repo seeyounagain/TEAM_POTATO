@@ -18,6 +18,7 @@
 			// 로그인 하지 않았을 경우
 			if (!id) {
 				
+				$('#bookDetailAlertModal').modal('hide');
 				$('.bookDetailModalBtn').removeAttr('onclick');
 				$('#bookDetailAlertText').text('로그인이 필요합니다.');
 				$('.bookDetailModalBtn').text('확인');
@@ -29,6 +30,7 @@
 			// 로그인 했을 경우
 			else {
 				
+				$('#bookDetailAlertModal').modal('hide');
 				$('.bookDetailModalBtn').removeAttr('onclick');
 				var str = '도서를 예약하시겠습니까?<br>도서가 반납되면 대출 가능합니다.';
 				$('#bookDetailAlertText').prepend(str);
@@ -110,6 +112,7 @@
 									success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 									// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 										
+										$('#bookDetailAlertModal').modal('hide');
 										$('.bookDetailModalBtn').removeAttr('onclick');
 										$('#bookDetailAlertText').text('도서가 예약되었습니다.');
 										$('.bookDetailModalBtn').text('확인');
@@ -128,6 +131,7 @@
 						
 						else {
 							
+							$('#bookDetailAlertModal').modal('hide');
 							$('.bookDetailModalBtn').removeAttr('onclick');
 							$('#bookDetailAlertText').text('이미 대출중인 도서입니다.');
 							$('.bookDetailModalBtn').attr('data-bs-dismiss','modal');
@@ -148,6 +152,7 @@
 			}
 				else {
 					
+					$('#bookDetailAlertModal').modal('hide');
 					$('.bookDetailModalBtn').removeAttr('onclick');
 					$('#bookDetailAlertText').text('대출 또는 예약가능 권수를 초과하셨습니다.');
 					$('.bookDetailModalBtn').attr('data-bs-dismiss','modal');

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=107" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=2" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -58,7 +58,7 @@ $(function() {
 <hr>
 	<div class="row mb-3">
 		<div class="col-6">
-			<button type="button" class="btn btn-primary px-4" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}'">신규도서등록</button>
+			<button type="button" class="btn btn-primary px-4" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}';">신규도서등록</button>
 		</div>		
 	    <div class="col-5 align-self-center">
 			<div class="input-group searchB">
@@ -141,7 +141,7 @@ $(function() {
 	</tbody>
 </table>
 
-<!-- modal 시작 -->
+<!-- 도서관리 alert modal 시작 -->
 <div class="modal fade" id="bookManageAlertModal" tabindex="-1" aria-labelledby="bookManageAlertModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -153,12 +153,32 @@ $(function() {
       
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal" onclick="location.href='/libManage/bookManage?menuCode=${menuVO.menuCode}';">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 도서관리 alert modal 종료 -->
+
+<!-- 도서관리 confirm modal 시작 -->
+<div class="modal fade" id="bookManageConfirmModal" tabindex="-1" aria-labelledby="bookManageConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookManageConfirmModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bookManageConfirmModalText">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="bookManageConfirmBtn">확인</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
 </div>
-<!-- modal 종료 -->
+<!-- 도서관리 confirm modal 종료 -->
 
 </body>
 </html>

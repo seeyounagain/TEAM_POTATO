@@ -84,8 +84,10 @@
 			var bookCode = $(this).parent().parent().prev().children().last().children().attr('data-bookCode');
 			
 			if (id == '') {
-				
-				alert('대여자의 아이디를 입력해주세요.');
+				$('#bookManageAlertModal').modal('hide');
+				$('#bookManageConfirmModal').modal('hide');				
+				$('#bookManageAlertText').text('대여자의 아이디를 입력해주세요.');
+				$('#bookManageAlertModal').modal('show');
 				return ;
 			}
 			
@@ -104,10 +106,15 @@
 			var menuCode = 'MENU_006';
 			var sideMenuCode = 'SIDE_MENU_013';
 			
-			var result = confirm('도서를 대여하시겠습니까?')
+			$('#bookManageAlertModal').modal('hide');
+			$('#bookManageConfirmModal').modal('hide');
+			$('#bookManageConfirmModalText').text('도서를 대여하시겠습니까?');
+			$('#bookManageConfirmModal').modal('show');	
+			$('#bookManageConfirmBtn').addClass('bookRentalBtn');			
 			
 			// if 시작
-			if (result) {
+			$(document).on('click', '.bookRentalBtn', function() {
+			
 			
 				// 페이지 이동 없이 쿼리 실행 Ajax1
 		   		$.ajax({
@@ -140,9 +147,12 @@
 								            data: {'id':id,'bookCode':bookCode,'status':2,'reserveId':reserveId}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 								            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 								            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
-								         		alert('도서가 대출되었습니다.');
-								         		location.href='/libManage/bookManage?menuCode=' + menuCode;
-							
+								            	$('#bookManageAlertModal').modal('hide');
+								            	$('#bookManageConfirmModal').modal('hide');	
+												$('#bookManageAlertText').text('도서가 대출되었습니다.');
+												$('#closeBtn').addClass('bookRentalClose');	
+												$('#bookManageAlertModal').modal('show');
+
 								            },
 								            error: function(){
 								           		// ajax 실행 실패 시 실행되는 구간
@@ -154,7 +164,10 @@
 									
 									
 								else {
-									alert('대출 또는 예약가능 권수를 초과하셨습니다.');
+									$('#bookManageAlertModal').modal('hide');
+									$('#bookManageConfirmModal').modal('hide');	
+									$('#bookManageAlertText').text('대출 또는 예약가능 권수를 초과하셨습니다.');
+									$('#bookManageAlertModal').modal('show');
 								}
 					         		
 					            },
@@ -170,7 +183,10 @@
 						
 			else {
 			
-				alert('존재하는 회원이 아닙니다.');
+				$('#bookManageAlertModal').modal('hide');
+				$('#bookManageConfirmModal').modal('hide');	
+				$('#bookManageAlertText').text('존재하는 회원이 아닙니다.');
+				$('#bookManageAlertModal').modal('show');
 				
 			}
 		         		
@@ -182,7 +198,7 @@
 			});
 		   		
 				
-		}
+		});
 			
 		});
 		/* 이벤트 종료 */
@@ -200,9 +216,13 @@
 			console.log('반납자 : ' + id);
 			console.log('예약자 : ' + reserveId);
 			
-			var result = confirm('도서를 반납하시겠습니까?')
+			$('#bookManageAlertModal').modal('hide');
+			$('#bookManageConfirmModal').modal('hide');
+			$('#bookManageConfirmModalText').text('도서를 반납하시겠습니까?');
+			$('#bookManageConfirmModal').modal('show');	
+			$('#bookManageConfirmBtn').addClass('bookReturnBtn');		
 			
-			if (result) {
+			$(document).on('click', '.bookReturnBtn', function() {
 			
 				
 				var status = 1;
@@ -219,8 +239,12 @@
 		            data: {'id':id,'bookCode':bookCode,'status':status,'reserveId':reserveId}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
 		            success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
 		            	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
-		         		alert('도서가 반납되었습니다.');
-		         		location.href='/libManage/bookManage?menuCode=' + menuCode;
+						
+		            	$('#bookManageAlertModal').modal('hide');
+						$('#bookManageConfirmModal').modal('hide');	
+						$('#bookManageAlertText').text('도서가 반납되었습니다.');
+						$('#closeBtn').addClass('bookReturnClose');	
+						$('#bookManageAlertModal').modal('show');
 		         		
 		            },
 		            error: function(){
@@ -230,7 +254,7 @@
 				});
 				/* Ajax 종료 */	
 				
-			}
+			});
 			
 			
 		});
@@ -264,7 +288,6 @@
 	
 	    	var status = $('#statusSelect').val();
 	    	var searchValue = $('#searchValue').val();
-	    	
 	    	
 	    	
 	    	// 페이지 이동 없이 쿼리 실행 Ajax

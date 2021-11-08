@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=20" ></script>
+<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=21" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
