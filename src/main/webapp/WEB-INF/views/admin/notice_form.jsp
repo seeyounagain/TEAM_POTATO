@@ -32,7 +32,7 @@ input{
 	width: 100%;
 }
 </style>
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> -->
 <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 <body>
@@ -49,7 +49,7 @@ input{
 					<table class="table text-center">
 						<tr>
 							<td class="w-10">제목</td>
-							<td class="w-90"><input type="text" name="title" id="title"></td>
+							<td class="w-90"><input type="text" name="title" id="title" required></td>
 						</tr>
 						<tr>
 							<td>작성자</td>
@@ -70,10 +70,8 @@ input{
 								   <script>
 								    // 3. CKEditor5를 생성할 textarea 지정
 								    ClassicEditor
-							        .create( document.querySelector( '#content' ), {
-							            // 제거 하고싶은 플러그인 (배열)
-							             removePlugins: [ 'ImageUpload' ]
-							        } )
+							        .create( document.querySelector( '#content' )
+							        		
 							        .catch( error => {
 							            console.error( error );
 							        } );
@@ -109,7 +107,8 @@ input{
 				공지사항을 등록하겠습니까?
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary modalClose" data-bs-dismiss="modal" onclick="confirmNotice();">확인</button>
+		      	 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary modalClose" data-bs-dismiss="modal" onclick="confirmNotice();">확인</button>
 		      </div>
 		    </div>
 		  </div>

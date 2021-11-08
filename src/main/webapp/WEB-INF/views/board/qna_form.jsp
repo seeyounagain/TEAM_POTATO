@@ -35,6 +35,7 @@ input{
 }
 
 </style>
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -68,8 +69,16 @@ input{
 							<td>문의 내용</td>
 							<td>
 								<div class="form-floating">
-								  <textarea class="form-control" id="floatingTextarea2" name="content" style="height: 100px" required></textarea>
-								  <label for="floatingTextarea2">답변은 해당 문의글에서 확인 가능합니다.</label>
+								  <textarea class="ckeditor" id="content" name="content" style="height: 100px" required></textarea>
+								 <!--  <label for="floatingTextarea2">답변은 해당 문의글에서 확인 가능합니다.</label> -->
+								 <script>
+								 /*  ClassicEditor */
+								 	StandardEditor
+						            .create( document.querySelector( '#content' ))
+						            .catch( error => {
+						                console.error( error );
+						            } );
+			                  </script>
 								</div>
 							</td>
 						</tr>

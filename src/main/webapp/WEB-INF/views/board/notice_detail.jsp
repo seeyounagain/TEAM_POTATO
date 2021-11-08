@@ -33,11 +33,11 @@
 	   					<td>${notice.readCnt }</td>
 	   				</tr>
 	   				<tr>
-	   					<td colspan="6" height="500px;">${notice.content }</td>
+	   					<td colspan="6" height="200px;">${notice.content }</td>
 	   				</tr>
 	   				<c:if test="${not empty notice.attachFileVO.attachedFileName }" >
 					<tr>
-						<td colspan="6">
+						<td colspan="6" height="600px;">
 	   						<div class="row justify-content-center">
 				    			<img id="noticeImg" src="/resources/noticeFileUpload/${notice.attachFileVO.attachedFileName }">
 				    		</div>
@@ -70,7 +70,8 @@
 				
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary deleModalClose" data-bs-dismiss="modal" onclick="confirmDele(menuCode,noticeCode);">확인</button>
+		      	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary deleModalClose" data-bs-dismiss="modal" onclick="confirmDele(menuCode,noticeCode);">확인</button>
 		      </div>
 		    </div>
 		  </div>

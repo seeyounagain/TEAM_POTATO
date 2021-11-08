@@ -109,7 +109,7 @@
 		   				<tr>
 		   					<td class="w-95">
 		   						<div class="form-floating">
-								  <textarea class="form-control" id="floatingTextarea" name="content" style="height: 100px"></textarea>
+								  <textarea class="form-control" id="floatingTextarea" name="content" style="height: 100px" required></textarea>
 								  <label for="floatingTextarea">답변을 등록해주세요.</label>
 								</div>
 		   					</td>
@@ -154,7 +154,8 @@
 				
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary deleModalClose" data-bs-dismiss="modal" onclick="deleQnaModal(menuCode,qnaCode);">확인</button>
+		      	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary deleModalClose" data-bs-dismiss="modal" onclick="deleQnaModal(menuCode,qnaCode);">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -172,7 +173,8 @@
 				
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary deleModalClose" data-bs-dismiss="modal" onclick="deleAnswerModal(menuCode,qnaCode);">확인</button>
+		      	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary deleModalClose" data-bs-dismiss="modal" onclick="deleAnswerModal(menuCode,qnaCode);">확인</button>
 		      </div>
 		    </div>
 		  </div>
