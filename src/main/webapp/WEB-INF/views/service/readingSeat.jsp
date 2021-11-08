@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=4"></script>
+<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=2"></script>
 <style type="text/css">
 
 .container{
@@ -65,7 +65,7 @@ background-color: white;
 					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
 					<input type="hidden" value="${seatList.get(0).seatCode }">
 					<span class="align-middle" id="seatForm">${index+ 1 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
-					<c:if test="${seatList.get(0).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(0).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatBlue.png"></c:if>
 					<c:if test="${seatList.get(0).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
 					</span>
 				</div>
@@ -74,7 +74,7 @@ background-color: white;
 					<input type="hidden" value="${seatList.get(1).seatCode }">
 					<span class="align-middle" id="seatForm">
 					${index+2 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
-					<c:if test="${seatList.get(1).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(1).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatOrange.png"></c:if>
 					<c:if test="${seatList.get(1).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
 					</span>
 				</div>
@@ -86,7 +86,7 @@ background-color: white;
 					<input type="hidden" value="${seatList.get(2).seatCode }">
 					<span class="align-middle" id="seatForm">
 					${index+3 }<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' }">${seat.id }</c:if>
-					<c:if test="${seatList.get(2).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatChairNone.png"></c:if>
+					<c:if test="${seatList.get(2).seatStatus == 0 }"><img class="image-seat" src="/resources/img/seatOrange.png"></c:if>
 					<c:if test="${seatList.get(2).seatStatus == 1 }"><img class="image-seat" src="/resources/img/seatChairColor.png"></c:if>
 					</span>
 				</div>
@@ -168,11 +168,24 @@ background-color: white;
 			<div>(전체기록 조회)</div>		
 		
 		</div>
-		<div class="col-8">
-			<input type="date" name="recordStartDate" > ~ <input type="date" name="recordEndDate" >
+<!-- 		<div class="col-3" id="dateLine" class="input-group"> 
+			<input type="date" name="recordStartDate" id="searchBeforeDate" class="form-control input-group" >
 		</div>
-		<div class="col-4 ml-0 ps-1">
-			<div class="input-group text-start">                                                           
+		<span>~</span>
+		
+		<div class="col-3" id="dateLine" class="input-group"> 
+			<input type="date" name="recordEndDate" id="searchNowDate" class="form-control input-group" >
+		</div> -->
+		<div class="col-5 mt-3 justify-content-start">
+			<div class="input-group mb-3 text-start">
+			  <input type="date" id="searchBeforeDate" name="recordStartDate" class="form-control" aria-describedby="inputGroup-sizing-default" >
+			  <span style="align-self: center;">&nbsp;~&nbsp;</span>
+			  <input type="date" id="searchNowDate" name="recordEndDate" class="form-control" aria-describedby="inputGroup-sizing-default">
+			</div>	
+		</div>
+		<div class="col-3"></div>
+		<div class="col-4 ml-0 ps-1 mt-3">
+			<div class="input-group text-center">                                                           
 				<input type="text" name="searchId" id="searchId" class="form-control" placeholder="아이디를 입력하세요.">                                  
 				<input type="button" value="검색" class="searchRecord input-group-text gap-2 col-2 btn-primary">
 				<input type="button" value="초기화" class="searchRecordReset input-group-text gap-2 btn-primary" style="margin-left : 3px;">
@@ -196,7 +209,7 @@ background-color: white;
 		<c:forEach items="${seatRecordList }" var="record" varStatus="status">
 
 		<tr>
-			<td class="seat mx-1">열람-${record.recordCode }</td>
+			<td class="seat mx-1">열람${record.recordCode }</td>
 			<td>${record.id }</td>
 			<td>열람-${record.seatCode }</td> 
 			<td>${record.seatInDate }</td>

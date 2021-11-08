@@ -1,16 +1,64 @@
 
 //화면 로딩 후 바로 실행
-$(document).ready(function(){
+$(document).ready(function(){	
+		// 현재 날짜
+		function getToday(){
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = ("0" + (1 + date.getMonth())).slice(-2);
+			var day = ("0" + date.getDate()).slice(-2);
+			
+			return year + "-" + month + "-" + day;
+		}
+		
+		// 한달 전 날짜
+		function searchBeforeDate(){
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = ("0" + (1 + date.getMonth())).slice(-2);
+			var day = ("0" + (date.getDate()-7)).slice(-2);
+			
+			return year + "-" + month + "-" + day;
+		}
+		
+		// 날짜 기본값 설정
+		var nowDate = getToday();
+		var searchBeforeDate = searchBeforeDate();
+		
+		if (!$('#searchBeforeDate').val()) {
+			$('#searchBeforeDate').val(searchBeforeDate);
+			$('#searchNowDate').val(nowDate);
+		
+		}
+		
+		
+		
+		$('#searchBeforeDate').attr('max', nowDate);
+		$('#searchNowDate').attr('max', nowDate);
+		
+	
+	
+	
 		
 		//검색 초기화 ajax
 		$(document).on('click','.searchRecordReset',function(){
 		var searchId = '';
-		
 				$.ajax({
-	            url: '/service/searchRecord', //요청경로
+	            url: '/service/resetSearchRecord', //요청경로
 	            type: 'post',
 	            data:{'id':searchId}, //필요한 데이터
 	            success: function(recordList) {
+
+			
+				var str2 = '';
+		
+				$('#dateLine').empty();
+
+				str2 = '<input type="date" name="recordStartDate" id="searchBeforeDate"> ~ <input type="date" name="recordEndDate" id="searchNowDate" >';
+				$('#dateLine').append(str2);		
+		
+				$('#searchBeforeDate').val(searchBeforeDate);
+				$('#searchNowDate').val(nowDate);
 				
 				$('.recordListTitleDiv').empty();
 	var title = '';
@@ -33,7 +81,7 @@ $(document).ready(function(){
    str+=' 	 <tbody>                                                                    ';
 				$(recordList).each(function(index, record){
    str+='		<tr>                                                                    ';
-   str+='			<td class="seat mx-1">열람-'+record.recordCode+'</td>                ';
+   str+='			<td class="seat mx-1">열람'+record.recordCode+'</td>                ';
    str+='			<td>'+record.id+'</td>                                              ';
    str+='			<td>열람-'+record.seatCode+'</td>                                    ';
    str+='			<td>'+record.seatInDate+'</td>                                      ';
@@ -60,16 +108,14 @@ $(document).ready(function(){
 	//시트기록 검색ajax
 	$(document).on('click','.searchRecord',function(){
 		var searchId = $('#searchId').val();
-		var	recordStartDate = $('input[name=recordStartDate]').val();
-		var	recordEndDate	= $('input[name=recordStartDate]').val();	
+		var	recordStartDate = $('#searchBeforeDate').val();
+		var	recordEndDate	= $('#searchNowDate').val();	
 			
 				$.ajax({
 	            url: '/service/searchRecord', //요청경로
 	            type: 'post',
 	            data:{'id':searchId,'recordEndDate':recordEndDate,'recordStartDate':recordStartDate}, //필요한 데이터
 	            success: function(recordList) {
-				
-
 				
 				$('.recordListTitleDiv').empty();
 	var title = '';
@@ -94,16 +140,18 @@ $(document).ready(function(){
    str+=' 	 <tbody>                                                                    ';
    str+='		<tr>                                                        			';
    str+='			<td rowspan="2" colspan="5" class="seat mx-auto">	     			';					
-   str+='			<h4>검색한 ID의 정보가 없습니다.</h4>										';
-   str+='			<h5>상세한 정보조회를 위하여 자세한 ID를 입력해주세요.							';			
+   str+='			<h4>검색한 ID 또는 해당기간의 정보가 없습니다.</h4>							';
+   str+='			<h5>상세한 정보조회를 위하여 자세한 ID와 기간을 입력해주세요.</h5>				';			
    str+='			</td>      															';				
    str+='		</tr>	                                                              	';
    str+=' 	</tbody>                                                                    ';
    str+='	</table>																	';					
-					
-					
-					
 					$('.searchRecordList').append(str);
+					
+					
+					
+					
+					
 					
 				}else{
 				
@@ -121,7 +169,7 @@ $(document).ready(function(){
    str+=' 	 <tbody>                                                                    ';
 				$(recordList).each(function(index, record){
    str+='		<tr>                                                                    ';
-   str+='			<td class="seat mx-1">열람-'+record.recordCode+'</td>                ';
+   str+='			<td class="seat mx-1">열람'+record.recordCode+'</td>                ';
    str+='			<td>'+record.id+'</td>                                              ';
    str+='			<td>열람-'+record.seatCode+'</td>                                    ';
    str+='			<td>'+record.seatInDate+'</td>                                      ';

@@ -8,8 +8,8 @@ public class ReadingRecordVO {
 		private String id			;						 //  ID
 		private String seatInDate	;						 //  SEAT_IN_DATE
 		private String seatOutDate	;						 //  SEAT_OUT_DATE
-		private String recordStartDate ;
-		private String recordEndDate ;
+		private String recordStartDate  ;
+		private String recordEndDate 	;
 		
 		
 		

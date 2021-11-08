@@ -67,6 +67,7 @@
 			<exclude-mapping path="/service/seatIdCheck"/>
 			<exclude-mapping path="/service/seatMemberIdCheck"/>
 			<exclude-mapping path="/service/searchRecord"/>
+			<exclude-mapping path="/service/resetSearchRecord"/>
 			<exclude-mapping path="/service/checkISBN"/>
 			<exclude-mapping path="/service/ajaxRegRequest"/>
 			<exclude-mapping path="/service/ajaxRequestStatusChange"/>

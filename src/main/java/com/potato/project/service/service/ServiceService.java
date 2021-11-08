@@ -50,5 +50,5 @@ public interface ServiceService {
 	
 	int ajaxRequestStatusChange(RequestBoardVO rbVO);
 
-	
+	String endDateForSearchRecord(ReadingRecordVO recordVO);
 }

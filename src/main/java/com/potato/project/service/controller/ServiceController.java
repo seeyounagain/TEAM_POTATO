@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
@@ -141,11 +142,13 @@ public class ServiceController {
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		model.addAttribute("seatRecordList",serviceService.seatRecordList());
+		model.addAttribute("seatRecordList",serviceService.seatRecordList());	
 		
 		//Ajax
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
+		
+		
 		
 		return  "service/readingSeat";
 	}
@@ -200,8 +203,17 @@ public class ServiceController {
 	@ResponseBody
 	@PostMapping("/searchRecord")
 	public List<ReadingRecordVO> searchRecord(Model model,ReadingRecordVO recordVO) {
+	recordVO.setRecordEndDate(serviceService.endDateForSearchRecord(recordVO));
 	return serviceService.searchRecord(recordVO);
 	}
+	
+	@ResponseBody
+	@PostMapping("/resetSearchRecord")
+	public List<ReadingRecordVO> resetSearchRecord(Model model,ReadingRecordVO recordVO) {
+	return serviceService.seatRecordList();
+	}
+	
+	
 	
 	@ResponseBody
 	@PostMapping("/checkISBN")

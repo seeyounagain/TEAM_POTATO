@@ -117,6 +117,11 @@ public class ServiceServiceImpl implements ServiceService {
 	public int ajaxRequestStatusChange(RequestBoardVO rbVO) {
 		return sqlSession.update("serviceMapper.ajaxRequestStatusChange", rbVO);
 	}
+
+	@Override
+	public String endDateForSearchRecord(ReadingRecordVO recordVO) {
+		return sqlSession.selectOne("serviceMapper.endDateForSearchRecord", recordVO);
+	}
 	
 	
 }

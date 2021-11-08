@@ -9,8 +9,6 @@
 			<result column="ID" 				property="id" 			/>
 			<result column="SEAT_IN_DATE" 		property="seatInDate"	/>
 			<result column="SEAT_OUT_DATE" 		property="seatOutDate"	/>
-			<result column="RECORD_START_DATE"	property="recordStartDate"	/>
-			<result column="RECORD_END_DATE"	property="recordEndDate"	/>
 			</resultMap>
 			
 			<resultMap type="com.potato.project.service.vo.ReadingSeatVO" id="seat">
@@ -169,6 +167,11 @@
             ,SEAT_IN_DATE DESC
 			</select>
 			
+			<select id="endDateForSearchRecord" resultType="String">
+			SELECT TO_DATE(#{recordEndDate }) + 1 AS RECORD_END_DATE
+			FROM READING_RECORD GROUP BY SYSDATE
+			</select>
+			
 			<select id="searchRecord" resultMap="record">
 			SELECT 
 			RECORD_CODE
@@ -177,16 +180,20 @@
 			, SEAT_IN_DATE
 			, SEAT_OUT_DATE 
 			FROM READING_RECORD
-			WHERE RECORD_CORD = RECORD_CODE
-			<if test="recordStartDate != null and !recordStartDate.equals('') and !recordEndDate.equals('')">
-				AND	SEAT_IN_DATE &gt;= TO_DATE(#{recordStartDate },'YYYY-MM-DD')
-				AND SEAT_IN_DATE &lt;= TO_DATE(#{recordEndDate },'YYYY-MM-DD')
+			<if test="id != null or !id.equals('') or !recordEndDate.equals('')">
+			WHERE
 			</if>
 			<if test="id != null and !id.equals('')">
-			AND ID = #{id }			
+			ID = #{id }			
+			</if>
+			<if test="id != null and !id.equals('') and !recordEndDate.equals('')">
+			AND
+			</if>
+			<if test="recordStartDate != null and !recordStartDate.equals('') and !recordEndDate.equals('')">
+			SEAT_IN_DATE &gt;= TO_DATE(#{recordStartDate },'YYYY-MM-DD HH24:mi:ss')
+			AND SEAT_IN_DATE &lt;= TO_DATE(#{recordEndDate },'YYYY-MM-DD HH24:mi:ss')
 			</if>
 			ORDER BY SEAT_OUT_DATE DESC
-            ,SEAT_IN_DATE DESC
 			</select>	
 			
 				
