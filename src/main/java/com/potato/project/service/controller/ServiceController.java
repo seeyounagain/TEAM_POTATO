@@ -147,9 +147,6 @@ public class ServiceController {
 		//Ajax
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		model.addAttribute("seatList",serviceService.selectReadingSeat());
-		
-		
-		
 		return  "service/readingSeat";
 	}
 
@@ -176,7 +173,7 @@ public class ServiceController {
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		model.addAttribute("seatRecordList",serviceService.seatRecordList());
 		
-		return  "service/readingSeat";
+		return  "redirect:/service/readingSeat";
 	}
 	
 	

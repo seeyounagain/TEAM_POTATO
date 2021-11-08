@@ -11,6 +11,11 @@
 .miniTitle {
 	font-size: 23px;
 }
+
+a:hover{
+	cursor: pointer;
+	color: blue;
+}
 </style>
 </head>
 <body>

@@ -1,7 +1,16 @@
 
 //화면 로딩 후 바로 실행
 $(document).ready(function(){	
+	
+	
+		$('html,body').animate({
+			scrollTop:200
+		},100);
+	
+	
+	
 		// 현재 날짜
+		
 		function getToday(){
 			var date = new Date();
 			var year = date.getFullYear();
@@ -81,7 +90,7 @@ $(document).ready(function(){
    str+=' 	 <tbody>                                                                    ';
 				$(recordList).each(function(index, record){
    str+='		<tr>                                                                    ';
-   str+='			<td class="seat mx-1">열람'+record.recordCode+'</td>                ';
+   str+='			<td class="seat mx-1">'+record.recordCode+'</td>                ';
    str+='			<td>'+record.id+'</td>                                              ';
    str+='			<td>열람-'+record.seatCode+'</td>                                    ';
    str+='			<td>'+record.seatInDate+'</td>                                      ';
@@ -169,7 +178,7 @@ $(document).ready(function(){
    str+=' 	 <tbody>                                                                    ';
 				$(recordList).each(function(index, record){
    str+='		<tr>                                                                    ';
-   str+='			<td class="seat mx-1">열람'+record.recordCode+'</td>                ';
+   str+='			<td class="seat mx-1">'+record.recordCode+'</td>          		    ';
    str+='			<td>'+record.id+'</td>                                              ';
    str+='			<td>열람-'+record.seatCode+'</td>                                    ';
    str+='			<td>'+record.seatInDate+'</td>                                      ';
@@ -202,7 +211,7 @@ $(document).ready(function(){
 	
 	$(document).on('click','.seatIdCheck',function(){
 			if($('.seatUpdateId').val() == '' || $('.seatUpdateId').val() == null){
-				alert('ID를 입력해주세요.');
+				$('#ComeOnSeatIdModal').modal('show');
 			}else{
 				var id = $('.seatUpdateId').val();
 				
@@ -213,7 +222,7 @@ $(document).ready(function(){
             success: function(memberId) {
 				
 				if(memberId == '' || memberId == ''){
-					alert('없는 ID 입니다. 회원가입을 해주세요.');
+					$('#EmptySeatIdModal').modal('show');
 				}else{	
 				memberId;
 				
@@ -227,9 +236,10 @@ $(document).ready(function(){
 						alert('이미 배정된 좌석이 있습니다.');
 						
 					}else{
-						alert('좌석 및 ID 확인 완료');
+						$('#clearSeatIdModal').modal('show');
 						$('.checkSubmit1').css('display','inline');
 						$('.checkSubmit2').css('display','none');
+						
 					}	
 	            },
 	            error: function(){
@@ -259,6 +269,12 @@ $(document).ready(function(){
 	})
 	
 	$(document).on('click','.seatForm', function() {
+		
+		$('html,body').animate({
+			scrollTop:450
+		},100);
+		
+		
 		var sc = $(this).children().eq(0).val();
 		
 				$.ajax({
@@ -278,7 +294,7 @@ $(document).ready(function(){
 			      	
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
-   str+='	<div class="col-6 text-center mb-5">                             		                               			';
+   str+='	<div class="col-7 text-center mb-5">                             		                               			';
    str+='	좌석상태변경 mini                                                                                    				';
    str+='<table class="table">                                                                                   			';
    str+='	<thead>                                                                                              			';
@@ -294,12 +310,12 @@ $(document).ready(function(){
    str+='			<th class="align-middle miniSeatCode" scope="row">'+result.seatCode+'</th>	     						';
    str+='			<td class="text-center align-middle">'+result.id+'</td>       								           	';
    str+='			<td class="text-center align-middle">'+result.seatStatus+'</td>       									';
-   str+='			<td class="text-center align-middle"><input type="button" value="변경" onclick="statusChange();"</td>    ';
+   str+='			<td class="text-center align-middle"><input type="button" value="변경" onclick="statusChange();" class="btn btn-primary"></td>    ';
    str+='		</tr>                                                                      									';                  
    str+='	</tbody>                                                                       									';
    str+='</table>   																										';
    str+='	<div class="text-center">                                                            							';
-   str+='	<input type="button" onclick="closeMinimin();" value="닫기">                                                		';
+   str+='	<input type="button" onclick="closeMinimin();" value="닫기" class="btn btn-primary">                                                		';
    str+='	</div>                                                                         									';                                                                       									
    str+='	</div>                                                                         									';
    str+='</div>                                                                         									';
@@ -338,9 +354,7 @@ $(document).ready(function(){
 			      success: function(result) {
 				
 			      	//ajax 실행 성공 시 실행되는 구간
-			      	$('#minimin').empty();
-
-			      	
+			      	$('#minimin').empty();	
 			      	
 			      	var inputOrSpan ='';
 			      	var checkSubmit = ''; //checkSubmit
@@ -351,28 +365,31 @@ $(document).ready(function(){
 			      	
 	//리절트 아이디가 널이면
 	if(result.id == null || result.id == ''){
-	inputOrSpan ='<input type="text" name="id" class="seatUpdateId" style="width:100px"><input type="button" value="체크" class="mx-1 seatIdCheck">';
+		
+	inputOrSpan ='<span class="input-group"><input type="text" name="id" class="seatUpdateId form-control gap-2 bg-white col-1" id="button-addon1" style="width:80px"><input type="button" value="체크" class="seatIdCheck btn btn-primary" id="button-addon1"></span>';
 	ment += '   <div class="text-center mb-2"> 회원의 ID 정보와 중복된 좌석을 확인합니다. [체크]버튼을 눌러주세요. </div>       	';
-	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';  
-   	checkSubmit+='<span class="checkSubmit1" style="display: none"><input type="submit" value="확인"></span>   				';
+	statusReadOr+='<input type="radio" name="seatStatus" value="1" checked>배정												';
+	  
+   	checkSubmit+='<span class="checkSubmit1" style="display: none"><input type="button" class="seatInfoChange btn btn-primary" value="확인" onclick="seatInfoChange();"></span>   				';
   	checkSubmit+='<span class="checkSubmit2" style="display: inline">정보확인중</span></td>    								';
-	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기">                                             ';
+	closeMinimin+='<input type="button" onclick="closeMinimin();" value="닫기" class="btn btn-primary">                                             ';
 	
 	//퇴실하는 에이잭스
 	}else{
-	inputOrSpan = '<input type="text" name="id" value="'+result.id+'" readOnly style="width:100px" >						';													
+	inputOrSpan = '<span class="input-group"><input type="text" name="id" value="'+result.id+'" readOnly style="width:150px" class="form-control"></span>						';													
 	statusReadOr +='<input type="radio" name="seatStatus" value="0" checked>퇴실												';
-	checkSubmit +='<input type="submit" value="확인">																		';
+	checkSubmit +='<input type="submit" value="확인" class="btn btn-primary">																		';
 	ment += '<div class="text-center mb-2"> 퇴실하시겠습니까? 확인 버튼을 눌러주세요.</div>		                  			';
-	closeMinimin +='<input type="button" onclick="closeMinimin();" value="취소">                                             ';
+	closeMinimin +='<input type="button" onclick="closeMinimin();" value="취소" class="btn btn-primary">                                             ';
 	}
 	
    var str = '';
    str+='<div class="row justify-content-center mt-5 align-middle">                                              			';
-   str+='	<div class="col-6 text-center mb-5">                             		                               			';
-   str+='<form action="/service/seatUpdate" method="post"> 				                                            		';
+   str+='	<div class="col-7 text-center mb-5">                             		                               			';
+   str+='<form action="/service/seatUpdate" method="post" id="seatUpdateFormAction"> 				                                            		';
    str+='	좌석상태변경 mini                                                                                    			';
    str+='<table class="table">                                                                                   			';
+   str+='	<colgroup><col width="20%"><col width="40%"><col width="15%"><col width="25%"></colgroup>';	
    str+='	<thead>                                                                                              			';
    str+='		<tr class="text-center">                                                                    				';
    str+='  			<th scope="col">좌석번호</th>                                                                			';
@@ -412,7 +429,10 @@ $(document).ready(function(){
 		
 	}
 		
-		
+	seatInfoChange = function() {
+		$('.seatInfoChange').addClass('disabled');
+		$('#seatUpdateFormAction').submit();
+	}
 		
 	
 		

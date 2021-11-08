@@ -9,6 +9,11 @@
 <script type="text/javascript" src="/resources/service/js/bookRequestRegForm.js?ver=7"></script>
 <style type="text/css">
 
+a:hover{
+	cursor: pointer;
+	color: blue;
+}
+
 table{
 	width: 100%;
 	font-size: 14px;
