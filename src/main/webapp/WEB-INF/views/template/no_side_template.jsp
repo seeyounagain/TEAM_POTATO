@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title"/></title>
+
+<link rel="icon" type="image/png" sizes="32x32" href="/resources/img/planet_b_b.jpg">
+
 <!-- 태그 초기화 작업 -->
 <link rel="stylesheet" href="/resources/common/reset.css?ver=7">
 
