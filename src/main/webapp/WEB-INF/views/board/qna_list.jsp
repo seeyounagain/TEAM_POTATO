@@ -73,11 +73,13 @@
 							<tr>
 								<td>${status.count }</td>
 								<td>
-								<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
-									<c:choose>
+									 <c:choose>
 										<c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' or empty info.qnaPw}">
 											<input type="hidden" value="${info.qnaCode}" name="qnaCode">
 											<input type="hidden" value="${menuVO.menuCode}" name="qnaCode">
+												<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y' and not empty info.qnaPw}">
+												<img src="/resources/img/icon_secret.png" width="13px;"> 
+												</c:if>
 											<a class="tableAtag" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }</a>
 												<c:if test="${info.answerCnt != 0}">
 													<span class="m-2 complete">답변완료</span>
@@ -96,7 +98,8 @@
 												</a>
 											</form>
 										</c:otherwise>
-									</c:choose>		
+									</c:choose> 
+				
 								</td>
 								<td>${info.name }</td>
 								<td>${info.createDate }</td>
