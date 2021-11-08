@@ -246,9 +246,7 @@
 			
 			if (pw != checkPw) {
 				
-				alert('* 비밀번호를 확인해주세요');
-				$('input[type="password"]').val('');
-				$('#pw').focus();
+				$('#checkPwAlertModal').modal('show');
 				return ;
 				
 			}
@@ -410,7 +408,13 @@
              isRunning = true;
 	}
 
-
+	checkPw = function() {
+		
+		$('#checkPwAlertModal').modal('hide');
+		$('input[type="password"]').val('');
+		$('#pw').focus();
+		
+	}
 
 		
 	})(jQuery);

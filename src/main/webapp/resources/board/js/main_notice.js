@@ -18,7 +18,7 @@ $(window).on('load',function(){
 		success: function(result){ 
 			
 			$('#title').text(result.title);
-			$('#content').text(result.content);
+			$('#content').prepend(result.content);
 			
 		},
 		error: function(){

@@ -88,7 +88,7 @@
 	        </div>
 	    </div>
 	</div>
- <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=10" ></script>
+ <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=11" ></script>
 
 
 <div class="row justify-content-center">

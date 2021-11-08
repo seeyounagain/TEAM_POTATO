@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=52" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=53" ></script>
 <style type="text/css">
 .pointer:hover {
 	cursor: pointer;
@@ -24,6 +24,25 @@
 <body>
 
 <a id="topBtn" href="#"><img src="/resources/img/top_b.png" width="50px;" title="위로"></a> 
+
+<!-- 비밀번호 확인 alert Modal -->
+<div class="modal fade" id="checkPwAlertModal" tabindex="-1" aria-labelledby="checkPwAlertModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: black;" id="checkPwAlertModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        비밀번호를 확인해주세요.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="checkPw();">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 아이디 & 비밀번호 미입력 alert Modal 종료 -->
 
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
 	<h2 class="display-6 text-center fw-bold">회원가입</h2>
