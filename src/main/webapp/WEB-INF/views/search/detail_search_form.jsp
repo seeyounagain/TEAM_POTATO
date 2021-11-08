@@ -72,15 +72,15 @@
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
 				  <input type="text" <c:if test="${not empty bookVO.writer }">value="${bookVO.writer}"</c:if> name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">역자</span>
-				  <input type="text" <c:if test="${not empty bookVO.translator }">value="${bookVO.writer}"</c:if> name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
+				  <input type="text" <c:if test="${not empty bookVO.translator }">value="${bookVO.translator}"</c:if> name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
-				  <input type="text" <c:if test="${not empty bookVO.publisher }">value="${bookVO.writer}"</c:if> name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
+				  <input type="text" <c:if test="${not empty bookVO.publisher }">value="${bookVO.publisher}"</c:if> name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
-				  <input type="text" <c:if test="${not empty bookVO.isbn }">value="${bookVO.writer}"</c:if> name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
+				  <input type="text" <c:if test="${not empty bookVO.isbn }">value="${bookVO.isbn}"</c:if> name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>

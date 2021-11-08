@@ -9,7 +9,20 @@
 <style type="text/css">
 #col1 {
 	height: 15rem;
-	background-color: #0b70b9;
+   	position: relative;
+}
+#col1:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/resources/img/main_image03.jpg'); 
+    background-position: 20% 70%;
+    width: 100%;
+    height: 100%;
+    opacity : 0.8;
+    z-index: -1;
 }
 #col2 {
 	height: 23rem;
@@ -41,6 +54,9 @@
     white-space: nowrap;
     background-color: white;
 }
+.welcomeTitle {
+	text-shadow: 2px 2px 4px black;
+}
 #myModal{
 	width: 500px;
 	position: fixed;
@@ -52,6 +68,9 @@
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	display: none;
+}
+#goSearchBtn {
+	border: 1px solid #dddddd;
 }
 </style>
 </head>
@@ -97,7 +116,7 @@
 <form action="/search/bookSearch" method="post">
 	    <div class="row justify-content-center pt-5 mt-2">
     		<div class="col-8 text-center fs-1 mb-3">
-    			<div style="color: white;"> 도담 도서관에 오신 것을 환영합니다.</div>
+    			<div class="welcomeTitle" style="color: white;"> 도담 도서관에 오신 것을 환영합니다.</div>
     		</div>
 		    <div class="col-6 align-self-center">
 				<div class="input-group searchB">
