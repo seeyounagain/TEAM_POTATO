@@ -110,7 +110,7 @@
  <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=11" ></script>
 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-5">
 	<!-- 검색 -->
     <div class="col-10 g-5" id="col1">
 <form action="/search/bookSearch" method="post">
@@ -136,8 +136,22 @@
     
     <!-- 신착도서 목록 테이블 -->
     <div class="col-5 g-5" id="col2">
-    <h1 class="display-6 text-center mt-1" style="color: white;">신착도서</h1>
-    <div class="row"  style="background-color: white;">
+    <h3 class="text-center mt-1" style="color: white;">신착도서</h3>
+<div class="card mb-8" style="max-width: 600px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+<%--     <div class="row"  style="background-color: white;">
     	<c:choose>
     		<c:when test="${not empty bookList }">
     	<div class="col-5">
@@ -160,7 +174,7 @@
     	</div>
     		</c:otherwise>
     	</c:choose>
-    </div>
+    </div> --%>
  </div>   
 
     <!-- 공지사항 이미지 슬라이드 -->
