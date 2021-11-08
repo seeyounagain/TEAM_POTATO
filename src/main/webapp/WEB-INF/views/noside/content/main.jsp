@@ -26,21 +26,10 @@
 }
 #col2 {
 	height: 23rem;
-	background-color: #0b70b9;
 }
 #col3 {
 	height: 23rem;
 	background-color: #0b70b9;
-}
-.carousel , .carousel-inner {
-	width: 590px;
-	height: 350px;
-}
-.carousel-item > img {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 80%;
 }
 .titleA {
 	color: black;
@@ -71,6 +60,29 @@
 }
 #goSearchBtn {
 	border: 1px solid #dddddd;
+}
+.carousel-item:hover {
+	cursor: pointer;
+}
+.carousel .carousel-item {
+  height: 100%;
+}
+.carousel-item img {
+    object-fit:cover;
+    top: 0;
+    left: 0;
+    height: 280px;
+}
+.card {
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 1.5em;
+}
+.card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 </style>
 </head>
@@ -136,46 +148,77 @@
     
     <!-- 신착도서 목록 테이블 -->
     <div class="col-5 g-5" id="col2">
-    <h3 class="text-center mt-1" style="color: white;">신착도서</h3>
-<div class="card mb-8" style="max-width: 600px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
+    <h3 class="text-first mt-1" >신착도서</h3>
+ <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" onclick="location.href='/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002'">
+		<div class="card mb-8">
+		  <div class="row g-0">
+		    <div class="col-4">
+		      <img src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }" class="img-fluid rounded-start">
+		    </div>
+		    <div class="col-8">
+		      <div class="card-body">
+		        <h5 class="card-title fs-4">${bookList[0].title }</h5>
+		        <p class="card-text">${bookList[0].summary }</p>
+		        <p class="card-text"><small class="text-muted">${bookList[0].writer }</small></p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
+    <div class="carousel-item" onclick="location.href='/search/bookDetail?bookCode=${bookList[1].bookCode }&menuCode=MENU_002'">
+		<div class="card mb-8">
+		  <div class="row g-0">
+		    <div class="col-md-4">
+		      <img src="/resources/bookImgUpload/${bookList[1].bookImgVO.attachedImgName }" class="img-fluid rounded-start">
+		    </div>
+		    <div class="col-md-8">
+		      <div class="card-body">
+		        <h5 class="card-title fs-4">${bookList[1].title }</h5>
+		        <p class="card-text">${bookList[1].summary }</p>
+		        <p class="card-text"><small class="text-muted">${bookList[1].writer }</small></p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    </div>
+    <div class="carousel-item" onclick="location.href='/search/bookDetail?bookCode=${bookList[2].bookCode }&menuCode=MENU_002'">
+		<div class="card mb-8">
+		  <div class="row g-0">
+		    <div class="col-md-4">
+		      <img src="/resources/bookImgUpload/${bookList[2].bookImgVO.attachedImgName }" class="img-fluid rounded-start" >
+		    </div>
+		    <div class="col-md-8">
+		      <div class="card-body">
+		        <h5 class="card-title fs-4">${bookList[2].title }</h5>
+		        <p class="card-text">${bookList[2].summary }</p>
+		        <p class="card-text"><small class="text-muted">${bookList[2].writer }</small></p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
     </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true" style="color: gray;"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true" style="color: gray;"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-<%--     <div class="row"  style="background-color: white;">
-    	<c:choose>
-    		<c:when test="${not empty bookList }">
-    	<div class="col-5">
-    		<div class="row">
-    			<a class="titleA" href="/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002"><img height="220px;" width="180px;" src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }"><br>
-    			<span>${bookList[0].title }</span><br>
-    			<span>${bookList[0].writer }</span></a>
-    		</div>
-    	</div>
-    	<div class="col-7">
-	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[1].bookCode }&menuCode=MENU_002">${bookList[1].title } / ${bookList[1].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[2].bookCode }&menuCode=MENU_002">${bookList[2].title } / ${bookList[2].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[3].bookCode }&menuCode=MENU_002">${bookList[3].title } / ${bookList[3].writer }</a></div>
-	    	<div class="row mb-4 mt-4"><a class="titleA" href="/search/bookDetail?bookCode=${bookList[4].bookCode }&menuCode=MENU_002">${bookList[4].title } / ${bookList[4].writer }</a></div>
-    	</div>
-    		</c:when>
-    		<c:otherwise>
-    	<div class="col-12 text-center px-5 py-5">
-    		신착도서가 없습니다.
-    	</div>
-    		</c:otherwise>
-    	</c:choose>
-    </div> --%>
+ 
  </div>   
+
+
+
 
     <!-- 공지사항 이미지 슬라이드 -->
     <div class="col-5 g-5" id="col3">
