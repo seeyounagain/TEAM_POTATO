@@ -4,6 +4,7 @@
 	
 	/*data-bs-target="#completeModal" data-bs-toggle="modal"*/
 	
+		
 	// 아이디 검색 클릭 시 아이디 조회
 	$(document).on('click', '#goSearchBtn' , function() {
 		

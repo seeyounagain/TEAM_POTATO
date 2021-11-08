@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=2" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=3" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 

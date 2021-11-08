@@ -1,6 +1,8 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		
+		
 		/* 로그아웃 modal 호출 */
 		$(document).on('click', '#logout', function() { 
 			

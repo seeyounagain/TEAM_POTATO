@@ -108,7 +108,7 @@
 </div>
 
 <!-- book detail modal 시작 -->
-<div class="modal fade" id="bookDetailAlertModal" tabindex="-1" aria-labelledby="bookDetailAlertModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookDetailAlertModal" tabindex="-1" aria-labelledby="bookDetailAlertModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

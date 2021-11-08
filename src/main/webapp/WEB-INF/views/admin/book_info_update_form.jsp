@@ -85,7 +85,7 @@ textarea {
 </form>
 
 <!-- 정보 수정 confirm modal 시작 -->
-<div class="modal fade" id="bookInfoUpdateModal" tabindex="-1" aria-labelledby="bookInfoUpdateModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookInfoUpdateModal" tabindex="-1" aria-labelledby="bookInfoUpdateModalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

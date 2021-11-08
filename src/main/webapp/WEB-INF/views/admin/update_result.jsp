@@ -50,6 +50,15 @@
 			location.href = '/search/bookDetail?menuCode=' + menuCode + '&bookCode=' + bookCode;
 			
 		});
+		
+		$('#updateCompleteModal').on('hidden', function () {
+			
+			var menuCode = document.getElementById('menuCode').value;
+			var bookCode = document.getElementById('bookCode').value;
+
+			location.href = '/search/bookDetail?menuCode=' + menuCode + '&bookCode=' + bookCode;
+			
+		})
 	
 		
 	</script>

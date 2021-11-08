@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=32"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=34"></script>
 <script>
 $(function() {
 	$(window).scroll(function() { 
@@ -17,6 +17,11 @@ $(function() {
 	$("#topBtn").click(function() { 
    	$('html, body').animate({ scrollTop : 0  }, 300); 
     return false; });
+	
+	$(window).load(function() {
+		$('.modal').modal({backdrop: 'static', keyboard: false});	
+	}); 
+	
 });
 </script>
 <style type="text/css">
