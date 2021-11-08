@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.CalenderUtil;
 import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.util.MessageApi;
 import com.potato.project.common.util.UploadUtil;
@@ -31,6 +32,9 @@ import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.service.ServiceService;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
+import edu.emory.mathcs.backport.java.util.Collections;
 
 @Controller
 @RequestMapping("/libManage")
@@ -59,7 +63,9 @@ public class AdminController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		// 모든리스트를 뿌리는 리스트
 		model.addAttribute("requestList", serviceService.requestBoardListAdmin());
-		
+		model.addAttribute("year",  CalenderUtil.Map().get("year"));
+		model.addAttribute("month", CalenderUtil.Map().get("month"));	
+	
 		return  "service/bookRequestManage";
 	}
 		

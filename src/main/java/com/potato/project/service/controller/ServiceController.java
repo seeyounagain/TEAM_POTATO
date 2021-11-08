@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.CalenderUtil;
 import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
@@ -65,7 +66,6 @@ public class ServiceController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("requestBoardList", serviceService.requestBoardList(serviceService.requestIdAndIsAdminCheck(loginInfo)));
-		
 		return  "service/bookRequest";
 	}
 	

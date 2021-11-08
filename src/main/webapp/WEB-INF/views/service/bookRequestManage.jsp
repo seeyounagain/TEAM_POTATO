@@ -9,16 +9,30 @@
 <script type="text/javascript" src="/resources/service/js/bookRequestManage.js?ver=9"></script>
 
 <style type="text/css">
+
 table{
 	font-size: 14px;
 	width: 100%;
 }
+
 </style>
 </head>
 <body>
 
 <h2 class="text-first fw-bold">도서비치관리</h2>
 <hr>
+
+<select>
+	<c:forEach items="${year }" var="y" varStatus="status">
+	<option>${y}</option>	
+	</c:forEach>
+</select>
+<select>
+	<c:forEach items="${month }" var="m" varStatus="status">
+	<option>${m}</option>	
+	</c:forEach>
+</select>
+
  <!-- 리스트 구획 -->
 	<div class="row justify-content-center mb-3 mt-2">
 		<c:if test="${empty requestList }">
