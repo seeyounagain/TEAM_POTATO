@@ -459,11 +459,8 @@
 			    , TITLE
 			    , PAGE
 			    , BOOK_SIZE
-			    , KEYWORD
 			    , PUBLISHER
 			    , PUB_DATE
-			    , SUMMARY
-			    , INTRO
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
@@ -481,11 +478,8 @@
 			    , TITLE
 			    , PAGE
 			    , BOOK_SIZE
-			    , KEYWORD
 			    , PUBLISHER
 			    , PUB_DATE
-			    , SUMMARY
-			    , INTRO
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
@@ -503,11 +497,8 @@
 	                , TITLE
 	                , PAGE
 	                , BOOK_SIZE
-	                , KEYWORD
 	                , PUBLISHER
 	                , PUB_DATE
-	                , SUMMARY
-	                , INTRO
 	                , INPUT_DATE
 	                , AREA
 	                , STATUS
@@ -520,10 +511,7 @@
 	            AND ( UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') )
+	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%') )
 	            ORDER BY INPUT_DATE DESC
 	            )
 	    )
@@ -538,10 +526,7 @@
 		AND ( UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') )
+	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%') )
 	</select>
 
 	<!-- 도서 상세 검색 + 페이징 -->

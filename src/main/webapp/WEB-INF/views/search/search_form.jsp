@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>TITLE</title>
 <script type="text/javascript" src="/resources/search/js/search_form.js?ver=17" ></script>
+<!-- mark.js 추가하기 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -23,11 +25,6 @@
 .titleA:hover {
 	color: black;
 }
-.highlight {
-	color: white;
-	background-color: #0b70b9;
-	font-weight: bold;
-}
 .keyword {
 	text-align: center;
     white-space: nowrap;
@@ -39,6 +36,11 @@
 	bottom: 25px;
 	display: none;
 	z-index: 9;
+}
+.table_highlight{
+	color: white;
+	background-color: #0b70b9;
+	vertical-align: baseline;
 }
 </style>
 </head>
@@ -69,7 +71,7 @@
 	</div>
 
 	<div class="col-12">
-	<table class="table table-hover table-bordered caption-top">
+	<table class="table table-hover table-bordered caption-top searchTable">
 		
 		<caption>
 		<c:if test="${not empty bookVO.searchValue}">검색어 "${bookVO.searchValue}"에 대한</c:if>
@@ -141,4 +143,18 @@
 </div>
 
 </body>
+
+<script>
+
+var keyword = document.getElementById('searchValue').value;
+
+if (keyword != null) {
+	$('.searchTable').mark(keyword, {
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+
+</script>
+
 </html>
