@@ -15,7 +15,9 @@
 </style>
 </head>
 <body>
-<h2 class="text-first fw-bold">추천도서</h2><hr>
+<h2 class="text-first fw-bold">추천도서</h2>
+<a href="/service/recommendRegForm?menuCode=${menuCode }">dd</a>
+<hr>
 
 <div class="row justify-content-center  mb-5">
 	<div class="col-12">

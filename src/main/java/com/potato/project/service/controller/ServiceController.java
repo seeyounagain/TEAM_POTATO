@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +46,20 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
+	
+	
+	@GetMapping("/recommendRegForm")
+	public String recommendRegForm(Model model,MenuVO menuVO,HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		return "service/recommendRegForm";
+	}
+	
 	@RequestMapping("/recommend")
 	public String recommendBook(Model model,MenuVO menuVO,HttpSession session) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -53,6 +68,7 @@ public class ServiceController {
 		}
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
 		return "service/recommend";
 	}
 	
