@@ -1,10 +1,8 @@
  //쿠키여부 확인
 var checkCookie = getCookie("popUp=Potato");
-
-if(checkCookie == 'popUp=Potato') {
-	$('#notice').modal('hide');
-};
-
+	if(checkCookie == 'popUp=Potato') {
+		$('#notice').modal('hide');
+	};
 //팝업 모달창 띄우기
 $(window).on('load',function(){ 
 	$('#notice').modal('show');

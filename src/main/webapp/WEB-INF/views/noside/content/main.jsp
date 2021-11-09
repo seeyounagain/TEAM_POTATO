@@ -72,9 +72,7 @@
     left: 0;
     height: 340px;
 }
-.noticeImg img{
-	 height: 340px;
-}
+
 .card {
     transition: transform 0.2s ease;
     box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
@@ -121,7 +119,7 @@
 	        </div>
 	    </div>
 	</div>
- <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=11" ></script>
+ <script type="text/javascript" src="/resources/board/js/main_notice.js?ver=14" ></script>
 
 
 <div class="row justify-content-center mb-5">
@@ -215,34 +213,56 @@
 
 
     <!-- 공지사항 이미지 슬라이드 -->
-   <div class="col-5 g-5" id="col2">
-    <h3 class="text-first mt-1" >공지사항</h3>
- <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-				  <div class="carousel-inner noticeImg">
-				    <div class="carousel-item active" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004'">
-				  
-				     	<img  height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[0].attachFileVO.attachedFileName }" class="d-block" alt="#">
-				     
-				    </div>
-				    <div class="carousel-item noticeImg">
-				    	<a href="/board/noticeDetail?noticeCode=${noticeList[1].noticeCode }&menuCode=MENU_004">
-				      		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[1].attachFileVO.attachedFileName }" class="d-block" alt="#">
-				    	</a>
-				    </div>
-				    <div class="carousel-item noticeImg">
-				    	<a href="/board/noticeDetail?noticeCode=${noticeList[2].noticeCode }&menuCode=MENU_004">
-				    		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/${noticeList[2].attachFileVO.attachedFileName }" class="d-block" alt="#">
-				    	</a>
-				    </div>
-				  </div>
-				 
-				</div>
+<div class="col-5 g-5" id="col2">
+  <h3 class="text-first mt-1" >공지사항</h3>
+	<div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div>
+		<div class="carousel-inner noticeImg">
+		<div class="carousel-item active" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004'">
+			<div class="card">
+			  <div class="row">
+			    <div class="col-12 text-center">
+			      <img src="/resources/noticeFileUpload/dodam_notice02.png" class="img-fluid rounded-start">
+			    </div>
+			  </div>
+			</div>
     	</div>
+		<div class="carousel-item" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[1].noticeCode }&menuCode=MENU_004'">
+			<div class="card">
+			  <div class="row">
+			    <div class="col-12 text-center">
+			      <img src="/resources/noticeFileUpload/dodam_notice01.png" class="img-fluid rounded-start">
+			    </div>
+			  </div>
+			</div>
+    	</div>
+		<div class="carousel-item" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[2].noticeCode }&menuCode=MENU_004'">
+			<div class="card">
+			  <div class="row">
+			    <div class="col-12 text-center">
+			      <img src="/resources/noticeFileUpload/dodam_notice01.png" class="img-fluid rounded-start">
+			    </div>
+			  </div>
+			</div>
+    	</div>
+	 
+		<%-- <div class="carousel-item active" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[0].noticeCode }&menuCode=MENU_004'">
+			<img height="100%;" width="800px;" src="/resources/noticeFileUpload/dodam_notice02.png" class="d-block" alt="#">
+		</div>
+	    <div class="carousel-item noticeImg" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[1].noticeCode }&menuCode=MENU_004'">
+	      	<img width="800px;" src="/resources/noticeFileUpload/dodam_notice01.png" class="d-block" alt="#">
+	    </div>
+    <div class="carousel-item noticeImg" onclick="location.href='/board/noticeDetail?noticeCode=${noticeList[2].noticeCode }&menuCode=MENU_004'">
+    		<img height="100%;" width="100%;" src="/resources/noticeFileUpload/dodam_notice01.png" class="d-block" alt="#">
+    </div> --%>
+	</div>
+					 
+	 </div>
+</div>
     </div>
 
 
