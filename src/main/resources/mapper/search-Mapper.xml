@@ -615,9 +615,6 @@
 	            WHERE B.KDC_NUM = C.KDC_NUM
 	            AND B.BOOK_CODE = I.BOOK_CODE
 	            AND IS_DELETE = 'N'
-	            <if test="kdcNum != 10">
-	            AND B.KDC_NUM = #{kdcNum}
-	            </if>
 	            <if test="title != null and !title.equals('')">
 	            AND UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
 	            </if>
@@ -649,10 +646,7 @@
 	<select id="countBookDetailSearch" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
-		WHERE 	IS_DELETE = 'N'
-				<if test="kdcNum != 10">
-	            AND KDC_NUM = #{kdcNum}
-	            </if>
+		WHERE IS_DELETE = 'N'
 	            <if test="title != null and !title.equals('')">
 	            AND UPPER(TITLE) LIKE UPPER('%'||#{title}||'%')
 	            </if>

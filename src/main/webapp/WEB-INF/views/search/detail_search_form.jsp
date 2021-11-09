@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>TITLE</title>
 <script type="text/javascript" src="/resources/search/js/search_form.js?ver=8" ></script>
+<!-- mark.js 추가하기 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
 <style type="text/css">
 .keyword {
 	width: 10%;
@@ -42,6 +44,11 @@
 	display: none;
 	z-index: 9;
 }
+.table_highlight{
+	color: white;
+	background-color: #0b70b9;
+	vertical-align: baseline;
+}
 </style>
 </head>
 <body>
@@ -52,41 +59,32 @@
 	<div class="col-12">
 		<h2 class="text-first fw-bold">상세검색</h2>
 		<hr>
-<form action="/search/bookDetailSearch" method="post">		
+<form action="/search/goBookDetailSearch" method="post">		
 		<div class="row justify-content-center">
 			<div id="searchBox">
-				<div class="input-group mt-1 mb-3">
-				<span class="input-group-text keyword" id="inputGroup-sizing-default">분류</span>
-				  <select name="kdcNum" class="form-select" id="inputGroupSelect02">
-				    <option value="10">전체</option>
-				    <c:forEach var="cate" items="${cateList }">
-				    <option value="${cate.kdcNum }">${cate.kdcName }</option>
-				    </c:forEach>
-				  </select>
-				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">제목</span>
-				  <input type="text" <c:if test="${not empty bookVO.title }">value="${bookVO.title}"</c:if> name="title" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
+				  <input type="text" <c:if test="${not empty bookVO.title }">value="${bookVO.title}"</c:if> id="title" name="title" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="제목">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">저자</span>
-				  <input type="text" <c:if test="${not empty bookVO.writer }">value="${bookVO.writer}"</c:if> name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
+				  <input type="text" <c:if test="${not empty bookVO.writer }">value="${bookVO.writer}"</c:if> id="writer" name="writer" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="글쓴이">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">역자</span>
-				  <input type="text" <c:if test="${not empty bookVO.translator }">value="${bookVO.translator}"</c:if> name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
+				  <input type="text" <c:if test="${not empty bookVO.translator }">value="${bookVO.translator}"</c:if> id="translator" name="translator" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="옮긴이">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">출판사</span>
-				  <input type="text" <c:if test="${not empty bookVO.publisher }">value="${bookVO.publisher}"</c:if> name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
+				  <input type="text" <c:if test="${not empty bookVO.publisher }">value="${bookVO.publisher}"</c:if> id="publisher" name="publisher" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="출판사">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">ISBN</span>
-				  <input type="text" <c:if test="${not empty bookVO.isbn }">value="${bookVO.isbn}"</c:if> name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
+				  <input type="text" <c:if test="${not empty bookVO.isbn }">value="${bookVO.isbn}"</c:if> id="isbn" name="isbn" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="ISBN">
 				</div>
 				<div class="input-group mb-3">
 				  <span class="input-group-text keyword" id="inputGroup-sizing-default">발행년</span>
-				  <input type="text" <c:if test="${not empty bookVO.searchBegin }">value="${bookVO.searchBegin}"</c:if> name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
+				  <input type="text" <c:if test="${not empty bookVO.searchBegin }">value="${bookVO.searchBegin}"</c:if> id="searchBegin" name="searchBegin" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="발행년도 4자리로 입력해주세요">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이후&nbsp;</span>
-				  <input type="text" <c:if test="${not empty bookVO.searchEnd }">value="${bookVO.searchEnd}"</c:if> name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
+				  <input type="text" <c:if test="${not empty bookVO.searchEnd }">value="${bookVO.searchEnd}"</c:if> id="searchEnd" name="searchEnd" class="form-control" aria-describedby="inputGroup-sizing-default" placeholder="예) 2014">
 				  <span style="align-self: center;">&nbsp;~&nbsp;년도&nbsp;이내&nbsp;</span>
 				</div>
 				<div class="input-group d-grid mb-3" style="padding-left: 3px;">
@@ -98,7 +96,7 @@
 </form>
 		
 	<div class="col-12">
-	<table class="table table-hover table-bordered caption-top">
+	<table class="table table-hover table-bordered caption-top searchT">
 		<caption>도서 
 		<c:if test="${not empty bookVO.totalCnt }">${bookVO.totalCnt }</c:if>
 		<c:if test="${empty bookVO.totalCnt }">0</c:if>
@@ -145,19 +143,46 @@
 			<ul class="pagination justify-content-center">
 			 <c:if test="${bookVO.prev }">
 				<li class="page-item">
-				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+				<a class="page-link" 
+				href="/search/goBookDetailSearch?nowPage=${bookVO.startPage - 1 }
+				&menuCode=${menuVO.menuCode}
+				&title=${bookVO.title}
+				&writer=${bookVO.writer}
+				&translator=${bookVO.translator}
+				&publisher=${bookVO.publisher}
+				&isbn=${bookVO.isbn}
+				&searchBegin=${bookVO.searchBegin}
+				&searchEnd=${bookVO.searchEnd}" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
 			 </c:if> 
 				<c:forEach var="pageNum" begin="${bookVO.startPage }" end="${bookVO.endPage }">
 					<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  " >
-					<a class="page-link" href="/search/bookSearch?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+					<a class="page-link" 
+					href="/search/goBookDetailSearch?nowPage=${pageNum }
+					&menuCode=${menuVO.menuCode}
+					&title=${bookVO.title}
+					&writer=${bookVO.writer}
+					&translator=${bookVO.translator}
+					&publisher=${bookVO.publisher}
+					&isbn=${bookVO.isbn}
+					&searchBegin=${bookVO.searchBegin}
+					&searchEnd=${bookVO.searchEnd}">${pageNum }</a>
 					</li>
 				</c:forEach>
 			<c:if test="${bookVO.next }">
 				<li class="page-item">
-				<a class="page-link" href="/search/bookSearch?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+				<a class="page-link" 
+				href="/search/goBookDetailSearch?nowPage=${bookVO.endPage + 1 }
+				&menuCode=${menuVO.menuCode}
+				&title=${bookVO.title}
+				&writer=${bookVO.writer}
+				&translator=${bookVO.translator}
+				&publisher=${bookVO.publisher}
+				&isbn=${bookVO.isbn}
+				&searchBegin=${bookVO.searchBegin}
+				&searchEnd=${bookVO.searchEnd}" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>
@@ -172,4 +197,60 @@
 </div>
 
 </body>
+
+<script>
+
+var keyword1 = document.getElementById('title').value;
+var keyword2 = document.getElementById('writer').value;
+var keyword3 = document.getElementById('translator').value;
+var keyword4 = document.getElementById('publisher').value;
+var keyword5 = document.getElementById('isbn').value;
+var keyword6 = document.getElementById('searchBegin').value;
+var keyword7 = document.getElementById('searchEnd').value;
+
+if (keyword1 != null) {
+	$('.searchT').mark(keyword1,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword2 != null) {
+	$('.searchT').mark(keyword2,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword3 != null) {
+	$('.searchT').mark(keyword3,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword4 != null) {
+	$('.searchT').mark(keyword4,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword5 != null) {
+	$('.searchT').mark(keyword5,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword6 != null) {
+	$('.searchT').mark(keyword6,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+if (keyword7 != null) {
+	$('.searchT').mark(keyword7,{
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+}
+
+</script>
+
 </html>

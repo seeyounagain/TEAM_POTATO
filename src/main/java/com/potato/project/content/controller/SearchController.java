@@ -52,14 +52,12 @@ public class SearchController {
 	@GetMapping("/bookDetailSearch")
 	public String bookDetailSearch(Model model,MenuVO menuVO,HttpSession session) {
 		
-		model.addAttribute("cateList",searchService.selectCateList());
-		
 		return "search/detail_search_form";
 		
 	}
 	
 	// 상세검색
-	@PostMapping("/bookDetailSearch")
+	@RequestMapping("/goBookDetailSearch")
 	public String goDetailSearch(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
 		
 		int totalCnt = searchService.countBookDetailSearch(bookVO);
@@ -69,8 +67,6 @@ public class SearchController {
 		
 		model.addAttribute("searchList",searchService.selectDetailSearchBookAndPaging(bookVO));
 		
-		model.addAttribute("cateList",searchService.selectCateList());
-		
 		return "search/detail_search_form";
 		
 	}
@@ -78,9 +74,6 @@ public class SearchController {
 	// 신착도서 페이지로 이동 + 페이징
 	@GetMapping("/newBookList")
 	public String newBookList(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
-		
-		System.out.println("!!!!!!!!!!!!11" + FileUploadUtil.getNowDateBeforeAMonth());
-		System.out.println("!!!!!!!!!!!!22" + FileUploadUtil.getNowDate());
 		
 		bookVO.setRentableStartDate(FileUploadUtil.getNowDateBeforeAMonth());
 		bookVO.setRentableEndDate(FileUploadUtil.getNowDate());
