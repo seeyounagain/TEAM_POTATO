@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>KIVIEW &mdash; 글쓰기</title>
+<title>글쓰기</title>
 
 <script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script> 
 
@@ -20,7 +20,12 @@
 <div class="jsx-2303464893 editor"> 
 	<div class="fr-box fr-basic fr-top" role="application"> 
 		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
-			<textarea name="notice_content" id="smartEditor" style="width: 100%; height: 412px;"></textarea> 
+			<textarea name="notice_content" id="smartEditor" style="width: 100%; height: 412px;">
+			
+			와 힘들었다.
+			
+			
+			</textarea> 
 		</div> 
 	</div> 
 </div>
@@ -37,21 +42,4 @@ nhn.husky.EZCreator.createInIFrame({
 
 
 </body>
-<!-- <script type="text/javascript" src ="/resources/service/js/notice-write.js?ver=5"></script> -->
-
 </html>
-
-
-<!--
-		
-<script type="text/javascript" src="/resources/service/js/notice-write.js" charset="utf-8"></script>
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
- elPlaceHolder: "smartEditor",
- sSkinURI: "/resources/service/html/SmartEditor2Skin.html",
- fCreator: "createSEditor2"
-});
-</script>
- -->
