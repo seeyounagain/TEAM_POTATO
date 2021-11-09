@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/board/js/notice_form.js?ver=23" ></script>
+<script type="text/javascript" src="/resources/board/js/notice_form.js?ver=47" ></script>
 <style type="text/css">
 .mainDiv{
 	background-color: white;
@@ -49,7 +49,7 @@ input{
 					<table class="table text-center">
 						<tr>
 							<td class="w-10">제목</td>
-							<td class="w-90"><input type="text" name="title" id="title" required></td>
+							<td class="w-90"><input type="text" name="title" id="title"></td>
 						</tr>
 						<tr>
 							<td>작성자</td>
@@ -66,7 +66,7 @@ input{
 							<td>
 								<div class="form-floating">
 								
-								  <textarea class="ckeditor" id="content" name="content" style="height: 100px"  required></textarea>
+								  <textarea class="ckeditor" id="content" name="content" style="height: 100px" required></textarea>
 								   <script>
 								    // 3. CKEditor5를 생성할 textarea 지정
 								    ClassicEditor
@@ -96,6 +96,24 @@ input{
 		</div>
 		
 <!-- 알림 모달 -->
+<!-- 		<div class="modal fade" id="emptyTitleModal" tabindex="-1" aria-labelledby="emptyTitleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" style="color: black;" id="emptyTitleModalLabel">알림</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="modalContent">
+				제목을 입력해 주세요.
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary modalClose" data-bs-dismiss="modal">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> -->
+		
+<!-- 알림 모달 -->
 		<div class="modal fade" id="noticeCompleteModal" tabindex="-1" aria-labelledby="noticeCompleteModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -103,12 +121,12 @@ input{
 		        <h5 class="modal-title" style="color: black;" id="noticeCompleteModalLabel">알림</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
-		      <div class="modal-body" id="modalContent">
-				공지사항을 등록하겠습니까?
+		      <div class="modal-body" id="noticeCompleteModalContent">
+
 		      </div>
 		      <div class="modal-footer">
-		      	 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary modalClose" data-bs-dismiss="modal" onclick="confirmNotice();">확인</button>
+		      	 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backBtn">취소</button>
+		        <button type="button" class="btn btn-primary modalClose" data-bs-dismiss="modal" id="confirmBtn" >확인</button>
 		      </div>
 		    </div>
 		  </div>
