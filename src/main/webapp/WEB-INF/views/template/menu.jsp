@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/template/js/menu.js?ver=34"></script>
+<script type="text/javascript" src="/resources/template/js/menu.js?ver=42"></script>
 <script>
 $(function() {
 	$(window).scroll(function() { 
