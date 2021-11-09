@@ -1,10 +1,10 @@
-$(document).ready(function(){
-			
-			
-		var oEditors = []; nhn.husky.EZCreator.createInIFrame({ 
+	
+		var oEditors = []; 
+		
+		nhn.husky.EZCreator.createInIFrame({ 
 	
 		oAppRef : oEditors, elPlaceHolder : "smartEditor", //저는 textarea의 id와 똑같이 적어줬습니다. 
-		sSkinURI : "/resources/service/html/SmartEditor2Skin.html", //경로를 꼭 맞춰주세요! 
+		sSkinURI : "/resources/service/se2/static/SmartEditor2Skin.html", //경로를 꼭 맞춰주세요! 
 		fCreator : "createSEditor2", 
 		htParams : { 
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
@@ -55,8 +55,7 @@ $(document).ready(function(){
 				return; 
 			} 
 			
-		}); 
-	})
+			}); 
+		});
 
-})
 

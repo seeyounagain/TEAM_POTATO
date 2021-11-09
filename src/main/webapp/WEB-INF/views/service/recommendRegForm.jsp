@@ -9,7 +9,8 @@
 <meta charset="UTF-8">
 <title>KIVIEW &mdash; 글쓰기</title>
 
-<script type="text/javascript" src="/resources/service/se2/static/js/service/HuskyEZCreator.js" charset="utf-8"></script> 
+<script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script> 
+
 
 </head> 
 <body>
@@ -23,12 +24,24 @@
 		</div> 
 	</div> 
 </div>
+<!-- SmartEditor2 --> 
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "smartEditor",
+ sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+</script>
 
 
 </body>
+<!-- <script type="text/javascript" src ="/resources/service/js/notice-write.js?ver=5"></script> -->
+
 </html>
-<script type="text/javascript" src ="/resources/service/js/notice-write.js?ver=4"></script>
-<!-- SmartEditor2 --> 
+
+
 <!--
 		
 <script type="text/javascript" src="/resources/service/js/notice-write.js" charset="utf-8"></script>
@@ -36,7 +49,7 @@
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
- elPlaceHolder: "ir1",
+ elPlaceHolder: "smartEditor",
  sSkinURI: "/resources/service/html/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
 });
