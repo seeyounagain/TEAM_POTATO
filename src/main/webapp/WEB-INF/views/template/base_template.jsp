@@ -83,6 +83,9 @@ hr , hr:not([size]) {
 			<div class="col-2"><tiles:insertAttribute name="side"/></div>
 			<div class="col-10 content"><tiles:insertAttribute name="body"/></div>
 		</div>
+		<div class="row" style="padding-top: 40px;">
+			<div class="col footer"><tiles:insertAttribute name="foot"/></div>
+		</div>
 	</div>
 </body>
 </html>
