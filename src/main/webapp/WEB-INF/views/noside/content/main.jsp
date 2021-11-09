@@ -84,6 +84,12 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+.newBookCard {
+	background-image: url('/resources/img/new.png'); 
+	background-size: 60px;
+	background-repeat: no-repeat;
+	background-position: 100% 0%;
+}
 </style>
 </head>
 <body>
@@ -148,7 +154,7 @@
     
     <!-- 신착도서 목록 테이블 -->
     <div class="col-5 g-5" id="col2">
-    <h3 class="text-first mt-1" >신착도서</h3>
+    <h4 class="text-first mt-1" >신착도서</h4>
  <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -157,7 +163,7 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" onclick="location.href='/search/bookDetail?bookCode=${bookList[0].bookCode }&menuCode=MENU_002'">
-		<div class="card mb-8">
+		<div class="card newBookCard mb-8">
 		  <div class="row g-0">
 		    <div class="col-4">
 		      <img src="/resources/bookImgUpload/${bookList[0].bookImgVO.attachedImgName }" class="img-fluid rounded-start">
@@ -173,7 +179,7 @@
 		</div>
     </div>
     <div class="carousel-item" onclick="location.href='/search/bookDetail?bookCode=${bookList[1].bookCode }&menuCode=MENU_002'">
-		<div class="card mb-8">
+		<div class="card newBookCard mb-8">
 		  <div class="row g-0">
 		    <div class="col-md-4">
 		      <img src="/resources/bookImgUpload/${bookList[1].bookImgVO.attachedImgName }" class="img-fluid rounded-start">
@@ -189,7 +195,7 @@
 		</div>
     </div>
     <div class="carousel-item" onclick="location.href='/search/bookDetail?bookCode=${bookList[2].bookCode }&menuCode=MENU_002'">
-		<div class="card mb-8">
+		<div class="card newBookCard mb-8">
 		  <div class="row g-0">
 		    <div class="col-md-4">
 		      <img src="/resources/bookImgUpload/${bookList[2].bookImgVO.attachedImgName }" class="img-fluid rounded-start" >
@@ -214,7 +220,7 @@
 
     <!-- 공지사항 이미지 슬라이드 -->
 <div class="col-5 g-5" id="col2">
-  <h3 class="text-first mt-1" >공지사항</h3>
+  <h4 class="text-first mt-1" >공지사항</h4>
 	<div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 90%;">
 		<div class="carousel-indicators">
 			<button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
