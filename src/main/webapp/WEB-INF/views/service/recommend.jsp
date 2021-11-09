@@ -118,7 +118,7 @@
 		<div class="row justify-content-center mt-5 mb-5">
 			<div class="col-10 text-center">
 				<img id="photo1" src="https://flexible.img.hani.co.kr/flexible/normal/800/1084/imgdb/original/2020/0213/20200213501239.jpg" style="width: 400px;">
-				<div class="mt-5 mb-5" id="photo1" style="font-size: 14px;">1990년 2월14일 보이저 1호가 60억km 거리에서 촬영한 지구 사진 원본. 나사 제공</div>
+				<div class="mt-3 mb-5" id="photo1" style="font-size: 14px;">1990년 2월14일 보이저 1호가 60억km 거리에서 촬영한 지구 사진 원본. 나사 제공</div>
 			</div>
 			
 			<div class="col-10">
