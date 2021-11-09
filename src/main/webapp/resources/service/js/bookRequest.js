@@ -8,10 +8,7 @@ $(document).ready(function(){
 		location.href='/myPage/bookRequestStatus?menuCode=MENU_005';		
 				
 		}else{
-			var login = confirm('홈페이지에 확인된 ID 정보가 없습니다. \n로그인화면으로 이동하시겠습니까?');
-			if(login){
-				location.href='/member/memberLoginForm';				
-			}
+			$('#loginCheckModal').modal('show');
 		}
 	});	
 	
@@ -20,13 +17,9 @@ $(document).ready(function(){
 		
         var loginInfo = $('.loginInfo').val();
 		if(loginInfo){
-		$('#goRegModal').modal('show');	
-				
+		$('#goRegModal').modal('show');				
 		}else{
-			var login = confirm('홈페이지에 확인된 ID 정보가 없습니다. \n로그인화면으로 이동하시겠습니까?');
-			if(login){
-				location.href='/member/memberLoginForm';				
-			}
+		$('#loginCheckModal').modal('show');
 		}
 	});
 	

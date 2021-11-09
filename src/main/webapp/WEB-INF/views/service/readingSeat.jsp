@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=9"></script>
 <style type="text/css">
 .miniTitle {
-	font-size: 23px;
+	font-size: 20px;
 }
 .container{
  background-color: white;

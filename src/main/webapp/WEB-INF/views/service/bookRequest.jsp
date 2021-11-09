@@ -6,15 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequest.js?ver=9"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequest.js?ver=1"></script>
 <style type="text/css">
 .miniTitle {
-	font-size: 23px;
-}
-
-a:hover{
-	cursor: pointer;
-	color: blue;
+	font-size: 20px;
 }
 </style>
 </head>
@@ -154,7 +149,6 @@ a:hover{
 </div>
 
 
-
 <!-- deleteBookRequestConfirm -->
 <div class="modal fade" id="deleteBookRequestConfirm" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -178,6 +172,30 @@ a:hover{
   </div>
 </div>
 
+
+<!-- loginCheckModal -->
+<div class="modal fade" id="loginCheckModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>홈페이지에 확인된 ID 정보가 없습니다.</p>
+			<p>로그인화면으로 이동하시겠습니까?</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      			<button type="button" class="btn btn-primary px-4" onclick="location.href='/member/memberLoginForm'" >확인</button>
+      			<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">취소</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
