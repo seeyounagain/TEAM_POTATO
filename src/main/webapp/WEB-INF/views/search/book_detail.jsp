@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TITLE</title>
-<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=21" ></script>
+<script type="text/javascript" src="/resources/search/js/book_detail.js?ver=23" ></script>
 <style type="text/css">
 .content {
 	background-color: white;
@@ -107,7 +107,7 @@
     </div>
 </div>
 
-<!-- book detail modal 시작 -->
+<!-- book detail alert modal 시작 -->
 <div class="modal fade" id="bookDetailAlertModal" tabindex="-1" aria-labelledby="bookDetailAlertModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -124,7 +124,28 @@
     </div>
   </div>
 </div>
-<!-- book detail modal 종료 -->
+<!-- book detail alert modal 종료 -->
+
+<!-- book detail confirm modal 시작 -->
+<div class="modal fade" id="bookDetailConfirmModal" tabindex="-1" aria-labelledby="bookDetailConfirmModalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookDetailConfirmModalLabel">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="bookDetailConfirmModalText">
+      	도서를 예약하시겠습니까?<br>
+      	도서가 반납되면 대출 가능합니다.
+      </div>
+      <div class="modal-footer">
+		 <button type="button" class="btn btn-primary" id="bookReserveModalBtn" onclick="goReserve();">예약</button>     
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- book detail confirm modal 종료 -->
 
 </body>
 </html>
