@@ -58,20 +58,20 @@ background-color: white;
 	
 <h2 class="text-first fw-bold">열람실좌석현황</h2><hr>	
 <input type="hidden" value="${menuCode }" class="menuCode">
-<div class="row position-relative mx-auto">
+<div class="row position-relative justify-content-center">
 	<div class="col-12">
-	<div class="row">
-	<div class="col-12 text-center mt-5"><h2>좌석안내</h2></div>
-		<div class="row justify-content-end mb-5">
-				<div class="col-2 bg-warning fs-5 deskColor p-2 align-middle text-center me-1">대기중</div>
-				<div class="col-2 fs-5 deskColor p-2 text-center ml-3" style="background-color: #0371ba;" >사용중</div>			
-		</div>
-	</div>
-		<div class="row justify-content-center text-center ">
-		
-		</div>
-			<div class="row justify-content-center text-center mb-5 me-5" style="width: 1100px;">
-		
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-5 mb-3"><h2>좌석현황</h2></div>
+				<div class="row justify-content-center mb-5">
+					<div class="col-9">
+						<div class="row justify-content-end">
+							<div class="col-5 bg-warning fs-5 deskColor p-2 align-middle text-center me-1">대기중</div>
+							<div class="col-5 fs-5 deskColor p-2 text-center ml-3" style="background-color: #0371ba;" >사용중</div>								
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center text-center mb-5"  style="width: 1100px; margin: 0 auto;">
 				<div class="col-1 miniSeatBox seatForm seat">
 					<c:if test="${sessionScope.loginInfo.isAdmin eq 'Y'}"></c:if>
 					<input type="hidden" value="${seatList.get(0).seatCode }">
@@ -325,7 +325,7 @@ background-color: white;
 				
 				
 			</div>
-			<div class="row justify-content-center text-center mb-5">
+			<div class="row justify-content-center text-center mb-5" style="width: 1100px; margin: 0 auto;">
 				<c:choose>
 				<c:when test="${not empty seatList }">
 				
@@ -344,10 +344,10 @@ background-color: white;
 <c:when test="${sessionScope.loginInfo.isAdmin eq 'Y' }">
 	
 	
-	<div class="col-12" id="minimin"></div>
+	<div class="col-12" id="minimin" style="margin: 0 auto;"></div>
 	
 	<!-- 이모티콘 구획 -->
-	<div class="col-12 container">
+	<div class="col-12 container" style="width: 1100px; margin: 0 auto;">
 		<div class="row justify-content-center mt-5 align-middle">
 			<div class="col-6 text-center">	
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
@@ -363,7 +363,7 @@ background-color: white;
 	
 	<!-- 스크롤 구획 -->
 	<div class="row justify-content-center mb-3 mt-3">
-		<div class="col-11 text-center recordListTitleDiv">
+		<div class="col-11 text-center recordListTitleDiv" style="width: 1100px; margin: 0 auto;">
 			<div><h3>열람실좌석 이용기록</h3></div>
 			<div>(전체기록 조회)</div>		
 		
