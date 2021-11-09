@@ -151,7 +151,7 @@
 				</li>
 			 </c:if> 
 				<c:forEach var="pageNum" begin="${bookVO.startPage }" end="${bookVO.endPage }">
-					<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  ">
+					<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  " >
 					<a class="page-link" href="/search/bookSearch?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
 					</li>
 				</c:forEach>

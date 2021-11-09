@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.admin.service.AdminService;
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.FileUploadUtil;
 import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.BookVO;
 import com.potato.project.common.vo.MenuVO;
@@ -77,6 +78,12 @@ public class SearchController {
 	// 신착도서 페이지로 이동 + 페이징
 	@GetMapping("/newBookList")
 	public String newBookList(Model model,MenuVO menuVO,BookVO bookVO,HttpSession session) {
+		
+		System.out.println("!!!!!!!!!!!!11" + FileUploadUtil.getNowDateBeforeAMonth());
+		System.out.println("!!!!!!!!!!!!22" + FileUploadUtil.getNowDate());
+		
+		bookVO.setRentableStartDate(FileUploadUtil.getNowDateBeforeAMonth());
+		bookVO.setRentableEndDate(FileUploadUtil.getNowDate());
 		
 		int totalCnt = adminService.countBookInputDate(bookVO);
 		

@@ -213,10 +213,16 @@
                 WHERE B.KDC_NUM = C.KDC_NUM
                 AND B.BOOK_CODE = I.BOOK_CODE
                 AND IS_DELETE = 'N'
-				<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
+			<choose>
+				<when test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
 				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
 				AND INPUT_DATE - 1 &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
-				</if>
+				</when>
+				<otherwise>
+				AND INPUT_DATE &gt;= TO_DATE(#{rentableStartDate},'YYYY-MM-DD')
+				AND INPUT_DATE - 1  &lt;= TO_DATE(#{rentableEndDate},'YYYY-MM-DD')
+				</otherwise>
+			</choose>
                 ORDER BY INPUT_DATE DESC)
         )
         WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
@@ -409,10 +415,16 @@
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
 		WHERE IS_DELETE = 'N' 
-		<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
-		AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
-		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
-		</if>
+			<choose>
+				<when test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
+				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
+				AND INPUT_DATE - 1 &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
+				</when>
+				<otherwise>
+				AND INPUT_DATE &gt;= TO_DATE(#{rentableStartDate},'YYYY-MM-DD')
+				AND INPUT_DATE - 1  &lt;= TO_DATE(#{rentableEndDate},'YYYY-MM-DD')
+				</otherwise>
+			</choose>
 	</select>
 	
 	<!-- 회원이 대여하고 있는 도서 정보 조회 -->

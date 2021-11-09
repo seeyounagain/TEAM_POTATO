@@ -39,6 +39,10 @@ $(function() {
 .dropdown-item:active {
 	background-color: #0b70b9;
 }
+.page-item .page-link {
+    z-index: 3;
+    color: black;
+}
 .page-item.active .page-link {
     z-index: 3;
     background-color: #0b70b9;

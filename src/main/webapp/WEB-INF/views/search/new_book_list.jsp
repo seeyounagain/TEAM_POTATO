@@ -83,19 +83,19 @@
 					<ul class="pagination justify-content-center">
 					 <c:if test="${bookVO.prev }">
 						<li class="page-item">
-						<a class="page-link" href="/search/newBookList?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+						<a class="page-link" href="/search/newBookList?nowPage=${bookVO.startPage - 1 }&menuCode=${menuVO.menuCode}&searchBegin=${bookVO.searchBegin }&searchEnd=${bookVO.searchEnd }" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						</a>
 						</li>
 					 </c:if> 
 						<c:forEach var="pageNum" begin="${bookVO.startPage }" end="${bookVO.endPage }">
 							<li class="page-item  <c:if test="${bookVO.nowPage eq pageNum }">active</c:if>  ">
-							<a class="page-link" href="/search/newBookList?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+							<a class="page-link" href="/search/newBookList?nowPage=${pageNum }&menuCode=${menuVO.menuCode}&searchBegin=${bookVO.searchBegin }&searchEnd=${bookVO.searchEnd }">${pageNum }</a>
 							</li>
 						</c:forEach>
 					<c:if test="${bookVO.next }">
 						<li class="page-item">
-						<a class="page-link" href="/search/newBookList?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+						<a class="page-link" href="/search/newBookList?nowPage=${bookVO.endPage + 1 }&menuCode=${menuVO.menuCode}&searchBegin=${bookVO.searchBegin }&searchEnd=${bookVO.searchEnd }" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 						</a>
 						</li>
