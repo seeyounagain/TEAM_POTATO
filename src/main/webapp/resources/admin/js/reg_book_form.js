@@ -102,22 +102,6 @@
 		
 	
 		regBookSubmit = function() {
-			
-			var myEditor;
-
-		    ClassicEditor
-		        .create( document.querySelector( '#ckeditor' ) )
-		        .then( editor => {
-		            console.log( 'Editor was initialized', editor );
-		            myEditor = editor;
-		        } )
-		        .catch( err => {
-		            console.error( err.stack );
-		        } );
-		    
-		    var intro = $('textarea#intro').html( myEditor.getData() );
-			
-		    console.log(intro);
 		    
 			var isbn = $('#isbn').val();
 			var title = $('#title').val();
@@ -129,7 +113,7 @@
 			var bookSize = $('#bookSize').val();
 			var keyword = $('#keyword').val();
 			var summary = $('#summary').val();
-			/*var intro = $('#intro').val();*/
+			var intro = $('#intro').val();
 			var area = $('#area').val();
 			var file = $('#file').val();
 			

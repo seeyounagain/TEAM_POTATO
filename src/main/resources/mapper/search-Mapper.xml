@@ -29,6 +29,7 @@
 		<result column="INPUT_DATE" 	property="inputDate"/>
 		<result column="AREA" 			property="area"/>
 		<result column="STATUS" 		property="status"/>
+		<result column="IS_DELETE" 		property="isDelete"/>
 		<result column="RENTAL_ID" 		property="rentalId"/>
 		<result column="RESERVE_ID" 	property="reserveId"/>
 		<result column="RENTAL_DATE" 	property="rentalDate"/>
@@ -133,10 +134,12 @@
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
+		    , IS_DELETE
 		    , ATTACHED_IMG_NAME
 		FROM BOOK B, BOOK_CATE C, BOOK_IMG I
 		WHERE B.KDC_NUM = C.KDC_NUM
 		AND B.BOOK_CODE = I.BOOK_CODE
+		AND IS_DELETE = 'N'
 		ORDER BY INPUT_DATE DESC
 	</select>
 	
@@ -161,6 +164,7 @@
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
+		    , IS_DELETE
 		    , ATTACHED_IMG_NAME
         FROM (
                 SELECT ROWNUM AS ROW_NUM
@@ -181,6 +185,7 @@
                 , INPUT_DATE
                 , AREA
                 , STATUS
+                , IS_DELETE
                 , ATTACHED_IMG_NAME           
             FROM    (
                 SELECT ROWNUM AS ROW_NUM
@@ -201,14 +206,16 @@
                 , INPUT_DATE
                 , AREA
                 , STATUS
+                , IS_DELETE
                 , ATTACHED_IMG_NAME        
                 FROM
                 BOOK B, BOOK_CATE C, BOOK_IMG I
                 WHERE B.KDC_NUM = C.KDC_NUM
                 AND B.BOOK_CODE = I.BOOK_CODE
+                AND IS_DELETE = 'N'
 				<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
 				AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
-				AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
+				AND INPUT_DATE - 1 &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
 				</if>
                 ORDER BY INPUT_DATE DESC)
         )
@@ -243,6 +250,7 @@
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
+		    , IS_DELETE
 		    , (SELECT ID FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RESERVE_ID
 		    , (SELECT ID FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS RENTAL_ID
             , (SELECT TO_CHAR(RENTAL_DATE,'YYYY-MM-DD') FROM RENTAL WHERE BOOK_CODE = B.BOOK_CODE AND RETURN_DATE IS NULL) AS RENTAL_DATE
@@ -251,6 +259,7 @@
             , (SELECT TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RENTABLE_END_DATE		
 		FROM BOOK B, BOOK_CATE C
 		WHERE B.KDC_NUM = C.KDC_NUM
+		AND IS_DELETE = 'N'
 		<if test="status != 0">
 		AND STATUS = #{status}
 		</if>
@@ -399,8 +408,9 @@
 	<select id="countBook" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
+		WHERE IS_DELETE = 'N' 
 		<if test="searchBegin != null and !searchBegin.equals('') and !searchEnd.equals('')">
-		WHERE INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
+		AND INPUT_DATE &gt;= TO_DATE(#{searchBegin},'YYYY-MM-DD')
 		AND INPUT_DATE &lt;= TO_DATE(#{searchEnd},'YYYY-MM-DD')
 		</if>
 	</select>
@@ -457,6 +467,7 @@
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
+			    , IS_DELETE
 			    , ATTACHED_IMG_NAME    
 	    FROM (
 	            SELECT
@@ -478,6 +489,7 @@
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
+			    , IS_DELETE
 			    , ATTACHED_IMG_NAME
 	        FROM (
 	            SELECT
@@ -499,10 +511,12 @@
 	                , INPUT_DATE
 	                , AREA
 	                , STATUS
+	                , IS_DELETE
 	                , ATTACHED_IMG_NAME
 	            FROM BOOK B, BOOK_CATE C, BOOK_IMG I
 	            WHERE B.KDC_NUM = C.KDC_NUM
 	            AND B.BOOK_CODE = I.BOOK_CODE
+	            AND IS_DELETE = 'N'
 	            AND ( UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
@@ -520,13 +534,14 @@
 	<select id="countBookSearch" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
-		WHERE UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
+		WHERE IS_DELETE = 'N'
+		AND ( UPPER(TITLE) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
-	            OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') 
+	            OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') )
 	</select>
 
 	<!-- 도서 상세 검색 + 페이징 -->
@@ -551,6 +566,7 @@
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
+			    , IS_DELETE
 			    , ATTACHED_IMG_NAME    
 	    FROM (
 	            SELECT
@@ -573,6 +589,7 @@
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
+			    , IS_DELETE
 			    , ATTACHED_IMG_NAME
 	        FROM (
 	            SELECT
@@ -595,10 +612,12 @@
 	                , INPUT_DATE
 	                , AREA
 	                , STATUS
+	                , IS_DELETE
 	                , ATTACHED_IMG_NAME
 	            FROM BOOK B, BOOK_CATE C, BOOK_IMG I
 	            WHERE B.KDC_NUM = C.KDC_NUM
 	            AND B.BOOK_CODE = I.BOOK_CODE
+	            AND IS_DELETE = 'N'
 	            <if test="kdcNum != 10">
 	            AND B.KDC_NUM = #{kdcNum}
 	            </if>
@@ -633,7 +652,7 @@
 	<select id="countBookDetailSearch" resultType="int">
 		SELECT COUNT(BOOK_CODE)
 		FROM BOOK
-		WHERE 	LENGTH(BOOK_CODE) = 9
+		WHERE 	IS_DELETE = 'N'
 				<if test="kdcNum != 10">
 	            AND KDC_NUM = #{kdcNum}
 	            </if>
@@ -704,10 +723,25 @@
 	
 	<!-- 대출 가능 기간이 지난 예약정보 삭제 -->
 	<delete id="deleteReserveDateIsOver">
-	DELETE RESERVE
-	WHERE RESERVE_CODE = #{reserveCode}
+		DELETE RESERVE
+		WHERE RESERVE_CODE = #{reserveCode}
 	</delete>
 	
+	<!-- 도서 관련 대출, 예약 중인 정보 갯수 조회 -->
+	<select id="selectBookInfoCnt" resultType="int">
+		SELECT
+		COUNT((SELECT BOOK_CODE FROM RENTAL WHERE BOOK_CODE = #{bookCode} AND RETURN_DATE IS NULL)) 
+		+ COUNT((SELECT BOOK_CODE FROM RESERVE WHERE BOOK_CODE = #{bookCode}))
+        FROM BOOK
+        WHERE BOOK_CODE = #{bookCode}	
+	</select>
+		
+	<!-- 도서 정보 삭제 -->
+	<update id="deleteBookInfo">
+		UPDATE BOOK
+		SET IS_DELETE = 'Y'
+		WHERE BOOK_CODE = #{bookCode}
+	</update>
 	
 </mapper>
 

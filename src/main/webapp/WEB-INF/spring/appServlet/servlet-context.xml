@@ -64,6 +64,7 @@
 			<exclude-mapping path="/libManage/sendMessageAjax"/>
 			<exclude-mapping path="/libManage/sendSMSRandomNumberAjax"/>
 			<exclude-mapping path="/libManage/sendSMSMemberPwAjax"/>
+			<exclude-mapping path="/libManage/deleteBookInfoAjax"/>
 			<exclude-mapping path="/libManage/regItem"/>
 			<exclude-mapping path="/search/isLoginAjax"/>
 			<exclude-mapping path="/service/chooseSeat"/>

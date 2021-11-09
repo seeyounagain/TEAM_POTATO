@@ -61,4 +61,7 @@ public interface AdminService {
 	// 회원에게 알람 전송
 	int sendMessage(MessageVO messageVO);
 	
+	// 도서 정보 조회 후 삭제 여부 문자 리턴
+	String selectBookInfoAndDeleteBookisDeleteYorN(String bookCode);
+	
 }

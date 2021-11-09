@@ -308,5 +308,18 @@ public class AdminController {
 		
 	}
 	
+	// 도서정보 삭제
+	@ResponseBody
+	@PostMapping("/deleteBookInfoAjax")
+	public String deleteBookInfoAjax(String bookCode) {
+		
+		// 도서 정보 조회 후 삭제 여부 문자 리턴
+		// 도서의 대여 혹은 예약 정보가 있다면 N
+		// 정보가 없다면 (삭제 가능한 상태라면) 삭제 후 Y
+		
+		return adminSerivce.selectBookInfoAndDeleteBookisDeleteYorN(bookCode);
+		
+	}
+	
 	
 }

@@ -23,6 +23,8 @@ public class BookVO extends PageVO{
 	private String 	inputDate	  ; // INPUT_DATE	    -- 책 등록일
 	private String 	area		  ; // AREA 		    -- 자료위치 (종합자료실1 종합자료실2 열람실 어린이실)
 	private int 	status		  ; // STATUS 		    -- 책 상태 (기본값 0 대출가능 / 1 대출중 / 2 연체중 / 3 예약중)
+	private String 	isDelete	  ; // IS_DELETE 		-- 책 정보 삭제 여부 (기본값 N )
+	
 	
 	private BookImgVO bookImgVO	; // 이미지VO
 	
@@ -143,6 +145,12 @@ public class BookVO extends PageVO{
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 	public BookImgVO getBookImgVO() {
 		return bookImgVO;

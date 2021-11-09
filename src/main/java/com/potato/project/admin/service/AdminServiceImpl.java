@@ -273,6 +273,28 @@ public class AdminServiceImpl implements AdminService{
 		return sqlSession.insert("memberMapper.insertMessage",messageVO);
 		
 	}
+	
+	// 도서 정보 조회 후 삭제 여부 문자 리턴
+	@Override
+	public String selectBookInfoAndDeleteBookisDeleteYorN(String bookCode) {
+		
+		String isDelete;
+		
+		int result = sqlSession.selectOne("searchMapper.selectBookInfoCnt",bookCode);
+		
+		// 도서의 대여 혹은 예약 정보가 있다면 N
+		if (result != 0) {
+			isDelete = "N";
+		}
+		// 정보가 없다면 (삭제 가능한 상태라면) 삭제 후 Y
+		else {
+			sqlSession.update("searchMapper.deleteBookInfo",bookCode);
+			isDelete = "Y";
+		}
+		
+		return isDelete;
+		
+	}
 
 	
 	
