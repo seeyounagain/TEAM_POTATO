@@ -60,7 +60,7 @@ public class ServiceController {
 		model.addAttribute("testString", rcVO.getContent());
 		model.addAttribute("rc", serviceService.recommendBoard("RC_001"));
 		
-		System.out.println(serviceService.recommendBoard("RC_001").get("CONTENT"));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!"+serviceService.recommendBoard("RC_001").get("CONTENT"));
 
 		return "service/recommendRegForm";
 	}
