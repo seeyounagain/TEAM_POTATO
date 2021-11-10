@@ -38,7 +38,7 @@ $(document).ready(function(){
 					else if(result.gender == '여'){
 						str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="'+male+'"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="'+female+'" checked><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="'+none+'"><label class="form-check-label" for="none">선택안함</label></div></td>';      
 					}
-					else if(result.gender == ''){
+					else if(result.gender == '' || result.gender == null){
 						str += '<td><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="male" value="'+male+'"><label class="form-check-label" for="male">남</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="female" value="'+female+'"><label class="form-check-label" for="female">여</label></div><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="gender" id="none" value="'+none+'" checked><label class="form-check-label" for="none">선택안함</label></div></td>';
 					}
 					str += '</tr>';
