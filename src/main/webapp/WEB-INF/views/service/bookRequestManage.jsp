@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/bookRequestManage.js?ver=9"></script>
+<script type="text/javascript" src="/resources/service/js/bookRequestManage.js?ver=1"></script>
 
 <style type="text/css">
 
@@ -22,16 +22,18 @@ table{
 <h2 class="text-first fw-bold">도서비치관리</h2>
 <hr>
 
-<select>
+<select name="year" id="windowYear">
 	<c:forEach items="${year }" var="y" varStatus="status">
-	<option>${y}</option>	
+	<option value="${y}" >${y}</option>	
 	</c:forEach>
 </select>
-<select>
+
+<select name="month" id="windowMonth">
 	<c:forEach items="${month }" var="m" varStatus="status">
-	<option>${m}</option>	
+	<option value="${m}">${m}</option>	
 	</c:forEach>
 </select>
+<input type="button" value="조회" class="btn btn-primary" id="chooseMonthYearRequestBoard"> 
 
  <!-- 리스트 구획 -->
 	<div class="row justify-content-center mb-3 mt-2">

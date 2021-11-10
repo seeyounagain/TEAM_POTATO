@@ -29,6 +29,7 @@ import com.potato.project.service.service.ServiceService;
 import com.potato.project.service.vo.ApiSearchVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
+import com.potato.project.service.vo.RecommendVO;
 import com.potato.project.service.vo.RequestBoardVO;
 
 // 천화 
@@ -46,6 +47,22 @@ public class ServiceController {
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
 	
+	
+	@PostMapping("/test")
+	public String test(Model model,MenuVO menuVO,HttpSession session, RecommendVO rcVO) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		
+		serviceService.recommendReg(rcVO);
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		model.addAttribute("testString", rcVO.getContent());
+
+		return "service/recommendRegForm";
+	}
 	
 	
 	@GetMapping("/recommendRegForm")

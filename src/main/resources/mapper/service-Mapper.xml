@@ -43,7 +43,21 @@
 			<result column="REQUEST_STATUS"	property="requestStatus"/>                                                                                                                                                                  
 			</resultMap>
 			
+			<resultMap type="com.potato.project.service.vo.RecommendVO" id="recommend">
+			<id 	column="RC_CODE"		property="rcCode"/>
+			<result column="CONTENT"		property="content"/>
+			<result column="TITLE"			property="title"/>                                                                                                                                                                                                              
+			</resultMap>
 			
+			<insert id="recommendReg">
+			INSERT INTO RECOMMEND_BOARD(
+			 RC_CODE
+			 ,CONTENT
+			)VALUES(
+			(SELECT 'RC_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(RC_CODE,4,3))),0)+1,3,'0') AS RECOMMEND_CODE FROM RECOMMEND_BOARD)
+			,RAWTOHEX(#{content })
+			)
+			</insert>
 			
 			<update id="ajaxRequestStatusChange">
 			UPDATE REQUEST_BOARD
@@ -95,10 +109,22 @@
                                  WHERE ID = #{id })
 					ORDER BY REQUEST_CODE DESC			
 			</select>
+			
 			<select id="requestBoardListAdmin" resultMap="requestBoard">
 					SELECT 
                     REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE, CATEGORY, KDC_CODE, KDC_NAME, REQUEST_STATUS
 					FROM REQUEST_BOARD
+					ORDER BY REQUEST_CODE DESC			
+			</select>
+			
+			<select id="requestBoardListAdminChooseYearMonth" resultMap="requestBoard">
+					SELECT 
+                    REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE, CATEGORY, KDC_CODE, KDC_NAME, REQUEST_STATUS
+					FROM REQUEST_BOARD
+					WHERE
+					CREATE_DATE &gt;= TO_DATE('2021/11','YYYY-MM')
+					AND
+					CREATE_DATE &lt;= TO_DATE(TO_CHAR(LAST_DAY('2021/11'||'01'),'YYYY-MM-DD'),'YYYY-MM-DD')
 					ORDER BY REQUEST_CODE DESC			
 			</select>
 

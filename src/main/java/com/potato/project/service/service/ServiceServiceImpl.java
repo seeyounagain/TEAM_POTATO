@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
+import com.potato.project.service.vo.RecommendVO;
 import com.potato.project.service.vo.RequestBoardVO;
 //천화 
 @Service("serviceService")
@@ -121,6 +122,11 @@ public class ServiceServiceImpl implements ServiceService {
 	@Override
 	public String endDateForSearchRecord(ReadingRecordVO recordVO) {
 		return sqlSession.selectOne("serviceMapper.endDateForSearchRecord", recordVO);
+	}
+
+	@Override
+	public void recommendReg(RecommendVO rcVO) {
+		sqlSession.insert("serviceMapper.recommendReg", rcVO);
 	}
 	
 	

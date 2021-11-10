@@ -1,5 +1,27 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
+
+		var month = getMonth();
+		$('#windowMonth').val(month);
+	
+		function getMonth(){
+			var date = new Date();
+			var month = ("0" + (1 + date.getMonth())).slice(-2);
+			return month;
+		}		
+		
+
+	$(document).on('click','#chooseMonthYearRequestBoard',function(){	
+		var yearMonth = $('#windowYear').val() + '/' + $('#windowMonth').val();
+		
+		alert(yearMonth).val();
+		
+		
+	
+	})
+		
+		
+	
 	
 
 	$(document).on('change','#status',function(){

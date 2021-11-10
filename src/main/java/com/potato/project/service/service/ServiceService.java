@@ -5,6 +5,7 @@ import java.util.List;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
+import com.potato.project.service.vo.RecommendVO;
 import com.potato.project.service.vo.RequestBoardVO;
 
  
@@ -51,4 +52,6 @@ public interface ServiceService {
 	int ajaxRequestStatusChange(RequestBoardVO rbVO);
 
 	String endDateForSearchRecord(ReadingRecordVO recordVO);
+	
+	void recommendReg(RecommendVO rcVO);
 }

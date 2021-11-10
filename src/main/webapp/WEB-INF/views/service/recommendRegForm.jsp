@@ -10,27 +10,28 @@
 <title>글쓰기</title>
 
 <script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script> 
-
-
+<script type="text/javascript" src="/resources/service/js/editor.js?ver=1"></script>
 </head> 
 <body>
 <br><br><br><br><br><br>
 
+${testString }
+
+<form action="/service/test" method="post" enctype="multipart/form-data" id="testSubmit">
 <!-- SmartEditor2 --> 
 <div class="jsx-2303464893 editor"> 
 	<div class="fr-box fr-basic fr-top" role="application"> 
 		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
-			<textarea name="notice_content" id="smartEditor" style="width: 100%; height: 412px;">
-			
-			와 힘들었다.
-			
-			
+			<textarea name="content" id="smartEditor" style="width: 100%; height: 412px;">
 			</textarea> 
 		</div> 
 	</div> 
 </div>
+<input type="button" class="formBtn" value="확인">
+</form>
 <!-- SmartEditor2 --> 
 <script type="text/javascript">
+
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
@@ -39,7 +40,6 @@ nhn.husky.EZCreator.createInIFrame({
  fCreator: "createSEditor2"
 });
 </script>
-
 
 </body>
 </html>
