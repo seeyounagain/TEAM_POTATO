@@ -26,9 +26,11 @@
 	text-decoration: underline;
 	font-weight: bold;
 }
+.tableDiv{
+	padding-top: 30px;
+}
 .form-select{
 	width: 100px;
-	margin-left: 20px;
 }
 .pageDiv{
 	padding-top: 10px;
@@ -56,12 +58,18 @@
 			</form>
 			<div class="tableDiv">
 					<table class="table table-striped text-center">
+							<colgroup>
+								<col width="15%">
+								<col width="55%">
+								<col width="20%">
+								<col width="10%">
+							</colgroup>
 						<thead>
 							<tr>
-								<th class="w-10">번호</th>
-								<th class="w-60">제목</th>
-								<th class="w-20">작성일</th>
-								<th class="w-10">조회수</th>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성일</th>
+								<th>조회수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -75,7 +83,7 @@
 									<c:forEach items="${list }" var="info" varStatus="status">
 										<tr>
 											<td>${status.count }</td>
-											<td><a class="tableA" href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
+											<td align="left"><a class="tableA" href="/board/noticeDetail?noticeCode=${info.noticeCode }&menuCode=${menuVO.menuCode}">${info.title }</a></td>
 											<td>${info.createDate }</td>
 											<td>${info.readCnt }</td>
 										</tr>
