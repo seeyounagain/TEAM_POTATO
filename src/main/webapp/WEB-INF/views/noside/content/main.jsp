@@ -232,7 +232,7 @@
 			<div class="card">
 			  <div class="row">
 			    <div class="col-12 text-center">
-			      <img src="/resources/noticeFileUpload/dodam_notice02.png" class="img-fluid rounded-start">
+			      <img src="/resources/noticeFileUpload/${noticeList[0].attachFileVO.attachedFileName }" class="img-fluid rounded-start">
 			    </div>
 			  </div>
 			</div>
@@ -241,7 +241,7 @@
 			<div class="card">
 			  <div class="row">
 			    <div class="col-12 text-center">
-			      <img src="/resources/noticeFileUpload/dodam_notice01.png" class="img-fluid rounded-start">
+			      <img src="/resources/noticeFileUpload/${noticeList[1].attachFileVO.attachedFileName }" class="img-fluid rounded-start">
 			    </div>
 			  </div>
 			</div>
@@ -250,7 +250,7 @@
 			<div class="card">
 			  <div class="row">
 			    <div class="col-12 text-center">
-			      <img src="/resources/noticeFileUpload/dodam_notice01.png" class="img-fluid rounded-start">
+			      <img src="/resources/noticeFileUpload/${noticeList[2].attachFileVO.attachedFileName }" class="img-fluid rounded-start">
 			    </div>
 			  </div>
 			</div>
