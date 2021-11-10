@@ -43,11 +43,20 @@
 			<result column="REQUEST_STATUS"	property="requestStatus"/>                                                                                                                                                                  
 			</resultMap>
 			
-	<!-- 		<resultMap id="" type="hashMap" >
+	 		<resultMap id="getRecommendBoard" type="hashMap" >
+			<result column="RC_CODE"		property="rcCode"/>                                                                                                                                                                                                           
+			<result column="TITLE"			property="title" />                                                                                                                                                                                                           
 			<result column="CONTENT"		property="content" jdbcType="BLOB" javaType="byte[]" />                                                                                                                                                                                                           
 			</resultMap> 
-			 -->
-
+			
+			<select id="recommendBoard" parameterType="java.util.HashMap" resultMap="getRecommendBoard" >
+			
+			SELECT 
+			CONTENT
+			FROM RECOMMEND_BOARD
+			WHERE RC_CODE = 'RC_001'
+			
+			</select>
 			
 			<insert id="recommendReg">
 			INSERT INTO RECOMMEND_BOARD(

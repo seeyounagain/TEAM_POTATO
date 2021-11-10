@@ -1,5 +1,6 @@
 package com.potato.project.service.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.potato.project.member.vo.MemberVO;
@@ -57,5 +58,5 @@ public interface ServiceService {
 	
 	void recommendReg(RecommendVO rcVO);
 	
-	List<RecommendVO> recommendList();
+	HashMap<String, String> recommendBoard(String a);
 }

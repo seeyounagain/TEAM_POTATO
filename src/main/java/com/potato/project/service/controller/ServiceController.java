@@ -4,7 +4,6 @@ package com.potato.project.service.controller;
 
 
 
-import java.sql.Blob;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.potato.project.common.service.CommonService;
-import com.potato.project.common.util.CalenderUtil;
-import com.potato.project.common.util.UploadUtil;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
 import com.potato.project.member.vo.MemberVO;
@@ -61,6 +58,9 @@ public class ServiceController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		model.addAttribute("testString", rcVO.getContent());
+		model.addAttribute("rc", serviceService.recommendBoard("RC_001"));
+		
+		System.out.println(serviceService.recommendBoard("RC_001").get("CONTENT"));
 
 		return "service/recommendRegForm";
 	}

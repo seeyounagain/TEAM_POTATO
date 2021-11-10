@@ -1,5 +1,6 @@
 package com.potato.project.service.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -135,8 +136,9 @@ public class ServiceServiceImpl implements ServiceService {
 	}
 
 	@Override
-	public List<RecommendVO> recommendList() {
-		return sqlSession.selectList("serviceMapper.recommendList");
+	public HashMap<String, String> recommendBoard(String a) {
+		a = "RC_001";
+		return sqlSession.selectOne("serviceMapper.recommendBoard", a);
 	}
 	
 	
