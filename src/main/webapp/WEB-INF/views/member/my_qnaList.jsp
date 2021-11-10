@@ -246,7 +246,7 @@
 				</div>
 			<!-- 페이징 끝 -->
 			<div class="col-12 text-center">
-				<button type="button" class="btn btn-secondary" onclick="location.href='/myPage/myPage?menuCode=${menuVO.menuCode }'">뒤로가기</button>
+				<button type="button" class="btn btn-secondary" onclick="history.back(0);">뒤로가기</button>
 			</div>
 			
 	</div>

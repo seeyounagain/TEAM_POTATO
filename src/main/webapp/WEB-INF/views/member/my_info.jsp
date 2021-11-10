@@ -118,7 +118,7 @@
 						<button type="button" id="changeBtn" class="btn btn-primary">수정</button>
 					</div>
 					<div class="col-2 d-grid">
-						<button type="button" class="btn btn-secondary" onclick="location.href='/myPage/myPage?menuCode=${menuVO.menuCode }'">뒤로가기</button>
+						<button type="button" class="btn btn-secondary" onclick="history.back(0);">뒤로가기</button>
 					</div>
 				</div>
 				<input type="hidden" id="menuCode" name="menuCode" value="${menuVO.menuCode }">

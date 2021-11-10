@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/member/js/my_library.js?ver=1"></script>
 <style type="text/css">
 #backIcon:hover {
 	cursor: pointer;
@@ -91,7 +92,16 @@
 									<tr>
 										<td>${status.count }</td>
 										<td>
-											<a class="aTag" href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
+											<c:choose>
+												<c:when test="${rental.bookVO.isDelete eq 'N' }">
+													<a class="aTag" href="/search/bookDetail?menuCode=${menuVO.menuCode}&bookCode=${rental.bookVO.bookCode }">${rental.bookVO.title }</a>	
+												</c:when>
+												<c:otherwise>
+													<input type="hidden" id="menuConde" name ="menuCode" value="${menuVO.menuCode}">
+													<input type="hidden" id="bookCode" name ="bookCode" value="${rental.bookVO.bookCode }">
+													<a class="aTag" href="" data-bs-toggle="modal" data-bs-target="#myLibraryAlertModal">${rental.bookVO.title }</a>
+												</c:otherwise>
+											</c:choose>
 										</td>
 										<td>${rental.rentalDate }</td>
 										<c:choose>
@@ -224,23 +234,26 @@
 				</table>
 			</div>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-		
 	</div>
 </div>
 
-
+<!-- 모달창-->
+<div class="modal fade" id="myLibraryAlertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">알림</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+        		관내에서 폐기된 도서입니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="myLibraryAlertModal" data-bs-dismiss="modal">확인</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>

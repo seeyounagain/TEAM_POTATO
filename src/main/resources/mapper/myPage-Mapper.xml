@@ -78,6 +78,7 @@
 		<result column="INPUT_DATE" 		property="inputDate"/>
 		<result column="AREA" 				property="area"/>
 		<result column="STATUS" 			property="status"/>
+		<result column="IS_DELETE" 			property="isDelete"/>
 		<result column="RENTAL_ID" 			property="rentalId"/>
 		<result column="RESERVE_ID" 		property="reserveId"/>
 		<association property="bookImgVO" 	resultMap="bookImg"/>
@@ -258,6 +259,7 @@
 		    ,BOOK_CODE
 		    ,TITLE
 		    ,STATUS
+		    ,IS_DELETE
 		    , RENTAL_DATE
 		    , LIMIT_DATE
 		    , RETURN_DATE
@@ -267,6 +269,7 @@
 		        ,BOOK_CODE
 		        ,TITLE
 		        ,STATUS
+		        ,IS_DELETE
 		        , RENTAL_DATE
 		        , LIMIT_DATE
 		        , RETURN_DATE
@@ -276,6 +279,7 @@
 					,R.BOOK_CODE
 					,TITLE
 					,STATUS
+					,B.IS_DELETE
 					, SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),0,4)||'년'
 					||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),6,2)||'월'
 					||SUBSTR(TO_CHAR(RENTAL_DATE, 'YYYY-MM-DD'),9,2)||'일' AS RENTAL_DATE
