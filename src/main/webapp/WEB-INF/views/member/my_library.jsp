@@ -54,6 +54,39 @@
 		</div> --%>
 		<!-- 타이틀 끝 -->
 		
+				<!-- 대여현황 테이블 -->
+		<div class="row justify-content-center text-center mb-4 mt-4">	
+			<div class="col-8">
+				<table class="table table-borderless">
+					<colgroup>
+						<col width="33.3%">
+						<col width="33.3%">
+						<col width="33.3%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td><img width="120px;" src="/resources/img/대출.png"></td>
+							<td><img width="120px;" src="/resources/img/예약.png"></td>
+							<td><img width="120px;" src="/resources/img/반납.png"></td>
+						</tr>
+						<tr>
+							<th>대여중</th>
+							<th>예약중</th>
+							<th>반납</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${memberBookSituationCnt.rentalCnt }</td>
+							<td>${memberBookSituationCnt.reserveCnt }</td>
+							<td>${memberBookSituationCnt.returnCnt }</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- 끝 -->
+		
 		
 		<!-- 대출내역 테이블 시작 -->
 		<div class="row justify-content-center">

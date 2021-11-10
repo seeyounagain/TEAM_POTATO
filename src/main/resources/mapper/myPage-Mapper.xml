@@ -292,7 +292,7 @@
 		          FROM RENTAL R, MEMBER M, BOOK B
 		          WHERE R.ID = M.ID
 		          AND R.BOOK_CODE = B.BOOK_CODE
-		          AND M.ID = 'java'
+		          AND M.ID = #{id}
 		          ORDER BY RETURN_DATE DESC, RENTAL_DATE DESC
 		          )
 		    )

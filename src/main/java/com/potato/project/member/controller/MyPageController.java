@@ -175,6 +175,8 @@ public class MyPageController {
 	//내 대출 내역,내 예약 현황 조회
 	@GetMapping("/myLibrary")
 	public String goMyLibrary(Model model,MenuVO menuVO,SideMenuVO sideMenuVO, HttpSession session, MemberVO memberVO) {
+		
+		
 		String id = ((MemberVO)session.getAttribute("loginInfo")).getId();
 		memberVO.setId(id);
 		//페이징 위한 내대출 총 갯수
@@ -185,7 +187,10 @@ public class MyPageController {
 		//메소드 호출 시 페이징 처리의 모든 정보 셋팅
 		memberVO.setPageInfo();
 		
+		
 		//로그인정보 MemberVO(id만있으면됨)에 담아서 맵퍼로 보내고 결과값 받아와서 내대출내역 예약내역 리스트 화면에 뿌림
+		model.addAttribute("memberBookSituationCnt",myPageService.memberBookSituation((MemberVO)session.getAttribute("loginInfo")));
+		
 		model.addAttribute("rentalList",myPageService.selectRentalList(memberVO));
 		model.addAttribute("reserveList",myPageService.selectReserveList(memberVO));
 		return "member/my_library";
