@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- mark.js 추가하기 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=9" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=16" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -63,6 +63,9 @@ $(function() {
     display: none; /* Chrome, Safari, Opera*/
     width: 0 !important;
 }
+.refreshBtn:hover {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -74,6 +77,8 @@ $(function() {
 	<div class="row mb-3 searchGO">
 		<div class="col-6">
 			<button type="button" class="btn btn-primary px-4" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}';">신규도서등록</button>
+			<button type="button" id="deleteBookList" class="btn btn-secondary px-4">제적도서목록</button>
+			&nbsp;<img class="refreshBtn" width="25px;" src="/resources/img/refresh.png" onclick="location.href='/libManage/bookManage?menuCode=${menuVO.menuCode}';">
 		</div>		
 	    <div class="col-5 align-self-center">
 			<div class="input-group searchB">
@@ -88,8 +93,8 @@ $(function() {
 		</div>
 	</div>
 	
-	<div class="col-12">
-	<select name="status" class="form-select" id="statusSelect">
+	<div class="col-12 statusSelect">
+	<select name="status" class="form-select" id="statusSelect" >
 		<option value="0">전체</option>
 		<option value="1">대출가능</option>
 		<option value="2">대출중</option>

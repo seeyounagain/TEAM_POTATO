@@ -262,8 +262,15 @@
             , (SELECT TO_CHAR(RENTABLE_END_DATE,'YYYY-MM-DD') FROM RESERVE WHERE BOOK_CODE = B.BOOK_CODE) AS RENTABLE_END_DATE		
 		FROM BOOK B, BOOK_CATE C
 		WHERE B.KDC_NUM = C.KDC_NUM
+		<choose>
+		<when test="status == 8">
+		AND IS_DELETE = 'Y'
+		</when>
+		<otherwise>
 		AND IS_DELETE = 'N'
-		<if test="status != 0">
+		</otherwise>
+		</choose>
+		<if test="status != 0 and status != 8">
 		AND STATUS = #{status}
 		</if>
 		<if test="searchValue != null and !searchValue.equals('')">

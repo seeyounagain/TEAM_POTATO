@@ -2,6 +2,13 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		// 새로고침 아이콘 변경
+		$('.refreshBtn').hover(function () {
+		    $(this).attr("src", $(this).attr("src").replace("/resources/img/refresh.png", "/resources/img/refresh_b.png"));
+		}, function () {
+		    $(this).attr("src", $(this).attr("src").replace("/resources/img/refresh_b.png", "/resources/img/refresh.png"));
+		});
+		
 		//엔터키 눌러서 검색
 		$('.searchGO').keydown(function(e){
 			if(e.keyCode == 13){
@@ -9,6 +16,7 @@
 			}
 		});
 		
+		//검색어 리셋
 		$(document).on('click', '#searchValue' , function() {
 			
 			$('#searchValue').val('');
@@ -272,11 +280,25 @@
 			changeList();
 
 		});
-		// 검색 버튼 클릭 시 (상태별 조회), 
+		
+		// 검색 버튼 클릭 시 (상태별 조회) 
 		$(document).on('click', '#goSearchBtn', function() { 
       		
 			changeList();
 
+		});
+		
+		// 제적도서목록 버튼 클릭 시
+		$(document).on('click', '#deleteBookList', function() { 
+			
+			deleteBookList();
+			
+			$(document).on('click', '#goSearchBtn', function() { 
+	      		
+				deleteBookList();
+
+			});
+			
 		});
 	
 	
@@ -306,6 +328,8 @@
 		        	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
 		     		
 		     		$('#bookT tbody').empty();
+		     		$('#bookHeadT thead').empty();
+		     		$('.statusSelect').show();
 		     		
 		     		str = '';
 
@@ -395,7 +419,11 @@
 					
 				}
 				
+		     	var str2 = '<tr class="text-center"><td>도서정보</td><td>대출/반납</td><td>도서정보수정</td></tr>';
+
 				$('#bookT tbody').prepend(str);
+				$('#bookHeadT thead').prepend(str2);
+				$('#goSearchBtn').removeClass('disabled');
 				
 	     		var keyword = document.getElementById('searchValue').value;
 
@@ -412,12 +440,96 @@
 		});
 		/* Ajax 종료 */
 		
-	  };	
+	};	
 	
-	  updateBookInfo = function(bookCode,menuCode) {
+	 updateBookInfo = function(bookCode,menuCode) {
 		
 		  location.href= '/libManage/updateBookInfo?bookCode=' + bookCode + '&menuCode=' + menuCode;
 		  
-	}
+	};
+	  
+	 deleteBookList = function() {
+		 
+	    var searchValue = $('#searchValue').val();
+	    	
+	    	// 페이지 이동 없이 쿼리 실행 Ajax
+			$.ajax({
+		        url: '/libManage/selectStatusBookListAjax', // 요청경로
+		        type: 'post', // post 메소드 방식
+		        data: {'status':8,'searchValue':searchValue}, // 필요한 데이터를 status라는 이름으로 status 데이터를 넘긴다. 데이터가 여러개일 경우 쉼표로 연결.
+		        success: function(result) { // result 값에 컨트롤러에서 돌려준 데이터가 들어간다.
+		        	// ajax 실행 성공 후 실행할 코드 작성, 컨트롤러 이동 후 코드 실행, 완료 후 다시 돌아와 실행 됨 (페이지 이동 x)
+		     		
+		     		$('#bookT tbody').empty();
+		     		$('#bookHeadT thead').empty();
+		     		$('.statusSelect').hide();
+		     		
+		     		str1 = '';
+
+		     	if (result.length >= 1) {
+			
+		     		if (searchValue != null && searchValue != '') {
+		     			
+		     			$('#bookTcap').text('검색어 "' + searchValue + '"에 대한 도서 ' + result.length + '건의 결과');
+		     			$('#searchValue').val(searchValue);
+		     			
+		     		}
+		     			
+		     		else {
+		     			
+		     			$('#bookTcap').text('제적도서 ' + result.length + '건의 목록');
+		     			
+		     		}
+		     		
+		     		$(result).each(function(index,element){
+			     		
+		     		// 테이블 그리기
+	         		str1 += '<tr>';
+					str1 += '<td colspan="3">';
+					str1 += '<div class="bookTitle"><a class="titleA" href="/search/bookDetail?bookCode=' + element.bookCode + '&menuCode=MENU_006&sideMenuCode=SIDE_MENU_013">' + element.title + '</a></div>';
+	         		str1 += '<div class="mt-2">' + element.writer + ' / ' + element.publisher + ' / ' + element.pubDate + '</div>';
+					str1 += '<div class="mt-2">제적</div>';
+	         		str1 += '</td>';
+	         		str1 += '</tr>';
+	         		
+				});
+		     		
+			    }
+		     		
+				else {
+					
+					$('#bookTcap').text('');
+					
+					str1 += '<tr class="text-center">';
+					str1 += '<td colspan="3">제적도서의 정보가 없습니다.</td>';
+					str1 += '</tr>';
+					
+				}
+
+	     		str2 = '';
+	     		
+	     		str2 += '<tr class="text-center"><td colspan="3">도서정보</td></tr>';
+	     		
+				$('#bookT tbody').prepend(str1);
+				$('#bookHeadT thead').prepend(str2);
+				$('#goSearchBtn').addClass('disabled');
+				
+				
+	     		var keyword = document.getElementById('searchValue').value;
+
+	     		$('table').mark(keyword, {
+	     		  "element": "mark",
+	     		  "className": "table_highlight"
+	     		});
+		     		
+		        },
+		        error: function(){
+		       		// ajax 실행 실패 시 실행되는 구간
+		       		alert('실패');
+		        }
+		});
+		/* Ajax 종료 */		
+		 
+	};
 	  
 })(jQuery);
