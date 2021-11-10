@@ -100,8 +100,13 @@ public class ServiceServiceImpl implements ServiceService {
 	}
 
 	@Override
-	public List<RequestBoardVO> requestBoardListAdmin() {
+	public List<RequestBoardVO> requestBoardListAdmin(){
 		return sqlSession.selectList("serviceMapper.requestBoardListAdmin");
+	}
+
+	@Override
+	public List<RequestBoardVO> requestBoardListAdminChooseYearMonth(String selectYearMonth) {
+		return sqlSession.selectList("serviceMapper.requestBoardListAdminChooseYearMonth",selectYearMonth);
 	}
 
 	@Override
@@ -127,6 +132,11 @@ public class ServiceServiceImpl implements ServiceService {
 	@Override
 	public void recommendReg(RecommendVO rcVO) {
 		sqlSession.insert("serviceMapper.recommendReg", rcVO);
+	}
+
+	@Override
+	public List<RecommendVO> recommendList() {
+		return sqlSession.selectList("serviceMapper.recommendList");
 	}
 	
 	

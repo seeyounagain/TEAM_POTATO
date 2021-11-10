@@ -4,6 +4,7 @@ package com.potato.project.service.controller;
 
 
 
+import java.sql.Blob;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -71,6 +72,15 @@ public class ServiceController {
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
+		
+//		Blob blob = rs.getBlob(cloumnName[i]);
+//		byte[] bdata = blob.getBytes(1, (int) blob.length());
+//		String s = new String(bdata);
+		
+		
+		
+		
+//		model.addAttribute("recommendList",serviceService.recommendList());
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());

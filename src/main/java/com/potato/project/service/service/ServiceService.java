@@ -47,6 +47,8 @@ public interface ServiceService {
 	
 	List<RequestBoardVO> requestBoardListAdmin();
 	
+	List<RequestBoardVO> requestBoardListAdminChooseYearMonth(String selectYearMonth);
+	
 	int ajaxRegRequest(RequestBoardVO rbVO);
 	
 	int ajaxRequestStatusChange(RequestBoardVO rbVO);
@@ -54,4 +56,6 @@ public interface ServiceService {
 	String endDateForSearchRecord(ReadingRecordVO recordVO);
 	
 	void recommendReg(RecommendVO rcVO);
+	
+	List<RecommendVO> recommendList();
 }

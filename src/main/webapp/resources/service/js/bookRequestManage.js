@@ -1,8 +1,11 @@
 //화면 로딩 후 바로 실행
 $(document).ready(function(){
 
+		
+
 		var month = getMonth();
-		$('#windowMonth').val(month);
+		var inMonth = $('#inMonth').val();
+		var inYear = $('#inYear').val();
 	
 		function getMonth(){
 			var date = new Date();
@@ -10,15 +13,23 @@ $(document).ready(function(){
 			return month;
 		}		
 		
+		if(inMonth == ''){
+		$('#windowMonth').val(month);
+		}else{
+		$('#windowMonth').val(inMonth);	
+		$('#windowYear').val(inYear);	
+		}
+		
 
-	$(document).on('click','#chooseMonthYearRequestBoard',function(){	
-		var yearMonth = $('#windowYear').val() + '/' + $('#windowMonth').val();
-		
-		alert(yearMonth).val();
-		
-		
-	
-	})
+		$(document).on('click','#chooseMonthYearRequestBoard',function(){	
+			var selectYearMonth = $('#windowYear').val() + '-' + $('#windowMonth').val();
+			
+			location.href='/libManage/bookRequestManage2?'
+							+'selectYearMonth='+selectYearMonth		
+							+'&year=' + $('#windowYear').val()
+							+'&month='+ $('#windowMonth').val()
+							+'&menuCode='+$('#menuCode').val();
+		})
 		
 		
 	
@@ -112,7 +123,16 @@ str+='		</table>                                                                
 			$('#toId').val(toId);
 			$('#content').val('도서비치신청이 완료되었습니다.\n신청번호'+requestCode);
 			$('#messageModal1').modal('show');
+			
 		}
+		else if($('#statusPack').text() == '비치불가'){
+			$('#toId2').val(toId);
+			$('#content2').val('해당 도서는 "비치불가" 처리 되었습니다.\n사유 : \n신청번호'+requestCode);
+			$('#messageModal2').modal('show');
+		}
+		
+		
+		
 	}
 },
 			error: function(){

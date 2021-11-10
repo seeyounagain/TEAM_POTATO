@@ -13,8 +13,8 @@ public class RequestBoardVO {
 		private String kdcCode              ;                                   //    KDC_CODE 
 		private String kdcName              ;                                   //    KDC_NAME 
 		private String requestStatus		;									//	  REQUEST_STATUS
-		
-		
+			
+
 		public String getRequestStatus() {
 			return requestStatus;
 		}
