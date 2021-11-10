@@ -36,6 +36,9 @@
 	display: none;
 	z-index: 9;
 }
+b, strong {
+	vertical-align: top;
+}
 </style>
 </head>
 <body>

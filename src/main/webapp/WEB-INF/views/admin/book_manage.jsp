@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=3" ></script>
+<!-- mark.js 추가하기 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=9" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 
@@ -37,9 +39,7 @@ $(function() {
     padding-left: 2.2rem!important;
 }
 #bookT {
-	max-height: 1000px;
 	min-height: 200px;
-	overflow: scroll;
 }
 #topBtn{
 	position: fixed;
@@ -47,6 +47,21 @@ $(function() {
 	bottom: 25px;
 	display: none;
 	z-index: 9;
+}
+.table_highlight{
+	color: white;
+	background-color: #0b70b9;
+	vertical-align: baseline;
+}
+.bookTdiv {
+	overflow-y: scroll;
+	max-height: 800px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.bookTdiv::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+    width: 0 !important;
 }
 </style>
 </head>
@@ -56,7 +71,7 @@ $(function() {
 
 <h2 class="text-first fw-bold">도서관리</h2>
 <hr>
-	<div class="row mb-3">
+	<div class="row mb-3 searchGO">
 		<div class="col-6">
 			<button type="button" class="btn btn-primary px-4" onclick="location.href='/libManage/regBookForm?menuCode=${menuVO.menuCode}';">신규도서등록</button>
 		</div>		
@@ -83,17 +98,15 @@ $(function() {
 		<option value="5">대출대기중</option>
 	</select>
 	</div>
-	
-<table id="bookT" class="table table-hover table-bordered caption-top">
 
-	<caption id="bookTcap">도서 ${bookList.size() }건</caption>
 
+<table id="bookHeadT" class="table table-hover table-bordered caption-top">
 	<colgroup>
 		<col width="70%">
 		<col width="15%">
 		<col width="15%">
 	</colgroup>
-
+	<caption id="bookTcap">도서 ${bookList.size() }건</caption>
 	<thead>
 		<tr class="text-center">
 			<td>도서정보</td>
@@ -101,6 +114,17 @@ $(function() {
 			<td>도서정보수정</td>
 		</tr>
 	</thead>
+</table>
+
+<div class="bookTdiv">
+<table id="bookT" class="table table-hover table-bordered caption-top">
+
+	<colgroup>
+		<col width="70%">
+		<col width="15%">
+		<col width="15%">
+	</colgroup>
+
 	<tbody>
 	<c:forEach var="book" items="${bookList }" varStatus="status">
 		<tr>
@@ -140,6 +164,7 @@ $(function() {
 	</c:forEach>
 	</tbody>
 </table>
+</div>
 
 <!-- 도서관리 alert modal 시작 -->
 <div class="modal fade" id="bookManageAlertModal" tabindex="-1" aria-labelledby="bookManageAlertModalLabel" aria-hidden="true">
@@ -181,4 +206,17 @@ $(function() {
 <!-- 도서관리 confirm modal 종료 -->
 
 </body>
+
+<script>
+
+var keyword = document.getElementById('searchValue').value;
+
+	$('table').mark(keyword, {
+	  "element": "mark",
+	  "className": "table_highlight"
+	});
+
+</script>
+
+
 </html>

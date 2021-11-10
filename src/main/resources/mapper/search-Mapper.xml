@@ -248,11 +248,8 @@
 		    , TITLE
 		    , PAGE
 		    , BOOK_SIZE
-		    , KEYWORD
 		    , PUBLISHER
 		    , PUB_DATE
-		    , SUMMARY
-		    , INTRO
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
@@ -274,9 +271,7 @@
 	    OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	    OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
 	    OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
-	    OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%')
-	    OR UPPER(SUMMARY) LIKE UPPER('%'||#{searchValue}||'%')
-	    OR UPPER(INTRO) LIKE UPPER('%'||#{searchValue}||'%') )
+	    OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%') )
 	    </if>		
 		ORDER BY DECODE(STATUS,3,1,2,2,4,3,5,4,1,5) ASC, INPUT_DATE DESC
 	</select>	
@@ -524,7 +519,7 @@
 	            OR UPPER(WRITER) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(TRANSLATOR) LIKE UPPER('%'||#{searchValue}||'%')
 	            OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%') )
-	            ORDER BY INPUT_DATE DESC
+	            ORDER BY TITLE
 	            )
 	    )
 	    WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
@@ -558,8 +553,6 @@
 			    , KEYWORD
 			    , PUBLISHER
 			    , PUB_DATE
-			    , SUMMARY
-			    , INTRO
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
@@ -581,8 +574,6 @@
 			    , KEYWORD
 			    , PUBLISHER
 			    , PUB_DATE
-			    , SUMMARY
-			    , INTRO
 			    , INPUT_DATE
 			    , AREA
 			    , STATUS
@@ -604,8 +595,6 @@
 	                , KEYWORD
 	                , PUBLISHER
 	                , PUB_DATE
-	                , SUMMARY
-	                , INTRO
 	                , INPUT_DATE
 	                , AREA
 	                , STATUS
@@ -636,7 +625,7 @@
 	            <if test="searchEnd != null and !searchEnd.equals('')">
 	            AND TO_DATE(PUB_DATE,'YYYY') &lt;= TO_DATE(#{searchEnd},'YYYY')
 	            </if>
-	            ORDER BY INPUT_DATE DESC
+	            ORDER BY TITLE
 	            )
 	    )
 	    WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}

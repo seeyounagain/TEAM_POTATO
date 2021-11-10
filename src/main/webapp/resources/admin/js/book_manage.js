@@ -1,12 +1,19 @@
 
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
-
-	$(document).on('click', '#searchValue' , function() {
 		
-		$('#searchValue').val('');
+		//엔터키 눌러서 검색
+		$('.searchGO').keydown(function(e){
+			if(e.keyCode == 13){
+				changeList(); 
+			}
+		});
 		
-	});
+		$(document).on('click', '#searchValue' , function() {
+			
+			$('#searchValue').val('');
+			
+		});
 		
 		/* 대여 버튼 클릭 시 대여자 아이디 입력칸 생성 */
 		$(document).on('click', '#rentalBtn', function() { 
@@ -318,7 +325,7 @@
 		     		}
 		     		
 		     		$(result).each(function(index,element){
-		     			
+			     		
 		     		// 테이블 그리기
 	         		str += '<tr>';
 					str += '<td>';
@@ -375,7 +382,7 @@
 	         		str += '</tr>';
 	         		
 				});
-				
+		     		
 			    }
 		     		
 				else {
@@ -389,7 +396,13 @@
 				}
 				
 				$('#bookT tbody').prepend(str);
+				
+	     		var keyword = document.getElementById('searchValue').value;
 
+	     		$('table').mark(keyword, {
+	     		  "element": "mark",
+	     		  "className": "table_highlight"
+	     		});
 		     		
 		        },
 		        error: function(){

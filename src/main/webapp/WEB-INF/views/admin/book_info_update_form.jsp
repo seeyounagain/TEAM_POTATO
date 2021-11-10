@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/admin/js/book_info_update_form.js?ver=9" ></script>
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -69,7 +70,12 @@ textarea {
 			</div>
 			<div class="col-12 mt-2">
 				<label for="intro" class="form-label">소개글</label>
-				 <textarea class="form-control" placeholder="소개글" id="intro" name="intro" style="height: 200px">${bookVO.intro }</textarea>
+				<textarea class="intro" name="intro" id="editor2" rows="10" cols="80">
+	            	${bookVO.intro }
+	            </textarea>
+	            <script>
+	                CKEDITOR.replace( 'editor2' );
+	         	</script>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="area" class="form-label">자료위치</label>

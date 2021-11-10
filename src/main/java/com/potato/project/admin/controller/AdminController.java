@@ -105,8 +105,6 @@ public class AdminController {
 	@PostMapping("/selectStatusBookListAjax")
 	public List<BookVO> selectStatusBookListAjax(BookVO bookVO) {
 		
-		System.out.println("!!!!!!!!!!!!!!!Ajax");
-		
 		return searchService.selectStatusBookList(bookVO);
 		
 	}

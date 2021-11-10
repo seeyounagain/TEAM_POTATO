@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%> 
+<% response.setContentType("text/html; charset=UTF-8");%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=34" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=37" ></script>
+<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
 <style type="text/css">
 textarea {
     resize: none;
@@ -76,8 +79,12 @@ textarea {
 				<input type="text" class="form-control" id="summary" name="summary" placeholder="한줄소개" required>
 			</div>
 			<div class="col-12 mt-2">
-				<label for="intro" class="form-label">소개글</label>
-				<textarea class="form-control" placeholder="소개글" id="intro" name="intro" style="height: 200px"></textarea>
+			<label for="intro" class="form-label">소개글</label>
+				<textarea class="intro" name="intro" id="editor1" rows="10" cols="80">
+	            </textarea>
+	            <script>
+	                CKEDITOR.replace( 'editor1' );
+	         	</script>
 			</div>
 			<div class="col-12 mt-2">
 				<label for="area" class="form-label">자료위치</label>
@@ -152,6 +159,7 @@ textarea {
   </div>
 </div>
 <!-- 도서등록완료 modal 종료 -->
+
 
 </body>
 </html>

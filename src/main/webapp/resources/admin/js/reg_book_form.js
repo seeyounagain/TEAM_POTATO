@@ -113,7 +113,7 @@
 			var bookSize = $('#bookSize').val();
 			var keyword = $('#keyword').val();
 			var summary = $('#summary').val();
-			var intro = $('#intro').val();
+			var intro = CKEDITOR.instances.editor1.getData();
 			var area = $('#area').val();
 			var file = $('#file').val();
 			
@@ -174,7 +174,7 @@
 			}
 			if (intro == null || intro == '') {
 				$('#regBtn').addClass('disabled');
-				$('#intro').focus();
+				$('.intro').focus();
 				return ;
 			}
 			
