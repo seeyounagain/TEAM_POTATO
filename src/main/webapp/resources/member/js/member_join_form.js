@@ -84,7 +84,7 @@
 					
 					$('#idAlert').css('color', 'blue');
 					$('#idAlert').text('아이디 중복확인을 해주세요.');
-					$('#joinBtn').removeClass('disabled');
+					$('#joinBtn').addClass('disabled');
 					
 				}
 			
@@ -100,7 +100,7 @@
 		      if(nameJ.test($('#name').val())){
 		      
 		         $('#nameAlert').text('');
-		         $('#joinBtn').removeClass('disabled');
+		         $('#joinBtn').addClass('disabled');
 		         return ;
 		      }
 		      
@@ -122,7 +122,7 @@
 			if(pwJ.test($('#pw').val())){
 			
 				$('#pwAlert').text('');
-				$('#joinBtn').removeClass('disabled');
+				$('#joinBtn').addClass('disabled');
 				return ;
 			}
 			
@@ -144,13 +144,15 @@
 			if(tell1J.test($('#tell1').val()) && tell2J.test($('#tell2').val()) && tell3J.test($('#tell3').val())){
 				
 				$('#tellCheck').text('');
-				$('#joinBtn').removeClass('disabled');
+				$('#joinBtn').addClass('disabled');
+				$('#smsBtn').removeClass('disabled');
 				return ;
 			}
 			else{
 				
 				$('#tellCheck').text('* 휴대전화 번호를 확인해주세요.');
 				$('#joinBtn').addClass('disabled');
+				$('#smsBtn').addClass('disabled');
 				return ;
 			}
 		});
@@ -226,7 +228,7 @@
 				$('#tellCheck').text('인증이 완료되었습니다.');
 				 $('#timeAlert').text('');
 				$('.tells').attr('readonly','readonly');
-				$('#joinBtn').removeClass('disabled');
+				$('#joinBtn').addClass('disabled');
 				$('#checkSmsBtn').addClass('disabled');
 				$('#smsBtn').addClass('disabled');
 				
@@ -245,64 +247,103 @@
 		
 			var pw = $('#pw').val();
 			var checkPw = $('#checkPw').val();
-			
-			if (pw != checkPw) {
-				
-				$('#checkPwAlertModal').modal('show');
-				return ;
-				
-			}
-			
-			else {
 				
 				if ($('#name').val() == null || $('#name').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#name').focus();
+					$('#joinCheckModalText').text('이름을 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#name').focus();
+					});
 					return ;
 				}
 				if ($('#id').val() == null || $('#id').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#id').focus();
+					$('#joinCheckModalText').text('아이디를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#id').focus();
+					});
 					return ;
 				}
 				if ($('#pw').val() == null || $('#pw').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#pw').focus();
+					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#pw').focus();
+					});
+					return ;
+				}
+				if (pw != checkPw) {
+					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#pw').focus();
+					});
 					return ;
 				}
 				if ($('#checkPw').val() == null || $('#checkPw').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#checkPw').focus();
+					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#checkPw').focus();
+					});
 					return ;
 				}
 				if ($('#birth').val() == null || $('#birth').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#birth').focus();
+					$('#joinCheckModalText').text('생년월일을 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#birth').focus();
+					});
 					return ;
 				}
 				if ($('#tell2').val() == null || $('#tell2').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#tell2').focus();
+					$('#joinCheckModalText').text('연락처를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#tell2').focus();
+					});
 					return ;
 				}
 				if ($('#tell3').val() == null || $('#tell3').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#tell3').focus();
+					$('#joinCheckModalText').text('연락처를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#tell3').focus();
+					});
 					return ;
 				}
 				if ($('#postcode').val() == null || $('#postcode').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#postcode').focus();
+					$('#joinCheckModalText').text('주소를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#postcode').focus();
+					});
 					return ;
 				}
 				if ($('#address').val() == null || $('#address').val() == '') {
 					$('#joinBtn').addClass('disabled');
-					$('#address').focus();
+					$('#joinCheckModalText').text('주소를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#address').focus();
+					});
 					return ;
 				}
-				if ($('#smsNum').val() == null || $('#smsNum').val() == '') {
+				if ($('#smsNum').val() == null || $('#smsNum').val() == '' || !$('#tellCheck').text('인증이 완료되었습니다.')) {
 					$('#joinBtn').addClass('disabled');
-					$('#smsNum').focus();
+					$('#joinCheckModalText').text('인증번호를 확인해주세요.');
+					$('#joinCheckModal').modal('show');
+					$(document).on('click', '#joinCheckModalBtn' , function() {
+						$('#smsBtn').focus();
+					});
 					return ;
 				}
 				
@@ -312,9 +353,7 @@
 					$('form').submit();
 					
 				}
-				
-			}
-			
+
 		});
 		
 	});
@@ -373,7 +412,7 @@
 					else {
 						$('#idAlert').css('color', 'blue');
 						$('#idAlert').text('사용가능한 아이디입니다.');
-						$('#joinBtn').removeClass('disabled');
+						$('#joinBtn').addClass('disabled');
 						return ;
 					}	
 		
@@ -408,14 +447,6 @@
             }
         }, 1000);
              isRunning = true;
-	}
-
-	checkPw = function() {
-		
-		$('#checkPwAlertModal').modal('hide');
-		$('input[type="password"]').val('');
-		$('#pw').focus();
-		
 	}
 
 		
