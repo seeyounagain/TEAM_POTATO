@@ -6,7 +6,7 @@
  */
 
 nhn.husky.SE2M_AttachQuickPhoto = jindo.$Class({		
-	name : "SE2M_AttachQuickPhoto",
+	name : "SE2M_AttachQuickPhoto22",
 
 	$init : function(){},
 	
