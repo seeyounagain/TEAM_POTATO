@@ -6,12 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/resources/service/js/bookRequestStatus.js?ver=2"></script>
 <style type="text/css">
 
-a:hover{
-	cursor: pointer;
-	color: blue;
-}
 
 </style>
 </head>
@@ -111,10 +108,10 @@ a:hover{
      		<th>KDC분류번호</th>
      		<th>KDC분류명칭</th>
      		<td rowspan="2" style="font-weight: bold;">
-     		<input type="button" class="btn btn-primary" value=
+     		<input type="button" class="btn btn-primary" value="신청취소"
      		<c:if test="${a.requestStatus == 0}">"신청취소"</c:if>
      		<c:if test="${a.requestStatus != 0}">"진행중" disabled </c:if> 		
-     		 id="deleteRequest" >
+     		 id="canselRequest" >
      		</td>
     	</tr>
 		<tr>						
@@ -144,7 +141,28 @@ a:hover{
 	</div>
 	
 </div>
-
+<!-- deleteBookRequestConfirm -->
+<div class="modal fade" id="deleteBookRequestConfirm" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>해당 도서비치 신청을 취소하시겠습니까?<span id="requestCodeP" style="display:none"></span></p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      			<button type="button" class="btn btn-primary px-4" onclick="deleteBookRequest('${menuVO.menuCode}')" >확인</button>
+      			<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">취소</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>

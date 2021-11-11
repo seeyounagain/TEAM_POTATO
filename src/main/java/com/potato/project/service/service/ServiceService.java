@@ -3,6 +3,7 @@ package com.potato.project.service.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.potato.project.content.vo.NoticeVO;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
@@ -56,7 +57,23 @@ public interface ServiceService {
 
 	String endDateForSearchRecord(ReadingRecordVO recordVO);
 	
+	//테스트용
 	void recommendReg(RecommendVO rcVO);
 	
-	HashMap<String, String> recommendBoard(String a);
+	RecommendVO recommendBoard(String a);
+
+	//추천 입력
+	void insertRecommend(RecommendVO rcVO);
+	
+	//추천이미지 등록용 코드
+	String selectRecommendCode();
+	
+	//이미지파일 코드 숫자부분
+	int selectNextImgNumber();
+	
+	int insertRcFile(RecommendVO rcVO); 
+	
+	
+	
+	
 }

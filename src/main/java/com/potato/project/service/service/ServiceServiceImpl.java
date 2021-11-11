@@ -136,10 +136,31 @@ public class ServiceServiceImpl implements ServiceService {
 	}
 
 	@Override
-	public HashMap<String, String> recommendBoard(String a) {
-		a = "RC_001";
-		return sqlSession.selectOne("serviceMapper.recommendBoard", a);
+	public void insertRecommend(RecommendVO rcVO) {
+		sqlSession.insert("serviceMapper.insertRecommend", rcVO);
 	}
+	
+	@Override
+	public RecommendVO recommendBoard(String rcCode) {
+		return sqlSession.selectOne("serviceMapper.recommendBoard", rcCode);
+	}
+
+	@Override
+	public String selectRecommendCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int selectNextImgNumber() {
+		return sqlSession.selectOne("serviceMapper.selectNextImgNumber");
+	}
+
+	@Override
+	public int insertRcFile(RecommendVO rcVO) {
+		return sqlSession.insert("serviceMapper.insertRcFile", rcVO);
+	}
+
 	
 	
 }

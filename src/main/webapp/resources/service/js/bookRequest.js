@@ -23,14 +23,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(document).on('click','#deleteRequest',function(){
-		var requestCode = $(this).parent().parent().prev().children().eq(0).text();
-		
-		$('#requestCodeP').text(requestCode);
-		$('#deleteBookRequestConfirm').modal('show');	
-		
-		
-	});
+
 
 });	
 
@@ -40,11 +33,7 @@ $(document).ready(function(){
 		location.href='/service/bookRequestRegForm?menuCode='+menuCode;
 	}
 	
-	deleteBookRequest = function(menuCode){
-		var requestCode = $('#requestCodeP').text();
-		location.href='/service/deleteBookRequest?menuCode='+menuCode+'&&requestCode='+requestCode;
-	}
-   
+
 })(jQuery);
 
 

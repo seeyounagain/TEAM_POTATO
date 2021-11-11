@@ -4,6 +4,10 @@ package com.potato.project.service.controller;
 
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,10 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.potato.project.common.service.CommonService;
+import com.potato.project.common.util.FileUploadUtil;
+import com.potato.project.common.vo.AttachFileVO;
 import com.potato.project.common.vo.MenuVO;
 import com.potato.project.content.service.ContentService;
+import com.potato.project.content.vo.NoticeVO;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.api.apiSearchPlay;
 import com.potato.project.service.service.ServiceService;
@@ -29,6 +38,7 @@ import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 import com.potato.project.service.vo.RecommendVO;
 import com.potato.project.service.vo.RequestBoardVO;
+import com.potato.project.service.vo.ImgVO;
 
 // 천화 
 @Controller
@@ -46,6 +56,70 @@ public class ServiceController {
 	private ServiceService serviceService;
 	
 	
+	//공지사항 등록
+	@PostMapping("/registerRecommend")
+	public String insertRecommend(MenuVO menuVO,RecommendVO rcVO, MultipartHttpServletRequest multi) {
+		//첨부파일 upload 및 이미지정보 insert
+		//파일이 첨부되는 input 태그의 name 속성값
+		Iterator<String> inputNames = multi.getFileNames();
+		
+		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\111012\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\"; //lecture
+		
+		//모든 첨부파일 정보가 들어갈 공간
+		List<ImgVO> imgList = new ArrayList<>();
+		
+		/*imgVO에 넣어줄 아이템코드값*/
+		String rcCode = serviceService.selectRecommendCode(); 
+		
+		int nextImgCode = 1;
+		
+		rcVO.setRcCode(rcCode);
+	
+		while (inputNames.hasNext()) {
+			String inputName = inputNames.next();
+			
+			 //상품 이미지 정보 insert 를 하기 위해서!
+			
+			try {
+				if(inputName.equals("files")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);
+					
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));	
+													
+							if(nextImgCode == 1) {
+								rcVO.setImgOne("one_" + String.format("%03d", nextImgCode));
+							}
+							if(nextImgCode == 2) {
+								rcVO.setImgTwo("two_" + String.format("%03d", nextImgCode));
+							}
+							if(nextImgCode == 3) {
+								rcVO.setImgThree("thr_" + String.format("%03d", nextImgCode));
+							}
+							nextImgCode++;
+
+						}
+					}						
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			
+		}		
+		
+		//추천 입력
+		serviceService.insertRecommend(rcVO);
+		
+		
+		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
+	}
+	
+	
+	
 	@PostMapping("/test")
 	public String test(Model model,MenuVO menuVO,HttpSession session, RecommendVO rcVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
@@ -57,10 +131,12 @@ public class ServiceController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
-		model.addAttribute("testString", rcVO.getContent());
 		model.addAttribute("rc", serviceService.recommendBoard("RC_001"));
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!"+serviceService.recommendBoard("RC_001").get("CONTENT"));
+		byte[] bt = serviceService.recommendBoard("RC_001").getContentOne();
+		String a = new String(bt);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a);
+		model.addAttribute("testString", a);
 
 		return "service/recommendRegForm";
 	}
@@ -164,7 +240,7 @@ public class ServiceController {
 	public String deleteBookRequest(Model model,MenuVO menuVO,RequestBoardVO rbVO) {
 		serviceService.deleteBookRequest(rbVO);
 		model.addAttribute("menuCode", menuVO.getMenuCode());
-		return "redirect:/service/bookRequest";
+		return "redirect:/myPage/bookRequestStatus";
 	}
 	
 	
