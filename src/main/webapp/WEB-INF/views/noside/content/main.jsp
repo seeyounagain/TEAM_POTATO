@@ -101,6 +101,7 @@
 	            <div class="modal-header">
 	                <h5 class="modal-title" style="font-weight: bold;">도담도서관 공지사항</h5>
 	            </div>
+	           
 	            <div class="modal-body">
 					<table class="table">
 						<tr style="border-bottom-color: white;">
