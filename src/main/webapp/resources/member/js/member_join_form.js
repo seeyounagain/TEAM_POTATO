@@ -59,6 +59,7 @@
 			
 			else {
 				
+				$('#joinBtn').removeClass('disabled');
 				$('#pwCheck').text('');
 				return ;				
 				
@@ -158,7 +159,6 @@
 		});
 
 
-	var timer = null;
 	var isRunning = false;
 	
 	
@@ -208,7 +208,7 @@
     		// 이미 타이머가 작동중이면 중지
     		if (isRunning){
     		clearInterval(timer);
-    		display.text("");
+    		$('#timeAlert').text('');
     		startTimer(leftSec);
     		}else{
     		startTimer(leftSec);
@@ -226,9 +226,11 @@
 				
 				$('#tellCheck').css('color', 'blue');
 				$('#tellCheck').text('인증이 완료되었습니다.');
-				 $('#timeAlert').text('');
+	        	clearInterval(timer);
+	        	$('#timeAlert').text('');
 				$('.tells').attr('readonly','readonly');
-				$('#joinBtn').addClass('disabled');
+				$('#smsNum').attr('readonly','readonly');
+				$('#joinBtn').removeClass('disabled');
 				$('#checkSmsBtn').addClass('disabled');
 				$('#smsBtn').addClass('disabled');
 				
@@ -412,7 +414,7 @@
 					else {
 						$('#idAlert').css('color', 'blue');
 						$('#idAlert').text('사용가능한 아이디입니다.');
-						$('#joinBtn').addClass('disabled');
+						$('#joinBtn').removeClass('disabled');
 						return ;
 					}	
 		
@@ -426,9 +428,9 @@
 		};
 
 	startTimer = function (count) {
-            
-    		var minutes, seconds;
+			
             timer = setInterval(function () {
+            var minutes, seconds;
             minutes = parseInt(count / 60, 10);
             seconds = parseInt(count % 60, 10);
      

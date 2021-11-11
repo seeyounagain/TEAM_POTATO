@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=65" ></script>
+<script type="text/javascript" src="/resources/member/js/member_join_form.js?ver=71" ></script>
 <style type="text/css">
 .pointer:hover {
 	cursor: pointer;
@@ -42,7 +42,8 @@
     </div>
   </div>
 </div>
-<!-- 입력 확인 alert alert Modal 종료 -->
+<!-- 입력 확인 alert Modal 종료 -->
+
 
 <form class="row g-0 mt-3 mb-5" action="/member/join" method="post">
 	<h2 class="display-6 text-center fw-bold">회원가입</h2>

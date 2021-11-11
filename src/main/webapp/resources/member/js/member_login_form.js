@@ -207,6 +207,7 @@
 			
 			$('#findIdname').val('');
 			$('#findIdbirth').val('');
+			$('#findIdCheck').text('');
 			$('#findIdModal').modal('show');
 			
 			$(document).on('click', '#findIdBtn' , function() {
@@ -268,6 +269,7 @@
 			$('#findPwBirth').val('');
 			$('#tell2').val('');
 			$('#tell3').val('');
+			$('#findPwCheck').text('');
 			$('#findPwModal').modal('show');
 			
 			$(document).on('click', '#findPwBtn' , function() {
