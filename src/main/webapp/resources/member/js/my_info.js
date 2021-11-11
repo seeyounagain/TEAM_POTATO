@@ -212,6 +212,24 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(document).on('keyup', '#checkPw', function() { 
+		//소대문자a~z,0~9,특수문자로 8~20자리 만들기
+		var pwJ = /^[a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$/;
+		
+		// 조건에 부합하다면
+		if(pwJ.test($('#checkPw').val())){
+			$('#checkCapsLock3').text('');
+			$('#changePwBtn2').removeClass('disabled');
+			return ;
+		}
+		else{
+			
+			$('#checkCapsLock3').text('* 영문 대문자, 소문자, 숫자, 특수문자를 사용하여 8자 이상, 20자 이하로 설정하십시오');
+			$('#changePwBtn2').addClass('disabled');
+			return ;
+		}
+	});
+	
 	//비밀번호 변경에서 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
 	$(document).on('keyup', '#checkPw' , function() {
 		var newPw = $('#newPw').val();
@@ -283,6 +301,8 @@ $(document).ready(function(){
 		var pw1 = $('#pw1').val();
 		var newPw = $('#newPw').val();
 		var checkPw = $('#checkPw').val();
+		
+		
 		
 		if (ajaxExistingPw != pw1) {
 			
@@ -507,7 +527,7 @@ $(document).ready(function(){
 						if (result) {
 							$("#myInfoAlertModal").modal('show');
 							$(".myInfoAlertModalBtn1").show();
-							$('#myInfoAlertText').text('정말 탈퇴하시겠습니까?.');
+							$('#myInfoAlertText').text('정말 탈퇴하시겠습니까?');
 							$('.myInfoAlertModalBtn2').text('취소');
 							myInfoAlertModal.addEventListener('hidden.bs.modal', function (event) {
 								$("#memberquitModal").modal('hide');

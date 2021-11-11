@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=41"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=45"></script>
 </head>
 <body>
 <div class="row justify-content-center">
@@ -154,6 +154,7 @@
 						<input type="password" class="form-control" id="checkPw" placeholder="Password" required> 
 						<label for="floatingPassword">비밀번호 확인</label>
 						<div class="col-12 mt-2" id="pwCheck2" style="color: red; font-size: 14px;"></div>
+						<div class="col-12 mt-2" id="checkCapsLock3" style="color: red;; font-size: 14px;"></div>
 						<div class="col-12 mt-2" id="checkCapsLock2" style="color: red;; font-size: 14px;"></div>
 					</div>
 				</div>
