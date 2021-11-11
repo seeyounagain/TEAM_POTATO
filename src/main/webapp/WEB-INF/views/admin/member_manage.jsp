@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=66" ></script>
+<script type="text/javascript" src="/resources/admin/js/member_manage.js?ver=68" ></script>
 <style type="text/css">
 .rightC {
 	text-align: right;
@@ -130,7 +130,7 @@ textarea {
 
 <!-- 회원정보 Modal -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="infoModalLabel">회원정보</h5>
@@ -140,6 +140,13 @@ textarea {
 		  <div class="container-fluid">
 		    <table class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
 		    	<caption class="cap" >&lt;대여도서정보&gt;</caption>
+		    	<colgroup>
+		    		<col width="50%">
+		    		<col width="10%">
+		    		<col width="20%">
+		    		<col width="20%">
+		    	</colgroup>
+		    	
 		    	<tr id="rentalTr">
 		    		<td>표제 / 저자</td>
 		    		<td>도서상태</td>

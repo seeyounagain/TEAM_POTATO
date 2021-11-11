@@ -171,7 +171,7 @@
 					$(result).each(function(index, element){
 					
 						str1 += '<tr class="rentalInfo">';
-						str1 += '<td><a class="titleA" href="/search/bookDetail?bookCode=' + element.bookVO.bookCode + '&menuCode=MENU_002">' + element.bookVO.title + '&nbsp;/&nbsp;' + element.bookVO.writer + '</a></td>';
+						str1 += '<td><a class="titleA" href="/search/bookDetail?bookCode=' + element.bookVO.bookCode + '&menuCode=MENU_002">' + element.bookVO.title + '&nbsp;/&nbsp;<br>' + element.bookVO.writer + '</a></td>';
 				        
 				         if (element.bookVO.status == 1) {
 							str1 += '<td>대출 가능</td>';
