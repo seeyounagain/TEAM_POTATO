@@ -1,6 +1,17 @@
 /* 페이지 로딩 후(jsp 내용 모두 실행) 실행 */
 	$(document).ready(function(){
 		
+		// caps lock
+		$("#id").on("keypress", function(e) { 
+			var text = String.fromCharCode( e.which );
+		    if ( text.toUpperCase() === text && text.toLowerCase() !== text && !e.shiftKey ) { 
+		        $('#capsLockCheck').text('<Caps Lock>이 켜져있습니다.'); 
+		    }
+		    else {
+		    	$('#capsLockCheck').text('');
+		    }
+		});
+		
 		//엔터키 눌러서 로그인 실행
 		$('#goLogin').keydown(function(e){
 			if(e.keyCode == 13){
@@ -73,7 +84,7 @@
 						else {
 							
 							$('#loginModalBody').text(result.name + '님, 연체중인 도서가 있습니다. 반납기한을 확인해주세요.');
-							$('.loginModalClose').attr('onclick','location.href="/myPage/myPage?menuCode=MENU_005"');
+							$('.loginModalClose').attr('onclick','location.href="/myPage/myLibrary?menuCode=MENU_005"');
 							
 						}
 			
@@ -159,7 +170,7 @@
 						else {
 							
 							$('#loginModalBody').text(result.name + '님, 연체중인 도서가 있습니다. 반납기한을 확인해주세요.');
-							$('.loginModalClose').attr('onclick','location.href="/myPage/myPage?menuCode=MENU_005"');
+							$('.loginModalClose').attr('onclick','location.href="/myPage/myLibrary?menuCode=MENU_005"');
 							
 						}
 			
