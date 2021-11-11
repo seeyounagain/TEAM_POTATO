@@ -32,6 +32,7 @@ import com.potato.project.common.vo.ReserveVO;
 import com.potato.project.content.service.SearchService;
 import com.potato.project.member.vo.MemberVO;
 import com.potato.project.service.service.ServiceService;
+import com.potato.project.service.vo.RequestBoardVO;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 import edu.emory.mathcs.backport.java.util.Collections;
@@ -53,8 +54,9 @@ public class AdminController {
 	private ServiceService serviceService;
 	// 도서비치 관리 페이지 이동
 	
+	
 	@GetMapping("/bookRequestManage")
-	public String bookRequestManage(Model model,MenuVO menuVO,HttpSession session) {
+	public String bookRequestManage(Model model,MenuVO menuVO,HttpSession session,RequestBoardVO rbVO,String year, String month) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
@@ -63,13 +65,34 @@ public class AdminController {
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		// 모든리스트를 뿌리는 리스트
 		model.addAttribute("requestList", serviceService.requestBoardListAdmin());
-		model.addAttribute("year",  CalenderUtil.Map().get("year"));
-		model.addAttribute("month", CalenderUtil.Map().get("month"));	
-	
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		model.addAttribute("years",  CalenderUtil.Map().get("year"));
+		model.addAttribute("months", CalenderUtil.Map().get("month"));	
+		model.addAttribute("inYear", year);
+		model.addAttribute("inMonth", month);
 		return  "service/bookRequestManage";
 	}
 		
 	
+	@RequestMapping("/bookRequestManage2")
+	public String bookRequestManageYearMonth(Model model,MenuVO menuVO,HttpSession session,String selectYearMonth,String year, String month) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		// 월간 리스트를 뿌리는 리스트
+		model.addAttribute("requestList", serviceService.requestBoardListAdminChooseYearMonth(selectYearMonth));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		model.addAttribute("years",  CalenderUtil.Map().get("year"));
+		model.addAttribute("months", CalenderUtil.Map().get("month"));
+		model.addAttribute("inYear", year);
+		model.addAttribute("inMonth", month);
+		
+		return  "service/bookRequestManage";
+	}
+			
 	
 	
 	

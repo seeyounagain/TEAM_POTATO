@@ -43,11 +43,20 @@
 			<result column="REQUEST_STATUS"	property="requestStatus"/>                                                                                                                                                                  
 			</resultMap>
 			
-			<resultMap type="com.potato.project.service.vo.RecommendVO" id="recommend">
-			<id 	column="RC_CODE"		property="rcCode"/>
-			<result column="CONTENT"		property="content"/>
-			<result column="TITLE"			property="title"/>                                                                                                                                                                                                              
-			</resultMap>
+	 		<resultMap id="getRecommendBoard" type="hashMap" >
+			<result column="RC_CODE"		property="rcCode"/>                                                                                                                                                                                                           
+			<result column="TITLE"			property="title" />                                                                                                                                                                                                           
+			<result column="CONTENT"		property="content" jdbcType="BLOB" javaType="byte[]" />                                                                                                                                                                                                           
+			</resultMap> 
+			
+			<select id="recommendBoard" parameterType="java.util.HashMap" resultMap="getRecommendBoard" >
+			
+			SELECT 
+			CONTENT
+			FROM RECOMMEND_BOARD
+			WHERE RC_CODE = 'RC_001'
+			
+			</select>
 			
 			<insert id="recommendReg">
 			INSERT INTO RECOMMEND_BOARD(
@@ -122,9 +131,9 @@
                     REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE, CATEGORY, KDC_CODE, KDC_NAME, REQUEST_STATUS
 					FROM REQUEST_BOARD
 					WHERE
-					CREATE_DATE &gt;= TO_DATE('2021/11','YYYY-MM')
+					CREATE_DATE &gt;= TO_DATE(#{selectYearMonth },'YYYY-MM')
 					AND
-					CREATE_DATE &lt;= TO_DATE(TO_CHAR(LAST_DAY('2021/11'||'01'),'YYYY-MM-DD'),'YYYY-MM-DD')
+					CREATE_DATE &lt;= TO_DATE(TO_CHAR(LAST_DAY(#{selectYearMonth }||'01'),'YYYY-MM-DD'),'YYYY-MM-DD')
 					ORDER BY REQUEST_CODE DESC			
 			</select>
 

@@ -1,5 +1,6 @@
 package com.potato.project.service.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.potato.project.member.vo.MemberVO;
@@ -47,6 +48,8 @@ public interface ServiceService {
 	
 	List<RequestBoardVO> requestBoardListAdmin();
 	
+	List<RequestBoardVO> requestBoardListAdminChooseYearMonth(String selectYearMonth);
+	
 	int ajaxRegRequest(RequestBoardVO rbVO);
 	
 	int ajaxRequestStatusChange(RequestBoardVO rbVO);
@@ -54,4 +57,6 @@ public interface ServiceService {
 	String endDateForSearchRecord(ReadingRecordVO recordVO);
 	
 	void recommendReg(RecommendVO rcVO);
+	
+	HashMap<String, String> recommendBoard(String a);
 }

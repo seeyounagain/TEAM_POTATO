@@ -280,7 +280,7 @@
 	    OR UPPER(PUBLISHER) LIKE UPPER('%'||#{searchValue}||'%')
 	    OR UPPER(KEYWORD) LIKE UPPER('%'||#{searchValue}||'%') )
 	    </if>		
-		ORDER BY DECODE(STATUS,3,1,2,2,4,3,5,4,1,5) ASC, INPUT_DATE DESC
+		ORDER BY DECODE(STATUS,3,1,2,2,4,3,5,4,1,5) , TITLE
 	</select>	
 	
 	<!-- 상품 이미지 코드 숫자 생성 -->
@@ -403,6 +403,7 @@
 		    , INPUT_DATE
 		    , AREA
 		    , STATUS
+		    , IS_DELETE
 		    , ATTACHED_IMG_NAME
             , (SELECT ID FROM RESERVE WHERE BOOK_CODE = #{bookCode}) AS RESERVE_ID
             , (SELECT ID FROM RENTAL WHERE BOOK_CODE = #{bookCode} AND RETURN_DATE IS NULL) AS RENTAL_ID
