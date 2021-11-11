@@ -16,9 +16,11 @@
 <body>
 <br><br><br><br><br><br>
 
-${testString }
+${testString1 }
+${testString2 }
 
-<form action="/service/test" method="post" enctype="multipart/form-data" id="testSubmit">
+<form action="/service/registerRecommend" method="post" enctype="multipart/form-data" id="testSubmit">
+<div class="master">
 	<div class="row justify-content-center">
 		<div class="col-10">                                                                
     		<div class="input-group text-start">                                                           
@@ -27,7 +29,7 @@ ${testString }
 	  		</div>                                                                                         
 	    </div> 
 	</div>
-
+	
 
 
 	<!-- SmartEditor2 --> 
@@ -37,28 +39,71 @@ ${testString }
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 							<textarea class="form-control" name="contentTitle" id="smartEditor" style="width: 100%; height: 200px; resize: none"  >
-							1호
+							타이틀 
 							</textarea> 
 					</div> 
 				</div> 
 			</div>
 		</div>
+	</div>
+	
+	<label for="Product" class="form-label">Product images</label>
+    <input name="file1" type="file" class="form-control" aria-label="file example" id="Product" multiple >
+    <div class="invalid-feedback">Example invalid form file feedback</div>	
+    
+	<label for="Product" class="form-label">Product images</label>
+    <input name="file2" type="file" class="form-control" aria-label="file example" id="Product" multiple >
+    <div class="invalid-feedback">Example invalid form file feedback</div>	
+    
+	<label for="Product" class="form-label">Product images</label>
+    <input name="file3" type="file" class="form-control" aria-label="file example" id="Product" multiple >
+    <div class="invalid-feedback">Example invalid form file feedback</div>	
+		
+		
+	<div class="row justify-content-center">	
 		<div class="col-10">
 			<div class="jsx-2303464893 editor"> 
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 							<textarea class="form-control" name="contentOne" id="smartEditor2" style="width: 100%; height: 200px; resize: none"  > 
-							2호
+							1호 서론
 							</textarea> 
 					</div> 
 				</div> 
 			</div>
 		</div>
+	</div>
 		
 		
+	<div class="row justify-content-center">	
+		<div class="col-10">
+			<div class="jsx-2303464893 editor"> 
+				<div class="fr-box fr-basic fr-top" role="application"> 
+					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
+							<textarea class="form-control" name="contentTwo" id="smartEditor3" style="width: 100%; height: 200px; resize: none"  > 
+							2호 본론
+							</textarea> 
+					</div> 
+				</div> 
+			</div>
+		</div>
+	</div>
+	
+
 		
-		
-		
+	<div class="row justify-content-center">	
+		<div class="col-10">
+			<div class="jsx-2303464893 editor"> 
+				<div class="fr-box fr-basic fr-top" role="application"> 
+					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
+							<textarea class="form-control" name="contentThree" id="smartEditor4" style="width: 100%; height: 200px; resize: none"  > 
+							3호	결론
+							</textarea> 
+					</div> 
+				</div> 
+			</div>
+		</div>
+	</div>
 		
 		
 		
@@ -68,22 +113,22 @@ ${testString }
 		<input type="button" class="formBtn" value="확인">
 		</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </form>
 
 
@@ -91,14 +136,7 @@ ${testString }
 
 
 
-    ,TITLE VARCHAR2(500)
-    ,CONTENT_TITLE BLOB
-    ,IMG_ONE VARCHAR2(100) -- IMG_001
-    ,CONTENT_ONE BLOB
-    ,IMG_TWO VARCHAR2(100) -- IMG_001
-    ,CONTENT_TWO BLOB
-    ,IMG_THREE VARCHAR2(100) --IMG_001
-    ,CONTENT_THREE BLOB
+
 <!-- SmartEditor2 --> 
 <script type="text/javascript">
 
@@ -110,10 +148,26 @@ nhn.husky.EZCreator.createInIFrame({
  fCreator: "createSEditor2"
 });
 
-var oEditors = [];
+var oEditors2 = [];
 nhn.husky.EZCreator.createInIFrame({
  oAppRef: oEditors,
  elPlaceHolder: "smartEditor2",
+ sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+
+var oEditors3 = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "smartEditor3",
+ sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
+ fCreator: "createSEditor2"
+});
+
+var oEditors4 = [];
+nhn.husky.EZCreator.createInIFrame({
+ oAppRef: oEditors,
+ elPlaceHolder: "smartEditor4",
  sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
 });

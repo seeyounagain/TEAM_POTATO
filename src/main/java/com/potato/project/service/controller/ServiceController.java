@@ -63,29 +63,50 @@ public class ServiceController {
 		//파일이 첨부되는 input 태그의 name 속성값
 		Iterator<String> inputNames = multi.getFileNames();
 		
-		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\111012\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\"; //lecture
+		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\111111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img"; //lecture
  
 		int nextImgCode = 1;
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
 			
 			try {
-				if(inputName.equals("files")) { //다중 첨부
+				if(inputName.equals("file1")) { //다중 첨부
 					List<MultipartFile> fileList =	multi.getFiles(inputName);	
 					for(MultipartFile file : fileList) {
 						if(!file.getOriginalFilename().equals("")){
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
 							file.transferTo(new File(uploadPath + uploadFile));							
-							if(nextImgCode == 1) {
-								rcVO.setImgOne("one_" + String.format("%03d", nextImgCode));
-							}
-							if(nextImgCode == 2) {
-								rcVO.setImgTwo("two_" + String.format("%03d", nextImgCode));
-							}
-							if(nextImgCode == 3) {
-								rcVO.setImgThree("thr_" + String.format("%03d", nextImgCode));
-							}
-							nextImgCode++;
+							
+								rcVO.setImgOne(uploadFile);
+
+						}
+					}						
+				}
+				if(inputName.equals("file2")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));							
+
+							
+							rcVO.setImgTwo(uploadFile);
+							
+
+							
+						}
+					}						
+				}
+				if(inputName.equals("file3")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));							
+							
+							rcVO.setImgThree(uploadFile);
+							
+						
 						}
 					}						
 				}
@@ -103,24 +124,28 @@ public class ServiceController {
 	
 	
 	
-	@PostMapping("/test")
+	@GetMapping("/test")
 	public String test(Model model,MenuVO menuVO,HttpSession session, RecommendVO rcVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-		serviceService.recommendReg(rcVO);
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
-		model.addAttribute("rc", serviceService.recommendBoard("RC_001"));
+//		byte[] bt1 = serviceService.recommendBoard("RC_009").getContentTitle();
+//		byte[] bt2 = serviceService.recommendBoard("RC_009").getContentOne();
+//		String a1 = new String(bt1);
+//		String a2 = new String(bt2);
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a1);
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a2);
 		
-		byte[] bt = serviceService.recommendBoard("RC_001").getContentOne();
-		String a = new String(bt);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a);
-		model.addAttribute("testString", a);
+		
+		System.out.println(serviceService.recommendBoard("RC_009"));
+		model.addAttribute("recommend", serviceService.recommendBoard("RC_004"));
+//		model.addAttribute("testString2", a2);
 
-		return "service/recommendRegForm";
+		return "service/recommendDetail";
 	}
 	
 	
@@ -134,6 +159,7 @@ public class ServiceController {
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
 		return "service/recommendRegForm";
 	}
 	

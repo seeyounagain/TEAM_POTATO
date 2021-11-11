@@ -17,6 +17,7 @@
 <body>
 <h2 class="text-first fw-bold">추천도서</h2>
 <a href="/service/recommendRegForm?menuCode=${menuCode }">dd</a>
+<a href="/service/test">123</a>
 <hr>
 
 <div class="row justify-content-center  mb-5">
@@ -31,10 +32,7 @@
 				</span>
 			</div>
 			<div class="col-10 text-center mb-5 fs-3">
-				도담도서관 드림
-				
 				<br><br><br><br><br><br>
-				
 			</div>
 			<div class="col-10 text-center mb-5" style="    font-family: 'GimpoTitle00';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/GimpoTitle00.woff') format('woff');

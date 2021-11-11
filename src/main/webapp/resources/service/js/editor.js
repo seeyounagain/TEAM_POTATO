@@ -4,6 +4,9 @@ $(document).ready(function(){
 	$(document).on('click', '.formBtn', function() {
 		
  		oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
+ 		oEditors2.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
+ 		oEditors3.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
+ 		oEditors4.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 		$('#testSubmit').submit();
 		
 		

@@ -85,9 +85,17 @@
 			
 			<select id="recommendBoard" resultMap="recommend" >
 			SELECT 
-			CONTENT
+			RC_CODE      
+			,TITLE        
+			,CONTENT_TITLE
+			,IMG_ONE      
+			,CONTENT_ONE  
+			,IMG_TWO      
+			,CONTENT_TWO  
+			,IMG_THREE   
+			,CONTENT_THREE
 			FROM RECOMMEND_BOARD
-			WHERE RC_CODE = 'RC_001'
+			WHERE RC_CODE = #{rcCode }
 			</select>
 			
 			<!-- 테스트용 매퍼 -->
