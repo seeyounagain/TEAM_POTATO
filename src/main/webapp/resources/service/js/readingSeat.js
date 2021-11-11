@@ -52,6 +52,9 @@ $(document).ready(function(){
 		//검색 초기화 ajax
 		$(document).on('click','.searchRecordReset',function(){
 		var searchId = '';
+		
+		$('#searchId').val('');
+
 				$.ajax({
 	            url: '/service/resetSearchRecord', //요청경로
 	            type: 'post',
@@ -64,7 +67,23 @@ $(document).ready(function(){
 				$('#dateLine').empty();
 
 				str2 = '<input type="date" name="recordStartDate" id="searchBeforeDate"> ~ <input type="date" name="recordEndDate" id="searchNowDate" >';
-				$('#dateLine').append(str2);		
+				$('#dateLine').append(str2);
+				
+				var str3 = '';
+				
+				$('#searchBar').empty();
+				
+		str3 += '<div class="input-group text-center">                                                                                       ';
+		str3 += '<input type="text" name="searchId" id="searchId" class="form-control" placeholder="아이디를 입력하세요.">                        ';          
+		str3 += '<input type="button" value="검색" class="searchRecord input-group-text gap-2 col-2 btn-primary">                             ';
+		str3 += '<input type="button" value="초기화" class="searchRecordReset input-group-text gap-2 btn-primary" style="margin-left : 3px;">  ';
+	  	str3 += '</div>                                                                                                                      ';
+	  		                                                                                                                             
+				$('#searchBar').append(str3);
+				  				
+				
+				
+						
 		
 				$('#searchBeforeDate').val(searchBeforeDate);
 				$('#searchNowDate').val(nowDate);
@@ -233,7 +252,7 @@ $(document).ready(function(){
 	            success: function(seatId) {
 					
 					if(seatId == id && seatId != null){
-						alert('이미 배정된 좌석이 있습니다.');
+						$('#imiittnunZuasuk').modal('show');
 						
 					}else{
 						$('#clearSeatIdModal').modal('show');

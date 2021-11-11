@@ -9,10 +9,9 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 
-<script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script> 
-<script type="text/javascript" src="/resources/service/se2/sample/js/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script> 
+<script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>  
 <script type="text/javascript" src="/resources/service/js/editor.js?ver=1"></script>
-<script type="text/javascript" src="./photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"> </script>
+
 
 </head> 
 <body>
@@ -26,18 +25,6 @@ ${testString }
 	<div class="fr-box fr-basic fr-top" role="application"> 
 		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 			<textarea name="content" id="smartEditor" style="width: 100%; height: 200px;">
-			</textarea> 
-		</div> 
-	</div> 
-</div>
-<input type="button" class="formBtn" value="확인">
-</form>
-<!-- SmartEditor2 --> 
-<!-- SmartEditor2 --> 
-<div class="jsx-2303464893 editor mt-5"> 
-	<div class="fr-box fr-basic fr-top" role="application"> 
-		<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
-			<textarea name="content2" id="smartEditor2" style="width: 100%; height: 200px;">
 			</textarea> 
 		</div> 
 	</div> 

@@ -64,31 +64,18 @@ public class ServiceController {
 		Iterator<String> inputNames = multi.getFileNames();
 		
 		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\111012\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\"; //lecture
-		
-		//모든 첨부파일 정보가 들어갈 공간
-		List<ImgVO> imgList = new ArrayList<>();
-		
-		/*imgVO에 넣어줄 아이템코드값*/
-		String rcCode = serviceService.selectRecommendCode(); 
-		
+ 
 		int nextImgCode = 1;
-		
-		rcVO.setRcCode(rcCode);
-	
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
 			
-			 //상품 이미지 정보 insert 를 하기 위해서!
-			
 			try {
 				if(inputName.equals("files")) { //다중 첨부
-					List<MultipartFile> fileList =	multi.getFiles(inputName);
-					
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
 					for(MultipartFile file : fileList) {
 						if(!file.getOriginalFilename().equals("")){
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
-							file.transferTo(new File(uploadPath + uploadFile));	
-													
+							file.transferTo(new File(uploadPath + uploadFile));							
 							if(nextImgCode == 1) {
 								rcVO.setImgOne("one_" + String.format("%03d", nextImgCode));
 							}
@@ -99,7 +86,6 @@ public class ServiceController {
 								rcVO.setImgThree("thr_" + String.format("%03d", nextImgCode));
 							}
 							nextImgCode++;
-
 						}
 					}						
 				}
@@ -108,14 +94,11 @@ public class ServiceController {
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
-			
 		}		
-		
 		//추천 입력
 		serviceService.insertRecommend(rcVO);
 		
-		
-		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
+		return "service/recommendRegForm";
 	}
 	
 	
@@ -126,7 +109,6 @@ public class ServiceController {
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-		
 		serviceService.recommendReg(rcVO);
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
@@ -148,14 +130,6 @@ public class ServiceController {
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-		
-//		Blob blob = rs.getBlob(cloumnName[i]);
-//		byte[] bdata = blob.getBytes(1, (int) blob.length());
-//		String s = new String(bdata);
-		
-		
-		
-		
 //		model.addAttribute("recommendList",serviceService.recommendList());
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));

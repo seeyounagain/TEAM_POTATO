@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=9"></script>
+<script type="text/javascript" src="/resources/service/js/readingSeat.js?ver=1"></script>
 <style type="text/css">
 .miniTitle {
 	font-size: 20px;
@@ -368,6 +368,7 @@ background-color: white;
 			<div>(전체기록 조회)</div>		
 		
 		</div>
+	</div>
 <!-- 		<div class="col-3" id="dateLine" class="input-group"> 
 			<input type="date" name="recordStartDate" id="searchBeforeDate" class="form-control input-group" >
 		</div>
@@ -376,16 +377,16 @@ background-color: white;
 		<div class="col-3" id="dateLine" class="input-group"> 
 			<input type="date" name="recordEndDate" id="searchNowDate" class="form-control input-group" >
 		</div> -->
-		<div class="col-5 mt-3 justify-content-start">
-			<div class="input-group mb-3 text-start">
+	<div class="row justify-content-center mb-3 mt-3">
+		<div class="col-4 mt-3 justify-content-end">
+			<div class="input-group mb-3 text-end">
 			  <input type="date" id="searchBeforeDate" name="recordStartDate" class="form-control" aria-describedby="inputGroup-sizing-default" >
 			  <span style="align-self: center;">&nbsp;~&nbsp;</span>
 			  <input type="date" id="searchNowDate" name="recordEndDate" class="form-control" aria-describedby="inputGroup-sizing-default">
 			</div>	
 		</div>
-		<div class="col-3"></div>
-		<div class="col-4 ml-0 ps-1 mt-3">
-			<div class="input-group text-center">                                                           
+		<div class="col-4 ml-0 ps-1 mt-3" id="searchBar">
+			<div class="input-group text-center">                                                        
 				<input type="text" name="searchId" id="searchId" class="form-control" placeholder="아이디를 입력하세요.">                                  
 				<input type="button" value="검색" class="searchRecord input-group-text gap-2 col-2 btn-primary">
 				<input type="button" value="초기화" class="searchRecordReset input-group-text gap-2 btn-primary" style="margin-left : 3px;">
@@ -518,6 +519,28 @@ background-color: white;
       </div>
       <div class="modal-body" style="color: black;">
 			<p>좌석 및 ID 확인 완료</p>
+      </div>
+      <div class="modal-footer" style="display: block;">
+		<div class="row">
+      		<div class="col-12 text-end">
+      			<button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">닫기</button>
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- imiittnunZuasuk -->
+<div class="modal fade" id="imiittnunZuasuk" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmModalLabel" style="color: black;">알림</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: black;">
+			<p>이미 배정된 좌석이 있습니다.</p>
       </div>
       <div class="modal-footer" style="display: block;">
 		<div class="row">
