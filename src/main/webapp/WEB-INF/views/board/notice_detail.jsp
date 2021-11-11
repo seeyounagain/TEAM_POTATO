@@ -32,18 +32,18 @@
 	   					<td>조회수</td>
 	   					<td>${notice.readCnt }</td>
 	   				</tr>
-	   				<tr>
-	   					<td colspan="6" height="200px;">${notice.content }</td>
-	   				</tr>
 	   				<c:if test="${not empty notice.attachFileVO.attachedFileName }" >
 					<tr>
-						<td colspan="6" height="600px;">
-	   						<div class="row justify-content-center">
+						<td colspan="6" style="border-bottom: none;">
+	   						<div class="row justify-content-center" style="width: 600px; text-align: c">
 				    			<img id="noticeImg" src="/resources/noticeFileUpload/${notice.attachFileVO.attachedFileName }">
 				    		</div>
 	   					</td>
 					</tr>
 	   				</c:if>
+	   				<tr>
+	   					<td colspan="6" height="200px;">${notice.content }</td>
+	   				</tr>
    				</tbody>
    			</table>
    		</div>
