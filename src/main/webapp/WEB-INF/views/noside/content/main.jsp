@@ -95,8 +95,8 @@
 <body>
 <input type="hidden" value="${noticeVO.noticeCode}" id="noticeCode">
 <!-- 팝업 모달창 -->
-	<div class="modal" id="notice" tabindex="-1" role="dialog" >
-	    <div class="modal-dialog" role="document">
+	<div class="modal" id="notice" tabindex="-1" role="dialog" style="width: 600px;">
+	    <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h5 class="modal-title" style="font-weight: bold;">도담도서관 공지사항</h5>
