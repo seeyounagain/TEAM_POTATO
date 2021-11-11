@@ -1,9 +1,5 @@
 package com.potato.project.service.controller;
 
-
-
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,17 +52,18 @@ public class ServiceController {
 	private ServiceService serviceService;
 	
 	
-	//공지사항 등록
+	
 	@PostMapping("/registerRecommend")
-	public String insertRecommend(MenuVO menuVO,RecommendVO rcVO, MultipartHttpServletRequest multi) {
-		//첨부파일 upload 및 이미지정보 insert
-		//파일이 첨부되는 input 태그의 name 속성값
+	public String insertRecommend(Model model,MenuVO menuVO,HttpSession session,RecommendVO rcVO, MultipartHttpServletRequest multi) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		
+		
 		Iterator<String> inputNames = multi.getFileNames();
-		
 		String uploadPath = "C:\\Users\\win\\git\\11111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
- 
 		int nextImg = 1;
-		
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
 			
@@ -78,7 +75,6 @@ public class ServiceController {
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
 							file.transferTo(new File(uploadPath + uploadFile));							
 							rcVO.setImgOne(uploadFile);									
-							
 							nextImg++;
 						}
 					}						
@@ -118,7 +114,11 @@ public class ServiceController {
 		//추천 입력
 		serviceService.insertRecommend(rcVO);
 		
-		return "service/recommendRegForm";
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
+		return "redirect:/service/recommend";
 	}
 	
 	
@@ -128,13 +128,28 @@ public class ServiceController {
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-//		model.addAttribute("recommendList",serviceService.recommendList());
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		
 		return "service/recommendRegForm";
 	}
+	
+	
+	@GetMapping("/recommendUpdate")
+	public String recommendUpdate(Model model,MenuVO menuVO,HttpSession session) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
+		return "/service/recommendUpdate";
+	}
+	
 	
 	@RequestMapping("/recommend")
 	public String recommendBook(Model model,MenuVO menuVO,HttpSession session,RecommendVO rcVO) {
@@ -171,6 +186,10 @@ public class ServiceController {
 		
 		model.addAttribute("recommend", rcVO2);
 		model.addAttribute("rcList", serviceService.rcList());
+		
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
 
 		return "service/recommendDetail";
 	}

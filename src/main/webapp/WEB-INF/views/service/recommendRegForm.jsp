@@ -13,7 +13,9 @@
 <script type="text/javascript" src="/resources/service/js/editor.js?ver=5"></script>
 </head> 
 <body>
-<br><br><br><br><br><br>
+<h2 class="text-first fw-bold">추천도서 글등록</h2>
+<hr>
+
 <form action="/service/registerRecommend" method="post" enctype="multipart/form-data" id="testSubmit">
 <div class="master">
 	<div class="row justify-content-center">

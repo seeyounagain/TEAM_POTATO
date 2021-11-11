@@ -24,16 +24,33 @@
 <h2 class="text-first fw-bold">추천도서</h2>
 <hr>
 	<div class="row">
-		<div class="input-group" >
-			<input type="button" value="추천리스트" class="btn btn-sm btn-outline-secondary"  >
-			<input type="button" value="접기" id="closeRcBtn" class="btn btn-sm btn-primary" style="display: flex;">
-			<input type="button" value="열기" id="openRcBtn" class="btn btn-sm btn-primary" style="display: none;">
+		<div class="col-3">
+			<div class="row">
+				<div class="input-group mb-3" >
+					<input type="button" value="추천도서리스트" class="btn btn-sm btn-outline-secondary">
+					<input type="button" value="접기" id="closeRcBtn" class="btn btn-sm btn-primary" style="display: flex;">
+					<input type="button" value="열기" id="openRcBtn" class="btn btn-sm btn-primary" style="display: none;">
+				</div>
+			</div>
 		</div>
-		<div id="rcListForUser">
+		<div class="col-6">
+		
+		</div>
+		<div class="col-3 text-end">
+			<div class="row justify-content-end">	
+					<div class="input-group">
+						<input type="button" value="관리자" class="btn btn-sm btn-outline-secondary">
+						<input type="button" value="수정" class="btn btn-sm btn-primary" onclick="location.href='/service/recommendUpdate?rcCode=${recommend.rcCode}&menuCode=${menuCode }'">
+						<input type="button" value="삭제" class="btn btn-sm btn-primary" onclick="location.href='#'" id="recommendDeleteModal">
+						<input type="button" value="새글등록" class="btn btn-sm btn-primary" onclick="location.href='/service/recommendRegForm?menuCode=${menuCode}'">
+					</div>
+			</div>
+		</div>	
+		<div class="col-12 mt-3" id="rcListForUser">
 			<c:choose>
 				<c:when test="${not empty rcList }">
 					<c:forEach items="${rcList }" var="a">
-						<a href="/service/recommend?menuCode=${menuCode }?rcCode=${a.rcCode}" style="text-decoration: underline;">${a.title }./.</a> 
+						<a href="/service/recommend?menuCode=${menuCode }&rcCode=${a.rcCode}" style="text-decoration: underline;">${a.title }./.</a> 
 					</c:forEach>	
 				</c:when>
 			<c:otherwise>
