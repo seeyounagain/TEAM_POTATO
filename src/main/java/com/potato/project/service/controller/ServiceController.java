@@ -141,8 +141,8 @@ public class ServiceController {
 //		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a2);
 		
 		
-		System.out.println(serviceService.recommendBoard("RC_009"));
-		model.addAttribute("recommend", serviceService.recommendBoard("RC_004"));
+		System.out.println(serviceService.recommendBoard("RC_001"));
+		model.addAttribute("recommend", serviceService.recommendBoard("RC_001"));
 //		model.addAttribute("testString2", a2);
 
 		return "service/recommendDetail";

@@ -10,7 +10,7 @@
 <title>글쓰기</title>
 
 <script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>  
-<script type="text/javascript" src="/resources/service/js/editor.js?ver=1"></script>
+<script type="text/javascript" src="/resources/service/js/editor.js?ver=5"></script>
 
 </head> 
 <body>
@@ -150,7 +150,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 var oEditors2 = [];
 nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
+ oAppRef: oEditors2,
  elPlaceHolder: "smartEditor2",
  sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
@@ -158,7 +158,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 var oEditors3 = [];
 nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
+ oAppRef: oEditors3,
  elPlaceHolder: "smartEditor3",
  sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
@@ -166,7 +166,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 var oEditors4 = [];
 nhn.husky.EZCreator.createInIFrame({
- oAppRef: oEditors,
+ oAppRef: oEditors4,
  elPlaceHolder: "smartEditor4",
  sSkinURI: "/resources/service/se2/SmartEditor2Skin.html",
  fCreator: "createSEditor2"
