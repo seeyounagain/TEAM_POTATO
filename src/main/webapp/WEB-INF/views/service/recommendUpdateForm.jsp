@@ -8,26 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript" src="/resources/service/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>  
-<script type="text/javascript" src="/resources/service/js/editor.js?ver=5"></script>
+<script type="text/javascript" src="/resources/service/js/editor.js?ver=6"></script>
 </head> 
 <body>
-<h2 class="text-first fw-bold">추천도서 등록페이지</h2>
+<h2 class="text-first fw-bold">추천도서 수정페이지</h2>
 <hr>
 
-
-
-
-
-
-<form action="/service/registerRecommend" method="post" enctype="multipart/form-data" id="testSubmit">
+<form action="/service/recommendUpdateGo" method="post" enctype="multipart/form-data" id="recommendUpdate">
 <div class="master">
 	<div class="row justify-content-center">
 		<div class="col-8">                                                                
     		<div class="input-group text-start">                                                           
 				<span class="input-group-text gap-2 col-3 btn-primary" id="inputGroupPrepend1">추천도서 게시글 TITLE</span>            
-				<input type="text" name="title" class="form-control" placeholder="제목">                                  
+				<input type="text" name="title" class="form-control" placeholder="제목" value="${recommend.title }">                                  
+				<input type="hidden" name="rcCode" value="${recommend.rcCode }">
 	  		</div>                                                                                         
 	    </div> 
 	</div>
@@ -41,7 +37,7 @@
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 							<textarea class="form-control" name="contentTitle" id="smartEditor" style="width: 100%; height: 200px; resize: none"  >
-							타이틀 
+							${recommend.content1 }
 							</textarea> 
 					</div> 
 				</div> 
@@ -58,30 +54,111 @@
     
 
 	
-	
+<script type="text/javascript">
+	// 콘텐츠 수정 :: 사진 수정 시 이미지 미리보기
+	function readURL1(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgArea1').attr('src', e.target.result); 
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$(":input[name='file1']").change(function() {
+		if( $(":input[name='file1']").val() == '' ) {
+			$('#imgArea1').attr('src' , '');  
+		}
+		$('#imgViewArea1').css({ 'display' : '' });
+		readURL1(this);
+	});
+
+	// 이미지 에러 시 미리보기영역 미노출
+	function imgAreaError(){
+		$('#imgViewArea1').css({ 'display' : 'none' });
+	}
+</script>	
+<script type="text/javascript">
+	// 콘텐츠 수정 :: 사진 수정 시 이미지 미리보기
+	function readURL2(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgArea2').attr('src', e.target.result); 
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$(":input[name='file2']").change(function() {
+		if( $(":input[name='file2']").val() == '' ) {
+			$('#imgArea2').attr('src' , '');  
+		}
+		$('#imgViewArea2').css({ 'display' : '' });
+		readURL2(this);
+	});
+
+	// 이미지 에러 시 미리보기영역 미노출
+	function imgAreaError2(){
+		$('#imgViewArea2').css({ 'display' : 'none' });
+	}
+</script>	
+<script type="text/javascript">
+	// 콘텐츠 수정 :: 사진 수정 시 이미지 미리보기
+	function readURL3(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgArea3').attr('src', e.target.result); 
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$(":input[name='file3']").change(function() {
+		if( $(":input[name='file3']").val() == '' ) {
+			$('#imgArea3').attr('src' , '');  
+		}
+		$('#imgViewArea3').css({ 'display' : '' });
+		readURL3(this);
+	});
+
+	// 이미지 에러 시 미리보기영역 미노출
+	function imgAreaError3(){
+		$('#imgViewArea3').css({ 'display' : 'none' });
+	}
+</script>	
 		
 	<div class="row justify-content-center">	
 		<div class="col-8">	
 			<div id="imgViewArea1" style="margin-top:10px; display:none;">
 				<img id="imgArea1" style="width:200px; height:100px;" onerror="imgAreaError()"/>
 			</div>
-		   		<input name="file1" type="file" class="form-control" aria-label="file example" id="Product" multiple required="required"  accept="image/*">
+		   		<input name="file1" type="file" class="form-control" aria-label="file example" id="Product" multiple accept="image/*" required="required" >
 		    <div class="invalid-feedback">Example invalid form file feedback</div>		
 		</div>
 	</div>	
+		
+		
 	<div class="row justify-content-center mb-3">	
 		<div class="col-8">
 			<div class="jsx-2303464893 editor"> 
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 						<textarea class="form-control" name="contentOne" id="smartEditor2" style="width: 100%; height: 200px; resize: none"  > 
-						1호 서론
+						${recommend.content2 }
 						</textarea> 
 					</div> 
 				</div> 
 			</div>
 		</div>
 	</div>
+		
+
+	
+	
+	
 	<div class="row justify-content-center">	
 		<div class="col-8">
 			<div id="imgViewArea2" style="margin-top:10px; display:none;">
@@ -98,7 +175,7 @@
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 							<textarea class="form-control" name="contentTwo" id="smartEditor3" style="width: 100%; height: 200px; resize: none"  > 
-							2호 본론
+							${recommend.content3 }
 							</textarea> 
 					</div> 
 				</div> 
@@ -122,20 +199,21 @@
 				<div class="fr-box fr-basic fr-top" role="application"> 
 					<div class="fr-wrapper show-placeholder" dir="auto" style="overflow: scroll;"> 
 							<textarea class="form-control" name="contentThree" id="smartEditor4" style="width: 100%; height: 200px; resize: none"  > 
-							3호	결론
+							${recommend.content4 }
 							</textarea> 
 					</div> 
 				</div> 
 			</div>
 		</div>
 	</div>
+		
+		
 	<div class="row justify-content-center">
 		<div class="col-8 text-center">
-			<input type="button" class="formBtn btn btn-primary" value="등록">
+			<input type="button" class="formBtn2 btn btn-primary" value="등록">
 			<input type="button" class="btn btn-primary" value="취소" onclick="location.href='/service/recommend?menuCode=${menuCode}'">
 		</div>
 	</div>
-
 
 
 

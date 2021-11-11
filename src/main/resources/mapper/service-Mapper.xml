@@ -55,6 +55,26 @@
 			 <result column="CONTENT_THREE" property="contentThree"	jdbcType="BLOB" javaType="[B" />
 			</resultMap>
 			
+			<delete id="recommendDelete">
+			DELETE RECOMMEND_BOARD WHERE RC_CODE = #{rcCode }
+			</delete>
+			
+			<!-- 심화 방법 필요함 -->
+			<insert id="recommendUpdate">
+			UPDATE RECOMMEND_BOARD
+			SET 
+			TITLE = #{title }       
+			,CONTENT_TITLE = RAWTOHEX(#{contentTitle })
+			,CONTENT_ONE = RAWTOHEX(#{contentOne }) 
+			,CONTENT_TWO = RAWTOHEX(#{contentTwo }) 
+			,CONTENT_THREE = RAWTOHEX(#{contentThree })
+			,IMG_ONE = #{imgOne }     
+			,IMG_TWO = #{imgTwo }     
+			,IMG_THREE = #{imgThree }  
+			FROM RECOMMEND_BOARD
+			WHERE RC_CODE = #{rcCode }
+			</insert>
+			
 			<select id="rcList" resultMap="recommend">
 			SELECT
 			RC_CODE, TITLE 

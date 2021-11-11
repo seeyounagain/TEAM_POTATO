@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,79 @@ public class ServiceController {
 	
 	@Resource(name = "serviceService")
 	private ServiceService serviceService;
+	
+	
+	
+	@PostMapping("/recommendUpdateGo")
+	public String recommendUpdateGo(Model model,MenuVO menuVO,HttpSession session,RecommendVO rcVO, MultipartHttpServletRequest multi) {
+		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
+		if (loginInfo == null) {
+			loginInfo = new MemberVO();	
+		}
+			
+		if(serviceService.recommendDelete(rcVO) != 0) {
+		
+		Iterator<String> inputNames = multi.getFileNames();
+		String uploadPath = "C:\\Users\\win\\git\\11111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
+		int nextImg = 1;
+		while (inputNames.hasNext()) {
+			String inputName = inputNames.next();
+			
+			try {
+				if(inputName.equals("file1")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));							
+							rcVO.setImgOne(uploadFile);									
+							nextImg++;
+						}
+					}						
+				}
+				if(inputName.equals("file2")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));													
+								if(nextImg == 2) {
+									rcVO.setImgTwo(uploadFile);									
+								}
+								nextImg++;	
+						}
+					}						
+				}
+				if(inputName.equals("file3")) { //다중 첨부
+					List<MultipartFile> fileList =	multi.getFiles(inputName);	
+					for(MultipartFile file : fileList) {
+						if(!file.getOriginalFilename().equals("")){
+							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
+							file.transferTo(new File(uploadPath + uploadFile));							
+								if(nextImg == 3) {
+									rcVO.setImgThree(uploadFile);
+								}
+								nextImg++;
+						}
+					}						
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		}
+		serviceService.recommendReg(rcVO);
+		//추천 입력
+		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
+		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		model.addAttribute("menuCode", menuVO.getMenuCode());
+		
+		
+		return "redirect:/service/recommendUpdateGo2";
+	}
+	
 	
 	
 	
@@ -137,17 +211,35 @@ public class ServiceController {
 	
 	
 	@GetMapping("/recommendUpdate")
-	public String recommendUpdate(Model model,MenuVO menuVO,HttpSession session) {
+	public String recommendUpdate(Model model,MenuVO menuVO,HttpSession session,RecommendVO rcVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
 		
+		String RcCode = rcVO.getRcCode();
+		RecommendVO rcVO2 = serviceService.recommendBoard(RcCode);
+		byte[] bt1 = serviceService.recommendBoard(RcCode).getContentTitle();
+		byte[] bt2 = serviceService.recommendBoard(RcCode).getContentOne();
+		byte[] bt3 = serviceService.recommendBoard(RcCode).getContentTwo();
+		byte[] bt4 = serviceService.recommendBoard(RcCode).getContentThree();
+		String a1 = new String(bt1);
+		String a2 = new String(bt2);
+		String a3 = new String(bt3);
+		String a4 = new String(bt4);
+		rcVO2.setContent1(a1);
+		rcVO2.setContent2(a2);
+		rcVO2.setContent3(a3);
+		rcVO2.setContent4(a4);
+		
+		model.addAttribute("recommend", rcVO2);
+		
+		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
 		model.addAttribute("menuCode", menuVO.getMenuCode());
 		
-		return "/service/recommendUpdate";
+		return "service/recommendUpdateForm";
 	}
 	
 	
@@ -167,24 +259,20 @@ public class ServiceController {
 		}
 		
 		RecommendVO rcVO2 = serviceService.recommendBoard(RcCode);
-		
 		byte[] bt1 = serviceService.recommendBoard(RcCode).getContentTitle();
 		byte[] bt2 = serviceService.recommendBoard(RcCode).getContentOne();
 		byte[] bt3 = serviceService.recommendBoard(RcCode).getContentTwo();
 		byte[] bt4 = serviceService.recommendBoard(RcCode).getContentThree();
-		
 		String a1 = new String(bt1);
 		String a2 = new String(bt2);
 		String a3 = new String(bt3);
 		String a4 = new String(bt4);
-		
 		rcVO2.setContent1(a1);
 		rcVO2.setContent2(a2);
 		rcVO2.setContent3(a3);
 		rcVO2.setContent4(a4);
-		
-		
 		model.addAttribute("recommend", rcVO2);
+		
 		model.addAttribute("rcList", serviceService.rcList());
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));

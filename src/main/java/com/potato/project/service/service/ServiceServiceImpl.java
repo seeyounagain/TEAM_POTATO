@@ -155,6 +155,18 @@ public class ServiceServiceImpl implements ServiceService {
 		return sqlSession.selectList("serviceMapper.rcList");
 	}
 
+	@Override
+	public void recommendUpdate(RecommendVO rcVO) {
+		sqlSession.update("serviceMapper.recommendUpdate", rcVO);
+		
+	}
+
+	@Override
+	public int recommendDelete(RecommendVO rcVO) {
+		return sqlSession.delete("serviceMapper.recommendDelete", rcVO);
+		
+	}
+
 	
 	
 }

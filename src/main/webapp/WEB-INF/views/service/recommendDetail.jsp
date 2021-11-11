@@ -40,9 +40,9 @@
 			<div class="row justify-content-end">	
 					<div class="input-group">
 						<input type="button" value="관리자" class="btn btn-sm btn-outline-secondary">
-						<input type="button" value="수정" class="btn btn-sm btn-primary" onclick="location.href='/service/recommendUpdate?rcCode=${recommend.rcCode}&menuCode=${menuCode }'">
-						<input type="button" value="삭제" class="btn btn-sm btn-primary" onclick="location.href='#'" id="recommendDeleteModal">
-						<input type="button" value="새글등록" class="btn btn-sm btn-primary" onclick="location.href='/service/recommendRegForm?menuCode=${menuCode}'">
+						<input type="button" value="수정" class="btn btn-sm btn-primary" 		onclick="location.href='/service/recommendUpdate?rcCode=${recommend.rcCode}&menuCode=${menuCode }'"> 
+						<input type="button" value="삭제" class="btn btn-sm btn-primary"		onclick="location.href='#'" id="recommendDeleteModal">
+						<input type="button" value="새글등록" class="btn btn-sm btn-primary" 	onclick="location.href='/service/recommendRegForm?menuCode=${menuCode}'">
 					</div>
 			</div>
 		</div>	

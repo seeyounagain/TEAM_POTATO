@@ -70,4 +70,7 @@ public interface ServiceService {
 	//타이틀과 rc코드
 	List<RecommendVO> rcList();
 	
+	void recommendUpdate(RecommendVO rcVO);
+	
+	int recommendDelete(RecommendVO rcVO);
 }
