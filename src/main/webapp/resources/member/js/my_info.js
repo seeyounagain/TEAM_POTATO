@@ -192,8 +192,14 @@ $(document).ready(function(){
 		}).open();
 	});
 	
+	//비밀번호 변경 모달창이 열리면
+	$("#changePwModal").on("shown.bs.modal", function () { 
+		
+		$("#pw1").focus(); 
 	
-	//비밀번호 정규식
+	});
+	
+	//새비밀번호 정규식
 	$(document).on('keyup', '#newPw', function() { 
 		//소대문자a~z,0~9,특수문자로 8~20자리 만들기
 		var pwJ = /^[a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$/;
@@ -201,7 +207,23 @@ $(document).ready(function(){
 		// 조건에 부합하다면
 		if(pwJ.test($('#newPw').val())){
 			$('#pwCheck1').text('');
-			$('#changePwBtn2').removeClass('disabled');
+			
+			
+			//비밀번호 변경에서 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
+				var newPw = $('#newPw').val();
+				var checkPw = $('#checkPw').val();
+				
+				if (newPw != checkPw) {
+					$('#pwCheck2').text('* 비밀번호를 확인해주세요.');
+					$('#changePwBtn2').addClass('disabled');
+					return ;
+				}
+				else {
+					$('#pwCheck2').text('');
+					$('#changePwBtn2').removeClass('disabled');
+					return ;				
+				}
+			
 			return ;
 		}
 		else{
@@ -211,41 +233,42 @@ $(document).ready(function(){
 			return ;
 		}
 	});
-	
+	//비밀번호확인 정규식
 	$(document).on('keyup', '#checkPw', function() { 
 		//소대문자a~z,0~9,특수문자로 8~20자리 만들기
 		var pwJ = /^[a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]{8,20}$/;
 		
 		// 조건에 부합하다면
 		if(pwJ.test($('#checkPw').val())){
-			$('#checkCapsLock3').text('');
+			$('#pwCheck3').text('');
 			$('#changePwBtn2').removeClass('disabled');
+			
+			//비밀번호 변경에서 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
+				var newPw = $('#newPw').val();
+				var checkPw = $('#checkPw').val();
+				
+				if (newPw != checkPw) {
+					$('#pwCheck2').text('* 비밀번호를 확인해주세요.');
+					$('#changePwBtn2').addClass('disabled');
+					return ;
+				}
+				else {
+					$('#pwCheck2').text('');
+					$('#changePwBtn2').removeClass('disabled');
+					return ;				
+				}
+			
 			return ;
 		}
 		else{
 			
-			$('#checkCapsLock3').text('* 영문 대문자, 소문자, 숫자, 특수문자를 사용하여 8자 이상, 20자 이하로 설정하십시오');
+			$('#pwCheck3').text('* 영문 대문자, 소문자, 숫자, 특수문자를 사용하여 8자 이상, 20자 이하로 설정하십시오');
 			$('#changePwBtn2').addClass('disabled');
 			return ;
 		}
 	});
 	
-	//비밀번호 변경에서 비밀번호 확인 칸에 입력 했을 경우 동일한지 체크
-	$(document).on('keyup', '#checkPw' , function() {
-		var newPw = $('#newPw').val();
-		var checkPw = $('#checkPw').val();
-		
-		if (newPw != checkPw) {
-			$('#pwCheck2').text('* 비밀번호를 확인해주세요.');
-			$('#changePwBtn2').addClass('disabled');
-			return ;
-		}
-		else {
-			$('#pwCheck2').text('');
-			$('#changePwBtn2').removeClass('disabled');
-			return ;				
-		}
-	});
+
 	
 	//비밀번호 변경에서 capslpck 확인
 	$(document).on('keyup','#pw, #newPw, #checkPw', function() { 
@@ -281,6 +304,7 @@ $(document).ready(function(){
 	 	 // do something...
 		$('#pwCheck1').text('');
 		$('#pwCheck2').text('');
+		$('#pwCheck3').text('');
 		$('#checkCapsLock2').text('');
 		$('.modal input[type="password"]').val('');
 	})
