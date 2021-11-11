@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- mark.js 추가하기 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
-<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=16" ></script>
+<script type="text/javascript" src="/resources/admin/js/book_manage.js?ver=17" ></script>
 <script type="text/javascript">
 $(function() {
 	$(window).scroll(function() { 

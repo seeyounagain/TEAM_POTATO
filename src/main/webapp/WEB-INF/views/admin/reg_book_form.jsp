@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=37" ></script>
+<script type="text/javascript" src="/resources/admin/js/reg_book_form.js?ver=40" ></script>
 <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
 <style type="text/css">
 textarea {

@@ -268,7 +268,7 @@
 					});
 					return ;
 				}
-				if ($('#pw').val() == null || $('#pw').val() == '') {
+				if ($('#pw').val() == null || $('#pw').val() == '' || $('#checkPw').val() == null || $('#checkPw').val() == '') {
 					$('#joinBtn').addClass('disabled');
 					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
 					$('#joinCheckModal').modal('show');
@@ -277,7 +277,7 @@
 					});
 					return ;
 				}
-				if (pw != checkPw) {
+				if ($('#pw').val() != $('#checkPw').val() || pw != checkPw || !pw.equals(checkPw)) {
 					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
 					$('#joinCheckModal').modal('show');
 					$(document).on('click', '#joinCheckModalBtn' , function() {

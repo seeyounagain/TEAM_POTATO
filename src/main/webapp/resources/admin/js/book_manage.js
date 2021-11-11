@@ -23,7 +23,7 @@
 			
 		});
 		
-		/* 대여 버튼 클릭 시 대여자 아이디 입력칸 생성 */
+		/* 대출 버튼 클릭 시 대출자 아이디 입력칸 생성 */
 		$(document).on('click', '#rentalBtn', function() { 
 			
 			$('#rental').remove();
@@ -46,7 +46,7 @@
 			
 			else {
 			
-			str += '대여자&nbsp;:&nbsp;';
+			str += '대출자&nbsp;:&nbsp;';
 			str += '<input type="text" id="id" name="id" placeholder="회원아이디" required style="width: 200x;">';
 			
 			}
@@ -92,7 +92,7 @@
 		
 		});
 		
-		/* 대여 버튼 클릭 시 대여자 아이디 입력 체크 후 대여처리 */
+		/* 대출 버튼 클릭 시 대출자 아이디 입력 체크 후 대출처리 */
 		$(document).on('click', '#rentalB', function() {
 			
 			var id = $(this).prev().val();
@@ -101,7 +101,7 @@
 			if (id == '') {
 				$('#bookManageAlertModal').modal('hide');
 				$('#bookManageConfirmModal').modal('hide');				
-				$('#bookManageAlertText').text('대여자의 아이디를 입력해주세요.');
+				$('#bookManageAlertText').text('대출자의 아이디를 입력해주세요.');
 				$('#bookManageAlertModal').modal('show');
 				return ;
 			}
@@ -123,7 +123,7 @@
 			
 			$('#bookManageAlertModal').modal('hide');
 			$('#bookManageConfirmModal').modal('hide');
-			$('#bookManageConfirmModalText').text('도서를 대여하시겠습니까?');
+			$('#bookManageConfirmModalText').text('도서를 대출하시겠습니까?');
 			$('#bookManageConfirmModal').modal('show');	
 			$('#bookManageConfirmBtn').addClass('bookRentalBtn');			
 			

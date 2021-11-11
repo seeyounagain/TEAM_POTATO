@@ -147,7 +147,7 @@
 				$('#pubDate').focus();
 				return ;
 			}
-			/*				if (page == null || page == '') {
+			/*	if (page == null || page == '') {
 					$('#regBtn').addClass('disabled');
 					$('#page').focus();
 					return ;
@@ -182,6 +182,11 @@
 				
 				var str = '';
 				
+				var length = 200; // 표시할 글자수 기준
+			    if (intro.length > length) {
+			    	intro = intro.substr(0, length - 2) + '...';
+			    }
+				
 				str += '도서를 등록 하시겠습니까?<br><br>';
 				str += 'ISBN : ' + isbn + '<br>';
 				str += '표제 : ' + title + '<br>';
@@ -196,6 +201,7 @@
 				str += '소개글 :  ' + intro + '<br>';
 				str += '위치 :  ' + area;
 				
+				$('#regBookConfirmText').empty();
 				$('#regBookConfirmText').prepend(str);
 				$('#regBookConfirmModal').modal('show');
 				
