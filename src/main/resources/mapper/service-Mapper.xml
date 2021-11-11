@@ -55,6 +55,17 @@
 			 <result column="CONTENT_THREE" property="contentThree"	jdbcType="BLOB" javaType="[B" />
 			</resultMap>
 			
+			<select id="rcList" resultMap="recommend">
+			SELECT
+			RC_CODE, TITLE 
+			FROM RECOMMEND_BOARD
+			</select>
+			
+			<select id="lastRcCode" resultType="String">
+			SELECT MAX(RC_CODE) AS RC_CODE 
+			FROM RECOMMEND_BOARD
+			</select>
+			
 			<insert id="insertRecommend">
 			INSERT INTO RECOMMEND_BOARD(
 			RC_CODE      
@@ -78,10 +89,6 @@
 			,RAWTOHEX(#{contentThree }) 	
 			)
 			</insert>
-			
-			<select id="selectNextImgNumber" resultType="int">
-			SELECT NVL(MAX(TO_NUMBER(SUBSTR(IMG_CODE,5,3))),0)+1 FROM RECOMMEND_IMG
-			</select>
 			
 			<select id="recommendBoard" resultMap="recommend" >
 			SELECT 

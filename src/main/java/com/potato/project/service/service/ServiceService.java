@@ -65,15 +65,9 @@ public interface ServiceService {
 	//추천 입력
 	void insertRecommend(RecommendVO rcVO);
 	
-	//추천이미지 등록용 코드
-	String selectRecommendCode();
+	String lastRcCode();
 	
-	//이미지파일 코드 숫자부분
-	int selectNextImgNumber();
-	
-	int insertRcFile(RecommendVO rcVO); 
-	
-	
-	
+	//타이틀과 rc코드
+	List<RecommendVO> rcList();
 	
 }

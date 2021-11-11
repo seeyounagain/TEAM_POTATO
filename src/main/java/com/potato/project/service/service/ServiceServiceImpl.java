@@ -1,6 +1,5 @@
 package com.potato.project.service.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,7 +11,7 @@ import com.potato.project.service.vo.ReadingRecordVO;
 import com.potato.project.service.vo.ReadingSeatVO;
 import com.potato.project.service.vo.RecommendVO;
 import com.potato.project.service.vo.RequestBoardVO;
-//천화 
+ 
 @Service("serviceService")
 public class ServiceServiceImpl implements ServiceService {
 	
@@ -145,20 +144,15 @@ public class ServiceServiceImpl implements ServiceService {
 		return sqlSession.selectOne("serviceMapper.recommendBoard", rcCode);
 	}
 
+
 	@Override
-	public String selectRecommendCode() {
-		// TODO Auto-generated method stub
-		return null;
+	public String lastRcCode() {
+		return sqlSession.selectOne("serviceMapper.lastRcCode");
 	}
 
 	@Override
-	public int selectNextImgNumber() {
-		return sqlSession.selectOne("serviceMapper.selectNextImgNumber");
-	}
-
-	@Override
-	public int insertRcFile(RecommendVO rcVO) {
-		return sqlSession.insert("serviceMapper.insertRcFile", rcVO);
+	public List<RecommendVO> rcList() {
+		return sqlSession.selectList("serviceMapper.rcList");
 	}
 
 	

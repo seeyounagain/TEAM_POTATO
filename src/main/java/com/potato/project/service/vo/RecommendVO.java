@@ -1,8 +1,5 @@
 package com.potato.project.service.vo;
 
-import java.util.List;
-
-import com.potato.project.common.vo.AttachFileVO;
 
 
 public class RecommendVO {
@@ -15,20 +12,45 @@ public class RecommendVO {
 	private String imgTwo 			;	 	  // ,    IMG_TWO             imgTwo 		
 	private byte[] contentTwo		;	   // ,       CONTENT_TWO         contentTwo	
 	private String imgThree 		;		//	      IMG_THREE           imgThree 	
-	private byte[] contentThree	;			//   	  CONTENT_THREE       contentThree	
+	private byte[] contentThree		;			//    CONTENT_THREE       contentThree	
 	 
-
-	private List<ImgVO> imgList;
+	
+	private String content1;			
+	private String content2;
+	private String content3;
+	private String content4;
 	
 	
 	
 
-	public List<ImgVO> getImgList() {
-		return imgList;
+	public String getContent1() {
+		return content1;
 	}
-	public void setImgList(List<ImgVO> imgList) {
-		this.imgList = imgList;
+	public void setContent1(String content1) {
+		this.content1 = content1;
 	}
+	public String getContent2() {
+		return content2;
+	}
+	public void setContent2(String content2) {
+		this.content2 = content2;
+	}
+	public String getContent3() {
+		return content3;
+	}
+	public void setContent3(String content3) {
+		this.content3 = content3;
+	}
+	public String getContent4() {
+		return content4;
+	}
+	public void setContent4(String content4) {
+		this.content4 = content4;
+	}
+
+	
+	
+
 	public String getRcCode() {
 		return rcCode;
 	}

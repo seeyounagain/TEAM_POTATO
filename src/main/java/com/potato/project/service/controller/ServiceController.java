@@ -63,9 +63,10 @@ public class ServiceController {
 		//파일이 첨부되는 input 태그의 name 속성값
 		Iterator<String> inputNames = multi.getFileNames();
 		
-		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\111111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img"; //lecture
+		String uploadPath = "C:\\Users\\win\\git\\11111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
  
-		int nextImgCode = 1;
+		int nextImg = 1;
+		
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
 			
@@ -76,9 +77,9 @@ public class ServiceController {
 						if(!file.getOriginalFilename().equals("")){
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
 							file.transferTo(new File(uploadPath + uploadFile));							
+							rcVO.setImgOne(uploadFile);									
 							
-								rcVO.setImgOne(uploadFile);
-
+							nextImg++;
 						}
 					}						
 				}
@@ -87,13 +88,11 @@ public class ServiceController {
 					for(MultipartFile file : fileList) {
 						if(!file.getOriginalFilename().equals("")){
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
-							file.transferTo(new File(uploadPath + uploadFile));							
-
-							
-							rcVO.setImgTwo(uploadFile);
-							
-
-							
+							file.transferTo(new File(uploadPath + uploadFile));													
+								if(nextImg == 2) {
+									rcVO.setImgTwo(uploadFile);									
+								}
+								nextImg++;	
 						}
 					}						
 				}
@@ -103,10 +102,10 @@ public class ServiceController {
 						if(!file.getOriginalFilename().equals("")){
 							String uploadFile = FileUploadUtil.getNowDateTime() +"_"+ file.getOriginalFilename();
 							file.transferTo(new File(uploadPath + uploadFile));							
-							
-							rcVO.setImgThree(uploadFile);
-							
-						
+								if(nextImg == 3) {
+									rcVO.setImgThree(uploadFile);
+								}
+								nextImg++;
 						}
 					}						
 				}
@@ -120,32 +119,6 @@ public class ServiceController {
 		serviceService.insertRecommend(rcVO);
 		
 		return "service/recommendRegForm";
-	}
-	
-	
-	
-	@GetMapping("/test")
-	public String test(Model model,MenuVO menuVO,HttpSession session, RecommendVO rcVO) {
-		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
-		if (loginInfo == null) {
-			loginInfo = new MemberVO();	
-		}
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		model.addAttribute("menuCode", menuVO.getMenuCode());
-//		byte[] bt1 = serviceService.recommendBoard("RC_009").getContentTitle();
-//		byte[] bt2 = serviceService.recommendBoard("RC_009").getContentOne();
-//		String a1 = new String(bt1);
-//		String a2 = new String(bt2);
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a1);
-//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!" + a2);
-		
-		
-		System.out.println(serviceService.recommendBoard("RC_001"));
-		model.addAttribute("recommend", serviceService.recommendBoard("RC_001"));
-//		model.addAttribute("testString2", a2);
-
-		return "service/recommendDetail";
 	}
 	
 	
@@ -164,15 +137,42 @@ public class ServiceController {
 	}
 	
 	@RequestMapping("/recommend")
-	public String recommendBook(Model model,MenuVO menuVO,HttpSession session) {
+	public String recommendBook(Model model,MenuVO menuVO,HttpSession session,RecommendVO rcVO) {
 		MemberVO loginInfo = (MemberVO)session.getAttribute("loginInfo");
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
-		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
-		model.addAttribute("menuCode", menuVO.getMenuCode());
-		return "service/recommend";
+		
+		String RcCode = "";
+		
+		if(rcVO.getRcCode()==""||rcVO.getRcCode()==null) {
+			 RcCode = serviceService.lastRcCode();			
+		}else {
+			 RcCode = rcVO.getRcCode();
+		}
+		
+		RecommendVO rcVO2 = serviceService.recommendBoard(RcCode);
+		
+		byte[] bt1 = serviceService.recommendBoard(RcCode).getContentTitle();
+		byte[] bt2 = serviceService.recommendBoard(RcCode).getContentOne();
+		byte[] bt3 = serviceService.recommendBoard(RcCode).getContentTwo();
+		byte[] bt4 = serviceService.recommendBoard(RcCode).getContentThree();
+		
+		String a1 = new String(bt1);
+		String a2 = new String(bt2);
+		String a3 = new String(bt3);
+		String a4 = new String(bt4);
+		
+		rcVO2.setContent1(a1);
+		rcVO2.setContent2(a2);
+		rcVO2.setContent3(a3);
+		rcVO2.setContent4(a4);
+		
+		
+		model.addAttribute("recommend", rcVO2);
+		model.addAttribute("rcList", serviceService.rcList());
+
+		return "service/recommendDetail";
 	}
 	
 	//도서비치 안내페이지

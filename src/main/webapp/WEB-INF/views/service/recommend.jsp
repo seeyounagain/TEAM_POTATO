@@ -70,11 +70,13 @@
 		<div class="row justify-content-center mt-5 mb-5">
 			<div class="col-10 text-center">
 				<img id="photo1" src="https://flexible.img.hani.co.kr/flexible/normal/800/792/imgdb/original/2020/0213/20200213501237.jpg" style="width: 500px;">
-				<div class="mt-3 mb-5" id="photo1" style="font-size: 14px;">30년 만에 디지털 기술로 새단장한 ‘창백한 푸른 점’ 지구. 나사 제공 </div>
+				<div class="mt-3 mb-5" id="photo1" style="font-size: 14px;"> </div>
 			</div>
 			
 			<div class="col-10">
 				<span class="text-center mt-3 mb-5" style="line-height: 15px; line-height: 30px;">　
+				30년 만에 디지털 기술로 새단장한 ‘창백한 푸른 점’ 지구. 
+				
 				
 				1990년 보이저1호가 60억km 우주에서 찍은 지구의 모습이다. 역사상 가장 유명하고 심오한 우주 사진으로 꼽혔다. 
 			 
