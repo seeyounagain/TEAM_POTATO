@@ -25,7 +25,7 @@ $(document).ready(function(){
 		position: new kakao.maps.LatLng(35.5350087, 129.310217)// 마커를 표시할 위치
 	});
 	
-	var iwContent = '<div class="row text-center" style="padding:5px;"><a href="https://map.kakao.com/link/to/고담도서관,35.5350087,129.310217" style="color:black" target="_blank">고담도서관</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	var iwContent = '<div class="text-center" style="padding:5px;"><a href="https://map.kakao.com/link/to/도담도서관,35.5350087,129.310217" style="color:black; text-align: center;" target="_blank">도담도서관</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(35.5350087, 129.310217); //인포윈도우 표시 위치입니다
 
 	// 인포윈도우를 생성합니다

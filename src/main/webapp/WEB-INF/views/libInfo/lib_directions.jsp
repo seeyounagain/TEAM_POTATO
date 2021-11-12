@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f504c174530a2ab6c9cf1f6e2b5b488"></script>
-<script type="text/javascript" src="/resources/libInfo/js/lib_directions.js?ver=7"></script>
+<script type="text/javascript" src="/resources/libInfo/js/lib_directions.js?ver=9"></script>
 <style type="text/css">
 table td{
 	border: 1px solid #dddddd;
+	
 }
 .lib_drections li{
 	margin-bottom: 10px;
