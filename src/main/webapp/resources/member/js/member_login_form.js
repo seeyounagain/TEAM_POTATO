@@ -2,15 +2,14 @@
 	$(document).ready(function(){
 		
 		// caps lock
-		$("#id").on("keypress", function(e) { 
-			var text = String.fromCharCode( e.which );
-		    if ( text.toUpperCase() === text && text.toLowerCase() !== text && !e.shiftKey ) { 
-		        $('#capsLockCheck').text('<Caps Lock>이 켜져있습니다.'); 
-		    }
-		    else {
-		    	$('#capsLockCheck').text('');
-		    }
+		$('#goLogin').on('keydown focus blur', function (e) {
+		    if (e.originalEvent.getModifierState("CapsLock")) {
+		        $('#capsLockCheck').text('<Caps Lock>이 켜져있습니다.');
+		    } else {
+		        $('#capsLockCheck').text('');
+		    };
 		});
+
 		
 		//엔터키 눌러서 로그인 실행
 		$('#goLogin').keydown(function(e){
