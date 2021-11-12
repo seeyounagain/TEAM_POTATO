@@ -45,6 +45,16 @@ textarea {
 #adminMessageT tr:hover {
 	cursor: pointer;
 }
+.adminMessageDiv {
+	max-height: 300px;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.adminMessageDiv::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+    width: 0 !important;
+}
 </style>
 </head>
 <body>
@@ -58,7 +68,7 @@ textarea {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 		<div class="modal-body">
-		  <div class="container-fluid">
+		  <div class="container-fluid adminMessageDiv">
 		    <table id="adminMessageT" class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
 		    	<thead>
 		    	<tr>

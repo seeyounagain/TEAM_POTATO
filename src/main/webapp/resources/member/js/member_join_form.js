@@ -277,7 +277,7 @@
 					});
 					return ;
 				}
-				if ($('#pw').val() != $('#checkPw').val() || pw != checkPw || !pw.equals(checkPw)) {
+				if ($('#pw').val() != $('#checkPw').val() || pw != checkPw) {
 					$('#joinCheckModalText').text('비밀번호를 확인해주세요.');
 					$('#joinCheckModal').modal('show');
 					$(document).on('click', '#joinCheckModalBtn' , function() {

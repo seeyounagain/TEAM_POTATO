@@ -119,8 +119,9 @@
 	<select id="countMember" resultType="int">
 		SELECT COUNT(ID)
 		FROM MEMBER
+		WHERE IS_ADMIN = 'N'
 		<if test="searchValue != null and !searchValue.equals('')">
-		WHERE UPPER(ID) LIKE UPPER('%'||#{searchValue}||'%')
+		AND UPPER(ID) LIKE UPPER('%'||#{searchValue}||'%')
 		</if>
 	</select>
 	

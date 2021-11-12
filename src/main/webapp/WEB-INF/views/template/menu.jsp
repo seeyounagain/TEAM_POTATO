@@ -79,6 +79,16 @@ $(function() {
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
+.messageDiv {
+	max-height: 300px;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.messageDiv::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+    width: 0 !important;
+}
 </style>
 </head>
 <body>
@@ -183,7 +193,7 @@ $(function() {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 		<div class="modal-body">
-		  <div class="container-fluid">
+		  <div class="container-fluid messageDiv">
 		    <table id="myMessageT" class="table table-hover table-bordered text-center caption-top" style="width: 100%;">
 		    	<thead>
 		    	<tr>
