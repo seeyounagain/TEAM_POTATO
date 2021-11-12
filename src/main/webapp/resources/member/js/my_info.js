@@ -271,7 +271,7 @@ $(document).ready(function(){
 
 	
 	//비밀번호 변경에서 capslpck 확인
-	$(document).on('keyup','#pw, #newPw, #checkPw', function() { 
+	$(document).on('keyup','#pw1, #newPw, #checkPw', function() { 
 		  if (event.getModifierState("CapsLock")) {
 			    document.getElementById("checkCapsLock2").innerText 
 			      = "Caps Lock이 켜져 있습니다."
