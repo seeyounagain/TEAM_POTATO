@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <!-- 우편번호 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/member/js/my_info.js?ver=53"></script>
+<script type="text/javascript" src="/resources/member/js/my_info.js?ver=55"></script>
 </head>
 <body>
 <div class="row justify-content-center">

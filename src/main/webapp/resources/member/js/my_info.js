@@ -629,7 +629,7 @@ $(document).ready(function(){
 	})
 	
 	//회원탈퇴창에서 capslpck 확인
-	$(document).on('keyup','#pw2', function() { 
+	$(document).on('keyup','#memberquitPw', function() { 
 		  if (event.getModifierState("CapsLock")) {
 			    document.getElementById("checkCapsLock1").innerText 
 			      = "Caps Lock이 켜져 있습니다."
