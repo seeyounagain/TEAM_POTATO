@@ -64,7 +64,7 @@ public class ServiceController {
 		if(serviceService.recommendDelete(rcVO) != 0) {
 		
 		Iterator<String> inputNames = multi.getFileNames();
-		String uploadPath = "C:\\Users\\win\\git\\11111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
+		String uploadPath = "C:C:\\Users\\USER\\Desktop\\git\\211112\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
 		int nextImg = 1;
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
@@ -136,7 +136,7 @@ public class ServiceController {
 		
 		
 		Iterator<String> inputNames = multi.getFileNames();
-		String uploadPath = "C:\\Users\\win\\git\\11111\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
+		String uploadPath = "C:\\Users\\USER\\Desktop\\git\\211112\\TEAM_POTATO\\src\\main\\webapp\\resources\\service\\img\\";
 		int nextImg = 1;
 		while (inputNames.hasNext()) {
 			String inputName = inputNames.next();
@@ -249,31 +249,32 @@ public class ServiceController {
 		if (loginInfo == null) {
 			loginInfo = new MemberVO();	
 		}
-		
 		String RcCode = "";
-		
-		if(rcVO.getRcCode()==""||rcVO.getRcCode()==null) {
-			 RcCode = serviceService.lastRcCode();			
+		if(serviceService.lastRcCode()==null||serviceService.lastRcCode().equals("")) {
+			
 		}else {
-			 RcCode = rcVO.getRcCode();
+			if(rcVO.getRcCode() == null || rcVO.getRcCode().equals("")) {
+				RcCode = serviceService.lastRcCode();
+			}else {
+				RcCode = rcVO.getRcCode();
+			}
+			RecommendVO rcVO2 = serviceService.recommendBoard(RcCode);
+			byte[] bt1 = serviceService.recommendBoard(RcCode).getContentTitle();
+			byte[] bt2 = serviceService.recommendBoard(RcCode).getContentOne();
+			byte[] bt3 = serviceService.recommendBoard(RcCode).getContentTwo();
+			byte[] bt4 = serviceService.recommendBoard(RcCode).getContentThree();
+			String a1 = new String(bt1);
+			String a2 = new String(bt2);
+			String a3 = new String(bt3);
+			String a4 = new String(bt4);
+			rcVO2.setContent1(a1);
+			rcVO2.setContent2(a2);
+			rcVO2.setContent3(a3);
+			rcVO2.setContent4(a4);
+			model.addAttribute("recommend", rcVO2);
 		}
-		
-		RecommendVO rcVO2 = serviceService.recommendBoard(RcCode);
-		byte[] bt1 = serviceService.recommendBoard(RcCode).getContentTitle();
-		byte[] bt2 = serviceService.recommendBoard(RcCode).getContentOne();
-		byte[] bt3 = serviceService.recommendBoard(RcCode).getContentTwo();
-		byte[] bt4 = serviceService.recommendBoard(RcCode).getContentThree();
-		String a1 = new String(bt1);
-		String a2 = new String(bt2);
-		String a3 = new String(bt3);
-		String a4 = new String(bt4);
-		rcVO2.setContent1(a1);
-		rcVO2.setContent2(a2);
-		rcVO2.setContent3(a3);
-		rcVO2.setContent4(a4);
-		model.addAttribute("recommend", rcVO2);
-		
 		model.addAttribute("rcList", serviceService.rcList());
+		
 		
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));

@@ -128,9 +128,10 @@
 				</div> 
 			</div>
 		</div>
-	</div>
+	</div>	
 	<div class="row justify-content-center">
 		<div class="col-8 text-center">
+			<input type="hidden" name="menuCode" value="${menuCode }" id="menuCode">
 			<input type="button" class="formBtn btn btn-primary" value="등록">
 			<input type="button" class="btn btn-primary" value="취소" onclick="location.href='/service/recommend?menuCode=${menuCode}'">
 		</div>

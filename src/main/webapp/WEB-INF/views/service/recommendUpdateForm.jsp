@@ -16,7 +16,7 @@
 <h2 class="text-first fw-bold">추천도서 수정페이지</h2>
 <hr>
 
-<form action="/service/recommendUpdateGo" method="post" enctype="multipart/form-data" id="recommendUpdate">
+<form action="/service/r" method="post" enctype="multipart/form-data" id="recommendUpdate">
 <div class="master">
 	<div class="row justify-content-center">
 		<div class="col-8">                                                                
