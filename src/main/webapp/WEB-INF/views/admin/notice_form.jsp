@@ -40,7 +40,7 @@ input{
 <div class="row justify-content-center">
    <div class="col-12 mainDiv">
    		<div class="titleDiv">
-   			<h1 class="display-6 text-center">공지사항 등록</h1>
+   			<h2 class="text-first fw-bold">공지사항 등록</h2>
    			<hr>
    		</div>
 			<div class="tableDiv">
@@ -95,23 +95,6 @@ input{
 			</div>
 		</div>
 		
-<!-- 알림 모달 -->
-<!-- 		<div class="modal fade" id="emptyTitleModal" tabindex="-1" aria-labelledby="emptyTitleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" style="color: black;" id="emptyTitleModalLabel">알림</h5>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body" id="modalContent">
-				제목을 입력해 주세요.
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary modalClose" data-bs-dismiss="modal">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div> -->
 		
 <!-- 알림 모달 -->
 		<div class="modal fade" id="noticeCompleteModal" tabindex="-1" aria-labelledby="noticeCompleteModalLabel" aria-hidden="true">

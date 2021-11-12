@@ -77,7 +77,7 @@
 			<if test="searchValue != null and !searchValue.equals('')">
 				WHERE UPPER(${searchKeyword}) LIKE '%'||UPPER(#{searchValue})||'%'
 			</if> 
-			 ORDER BY NOTICE_CODE DESC
+			 ORDER BY NOTICE_CODE ASC
 			 )
 		)
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}
@@ -97,7 +97,7 @@
 		SELECT NOTICE_CODE 
 			 , TITLE 
 			 , CONTENT
-		FROM (SELECT * FROM NOTICE ORDER BY NOTICE_CODE DESC)
+		FROM (SELECT * FROM NOTICE ORDER BY NOTICE_CODE ASC)
 		WHERE ROWNUM = 1
 	</select>
 	

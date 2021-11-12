@@ -12,7 +12,7 @@
 <div class="row justify-content-center">
    <div class="col-12 mainDiv">
    		<div class="titleDiv">
-   			<h1 class="display-6 text-center">공지사항</h1>
+   			<h2 class="text-first fw-bold">공지사항</h2>
    			<hr>
    		</div>
    		
@@ -35,7 +35,7 @@
 	   				<c:if test="${not empty notice.attachFileVO.attachedFileName }" >
 					<tr>
 						<td colspan="6" style="border-bottom: none;">
-	   						<div class="row justify-content-center" style="width: 600px; text-align: c">
+	   						<div class="row justify-content-center" style="width: 600px; text-align: center;">
 				    			<img id="noticeImg" src="/resources/noticeFileUpload/${notice.attachFileVO.attachedFileName }">
 				    		</div>
 	   					</td>

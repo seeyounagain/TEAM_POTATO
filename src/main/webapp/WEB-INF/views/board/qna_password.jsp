@@ -42,7 +42,7 @@ input[type="button"] {
 <div class="row justify-content-center">
 	<div class="col-10 mainDiv">
 		<div class="titleDiv">
-   			<h1 class="display-6 text-center">상담 / 문의</h1>
+   			<h2 class="text-first fw-bold">상담 / 문의</h2>
    			<hr>
    		</div>
    		<div class="tableDiv text-center">
@@ -50,10 +50,15 @@ input[type="button"] {
    		<input type="hidden" value="${qnaVO.qnaCode}" id="qnaCode">
    		<input type="hidden" value="${menuVO.menuCode}" id="menuCode">
    			<table class="table">
+   				<colgroup>
+   					<col width="20%;">
+   					<col width="50%;">
+   					<col width="30%;">
+   				</colgroup>
    				<tr>
    					<td>비밀번호</td>
-   					<td><input type="password" id="inputPw" autofocus="autofocus" placeholder="비밀번호를 입력해 주세요."></td>
-   					<td>
+   					<td style="text-align: center;"><input type="password" id="inputPw" autofocus="autofocus" placeholder="비밀번호를 입력해 주세요."></td>
+   					<td style="text-align: left;">
    						<input class="btn btn-primary" type="button" value="확인" onclick="checkPw();">
    						<input class="btn btn-primary" type="button" value="뒤로가기" onclick="location.href='/board/qna?menuCode=${menuVO.menuCode}';">
    					</td>

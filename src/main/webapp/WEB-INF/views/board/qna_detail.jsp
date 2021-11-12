@@ -50,14 +50,18 @@
 <div class="row justify-content-center">
    <div class="col-12 mainDiv">
    		<div class="titleDiv">
-   			<h1 class="display-6 text-center">상담 / 문의</h1>
+   			<h2 class="text-first fw-bold">상담 / 문의</h2>
    			<hr>
    		</div>
    		<div class="qnaTableDiv">
    			<table class="table qnaTable">
+   				<colgroup>
+   					<col width="20%">
+   					<col width="80%">
+   				</colgroup>
    				<tr>
-   					<td class="w-10">문의 제목</td>
-   					<td class="w-90">${qna.title}</td>
+   					<td>문의 제목</td>
+   					<td>${qna.title}</td>
    				</tr>
    				<tr>
    					<td>작성자</td>
@@ -92,7 +96,7 @@
 			   					</td>
 			   				</tr>
 			   				<tr>
-			   					<td colspan="2" height="200px;" style="padding: 15px;">${info.content }</td>   				
+			   					<td colspan="3" height="200px;" style="padding: 15px;">${info.content }</td>   				
 			   				</tr>
 			   			</table>
 			   		</div>
