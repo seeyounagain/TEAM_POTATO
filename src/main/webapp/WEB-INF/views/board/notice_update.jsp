@@ -97,7 +97,7 @@ input{
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body" id="noticeUpdateModalContent">
-				수정?
+				공지사항을 수정하시겠습니까?
 		      </div>
 		      <div class="modal-footer">
 		      	 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="backBtn">취소</button>

@@ -41,6 +41,9 @@ public interface BoardService {
 	//조회수 증가
 	int updateReadCnt(NoticeVO noticeVO);
 	
+	//공지사항 수정
+	int updateNotice(NoticeVO noticeVO);
+	
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
 	//상담문의 리스트

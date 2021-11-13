@@ -58,7 +58,7 @@ public class BoardController {
 		//오늘 날짜 입력
 		model.addAttribute("nowDate",UploadUtil.getNowDateTime("day"));
 	
-		return "admin/notice_form";
+		return "board/notice_form";
 	}
 	
 	//공지사항 등록
@@ -135,6 +135,23 @@ public class BoardController {
 		return "redirect:/board/notice?menuCode=" + menuVO.getMenuCode();
 	}
 	
+	//공지사항 수정으로 이동
+	@GetMapping("/updateNotice")
+	public String goUpdateNotice(MenuVO menuVO, NoticeVO noticeVO, Model model) {
+		
+		model.addAttribute("notice", boardService.selectNotice(noticeVO));
+		
+		return "board/notice_update";
+	}
+	
+	//공지사항 수정
+	@PostMapping("/noticeUpdate")
+	public String updateNotice(MenuVO menuVO, NoticeVO noticeVO) {
+	
+		boardService.updateNotice(noticeVO);
+		
+		return "redirect:/board/noticeDetail?menuCode=" + menuVO.getMenuCode()+ "&noticeCode=" + noticeVO.getNoticeCode();
+	}
 	
 	//---------------------------------- 상담 문의 부분 -------------------------------------\\
 	
