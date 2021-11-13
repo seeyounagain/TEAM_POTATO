@@ -51,6 +51,7 @@
 	   		<c:if test="${sessionScope.loginInfo.isAdmin  eq 'Y' }">
 	   			<input type="hidden" value="${notice.noticeCode }" id="noticeCode">
 	   			<input type="hidden" value="${menuVO.menuCode }" id=menuCode>
+	   			<input class="btn btn-primary btn-md" type="button" value="수정" onclick="location.href='/board/updateNotice?noticeCode=${notice.noticeCode}&menuCode=${menuVO.menuCode}';">
 	   			<input class="btn btn-primary btn-md" type="button" value="삭제" onclick="deleNotice();">
 	   		</c:if>
 	   			<input class="btn btn-primary btn-md" type="button" value="목록" onclick="location.href='/board/notice?menuCode=${menuVO.menuCode}';">
