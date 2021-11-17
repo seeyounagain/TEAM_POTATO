@@ -293,7 +293,7 @@
 		          WHERE R.ID = M.ID
 		          AND R.BOOK_CODE = B.BOOK_CODE
 		          AND M.ID = #{id}
-		          ORDER BY RETURN_DATE DESC, RENTAL_DATE DESC
+		          ORDER BY RETURN_DATE DESC, STATUS DESC, RENTAL_DATE DESC
 		          )
 		    )
 		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}

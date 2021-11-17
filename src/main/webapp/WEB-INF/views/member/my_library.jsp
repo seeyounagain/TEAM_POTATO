@@ -151,7 +151,7 @@
 												</td>
 											</c:when>
 											<c:when test="${rental.returnDate eq '년월일' and rental.bookVO.status == 3 }">
-												<td>연체중 </td>
+												<td style="color: red;">연체중 </td>
 												<td>
 													${rental.limitDate }
 												</td>
