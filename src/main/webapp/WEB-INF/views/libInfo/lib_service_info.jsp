@@ -184,8 +184,6 @@ table td{
 			</div>
 		</div>
 		<!-- 예약 안내 끝 -->
-		<div>${menuList[4].menuCode } 어드민</div>
-		<div>${menuList[4].menuCode } 나의도서관</div>
 	</div>		
 </div>
 </body>

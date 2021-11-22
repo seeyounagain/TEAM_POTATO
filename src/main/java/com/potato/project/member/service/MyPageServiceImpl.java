@@ -70,6 +70,12 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<QnaVO> myQnaList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectMyQnaList", memberVO);
 	}
+	//내 문의 갯수 구하기 페이징 위해
+	@Override
+	public int cntQna(MemberVO memberVO) {
+		
+		return sqlSession.selectOne("myPageMapper.cntQna", memberVO);
+	}
 	//---------------------------------------내 문의 끝----------------------------------
 
 	
@@ -85,6 +91,8 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<ReserveVO> selectReserveList(MemberVO memberVO) {
 		return sqlSession.selectList("myPageMapper.selectReserveList", memberVO);
 	}
+
+
 	
 	
 	

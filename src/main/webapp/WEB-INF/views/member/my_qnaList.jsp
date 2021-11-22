@@ -21,7 +21,7 @@
 .table{
 	width: 100%;
 }
-a:hover{
+.titleA:hover{
 	color: black;
 }
 .answerCnt{
@@ -197,7 +197,7 @@ a:hover{
 											<td>${status.count }</td>
 											<td>
 											<!-- 관리자 혹은 비밀번호가 없는 title 클릭하면 비밀번호 확인 없이 바로 detail로 이동 -->
-												<a href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
+												<a class="titleA" href="/board/qnaDetail?qnaCode=${info.qnaCode}&menuCode=${menuVO.menuCode}">${info.title }
 													<c:if test="${info.answerCnt != 0}">
 														<span class="m-2 complete">답변완료</span>
 													</c:if>
@@ -215,31 +215,31 @@ a:hover{
 				<!-- 문의 테이블 끝 -->
 				
 				<!-- 페이징 처리 -->
-<%-- 		<div class="col-12">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<c:if test="${noticeVO.prev }">
-						<li class="page-item">
-							<a class="page-link" href="/board/notice?nowPage=${noticeVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-					 </c:if> 
-						<c:forEach var="pageNum" begin="${noticeVO.startPage }" end="${noticeVO.endPage }">
-							<li class="page-item  <c:if test="${noticeVO.nowPage eq pageNum }">active</c:if>  ">
-							<a class="page-link" href="/board/notice?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
-							</li>
-						</c:forEach>
-					<c:if test="${noticeVO.next }">
-						<li class="page-item">
-						<a class="page-link" href="/board/notice?nowPage=${noticeVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-						</a>
-						</li>
-					</c:if>
-				</ul>
-			</nav>
-		</div> --%>
+				<div class="col-12 pageDiv">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<c:if test="${qnaVO.prev }">
+								<li class="page-item">
+									<a class="page-link" href="/board/qna?nowPage=${qnaVO.startPage - 1 }&menuCode=${menuVO.menuCode}" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+							</c:if> 
+							<c:forEach var="pageNum" begin="${qnaVO.startPage }" end="${qnaVO.endPage }">
+								<li class="page-item  <c:if test="${qnaVO.nowPage eq pageNum }">active</c:if>  ">
+									<a class="page-link" href="/board/qna?nowPage=${pageNum }&menuCode=${menuVO.menuCode}">${pageNum }</a>
+								</li>
+							</c:forEach>
+							<c:if test="${noticeVO.next }">
+								<li class="page-item">
+									<a class="page-link" href="/board/qna?nowPage=${qnaVO.endPage + 1 }&menuCode=${menuVO.menuCode}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
 			<!-- 페이징 끝 -->
 											
 	</div>
