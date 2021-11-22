@@ -42,9 +42,13 @@
 			<result column="CREATE_DATE"	property="createDate"/>                                                                                                                                                                  
 			</resultMap>
 			
+			<select id="checkRequestCnt" resultType="int">
+			SELECT COUNT(REQUEST_CODE) AS REQUEST_CNT FROM REQUEST_BOARD WHERE ID = #{id }
+			</select>
+			
 			<insert id="regBookRequest">
 			INSERT INTO REQUEST_BOARD(
-			REQUEST_CODE, ID, TITLE, WRITER, ISBN, PUB_DATE, CATEGORY,KDC_CODE, KDC_NAME
+			REQUEST_CODE, ID, TITLE, WRITER, ISBN, PUB_DATE, CATEGORY, KDC_CODE, KDC_NAME
 			)VALUES(
 			 (SELECT 'REQUEST_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(REQUEST_CODE,9,3))),0)+1,3,'0')AS REQUEST_CODE FROM REQUEST_BOARD)
 			 ,#{id }, #{title }, #{writer }, #{isbn }, #{pubDate }, #{category }, #{kdcCode }, #{kdcName }
@@ -57,12 +61,11 @@
 			
 			<select id="requestBoardList" resultMap="requestBoard">
 					SELECT 
-                    REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE
+                    REQUEST_CODE,ID ,TITLE ,WRITER ,ISBN ,PUB_DATE, CREATE_DATE, CATEGORY, KDC_CODE, KDC_NAME
 					FROM REQUEST_BOARD
                     WHERE  ID = (SELECT ID 
                                  FROM MEMBER 
-                                 WHERE ID = #{id }
-                                 AND IS_ADMIN = #{isAdmin } )
+                                 WHERE ID = #{id })
 					ORDER BY REQUEST_CODE DESC			
 			</select>
 

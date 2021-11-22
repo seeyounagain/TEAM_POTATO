@@ -185,15 +185,39 @@
 	
 	<!-- 문의상담 리스트 조회 -->
 	<select id="selectQnaList" resultMap="qna">
-		SELECT QNA_CODE 
+	<!-- 	SELECT ROW_NUM 
+		     , QNA_CODE 
 		     , TITLE
 		     , ID
 		     , NAME
-		     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+		     , CREATE_DATE
 		     , QNA_PW
 		     , ANSWER_CNT
-		FROM QNA
-        ORDER BY QNA_CODE DESC
+		FROM
+		(
+		SELECT ROWNUM AS ROW_NUM 
+		     , QNA_CODE 
+		     , TITLE
+		     , ID
+		     , NAME
+		     , CREATE_DATE
+		     , QNA_PW
+		     , ANSWER_CNT
+		FROM
+		(
+		         -->SELECT ROWNUM AS ROW_NUM 
+		             , QNA_CODE 
+				     , TITLE
+				     , ID
+				     , NAME
+				     , TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
+				     , QNA_PW
+				     , ANSWER_CNT
+				FROM QNA
+		        ORDER BY QNA_CODE DESC
+		     <!--    )
+		)
+		WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum} -->
 	</select>
 	
 	<!-- 상담문의 총 개수 -->

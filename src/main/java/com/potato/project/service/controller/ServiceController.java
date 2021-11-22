@@ -100,6 +100,10 @@ public class ServiceController {
 		}
 		model.addAttribute("menuList",commonService.selectMenuList(loginInfo));
 		model.addAttribute("sideMenuList",commonService.selectSideMenuList(menuVO));
+		
+		//도서비치신청 개수
+		model.addAttribute("requestCnt",serviceService.checkRequestCnt(loginInfo));
+		
 		//검색 키워드가 공백이고 Isbn만 검색한다면 isbn코드 검색값을 출력한다.
 		if(asVO.getKeyword()=="" && asVO.getIsbnCode() != "") {
 			model.addAttribute("apiSearchList",asPlay.apiSearch(asVO));

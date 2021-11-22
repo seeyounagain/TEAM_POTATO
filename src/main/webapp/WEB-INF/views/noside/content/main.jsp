@@ -55,55 +55,85 @@
 }
 </style>
 <script type="text/javascript">
-	//팝업 모달창
-	$(window).on('load',function(){  
+	
+	//팝업 모달창 띄우기
+ 	$(window).on('load',function(){  
 	    $('#myModal').modal('show');
 	});
 	
-	 function closePop() {
-         $('#myModal').modal('hide');
-    }; 
+	//쿠키생성(실제 생성은 아래의 사용자의 체크박스값을 보고 결정)
+	function setCookie(name, value, expires) {
+		
+		//현재 날짜
+		var date = new Date();
+		date.setDate(date.getDate() + expires);
+		
+		var myCookie ='';
+		myCookie += name + '=' + value + ';';
+		myCookie +='Expires='+ date.toUTCString();
+		
+		document.cookie = myCookie;
+	}
+	setCookie('popup', 'notice', 1);
+	
+	//쿠키 삭제
+	function deleCookie(name) {
+		var date = new Date();
+		
+		date.setDate(date.getDate() - 1);
+		
+		var setCookie = '';
+		
+		setCookie += name+ '=popup;';
+		setCookie += 'Expires=' + date.toUTCString();
+		
+		document.cookie = setCookie;
+	}
+	
+	//쿠키 확인
+	/* function checkCookie(name){
+		var cookies = document.cookie.split(';');
+		var visited = false; //방문 여부 확인
+		
+		for(var i in cookies){
+			if(cookies[i].indexOf(name) > -1){
+				visited = true; //방문한 적이 있음
+			}
+	
+			//재방문
+			if(visited){
+				$('#myModal').modal('hide');
+			}
+			//신규 방문
+			else{
+				$('#myModal').modal('show');
+			}
+		
+		}
+	}
+	checkCookie('popup');
+	 */
+	
+	
+	
+	function popClose(){
+		var chkBox = document. getElementById('#chkBox'); // 체크박스
+		
+		if(chkBox.checked){
+			//팝업을 하루동안 보지 않음 = > 쿠키 생성
+			//setCookie('popup', 'notice', 1);
+			 $('#myModal').modal('hide');
+		}
+		else{
+			//팝업을 계속 본다 = > 쿠키 삭제
+			$('#myModal').modal('hide');
+			deleCookie('popup');		
+		}
+		
+	};
+    
 
-   /*  function setCookie(name, value, expiredays){
-    	var today = new Date();
-
-    	console.log(today.getDate())
-
-    	today.setDate(today.getDate() + expiredays); // 현재시간에 하루를 더함 
-
-    	document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
-
-    }
-    	
-    function getCookie(name) {
-
-    	var cookie = document.cookie;
-    	
-    	if (document.cookie != "") {
-    		var cookie_array = cookie.split("; ");
-    		console.log(cookie_array)
-    		for ( var index in cookie_array) {
-    			var cookie_name = cookie_array[index].split("=");
-    			if (cookie_name[0] == "mycookie") {
-    				return cookie_name[1];
-    			}
-    		}
-    	}
-    	return;
-    }
-  
-    $(".modal-today-close").click(function() {
-    	$("#myModal").modal("hide");
-    	setCookie("mycookie", 'popupEnd', 1);
-    })
-
-    var checkCookie = getCookie("mycookie");
-    	
-    if(checkCookie == 'popupEnd') {
-    	$("#myModal").modal("hide");
-    } else {
-    	$('#myModal').modal("show");	
-    } */
+    
 </script>
 </head>
 <body>
@@ -206,8 +236,8 @@
 	                <p>공지내용</p>
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-primary" id = "modal-today-close" onclick="closeToday();">오늘만 닫기</button>
-	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="closePop();">닫기</button>
+	                <input type="checkbox" id ="chkBox">오늘만 닫기
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="popClose();" >닫기</button>
 	            </div>
 	        </div>
 	    </div>

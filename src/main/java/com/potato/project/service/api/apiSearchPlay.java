@@ -84,12 +84,17 @@ public class apiSearchPlay {
 	        	if(resultArr != null) {
 	        		for(int i = 0; i < resultArr.size();i++) {
 	        			JSONObject totalData = (JSONObject)resultArr.get(i);
-	        			ApiDataVO adVO = new ApiDataVO(
-	        					(String)totalData.get("titleInfo"),(String)totalData.get("typeName"),(String)totalData.get("authorInfo"),(String)totalData.get("menuName")
-	        					,(String)totalData.get("mediaName"),(String)totalData.get("pubYearInfo"),(String)totalData.get("id"),(String)totalData.get("typeCode")
-	        					,(String)totalData.get("isbn"),(String)totalData.get("callNo"),(String)totalData.get("kdcCode1s"), (String)totalData.get("kdcName1s")
-	        					);
-	        			adList.add(adVO);
+	        			if(totalData.get("isbn").equals("")||totalData.get("isbn") == null) {
+	        				
+	        			}else {
+		        		ApiDataVO adVO = new ApiDataVO(
+		        			(String)totalData.get("titleInfo"),(String)totalData.get("typeName"),(String)totalData.get("authorInfo"),(String)totalData.get("menuName")
+		        			,(String)totalData.get("mediaName"),(String)totalData.get("pubYearInfo"),(String)totalData.get("id"),(String)totalData.get("typeCode")
+		        			,(String)totalData.get("isbn"),(String)totalData.get("callNo"),(String)totalData.get("kdcCode1s"), (String)totalData.get("kdcName1s")
+		        			);
+		        		adList.add(adVO);
+	        			}
+
 	        		}	
 	        	}
 	        	else {

@@ -81,6 +81,11 @@ public class ServiceServiceImpl implements ServiceService {
 	public void regBookRequest(RequestBoardVO rbVO) {
 		sqlSession.insert("serviceMapper.regBookRequest", rbVO);
 	}
+
+	@Override
+	public int checkRequestCnt(MemberVO loginInfo) {
+		return sqlSession.selectOne("serviceMapper.checkRequestCnt", loginInfo);
+	}
 	
 	
 	
